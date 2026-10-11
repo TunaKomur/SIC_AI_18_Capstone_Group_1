@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Veri ve büyük dosyalar
+data/raw/
+data/processed/
+*.parquet
+*.arrow
+eda_outputs.zip
+
+# Sistem
+.DS_Store
+.vscode/
+.idea/
