@@ -1,0 +1,177 @@
+{
+  "templates": {
+    "templated_conversations_pct": 16.49,
+    "distinct_templates": 72
+  },
+  "overview": {
+    "n_conversations": 50000,
+    "n_unique_users_hashed_ip": 16809,
+    "date_min": "2023-04-09",
+    "date_max": "2024-04-05",
+    "n_languages": 68,
+    "n_countries": 157,
+    "models": {
+      "gpt-3.5-turbo-0613": 20197,
+      "gpt-3.5-turbo-0301": 14247,
+      "gpt-4-0314": 5059,
+      "gpt-4-0125-preview": 3769,
+      "gpt-3.5-turbo-0125": 3379
+    },
+    "missing_pct": {
+      "country": 0.1
+    }
+  },
+  "language_country": {
+    "top_languages_pct": {
+      "English": 54.04,
+      "Chinese": 19.93,
+      "Russian": 8.95,
+      "French": 2.87,
+      "Spanish": 2.35,
+      "German": 1.96,
+      "Portuguese": 1.18,
+      "Arabic": 1.13,
+      "Turkish": 0.8,
+      "Italian": 0.51
+    },
+    "top_countries_pct": {
+      "United States": 21.34,
+      "China": 13.59,
+      "Russia": 11.72,
+      "Hong Kong": 6.75,
+      "United Kingdom": 4.67,
+      "Germany": 3.43,
+      "India": 2.19,
+      "Japan": 2.17,
+      "France": 2.12,
+      "Canada": 1.8
+    },
+    "turkey_conversations": 691,
+    "turkey_pct": 1.38,
+    "turkish_language_conversations": 402
+  },
+  "turns": {
+    "mean": 2.3,
+    "median": 1.0,
+    "p90": 5.0,
+    "p99": 14.0,
+    "max": 110,
+    "single_turn_pct": 61.54,
+    "ge5_turn_pct": 11.75,
+    "ge10_turn_pct": 2.91
+  },
+  "hours": {
+    "peak_hour_utc": 8,
+    "turkey_n": 691,
+    "turkey_night_00_05_pct": 30.68,
+    "turkey_users": 214,
+    "turkey_night_00_05_user_weighted_pct": 17.49,
+    "turkey_peak_hour_local_user_weighted": 18,
+    "turkey_peak_hour_local": 23
+  },
+  "users": {
+    "conversations_per_user_mean": 2.97,
+    "conversations_per_user_median": 1.0,
+    "single_conversation_users_pct": 61.2,
+    "top1pct_users_share_of_conversations": 28.0,
+    "top10pct_users_share_of_conversations": 54.12,
+    "templated_pct_by_group": {
+      "Diğer kullanıcılar": 11.67,
+      "En yoğun %1 kullanıcı": 28.89
+    }
+  },
+  "loops": {
+    "method": "multilingual MiniLM embeddings",
+    "threshold": 0.85,
+    "n_conversations": 10000,
+    "n_pairs": 48427,
+    "pairs_above_threshold_pct": 11.66,
+    "conversations_with_any_near_repeat_pct": 31.63,
+    "conversations_with_half_pairs_repeat_pct": 12.98,
+    "pairs_near_identical_ge_0_98_pct": 4.02,
+    "organic_conversations_with_any_near_repeat_pct": 31.83
+  },
+  "loops_by_length_pct": {
+    "3-4": 25.13,
+    "5-9": 35.86,
+    "10+": 47.5
+  },
+  "repair": {
+    "n_multi_turn": 19232,
+    "with_repair_phrase_pct": 1.79,
+    "by_length_pct": {
+      "2": 0.81,
+      "3-4": 1.34,
+      "5-9": 2.79,
+      "10+": 5.56
+    }
+  },
+  "intent": {
+    "overall_pct": {
+      "Doğrudan üretim": 15.98,
+      "Anlama / soru": 9.16,
+      "Diğer": 58.37,
+      "Şablon / otomatik": 16.49
+    },
+    "by_region_pct": {
+      "Doğrudan üretim": {
+        "Diğer ülkeler": 16.0,
+        "Türkiye": 14.76
+      },
+      "Anlama / soru": {
+        "Diğer ülkeler": 9.1,
+        "Türkiye": 13.31
+      },
+      "Diğer": {
+        "Diğer ülkeler": 58.47,
+        "Türkiye": 50.94
+      },
+      "Şablon / otomatik": {
+        "Diğer ülkeler": 16.43,
+        "Türkiye": 20.98
+      }
+    }
+  },
+  "quality": {
+    "toxic_flag_pct": 0.0,
+    "redacted_flag_pct": 0.79,
+    "empty_first_prompt_pct": 0.8,
+    "very_short_first_prompt_lt10_pct": 6.31,
+    "duplicate_hash_pct": 0.91,
+    "top_language_share_pct": 54.04,
+    "first_prompt_chars_median": 161.0
+  },
+  "oasst1": {
+    "n_messages_read": 30000,
+    "n_trees": 3808,
+    "assistant_messages": 18990,
+    "languages_top": {
+      "en": 12448,
+      "es": 9922,
+      "ru": 2322,
+      "zh": 1301,
+      "de": 1024,
+      "th": 707,
+      "fr": 649,
+      "ca": 540
+    },
+    "turkish_messages": 8,
+    "label_coverage_pct": {
+      "quality": 98.1,
+      "helpfulness": 97.27,
+      "fails_task": 97.67,
+      "creativity": 97.26,
+      "humor": 97.68,
+      "toxicity": 97.68
+    },
+    "label_means": {
+      "quality": 0.661,
+      "helpfulness": 0.676,
+      "fails_task": 0.103,
+      "creativity": 0.38,
+      "humor": 0.181,
+      "toxicity": 0.113
+    },
+    "low_quality_lt_0_3_pct": 8.69
+  }
+}
