@@ -1,0 +1,49 @@
+// KafiAI sistem mimarisi
+// PNG üretmek için: dot -Tpng -Gdpi=170 docs/diagrams/architecture.dot -o figures/11_architecture.png
+
+digraph KafiAI {
+    graph [rankdir=TB, fontname="Inter", fontsize=13, nodesep=0.6, ranksep=0.35,
+           pad=0.3, bgcolor="white", newrank=true];
+    node  [shape=box, style="rounded,filled", fontname="Inter", fontsize=11,
+           color="#1F5F6B", fillcolor="#EEF4F5", penwidth=1.2, margin="0.18,0.10"];
+    edge  [color="#4A5A5E", penwidth=1.1, arrowsize=0.7, fontname="Inter", fontsize=9];
+
+    subgraph cluster_offline {
+        label="A. Model geliştirme (Python)";
+        labeljust=l; fontsize=13; fontcolor="#1F5F6B";
+        style="rounded,dashed"; color="#9AA5A8";
+
+        data   [label="1. Açık veri setleri\nWildChat 1M ve 4.8M, WildFeedback,\nShareChat, OASST1"];
+        prep   [label="2. Ön işleme\nşablon sohbetleri ve meşru\ntekrarları ayıklama"];
+        label  [label="3. Etiketleme\nkural tabanlı zayıf etiket\n+ hazır ve LLM etiketleri\n+ elle doğrulama"];
+        feat   [label="4. Öznitelik çıkarımı\nilk turlar: benzerlik, uzunluk,\nonarım ifadeleri, talep türü"];
+        train  [label="5. Eğitim ve değerlendirme\nLogistic Regression, XGBoost\nkullanıcı bazlı bölme, SHAP"];
+        export [label="6. Dışa aktarma\nmodel dosyası\n+ görev normları tablosu"];
+
+        data -> prep -> label -> feat -> train -> export;
+    }
+
+    subgraph cluster_online {
+        label="B. Chrome eklentisi (kullanıcının bilgisayarında)";
+        labeljust=l; fontsize=13; fontcolor="#C4562A";
+        style="rounded,dashed"; color="#D9A48C";
+        node [color="#C4562A", fillcolor="#FBF1EC"];
+
+        cs      [label="7. Content script\nChatGPT ve Gemini sayfaları\ngönderilen mesaj ve cevabın bitişi"];
+        sw      [label="8. Değerlendirme\nmodel tahmini, tekrar kontrolü,\ntur sayısı ve görev normu"];
+        decide  [label="9. Karar katmanı\nhangi sinyal hangi katmanı açar,\nbekleme süresi, gerekçe metni"];
+        ui      [label="10. Arayüz\nhalka, gönderirken uyarı şeridi,\nçıkış kartı, haftalık özet"];
+        store   [label="chrome.storage.local\nyalnızca sayaçlar ve ayarlar,\nmesaj metni saklanmaz", shape=cylinder, margin="0.12,0.08"];
+
+        cs -> sw -> decide -> ui;
+        decide -> store [style=dashed];
+        ui -> cs [label="  onarım düğmeleri,\n  taze başlat taslağı", style=dashed];
+    }
+
+    yedam [label="Destek yolu\nkullanıcı isterse YEDAM bilgisi,\nmesai dışında e-randevu", color="#4A5A5E", fillcolor="#F4F4F2"];
+
+    { rank=same; train; cs; }
+    { rank=same; export; sw; }
+    export -> sw [label="model ve normlar\neklentiyle gelir", penwidth=1.6, color="#1F5F6B"];
+    ui -> yedam [style=dotted];
+}
