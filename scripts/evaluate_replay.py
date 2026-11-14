@@ -90,10 +90,10 @@ def detector_flags(msgs, use_variation):
 
 
 def ring_level(prediction, similar_signal, apology, vague, short_repeat=0):
+    """Halka seviyesi (ring.ts). Aynı kısa mesajın tekrarı halkayı yükseltmez; onun yerine şerit çıkar."""
     if (prediction and prediction["level"] == "yuksek") or similar_signal >= 2 or apology >= 2:
         return 2
-    if ((prediction and prediction["level"] == "oneri") or similar_signal == 1 or apology == 1 or vague >= 2
-            or short_repeat >= SIGNAL_RULES["short"]["repeat_streak"]):
+    if (prediction and prediction["level"] == "oneri") or similar_signal == 1 or apology == 1 or vague >= 2:
         return 1
     return 0
 
@@ -109,6 +109,7 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
     repeats = 0          # ExitCardPolicy.repeats (önce: sohbet boyu yumuşak tekrar; sonra: son dört mesajda benzer)
     similar_total = 0    # eski halkanın kullandığı sohbet boyu sayı
     quiet_until = 0
+    short_repeat_offered = hint_shown = False
     turns = []
     for t, text in enumerate(msgs):
         n = t + 1
@@ -127,6 +128,10 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
         quiet_model = after and signals.exited
         high = bool(prediction) and prediction["level"] == "yuksek" and not quiet_model
         suggest = bool(prediction) and prediction["level"] in ("oneri", "yuksek") and not quiet_model
+        # Aynı kısa mesaj üçüncü kez: gönderim öncesi şerit (sohbet başına bir kez).
+        short_repeat_strip = (after and not short_repeat_offered and not hold and not signals.last_short_repair
+                              and signals.short_repeat_streak == SIGNAL_RULES["short"]["repeat_streak"])
+        short_repeat_offered = short_repeat_offered or short_repeat_strip
         if after:
             signals.note_answer(answers[t] if t < len(answers) else "")
             level = ring_level(None if signals.exited else prediction, signals.recent_similar,
@@ -135,7 +140,7 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
             level = ring_level(prediction, similar_total, 0, 0)
         card = None
         # Bir turda tek müdahale: bu mesajda şerit çıktıysa kart en erken sonraki turda gelir.
-        stripped = after and (hold or signals.last_short_repair)
+        stripped = after and (hold or signals.last_short_repair or short_repeat_strip)
         if n >= quiet_until and not stripped:
             if high:
                 card = "model"
@@ -145,7 +150,12 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
                 card = "norm"
         if card:
             quiet_until = n + config.EXT_EXIT_CARD_COOLDOWN_TURNS
-        turns.append({"strip": hold, "short_strip": after and signals.last_short_repair, "variation": variation, "ring": level, "card": card,
+        # Onay zinciri önerisi: cevabın altında, sohbet başına bir kez, kart ya da şerit yoksa.
+        hint = (after and not hint_shown and not card and not stripped
+                and signals.affirm_streak >= SIGNAL_RULES["affirm"]["streak"])
+        hint_shown = hint_shown or hint
+        turns.append({"strip": hold, "short_strip": after and signals.last_short_repair,
+                      "short_repeat_strip": short_repeat_strip, "hint": hint, "variation": variation, "ring": level, "card": card,
                       "exit": after and signals.exited, "segments": signals.segments, "segment_start": signals.segment_start})
     return turns
 
@@ -163,6 +173,8 @@ class Tally:
         self.n = self.user_turns = 0
         self.strips = self.strip_hits = 0
         self.short_strips = self.short_strip_hits = 0
+        self.short_repeat_strips = self.short_repeat_hits = 0
+        self.hints = self.hint_hits = 0
         self.ring1 = self.ring2 = self.ring2_hits = 0
         self.exits = self.exit_high = 0
         self.cards = self.card_hits = 0
@@ -182,6 +194,12 @@ class Tally:
             if d.get("short_strip"):
                 self.short_strips += 1
                 self.short_strip_hits += t in ds
+            if d.get("short_repeat_strip"):
+                self.short_repeat_strips += 1
+                self.short_repeat_hits += t in ds
+            if d.get("hint"):
+                self.hints += 1
+                self.hint_hits += (t in ds) or ((t + 1) in ds)
             if d["ring"] >= 1:
                 self.ring1 += 1
             if d["ring"] == 2:
@@ -217,6 +235,10 @@ class Tally:
             "serit": {"100_sohbette": round(100 * self.strips / n, 2), "isabet_yuzde": pct(self.strip_hits, self.strips)},
             "kisa_onarim_seridi": {"100_sohbette": round(100 * self.short_strips / n, 2),
                                    "isabet_yuzde": pct(self.short_strip_hits, self.short_strips)},
+            "kisa_tekrar_seridi": {"100_sohbette": round(100 * self.short_repeat_strips / n, 2),
+                                   "isabet_yuzde": pct(self.short_repeat_hits, self.short_repeat_strips)},
+            "onay_zinciri_onerisi": {"100_sohbette": round(100 * self.hints / n, 3),
+                                     "sonraki_tur_memnuniyetsizlik_yuzde": pct(self.hint_hits, self.hints)},
             "halka": {"seviye1_ve_ustu_tur_yuzde": pct(self.ring1, self.user_turns),
                       "seviye2_tur_yuzde": pct(self.ring2, self.user_turns),
                       "seviye2_isabet_yuzde": pct(self.ring2_hits, self.ring2),

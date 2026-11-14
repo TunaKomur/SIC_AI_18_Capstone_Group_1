@@ -42,6 +42,8 @@ def test_scenario(scenario, model):
         "cikis": any(t["exit"] for t in turns),
         "bolum": turns[-1]["segments"],
         "kisisel": is_personal(user[0]),
+        "kisa_tekrar_serit": sum(bool(t["short_repeat_strip"]) for t in turns),
+        "oneri": any(t["hint"] for t in turns),
     }
     for key, value in want.items():
         if key == "halka_en_az":

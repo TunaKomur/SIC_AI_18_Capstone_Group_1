@@ -12,6 +12,14 @@
       "100_sohbette": 0.0,
       "isabet_yuzde": null
     },
+    "kisa_tekrar_seridi": {
+      "100_sohbette": 0.0,
+      "isabet_yuzde": null
+    },
+    "onay_zinciri_onerisi": {
+      "100_sohbette": 0.0,
+      "sonraki_tur_memnuniyetsizlik_yuzde": null
+    },
     "halka": {
       "seviye1_ve_ustu_tur_yuzde": 22.49,
       "seviye2_tur_yuzde": 9.77,
@@ -52,8 +60,16 @@
       "100_sohbette": 0.91,
       "isabet_yuzde": 57.69
     },
+    "kisa_tekrar_seridi": {
+      "100_sohbette": 0.5,
+      "isabet_yuzde": 6.0
+    },
+    "onay_zinciri_onerisi": {
+      "100_sohbette": 0.02,
+      "sonraki_tur_memnuniyetsizlik_yuzde": 0.0
+    },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.55,
+      "seviye1_ve_ustu_tur_yuzde": 22.34,
       "seviye2_tur_yuzde": 9.33,
       "seviye2_isabet_yuzde": 29.21,
       "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
