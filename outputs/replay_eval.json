@@ -13,26 +13,26 @@
       "isabet_yuzde": null
     },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.47,
-      "seviye2_tur_yuzde": 9.75,
+      "seviye1_ve_ustu_tur_yuzde": 22.49,
+      "seviye2_tur_yuzde": 9.77,
       "seviye2_isabet_yuzde": 25.09,
       "cikistan_sonra_yuksek_kalan_yuzde": null,
       "cikis_mesaji": 0
     },
     "kart": {
-      "100_sohbette": 30.64,
-      "isabet_yuzde": 18.21,
+      "100_sohbette": 30.66,
+      "isabet_yuzde": 18.23,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3142,
-          "isabet_yuzde": 29.98
+          "sayi": 3148,
+          "isabet_yuzde": 29.99
         },
         "norm": {
-          "sayi": 2986,
+          "sayi": 2985,
           "isabet_yuzde": 5.83
         }
       },
-      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.44,
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.68,
       "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
     },
     "taze_baslat": {
@@ -49,40 +49,40 @@
       "isabet_yuzde": 21.51
     },
     "kisa_onarim_seridi": {
-      "100_sohbette": 1.09,
-      "isabet_yuzde": 48.62
+      "100_sohbette": 0.91,
+      "isabet_yuzde": 57.69
     },
     "halka": {
       "seviye1_ve_ustu_tur_yuzde": 22.55,
-      "seviye2_tur_yuzde": 9.31,
+      "seviye2_tur_yuzde": 9.33,
       "seviye2_isabet_yuzde": 29.21,
       "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
       "cikis_mesaji": 336
     },
     "kart": {
-      "100_sohbette": 18.43,
-      "isabet_yuzde": 30.39,
+      "100_sohbette": 18.47,
+      "isabet_yuzde": 30.35,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3137,
-          "isabet_yuzde": 28.12
+          "sayi": 3146,
+          "isabet_yuzde": 28.1
         },
         "ozur": {
-          "sayi": 506,
-          "isabet_yuzde": 45.65
+          "sayi": 505,
+          "isabet_yuzde": 45.54
         },
         "norm": {
           "sayi": 43,
           "isabet_yuzde": 16.28
         }
       },
-      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 28.52,
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 28.75,
       "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
     },
     "taze_baslat": {
-      "konu_kayan_sohbet_yuzde": 7.04,
-      "taslaktaki_istek_ortalama_once": 6.35,
-      "taslaktaki_istek_ortalama_sonra": 4.21
+      "konu_kayan_sohbet_yuzde": 6.42,
+      "taslaktaki_istek_ortalama_once": 6.4,
+      "taslaktaki_istek_ortalama_sonra": 4.22
     }
   }
 }
