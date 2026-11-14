@@ -38,7 +38,15 @@
     "decline_note": "Yapay zekanın cevabı bir soruyla bittiyse ('Grafik de ekleyeyim mi?') yalnızca 'hayır' ya da 'no' demek bir teklifi geri çevirmektir, şikayet değildir: kısa onarım sayılmaz. WildFeedback'te yalın 'no/hayır' mesajlarında memnuniyetsizlik önceki cevap soruyla bittiğinde %4,9, bitmediğinde %57,9. Cevabın sonundaki soru, cevabın son tail_chars karakterine bakılarak bulunur (yalnızca bellekte).",
     "decline_words": ["hayır", "no", "nope", "nah", "yok"],
     "decline_max_words": 2,
-    "tail_chars": 200
+    "tail_chars": 200,
+    "repeat_strip_note": "Aynı kısa mesajın ('devam') repeat_streak kez üst üste gelmesi halkayı yükseltmez; gönderim öncesi şerit çıkar ve neyle, nasıl devam etmesini istediğini yazmayı önerir. Sohbet başına bir kez (Mert'in kararı, 14 Kasım). WildFeedback'te bu tekrarlarda memnuniyetsizlik onaylarda %2,2, diğerlerinde %4,7 (taban %5,85); şerit bir döngü uyarısı değil, yönü kullanıcıya geri veren bir öneri."
+  },
+  "affirm": {
+    "note": "Kısa onay zinciri: kullanıcı modelin soruyla biten cevaplarına (teklif: '… ekleyeyim mi?') üst üste streak kez yalnızca kısa bir onay ya da ret ile karşılık veriyor; yön modelde kalıyor. Cevabın altında gönderimi bekletmeyen bir öneri çıkar ve modelden şu ana kadar anladığını özetlemesini istemeyi önerir; sohbet başına bir kez. 'devam' gibi devam istekleri sayılmaz: uzun bir çıktıyı parça parça almak verimli bir iştir (WildFeedback'te 'devam' zinciri olan sohbetlerde memnuniyetsizlik %4,5). WildFeedback'te bu örüntü yalnızca 13 sohbette görüldü; isabet elle doğrulamada ve sayaçlarda ölçülecek.",
+    "words": ["evet", "aynen", "tamam", "tamamdır", "olur", "peki", "olsun", "hayır", "yok", "ok", "okey", "okay", "yes", "yeah", "yep", "yup", "sure", "no", "nope"],
+    "allowed": ["lütfen", "please", "yap", "et", "go", "ahead", "do", "it", "bu", "şekilde", "öyle", "gerek"],
+    "max_words": 3,
+    "streak": 3
   },
   "recent_window": 4
 }

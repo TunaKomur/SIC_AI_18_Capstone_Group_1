@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import fixture from "../../../tests/fixtures/signals_parity.json";
-import { apologizes, ConversationSignals, isExitMessage, isNewTopic, isShortRepair, isVague } from "./signals";
+import { apologizes, ConversationSignals, isAffirmation, isExitMessage, isNewTopic, isShortRepair, isVague, SHORT_REPEAT_STREAK } from "./signals";
 import { normalizeText } from "./text";
 
 describe("sohbet sinyalleri: Python ikiziyle aynı karar (parite örnekleri)", () => {
@@ -105,5 +105,43 @@ describe("ConversationSignals", () => {
     const recent = [normalizeText("Python'da bir listeyi nasıl sıralarım, kod örneği ver")];
     expect(isNewTopic("Python'da bir sözlüğü nasıl sıralarım, kod örneği ver", { recent, segmentTask: "kod" })).toBe(false);
     expect(isNewTopic("kısa", { recent, segmentTask: "kod" })).toBe(false);
+  });
+});
+
+describe("kısa onay zinciri ve kısa tekrar önizlemesi", () => {
+  it("soruyla biten cevaplara verilen onaylar sayılır, devam sayılmaz", () => {
+    const s = new ConversationSignals();
+    s.noteUser("Bitirme projem için bir zaman planı çıkar", { similar: false });
+    s.noteAnswer("Önerim şu. Haftalara bölelim mi?");
+    s.noteUser("evet", { similar: false });
+    s.noteAnswer("Haftalık plan hazır. Görev dağılımı da ekleyeyim mi?");
+    s.noteUser("aynen", { similar: false });
+    s.noteAnswer("Görevler hazır. Risk bölümü de ister misin?");
+    s.noteUser("hayır gerek yok", { similar: false });
+    expect(s.affirmStreak).toBe(3);
+    s.noteAnswer("Tamam, böyle bırakıyorum.");
+    s.noteUser("tamam", { similar: false }); // önceki cevap soruyla bitmedi
+    expect(s.affirmStreak).toBe(0);
+  });
+
+  it("devam onay sayılmaz; çıkış mesajı onay sayılmaz", () => {
+    expect(isAffirmation("devam")).toBe(false);
+    expect(isAffirmation("evet harika")).toBe(false);
+    expect(isAffirmation("tamam")).toBe(true);
+    expect(isAffirmation("evet lutfen")).toBe(true);
+  });
+
+  it("aynı kısa mesajın kaçıncı kez geleceğini durumu değiştirmeden söyler", () => {
+    const s = new ConversationSignals();
+    s.noteUser("React ile not alma uygulamasının tüm bileşenlerini yaz", { similar: false });
+    s.noteAnswer("İlk bölüm");
+    expect(s.previewShortRepeat("devam")).toBe(1);
+    s.noteUser("devam", { similar: false });
+    s.noteAnswer("İkinci bölüm");
+    s.noteUser("devam", { similar: false });
+    s.noteAnswer("Üçüncü bölüm");
+    expect(s.previewShortRepeat("devam")).toBe(SHORT_REPEAT_STREAK);
+    expect(s.previewShortRepeat("devam")).toBe(SHORT_REPEAT_STREAK); // değişmedi
+    expect(s.previewShortRepeat("olmadı")).toBe(0); // kısa onarım kendi şeridini alır
   });
 });

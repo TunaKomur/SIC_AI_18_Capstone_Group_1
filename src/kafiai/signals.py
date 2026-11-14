@@ -93,6 +93,20 @@ def is_offer_decline(text, answer_asked_question):
     return 0 < len(tokens) <= RULES["short"]["decline_max_words"] and tokens[0] in _DECLINE
 
 
+_AFFIRM = RULES["affirm"]
+_AFFIRM_WORDS = set(with_folded(_AFFIRM["words"]))
+_AFFIRM_ALLOWED = set(with_folded(_AFFIRM["allowed"] + _AFFIRM["words"]))
+
+
+def is_affirmation(text):
+    """Kısa onay ya da ret ("evet", "aynen", "hayır gerek yok"); "devam" sayılmaz (signals.ts ile aynı)."""
+    if is_exit_message(text):
+        return False
+    tokens = fold_turkish(normalize_text(text)).split()
+    return (0 < len(tokens) <= _AFFIRM["max_words"] and all(t in _AFFIRM_ALLOWED for t in tokens)
+            and any(t in _AFFIRM_WORDS for t in tokens))
+
+
 def is_short_repair(text):
     """Kısa ve güçlü onarım ifadesi taşıyan mesaj ("olmadı", "yanlış", "hala hata")."""
     return is_short(text) and _strong_repair(text) and not is_exit_message(text)
@@ -131,6 +145,7 @@ class ConversationSignals:
         self.short_repeat_streak = 0
         self.last_short_repair = False
         self.answer_asked_question = False
+        self.affirm_streak = 0
 
     def note_user(self, text, similar):
         index = self.turns
@@ -149,6 +164,7 @@ class ConversationSignals:
         normalized = normalize_text(text)
         previous = self.recent_texts[-1] if self.recent_texts else None
         self.last_short_repair = index > 0 and is_short_repair(text) and not is_offer_decline(text, self.answer_asked_question)
+        self.affirm_streak = self.affirm_streak + 1 if self.answer_asked_question and is_affirmation(text) else 0
         if is_exit_message(text):
             self.exited = True
             self.recent_flags = []

@@ -53,11 +53,9 @@ describe("halka: sohbet sinyalleri (K32)", () => {
 });
 
 describe("kısa mesaj sinyalleri", () => {
-  it("aynı kısa mesaj üçüncü kez gelince halka bir kademe yükselir", () => {
-    expect(ringLevel({ prediction: null, similarCount: 0, shortRepeatStreak: 2 })).toBe(0);
-    const s = { prediction: null, similarCount: 0, shortRepeatStreak: 3 };
-    expect(ringLevel(s)).toBe(1);
-    expect(ringText(s)).toMatch(/Aynı kısa mesajı/);
+  it("aynı kısa mesajın tekrarı halkayı yükseltmez (onun yerine gönderim öncesi şerit çıkar)", () => {
+    expect(ringLevel({ prediction: null, similarCount: 0, shortRepeatStreak: 3 })).toBe(0);
+    expect(ringLevel({ prediction: null, similarCount: 0, shortRepeatStreak: 5 })).toBe(0);
   });
 
   it("kısa onarım tekrar denemesi gibi sayılır ve kendi açıklamasını söyler", () => {

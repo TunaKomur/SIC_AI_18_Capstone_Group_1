@@ -92,6 +92,26 @@ export function isOfferDecline(text: string, answerAskedQuestion: boolean): bool
   return tokens.length > 0 && tokens.length <= rules.short.decline_max_words && DECLINE_WORDS.has(tokens[0] ?? "");
 }
 
+/** Aynı kısa mesaj bu kadar kez üst üste gelince şerit çıkar. */
+export const SHORT_REPEAT_STREAK: number = rules.short.repeat_streak;
+/** Soruyla biten cevaplara bu kadar ardışık kısa onaydan sonra öneri çıkar. */
+export const AFFIRM_STREAK: number = rules.affirm.streak;
+
+const AFFIRM_WORDS = new Set<string>(withFolded(rules.affirm.words));
+const AFFIRM_ALLOWED = new Set<string>(withFolded([...rules.affirm.allowed, ...rules.affirm.words]));
+
+/** Kısa onay ya da ret mi ("evet", "aynen", "tamam", "hayır gerek yok")? "devam" sayılmaz. */
+export function isAffirmation(text: string): boolean {
+  if (isExitMessage(text)) return false;
+  const tokens = tokensOf(foldTurkish(normalizeText(text)));
+  return (
+    tokens.length > 0 &&
+    tokens.length <= rules.affirm.max_words &&
+    tokens.every((t) => AFFIRM_ALLOWED.has(t)) &&
+    tokens.some((t) => AFFIRM_WORDS.has(t))
+  );
+}
+
 /** Kısa ve güçlü onarım ifadesi taşıyan mesaj mı ("olmadı", "yanlış", "hala hata")? */
 export function isShortRepair(text: string): boolean {
   return isShort(text) && hasStrongRepair(text) && !isExitMessage(text);
@@ -135,6 +155,17 @@ export class ConversationSignals {
   private shortRepeatRun = 0;
   private lastShortRepair = false;
   private answerAskedQuestion = false;
+  private affirmRun = 0;
+
+  /**
+   * Bu mesaj gönderilirse aynı kısa mesaj üst üste kaçıncı kez gelmiş olur (noteUser ile aynı kural)?
+   * Gönderim öncesi şerit için; durumu değiştirmez.
+   */
+  previewShortRepeat(text: string): number {
+    if (isExitMessage(text) || !isShort(text)) return 0;
+    if (this.turns > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion)) return 0;
+    return normalizeText(text) === this.recentTexts[this.recentTexts.length - 1] ? this.shortRepeatRun + 1 : 1;
+  }
 
   /** Kullanıcı bir mesaj gönderdi (ya da geçmişten okundu). */
   noteUser(text: string, turn: UserTurn): void {
@@ -155,6 +186,8 @@ export class ConversationSignals {
     const normalized = normalizeText(text);
     const previous = this.recentTexts[this.recentTexts.length - 1];
     this.lastShortRepair = index > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
+    // Soruyla biten cevaba verilen kısa onay ya da ret zinciri (yön modelde kalıyor).
+    this.affirmRun = this.answerAskedQuestion && isAffirmation(text) ? this.affirmRun + 1 : 0;
     if (isExitMessage(text)) {
       this.lastExit = true;
       this.recentFlags = [];
@@ -179,6 +212,11 @@ export class ConversationSignals {
   noteAnswer(answer: string | null): void {
     this.apologyRun = apologizes(answer) ? this.apologyRun + 1 : 0;
     this.answerAskedQuestion = endsWithQuestion(answer);
+  }
+
+  /** Soruyla biten cevaplara üst üste verilen kısa onay ya da ret sayısı. */
+  get affirmStreak(): number {
+    return this.affirmRun;
   }
 
   /** Son cevap bir soruyla mı bitti (yalın "hayır" o zaman şikayet sayılmaz)? */
@@ -237,5 +275,6 @@ export class ConversationSignals {
     this.shortRepeatRun = 0;
     this.lastShortRepair = false;
     this.answerAskedQuestion = false;
+    this.affirmRun = 0;
   }
 }
