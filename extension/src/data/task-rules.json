@@ -1,5 +1,5 @@
 {
-  "note": "Görev türü kuralları. Hem eklenti (src/core/tasks.ts) hem Python (src/kafiai/tasks.py) bu dosyayı okur. Sıra önemlidir: ilk eşleşen tür seçilir. Kurallar sadeleştirilmiş metnin iki biçimine uygulanır: Türkçe kuralla (I -> ı) ve İngilizce kuralla (I -> i); böylece 'API', 'CLI' gibi büyük harfli kısaltmalar da tanınır.",
+  "note": "Görev türü kuralları. Hem eklenti (src/core/tasks.ts) hem Python (src/kafiai/tasks.py) bu dosyayı okur. Sıra önemlidir: ilk eşleşen tür seçilir. Kurallar sadeleştirilmiş metnin iki biçimine uygulanır: Türkçe kuralla (I -> ı) ve İngilizce kuralla (I -> i); böylece 'API', 'CLI' gibi büyük harfli kısaltmalar da tanınır. Kasım 2026 ekleri (Türkçe senaryo testinde bulunan iki hata için): web ve veri kütüphanesi adları (flask, fastapi, pandas, jwt vb.), 'uç nokta' kalıpları ve 'React ile' gibi bağlamlı ifadeler kod sayılır; 'hangi' önek oldu ve 'hangileri', 'hangisinde' biçimlerini de kapsıyor. WildFeedback'teki 20.000 ilk mesajın 58'inin türü değişti (%0,3; çoğu kod).",
   "order": ["kod", "ceviri", "ozet", "yazma", "soru"],
   "fallback": "diger",
   "head_chars": 300,
@@ -14,9 +14,11 @@
   "rules": {
     "kod": {
       "markers": ["```", "#include", "def ", "console.log", "traceback", "</", "();", "=>", "import ", "c++", "c#"],
-      "words": ["python", "javascript", "java", "sql", "html", "css", "typescript", "code", "bug", "error", "exception", "regex", "api", "json", "script", "reactjs", "jsx", "docker", "git", "github", "npm", "php", "linux", "bash", "django", "flutter", "laravel", "kotlin", "vba", "cli", "nodejs", "sqlite", "mysql", "arduino", "wordpress"],
+      "words": ["python", "javascript", "java", "sql", "html", "css", "typescript", "code", "bug", "error", "exception", "regex", "api", "json", "script", "reactjs", "jsx", "docker", "git", "github", "npm", "php", "linux", "bash", "django", "flutter", "laravel", "kotlin", "vba", "cli", "nodejs", "sqlite", "mysql", "arduino", "wordpress",
+                "flask", "fastapi", "sqlalchemy", "pytest", "bcrypt", "dockerfile", "endpoint", "endpoints", "pandas", "numpy", "vue", "angular", "jwt", "nextjs"],
       "prefixes": ["kod", "fonksiyon", "debug", "compil", "sorgu", "algoritma", "veritaban", "programla"],
-      "phrases": ["hata veriyor", "excel de", "excelde", "excel formula", "excel sheet", "in excel", "node js", "react native"]
+      "phrases": ["hata veriyor", "excel de", "excelde", "excel formula", "excel sheet", "in excel", "node js", "react native",
+                  "react ile", "in react", "react app", "react component", "uç nokta", "uç noktası", "uç noktaları", "uç noktalarını", "uç noktalar"]
     },
     "ceviri": {
       "markers": [],
@@ -38,8 +40,8 @@
     },
     "soru": {
       "markers": [],
-      "words": ["explain", "why", "nedir", "neden", "nasıl", "niçin", "hangisi", "hangi", "kaç", "kim", "kimdir", "nelerdir", "midir", "mıdır", "kaçtır", "anlat", "anlatır"],
-      "prefixes": ["açıkla", "çöz", "aşağıdakiler", "hesapla"],
+      "words": ["explain", "why", "nedir", "neden", "nasıl", "niçin", "kaç", "kim", "kimdir", "nelerdir", "midir", "mıdır", "kaçtır", "anlat", "anlatır"],
+      "prefixes": ["açıkla", "çöz", "aşağıdakiler", "hesapla", "hangi"],
       "phrases": ["how do", "how does", "how can", "how to", "what is", "what are", "what does", "difference between", "ne demek", "farkı", "ne zaman", "can you explain", "tell me about"],
       "ends_with_question": true
     }

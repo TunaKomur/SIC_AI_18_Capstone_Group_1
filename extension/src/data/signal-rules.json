@@ -34,7 +34,11 @@
   },
   "short": {
     "note": "Karşılaştırılamayacak kadar kısa mesajlar (12 karakterden az). Güçlü onarım ifadesi taşıyan kısa mesaj ('olmadı', 'yanlış', 'hala hata') tekrar denemesi gibi sayılır: WildFeedback'te o turda memnuniyetsizlik %45,8 (genel %5,8). Aynı kısa mesajın ('devam', 'alternatif') üst üste gelmesi tek başına memnuniyetsizlik göstermiyor (%4,9); yalnızca repeat_streak kez üst üste gelince halka bir kademe yükselir. Sayıların kaynağı: scripts/evaluate_short_messages.py (outputs/short_messages.json).",
-    "repeat_streak": 3
+    "repeat_streak": 3,
+    "decline_note": "Yapay zekanın cevabı bir soruyla bittiyse ('Grafik de ekleyeyim mi?') yalnızca 'hayır' ya da 'no' demek bir teklifi geri çevirmektir, şikayet değildir: kısa onarım sayılmaz. WildFeedback'te yalın 'no/hayır' mesajlarında memnuniyetsizlik önceki cevap soruyla bittiğinde %4,9, bitmediğinde %57,9. Cevabın sonundaki soru, cevabın son tail_chars karakterine bakılarak bulunur (yalnızca bellekte).",
+    "decline_words": ["hayır", "no", "nope", "nah", "yok"],
+    "decline_max_words": 2,
+    "tail_chars": 200
   },
   "recent_window": 4
 }

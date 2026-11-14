@@ -17,7 +17,7 @@ import { HistoryWatcher, historySeed, historySignature } from "../core/history-w
 import { isPopupMessage, MSG_OPEN_CARD, type ConversationSnapshot } from "../core/messages";
 import { isPersonal } from "../core/personal";
 import { ringLevel, ringText } from "../core/ring";
-import { ConversationSignals, isShortRepair } from "../core/signals";
+import { ConversationSignals, isOfferDecline, isShortRepair } from "../core/signals";
 import { RepeatDetector } from "../core/repeat-detector";
 import { Session } from "../core/session";
 import {
@@ -411,7 +411,9 @@ function main(): boolean {
       const check = detector.check(text);
       // Kısa onarım ("olmadı", "yanlış"): tekrar değil ama neyin olmadığını söylemiyor.
       // İlk mesajda anlamı yok; önce bir cevap gelmiş olmalı.
-      const shortRepair = !check.similar && session.turns > 0 && isShortRepair(text);
+      // Soruyla biten cevaba verilen yalın "hayır" bir teklifi geri çevirmektir, şerit çıkmaz.
+      const shortRepair =
+        !check.similar && session.turns > 0 && isShortRepair(text) && !isOfferDecline(text, signals.lastAnswerAskedQuestion);
       // Birebir olmayan yeniden yazımda gönderim bekletilmez; halka ve kart yine de sayar.
       if (!check.hold && !shortRepair) {
         skipNextCheck = false;

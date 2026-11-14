@@ -465,6 +465,114 @@
           "short_repair": false
         }
       ]
+    },
+    {
+      "user": [
+        "Aylık bütçe tablosu için Excel formülleri öner",
+        "hayır"
+      ],
+      "answers": [
+        "Şu formülleri kullanabilirsin. Grafik de ekleyeyim mi? 🙂",
+        "Tamam, grafiksiz bırakıyorum."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "Aylık bütçe tablosu için Excel formülleri öner",
+        "hayır"
+      ],
+      "answers": [
+        "Şu formülleri kullanabilirsin: TOPLA ve EĞER.",
+        "Haklısınız, düzeltiyorum."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 1,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": true
+        }
+      ]
+    },
+    {
+      "user": [
+        "Kahve dükkanım için Instagram'a 5 başlık öner",
+        "farklı bir tonda 5 tane daha yaz"
+      ],
+      "answers": [
+        "1. ...",
+        "Daha samimi tonda ..."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        }
+      ]
     }
   ]
 }

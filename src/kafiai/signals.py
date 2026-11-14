@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 from kafiai.config import EXT_MIN_NORMALIZED_CHARS
-from kafiai.extension_similarity import cosine, fold_turkish, ngram_vector, normalize_text, with_folded
+from kafiai.extension_similarity import cosine, fold_turkish, has_variation_cue, ngram_vector, normalize_text, with_folded
 from kafiai.tasks import task_type
 
 RULES = json.loads(
@@ -71,6 +71,28 @@ def is_short(text):
     return 0 < len(n) < EXT_MIN_NORMALIZED_CHARS
 
 
+_DECLINE = set(with_folded(RULES["short"]["decline_words"]))
+
+
+def ends_with_question(answer):
+    """Cevap bir soruyla mı bitiyor? Cevabın son tail_chars karakterine bakılır (signals.ts ile aynı)."""
+    if not answer:
+        return False
+    tail = answer[-RULES["short"]["tail_chars"]:].rstrip()
+    i = len(tail)
+    while i > 0 and not (tail[i - 1] == "?" or tail[i - 1].isalnum()):
+        i -= 1
+    return i > 0 and tail[i - 1] == "?"
+
+
+def is_offer_decline(text, answer_asked_question):
+    """Soruyla biten bir cevaba verilen yalın "hayır": teklifi geri çevirmek, şikayet değil."""
+    if not answer_asked_question:
+        return False
+    tokens = fold_turkish(normalize_text(text)).split()
+    return 0 < len(tokens) <= RULES["short"]["decline_max_words"] and tokens[0] in _DECLINE
+
+
 def is_short_repair(text):
     """Kısa ve güçlü onarım ifadesi taşıyan mesaj ("olmadı", "yanlış", "hala hata")."""
     return is_short(text) and _strong_repair(text) and not is_exit_message(text)
@@ -79,6 +101,9 @@ def is_short_repair(text):
 def is_new_topic(text, recent, segment_task):
     normalized = normalize_text(text)
     if len(normalized) < RULES["topic"]["min_chars"] or _strong_repair(text):
+        return False
+    # Varyasyon isteği ("farklı tonda 5 tane daha") aynı işin devamıdır, yeni konu değildir.
+    if has_variation_cue(text):
         return False
     task = task_type(text)
     if task == "diger" or task == segment_task:
@@ -105,6 +130,7 @@ class ConversationSignals:
         self.exited = False
         self.short_repeat_streak = 0
         self.last_short_repair = False
+        self.answer_asked_question = False
 
     def note_user(self, text, similar):
         index = self.turns
@@ -122,7 +148,7 @@ class ConversationSignals:
             self.short_repeat_streak = 0
         normalized = normalize_text(text)
         previous = self.recent_texts[-1] if self.recent_texts else None
-        self.last_short_repair = index > 0 and is_short_repair(text)
+        self.last_short_repair = index > 0 and is_short_repair(text) and not is_offer_decline(text, self.answer_asked_question)
         if is_exit_message(text):
             self.exited = True
             self.recent_flags = []
@@ -144,6 +170,7 @@ class ConversationSignals:
 
     def note_answer(self, answer):
         self.apology_streak = self.apology_streak + 1 if apologizes(answer) else 0
+        self.answer_asked_question = ends_with_question(answer)
 
     @property
     def recent_similar(self):

@@ -1,5 +1,5 @@
 import rules from "../data/personal-rules.json";
-import { normalizeText } from "./text";
+import { foldTurkish, normalizeText, withFolded } from "./text";
 
 /**
  * Kişisel ve duygusal mesaj tespiti. İlke: bu sohbetlerde öneri gösterilmez.
@@ -8,11 +8,16 @@ import { normalizeText } from "./text";
  * Kurgu isteklerinde ("write a story") yalnızca kendine zarar ifadeleri sayılır.
  */
 
+// Türkçe karaktersiz yazım da kişisel sayılır ("cok yalniz hissediyorum").
+const PHRASES = withFolded(rules.phrases);
+const FICTION_MARKERS = withFolded(rules.fiction_markers);
+const FICTION_EXEMPT = withFolded(rules.fiction_exempt);
+
 function variants(text: string): string[] {
   const raw = text ?? "";
   const tr = normalizeText(raw);
   const en = normalizeText(raw.replace(/I/g, "i"));
-  return tr === en ? [` ${tr} `] : [` ${tr} `, ` ${en} `];
+  return [...new Set([tr, en, foldTurkish(tr)])].map((v) => ` ${v} `);
 }
 
 function hit(padded: string[], phrases: string[]): boolean {
@@ -21,6 +26,6 @@ function hit(padded: string[], phrases: string[]): boolean {
 
 export function isPersonal(text: string): boolean {
   const v = variants(text);
-  if (hit(v, rules.fiction_markers)) return hit(v, rules.fiction_exempt);
-  return hit(v, rules.phrases);
+  if (hit(v, FICTION_MARKERS)) return hit(v, FICTION_EXEMPT);
+  return hit(v, PHRASES);
 }

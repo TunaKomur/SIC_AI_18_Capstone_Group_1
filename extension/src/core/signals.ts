@@ -1,5 +1,6 @@
 import { MIN_NORMALIZED_CHARS } from "../config";
 import rules from "../data/signal-rules.json";
+import { hasVariationCue } from "./repeat-detector";
 import { cosine, ngramVector } from "./similarity";
 import { hasStrongRepair } from "./strong-repair";
 import { taskType, type TaskType } from "./tasks";
@@ -75,6 +76,22 @@ export function isShort(text: string): boolean {
   return length > 0 && length < MIN_NORMALIZED_CHARS;
 }
 
+const DECLINE_WORDS = new Set<string>(withFolded(rules.short.decline_words));
+
+/** Cevap bir soruyla mı bitiyor ("… ekleyeyim mi?")? Sondaki emoji, tırnak ve boşluklar yok sayılır. */
+export function endsWithQuestion(answer: string | null | undefined): boolean {
+  if (!answer) return false;
+  const tail = Array.from(answer).slice(-rules.short.tail_chars).join("");
+  return /\?[^\p{L}\p{N}?]*$/u.test(tail);
+}
+
+/** Soruyla biten bir cevaba verilen yalın "hayır": teklifi geri çevirmek, şikayet değil. */
+export function isOfferDecline(text: string, answerAskedQuestion: boolean): boolean {
+  if (!answerAskedQuestion) return false;
+  const tokens = tokensOf(foldTurkish(normalizeText(text)));
+  return tokens.length > 0 && tokens.length <= rules.short.decline_max_words && DECLINE_WORDS.has(tokens[0] ?? "");
+}
+
 /** Kısa ve güçlü onarım ifadesi taşıyan mesaj mı ("olmadı", "yanlış", "hala hata")? */
 export function isShortRepair(text: string): boolean {
   return isShort(text) && hasStrongRepair(text) && !isExitMessage(text);
@@ -91,6 +108,8 @@ export interface TopicContext {
 export function isNewTopic(text: string, ctx: TopicContext): boolean {
   const normalized = normalizeText(text);
   if (Array.from(normalized).length < rules.topic.min_chars || hasStrongRepair(text)) return false;
+  // Varyasyon isteği ("farklı tonda 5 tane daha") aynı işin devamıdır, yeni konu değildir.
+  if (hasVariationCue(text)) return false;
   const task = taskType(text);
   if (task === "diger" || task === ctx.segmentTask) return false;
   const vec = ngramVector(normalized);
@@ -115,6 +134,7 @@ export class ConversationSignals {
   private lastExit = false;
   private shortRepeatRun = 0;
   private lastShortRepair = false;
+  private answerAskedQuestion = false;
 
   /** Kullanıcı bir mesaj gönderdi (ya da geçmişten okundu). */
   noteUser(text: string, turn: UserTurn): void {
@@ -134,7 +154,7 @@ export class ConversationSignals {
     }
     const normalized = normalizeText(text);
     const previous = this.recentTexts[this.recentTexts.length - 1];
-    this.lastShortRepair = index > 0 && isShortRepair(text);
+    this.lastShortRepair = index > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
     if (isExitMessage(text)) {
       this.lastExit = true;
       this.recentFlags = [];
@@ -158,6 +178,12 @@ export class ConversationSignals {
   /** Yapay zekanın cevabı bitti; cevabın başı (yalnızca kural için, saklanmaz). */
   noteAnswer(answer: string | null): void {
     this.apologyRun = apologizes(answer) ? this.apologyRun + 1 : 0;
+    this.answerAskedQuestion = endsWithQuestion(answer);
+  }
+
+  /** Son cevap bir soruyla mı bitti (yalın "hayır" o zaman şikayet sayılmaz)? */
+  get lastAnswerAskedQuestion(): boolean {
+    return this.answerAskedQuestion;
   }
 
   /** Son birkaç mesajdan kaçı öncekine çok benziyordu (çıkış ya da konu değişince sıfırlanır). */
@@ -210,5 +236,6 @@ export class ConversationSignals {
     this.lastExit = false;
     this.shortRepeatRun = 0;
     this.lastShortRepair = false;
+    this.answerAskedQuestion = false;
   }
 }
