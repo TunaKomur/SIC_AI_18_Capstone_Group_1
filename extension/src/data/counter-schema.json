@@ -89,6 +89,8 @@
         "gosterildi",
         "tetiklendi_kisa",
         "gosterildi_kisa",
+        "tetiklendi_tekrar",
+        "gosterildi_tekrar",
         "gizlendi_sayim",
         "gizlendi_rastgele",
         "gizlendi_bekleme",
@@ -96,7 +98,7 @@
         "gizlendi_platform",
         "gizlendi_kisisel"
       ],
-      "note": "Benzer mesaj şeridi. tetiklendi: koşul sağlandı; ardından gösterildi ya da gizlendi (nedeniyle) sayılır. gizlendi_kisisel: sohbet kişisel ya da duygusal görünüyor, öneri gösterilmedi (içeriği değil yalnızca sayısı). tetiklendi_kisa ve gosterildi_kisa: kısa onarım şeridi ('olmadı' gibi mesajlarda neyin olmadığını ekleme önerisi); gizlenme nedenleri iki şerit için ortak."
+      "note": "Benzer mesaj şeridi. tetiklendi: koşul sağlandı; ardından gösterildi ya da gizlendi (nedeniyle) sayılır. gizlendi_kisisel: sohbet kişisel ya da duygusal görünüyor, öneri gösterilmedi (içeriği değil yalnızca sayısı). tetiklendi_kisa ve gosterildi_kisa: kısa onarım şeridi ('olmadı' gibi mesajlarda neyin olmadığını ekleme önerisi). tetiklendi_tekrar ve gosterildi_tekrar: aynı kısa mesaj ('devam') üçüncü kez, neyle ve nasıl devam edeceğini yazma önerisi (sohbet başına bir kez). Gizlenme nedenleri şeritler için ortak."
     },
     "strip_action": {
       "dims": [
@@ -122,9 +124,11 @@
         "error",
         "expected",
         "wrong_part",
+        "continue_what",
+        "continue_how",
         "na"
       ],
-      "note": "Onarım düğmesi; ayrıntı düğmenin türü (src/core/repairs.ts). 'na': sürüm 1'den göç edilen, türü bilinmeyen sayılar."
+      "note": "Onarım düğmesi; ayrıntı düğmenin türü (src/core/repairs.ts). continue_what ve continue_how: kısa tekrar şeridindeki 'Neyle devam etsin' ve 'Nasıl devam etsin' cümleleri. 'na': sürüm 1'den göç edilen, türü bilinmeyen sayılar."
     },
     "card": {
       "dims": [
@@ -217,6 +221,19 @@
         "ayrinti"
       ],
       "note": "Haftalık içgörü. pencere: araç çubuğu penceresi içgörüyle açıldı (görev 'na'); ayrinti: bir görev satırı açıldı."
+    },
+    "hint": {
+      "dims": [
+        "platform",
+        "task"
+      ],
+      "details": [
+        "gosterildi",
+        "ozetlet",
+        "yerinde_degil",
+        "kapat"
+      ],
+      "note": "Onay zinciri önerisi: kullanıcı modelin soruyla biten cevaplarına üst üste kısa onaylarla karşılık verdi; cevabın altında, gönderimi bekletmeden, sohbet başına bir kez. ozetlet: modelden şu ana kadar anladığını özetlemesini isteyen cümle mesaj kutusuna eklendi."
     },
     "ring": {
       "dims": [

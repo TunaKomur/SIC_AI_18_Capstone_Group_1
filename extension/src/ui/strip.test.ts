@@ -184,3 +184,31 @@ describe("kısa onarım şeridi", () => {
     expect(a.onSendAnyway).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("kısa tekrar şeridi ve onay zinciri önerisi", () => {
+  const strip = new Strip();
+  afterEach(() => strip.hide());
+
+  it("kısa tekrarda neyle ve nasıl devam edeceğini yazma cümlelerini sunar", () => {
+    const a = actions();
+    strip.show(document.body, a, { attempt: 1, exact: true, task: "kod", kind: "short_repeat" });
+    expect(shadowOf().textContent).toContain("Aynı kısa mesajı üçüncü kez gönderiyorsun.");
+    buttonByText("Neyle devam etsin, yaz").click();
+    expect(a.onRepair).toHaveBeenCalledWith("Şununla devam et: ", "continue_what");
+    expect(strip.visible).toBe(false);
+  });
+
+  it("onay zinciri önerisi 'Özetlet' sunar, gönder düğmesi yoktur ve odağı almaz", () => {
+    const a = actions();
+    const input = document.createElement("input");
+    document.body.append(input);
+    input.focus();
+    strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "affirm_hint" });
+    expect(shadowOf().textContent).toContain("Yön sende");
+    expect(buttonByText("Yine de gönder")).toBeUndefined();
+    expect(document.activeElement).toBe(input);
+    buttonByText("Özetlet").click();
+    expect(a.onRepair).toHaveBeenCalledWith(expect.stringContaining("üç maddede özetle"), "summary");
+    input.remove();
+  });
+});

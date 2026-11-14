@@ -1,4 +1,4 @@
-import { REPAIRS, shortRepairs, type Repair } from "../core/repairs";
+import { CONTINUE_REPAIRS, REPAIRS, SUMMARY_REPAIR, shortRepairs, type Repair } from "../core/repairs";
 import { header, mountCard } from "./theme";
 
 /**
@@ -31,9 +31,11 @@ export interface StripContext {
   task: string | null;
   /**
    * repeat: benzer mesaj (varsayılan). short_repair: "olmadı", "yanlış" gibi kısa bir onarım;
-   * mesaj tekrar değil, yalnızca neyin olmadığını söylemiyor.
+   * mesaj tekrar değil, yalnızca neyin olmadığını söylemiyor. short_repeat: aynı kısa mesaj ("devam")
+   * üçüncü kez gönderilmek üzere. affirm_hint: soruyla biten cevaplara üst üste kısa onaylar verildi;
+   * cevabın altında çıkar ve gönderimi bekletmez.
    */
-  kind?: "repeat" | "short_repair";
+  kind?: "repeat" | "short_repair" | "short_repeat" | "affirm_hint";
 }
 
 /** Bu denemeden sonra şeritte "Yeni sohbete geç" önerilir. */
@@ -50,6 +52,20 @@ const TASK_HINTS: Record<string, string> = {
 /** Şeridin başlığı, açıklaması ve görev ipucu. Testler ve popup önizlemesi de kullanır. */
 export function stripMessage(ctx: StripContext): { title: string; body: string; hint: string | null } {
   const hint = ctx.task !== null ? (TASK_HINTS[ctx.task] ?? null) : null;
+  if (ctx.kind === "short_repeat") {
+    return {
+      title: "Aynı kısa mesajı üçüncü kez gönderiyorsun.",
+      body: "Model neyle ve nasıl devam edeceğini tahmin ediyor. Bunu bir cümleyle sen belirlersen döngüde kalmazsın.",
+      hint: null,
+    };
+  }
+  if (ctx.kind === "affirm_hint") {
+    return {
+      title: "Son mesajların modelin tekliflerine kısa onaylardı.",
+      body: "İstersen devam etmeden önce modelin şu ana kadar ne anladığını özetlemesini iste; bir sonraki adımı sen seç.",
+      hint: null,
+    };
+  }
   if (ctx.kind === "short_repair") {
     return {
       title: "Neyin olmadığını bir cümleyle eklersen cevap daha isabetli olur.",
@@ -125,13 +141,23 @@ export class Strip {
       actions.onClose();
     };
     const msg = stripMessage(ctx);
-    const chip = ctx.kind === "short_repair" ? "Kısa düzeltme" : ctx.attempt >= 2 ? `${ctx.attempt}. deneme` : "Benzer mesaj";
+    const chip =
+      ctx.kind === "short_repair"
+        ? "Kısa düzeltme"
+        : ctx.kind === "short_repeat"
+          ? "Aynı kısa mesaj"
+          : ctx.kind === "affirm_hint"
+            ? "Yön sende"
+            : ctx.attempt >= 2
+              ? `${ctx.attempt}. deneme`
+              : "Benzer mesaj";
 
-    /** Kısa onarım görünümü: onarım cümleleri doğrudan ilk satırda, ara adım yok. */
+    /** Kısa onarım ve kısa tekrar görünümü: cümleler doğrudan ilk satırda, ara adım yok. */
     const showShortRepair = () => {
       const row = document.createElement("div");
       row.className = "row";
-      for (const repair of shortRepairs(ctx.task)) {
+      const repairs = ctx.kind === "short_repeat" ? CONTINUE_REPAIRS : shortRepairs(ctx.task);
+      for (const repair of repairs) {
         row.append(
           button(repair.label, row.childElementCount === 0 ? "" : "secondary", () => {
             this.hide();
@@ -213,7 +239,31 @@ export class Strip {
       (row.firstElementChild as HTMLButtonElement | null)?.focus();
     };
 
-    if (ctx.kind === "short_repair") showShortRepair();
+    /** Onay zinciri önerisi: gönderimi bekletmez, odağı almaz (kullanıcı yazıyor olabilir). */
+    const showAffirmHint = () => {
+      const row = document.createElement("div");
+      row.className = "row";
+      row.append(
+        button(SUMMARY_REPAIR.label, "", () => {
+          this.hide();
+          actions.onRepair(SUMMARY_REPAIR.sentence, SUMMARY_REPAIR.id);
+        }),
+        spacer(),
+      );
+      if (actions.onNotRelevant) {
+        row.append(
+          button("Yerinde değildi", "link", () => {
+            this.hide();
+            actions.onNotRelevant?.();
+          }),
+        );
+      }
+      row.append(button("Kapat", "link", close));
+      box.replaceChildren(header(chip), paragraph(msg.title, "title"), paragraph(msg.body, "body"), row);
+    };
+
+    if (ctx.kind === "short_repair" || ctx.kind === "short_repeat") showShortRepair();
+    else if (ctx.kind === "affirm_hint") showAffirmHint();
     else showChoice();
     this.host = host;
 

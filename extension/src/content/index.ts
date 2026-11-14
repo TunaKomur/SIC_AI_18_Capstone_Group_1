@@ -17,7 +17,7 @@ import { HistoryWatcher, historySeed, historySignature } from "../core/history-w
 import { isPopupMessage, MSG_OPEN_CARD, type ConversationSnapshot } from "../core/messages";
 import { isPersonal } from "../core/personal";
 import { ringLevel, ringText } from "../core/ring";
-import { ConversationSignals, isOfferDecline, isShortRepair } from "../core/signals";
+import { AFFIRM_STREAK, ConversationSignals, isOfferDecline, isShortRepair, SHORT_REPEAT_STREAK } from "../core/signals";
 import { RepeatDetector } from "../core/repeat-detector";
 import { Session } from "../core/session";
 import {
@@ -82,6 +82,9 @@ function main(): boolean {
   /** Bu sohbette halkanın ulaştığı en yüksek seviye (sayaç tekrarını önlemek için) */
   let ringPeak = 0;
   let ringExplained = false;
+  /** Bu sohbette kısa tekrar şeridi ve onay zinciri önerisi gösterildi mi (her biri sohbet başına bir kez)? */
+  let shortRepeatOffered = false;
+  let affirmHintShown = false;
   /** Konsola yazılan son halka seviyesi; elle doğrulamada seviye değişimini tek satırda görmek için */
   let ringLogged = 0;
 
@@ -203,6 +206,39 @@ function main(): boolean {
         },
       },
       reason,
+    );
+  };
+
+  /**
+   * Onay zinciri önerisi: kullanıcı modelin soruyla biten cevaplarına üst üste kısa onaylarla karşılık
+   * verdi. Cevabın altında çıkar, gönderimi bekletmez, odağı almaz; sohbet başına bir kez.
+   */
+  const maybeShowAffirmHint = () => {
+    if (affirmHintShown || signals.affirmStreak < AFFIRM_STREAK) return;
+    if (strip.visible || exitCard.visible || policy.stripShownThisTurn(session.turns)) return;
+    if (!suggesting() || !intervening() || personal) return;
+    const composer = adapter.composer();
+    if (!composer) return;
+    affirmHintShown = true;
+    record("hint", "gosterildi");
+    console.log(`[KafiAI] onay zinciri önerisi gösterildi (üst üste ${signals.affirmStreak} kısa onay)`);
+    ring.hide();
+    strip.show(
+      composer.anchor,
+      {
+        onSendAnyway: () => undefined,
+        onClose: () => record("hint", "kapat"),
+        onNotRelevant: () => {
+          console.log("[KafiAI] kullanıcı onay önerisi için 'Yerinde değildi' dedi");
+          record("hint", "yerinde_degil");
+        },
+        onRepair: (sentence) => {
+          const ok = adapter.insertText(sentence);
+          if (ok) record("hint", "ozetlet");
+          console.log(`[KafiAI] özet isteği eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
+        },
+      },
+      { attempt: 1, exact: false, task: currentTask(), kind: "affirm_hint" },
     );
   };
 
@@ -414,12 +450,17 @@ function main(): boolean {
       // Soruyla biten cevaba verilen yalın "hayır" bir teklifi geri çevirmektir, şerit çıkmaz.
       const shortRepair =
         !check.similar && session.turns > 0 && isShortRepair(text) && !isOfferDecline(text, signals.lastAnswerAskedQuestion);
+      // Aynı kısa mesaj ("devam") üçüncü kez: neyle ve nasıl devam edeceğini yazmayı öner (sohbet başına bir kez).
+      const shortRepeat =
+        !check.similar && !shortRepair && !shortRepeatOffered && signals.previewShortRepeat(text) === SHORT_REPEAT_STREAK;
       // Birebir olmayan yeniden yazımda gönderim bekletilmez; halka ve kart yine de sayar.
-      if (!check.hold && !shortRepair) {
+      if (!check.hold && !shortRepair && !shortRepeat) {
         skipNextCheck = false;
         return false;
       }
-      record("strip", shortRepair ? "tetiklendi_kisa" : "tetiklendi");
+      const kind: "short_repair" | "short_repeat" | "repeat" = shortRepair ? "short_repair" : shortRepeat ? "short_repeat" : "repeat";
+      const suffix = kind === "short_repair" ? "_kisa" : kind === "short_repeat" ? "_tekrar" : "";
+      record("strip", `tetiklendi${suffix}`);
       if (skipNextCheck) {
         // Onarım cümlesi az önce eklendi: aynı mesaj için tekrar sorulmaz.
         skipNextCheck = false;
@@ -439,11 +480,14 @@ function main(): boolean {
         return false;
       }
       console.log(
-        shortRepair
+        kind === "short_repair"
           ? "[KafiAI] kısa onarım mesajı, gönderim bekletildi"
-          : `[KafiAI] benzer mesaj, gönderim bekletildi (skor ${check.score.toFixed(2)})`,
+          : kind === "short_repeat"
+            ? `[KafiAI] aynı kısa mesaj ${SHORT_REPEAT_STREAK}. kez, gönderim bekletildi`
+            : `[KafiAI] benzer mesaj, gönderim bekletildi (skor ${check.score.toFixed(2)})`,
       );
-      record("strip", shortRepair ? "gosterildi_kisa" : "gosterildi");
+      record("strip", `gosterildi${suffix}`);
+      if (kind === "short_repeat") shortRepeatOffered = true;
       policy.noteStrip(session.turns + 1); // mesaj gönderilince bu tur numarasını alacak
       exitCard.hide();
       const task = currentTask();
@@ -452,7 +496,7 @@ function main(): boolean {
         attempt: shortRepair ? signals.recentSimilar + 1 : check.matches + 1,
         exact: check.score >= EXACT_REPEAT_THRESHOLD,
         task,
-        kind: shortRepair ? ("short_repair" as const) : ("repeat" as const),
+        kind,
       };
       ring.hide();
       strip.show(anchor, {
@@ -545,6 +589,7 @@ function main(): boolean {
       if (signals.apologyStreak >= 2) recordSignal("ozur_dongusu");
       updateRing();
       maybeShowExitCard();
+      maybeShowAffirmHint();
     },
     onSendNotSeen: () => {
       // Sayfa mesajı göndermedi (örneğin yeni açılmış sekmede Enter işlenmedi): sayılmadı.
@@ -585,6 +630,8 @@ function main(): boolean {
     ring.hide();
     ringPeak = 0;
     ringExplained = false;
+    shortRepeatOffered = false;
+    affirmHintShown = false;
     ringLogged = 0;
     policy.reset();
     userTexts = [];

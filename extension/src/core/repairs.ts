@@ -4,7 +4,7 @@
  * Cümleler iki türlüdür: iki nokta ile bitenler kullanıcının devam etmesini bekler.
  */
 export interface Repair {
-  id: "format" | "info" | "shorter" | "longer" | "error" | "expected" | "wrong_part";
+  id: "format" | "info" | "shorter" | "longer" | "error" | "expected" | "wrong_part" | "continue_what" | "continue_how" | "summary";
   label: string;
   sentence: string;
 }
@@ -35,3 +35,20 @@ export function shortRepairs(task: string | null): readonly Repair[] {
       : { id: "wrong_part", label: "Neyin yanlış olduğunu yaz", sentence: "Yanlış olan kısım: " };
   return [first, { id: "expected", label: "Beklediğimi yaz", sentence: "Beklediğim sonuç: " }];
 }
+
+/**
+ * Aynı kısa mesaj ("devam") üçüncü kez gönderilmek üzereyken: model neyle ve nasıl devam edeceğini
+ * tahmin ediyor; yönü kullanıcı bir cümleyle belirler.
+ */
+export const CONTINUE_REPAIRS: readonly Repair[] = [
+  { id: "continue_what", label: "Neyle devam etsin, yaz", sentence: "Şununla devam et: " },
+  { id: "continue_how", label: "Nasıl devam etsin, yaz", sentence: "Bundan sonra şu şekilde devam et: " },
+];
+
+/** Kısa onay zincirinden sonra: modelden şu ana kadar anladığını özetlemesini isteyen hazır cümle. */
+export const SUMMARY_REPAIR: Repair = {
+  id: "summary",
+  label: "Özetlet",
+  sentence:
+    "Devam etmeden önce şu ana kadar ne istediğimi nasıl anladığını üç maddede özetle ve bir sonraki adım için bana seçenekler sun.",
+};
