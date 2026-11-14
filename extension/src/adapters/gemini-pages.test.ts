@@ -45,12 +45,12 @@ describe("Gemini sayfa görüntüleri", () => {
     expect(geminiAdapter.lastResponse!()).toBeNull();
   });
 
-  it("ilk cevap: tek istek ve cevabın ilk 600 karakteri", () => {
+  it("ilk cevap: tek istek ve cevabın başı ile sonu", () => {
     load("ilk_cevap");
     expect(geminiAdapter.readHistory()).toHaveLength(1);
     const answer = geminiAdapter.lastResponse!()!;
     expect(answer).toMatch(/ters çevir/);
-    expect(answer.length).toBeLessThanOrEqual(600);
+    expect(answer.length).toBeLessThanOrEqual(803); // ilk 600 + " … " + son 200 karakter
   });
 
   it("cevap yazılırken üretim sürüyor sayılır", () => {

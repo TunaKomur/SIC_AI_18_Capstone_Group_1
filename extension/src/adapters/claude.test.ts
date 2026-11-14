@@ -303,7 +303,7 @@ describe("lastResponse: son cevabın başı (yalnızca özür kuralı için)", (
     const text = claudeAdapter.lastResponse!()!;
     expect(text).toMatch(/ters çevirmenin/);
     expect(text).not.toMatch(/Claude responded/);
-    expect(text.length).toBeLessThanOrEqual(600);
+    expect(text.length).toBeLessThanOrEqual(803); // ilk 600 + " … " + son 200 karakter
   });
 
   it("boş sohbette null", () => {

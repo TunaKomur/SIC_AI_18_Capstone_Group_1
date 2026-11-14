@@ -259,6 +259,22 @@ describe("start(): gönderme ve cevap bitişi", () => {
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
+  it("Enter'dan sonra sayfanın kendi Gönder tıklaması aynı gönderimdir: tekrar sorulmaz, bir kez sayılır", () => {
+    const before = vi.fn().mockReturnValue(false);
+    const notSeen = vi.fn();
+    renderPage({ text: "merhaba" });
+    stop = chatgptAdapter.start({ ...handlers, onBeforeSend: before, onSendNotSeen: notSeen });
+    const pageClick = vi.fn();
+    document.querySelector<HTMLButtonElement>('button[type="submit"]')!.addEventListener("click", pageClick);
+    pressEnter();
+    document.querySelector<HTMLButtonElement>('button[type="submit"]')!.click(); // ChatGPT'nin kendi tıklaması
+    pageSent();
+    expect(before).toHaveBeenCalledTimes(1);
+    expect(pageClick).toHaveBeenCalledTimes(1); // sayfanın gönderimi durdurulmadı
+    expect(handlers.onSend).toHaveBeenCalledTimes(1);
+    expect(notSeen).not.toHaveBeenCalled();
+  });
+
   it("kutu boşalmasa da üretim başlarsa gönderilmiş sayılır", () => {
     renderPage({ text: "merhaba" });
     stop = chatgptAdapter.start(handlers);

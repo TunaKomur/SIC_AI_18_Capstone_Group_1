@@ -237,6 +237,15 @@ export const chatgptAdapter: Adapter = {
       }
     };
 
+    /**
+     * ChatGPT Enter'a basılınca kendi Gönder düğmesine de tıklıyor (elle doğrulamada görüldü): aynı
+     * gönderim iki olay olarak geliyor. İkincisi yeni bir girişim sayılmaz; aksi hâlde ilk kayıtta
+     * olduğu gibi "benzer mesaj" sanılıp bekletiliyor ve ChatGPT'nin asıl gönderimini durduruyordu.
+     */
+    const sameSubmission = (composer: HTMLElement, text: string) =>
+      pending !== null && pending.composer === composer && pending.text === text &&
+      Date.now() - pending.startedAt < CONFIRM_TIMEOUT_MS;
+
     const handleSend = (composer: HTMLElement, text: string) => {
       if (!text) return;
       heldComposer = null;
@@ -261,6 +270,7 @@ export const chatgptAdapter: Adapter = {
       if (isGenerating(document)) return; // üretim sürerken Enter mesaj göndermez
       const text = readComposerText(composer);
       if (!text) return;
+      if (sameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı: dokunma
       if (intercept(event, composer, text)) return;
       handleSend(composer, text);
     };
@@ -277,6 +287,7 @@ export const chatgptAdapter: Adapter = {
       if (!composer) return;
       const text = readComposerText(composer);
       if (!text) return;
+      if (sameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı: dokunma
       if (intercept(event, composer, text)) return;
       handleSend(composer, text);
     };
