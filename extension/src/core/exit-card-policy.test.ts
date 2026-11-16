@@ -191,3 +191,18 @@ describe("bir turda tek müdahale", () => {
     expect(p.stripShownThisTurn(2)).toBe(false);
   });
 });
+
+describe("düzeltme alınmadı kartı", () => {
+  it("kaynak 'tekrar' olur; model ve özür önce gelir; konu değişince silinir", () => {
+    const p = new ExitCardPolicy();
+    p.noteIgnoredRepair(3);
+    expect(p.triggerSource(3)).toBe("tekrar");
+    expect(p.shouldShow(3)).toBe(true);
+    p.noteApologies(2, 3);
+    expect(p.triggerSource(3)).toBe("ozur");
+    p.clearRepeats();
+    p.noteIgnoredRepair(5);
+    p.clearRepeats();
+    expect(p.triggerSource(5)).toBe(null);
+  });
+});

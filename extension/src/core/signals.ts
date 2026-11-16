@@ -1,5 +1,6 @@
 import { MIN_NORMALIZED_CHARS } from "../config";
 import rules from "../data/signal-rules.json";
+import { isBareContinue } from "./intents";
 import { hasVariationCue } from "./repeat-detector";
 import { cosine, ngramVector } from "./similarity";
 import { hasStrongRepair } from "./strong-repair";
@@ -112,6 +113,15 @@ export function isAffirmation(text: string): boolean {
   );
 }
 
+/**
+ * Kısa tekrar serisinin anahtarı: yönsüz devam isteklerinin hepsi "devam" sayılır ("devam",
+ * "devam et", "continue" aynı seri), öbür kısa mesajlar kendi metniyle. Seriye girmeyen mesajda null.
+ */
+export function shortRepeatKey(text: string): string | null {
+  if (isBareContinue(text)) return "niyet:devam";
+  return isShort(text) ? normalizeText(text) : null;
+}
+
 /** Kısa ve güçlü onarım ifadesi taşıyan mesaj mı ("olmadı", "yanlış", "hala hata")? */
 export function isShortRepair(text: string): boolean {
   return isShort(text) && hasStrongRepair(text) && !isExitMessage(text);
@@ -156,15 +166,20 @@ export class ConversationSignals {
   private lastShortRepair = false;
   private answerAskedQuestion = false;
   private affirmRun = 0;
+  private lastShortKey: string | null = null;
+  private lastUserRepair = false;
+  private prevAnswerVec: Map<number, number> | null = null;
+  private ignoredRepair = false;
 
   /**
    * Bu mesaj gönderilirse aynı kısa mesaj üst üste kaçıncı kez gelmiş olur (noteUser ile aynı kural)?
    * Gönderim öncesi şerit için; durumu değiştirmez.
    */
   previewShortRepeat(text: string): number {
-    if (isExitMessage(text) || !isShort(text)) return 0;
+    const key = shortRepeatKey(text);
+    if (isExitMessage(text) || key === null) return 0;
     if (this.turns > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion)) return 0;
-    return normalizeText(text) === this.recentTexts[this.recentTexts.length - 1] ? this.shortRepeatRun + 1 : 1;
+    return key === this.lastShortKey ? this.shortRepeatRun + 1 : 1;
   }
 
   /** Kullanıcı bir mesaj gönderdi (ya da geçmişten okundu). */
@@ -184,8 +199,8 @@ export class ConversationSignals {
       this.shortRepeatRun = 0;
     }
     const normalized = normalizeText(text);
-    const previous = this.recentTexts[this.recentTexts.length - 1];
     this.lastShortRepair = index > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
+    this.lastUserRepair = hasStrongRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
     // Soruyla biten cevaba verilen kısa onay ya da ret zinciri (yön modelde kalıyor).
     this.affirmRun = this.answerAskedQuestion && isAffirmation(text) ? this.affirmRun + 1 : 0;
     if (isExitMessage(text)) {
@@ -198,12 +213,14 @@ export class ConversationSignals {
       this.recentFlags.push(turn.similar || this.lastShortRepair);
       if (this.recentFlags.length > rules.recent_window) this.recentFlags.shift();
       this.vagueRun = isVague(text) ? this.vagueRun + 1 : 0;
-      if (isShort(text) && !this.lastShortRepair) {
-        this.shortRepeatRun = normalized === previous ? this.shortRepeatRun + 1 : 1;
+      const key = shortRepeatKey(text);
+      if (key !== null && !this.lastShortRepair) {
+        this.shortRepeatRun = key === this.lastShortKey ? this.shortRepeatRun + 1 : 1;
       } else {
         this.shortRepeatRun = 0;
       }
     }
+    this.lastShortKey = this.lastExit ? null : shortRepeatKey(text);
     this.recentTexts.push(normalized);
     if (this.recentTexts.length > 5) this.recentTexts.shift();
   }
@@ -212,6 +229,17 @@ export class ConversationSignals {
   noteAnswer(answer: string | null): void {
     this.apologyRun = apologizes(answer) ? this.apologyRun + 1 : 0;
     this.answerAskedQuestion = endsWithQuestion(answer);
+    // Düzeltme alınmadı: kullanıcı onarım istedi ama cevabın başı öncekinin neredeyse aynısı.
+    const head = normalizeText(Array.from(answer ?? "").slice(0, rules.answer_repeat.head_chars).join(""));
+    const vec = head === "" ? null : ngramVector(head);
+    const repeated = vec !== null && this.prevAnswerVec !== null && cosine(vec, this.prevAnswerVec) >= rules.answer_repeat.similarity;
+    this.ignoredRepair = repeated && this.lastUserRepair && !this.lastExit;
+    this.prevAnswerVec = vec;
+  }
+
+  /** Son cevap, kullanıcının düzeltme isteğine rağmen öncekinin neredeyse aynısı mı? */
+  get answerIgnoredRepair(): boolean {
+    return this.ignoredRepair;
   }
 
   /** Soruyla biten cevaplara üst üste verilen kısa onay ya da ret sayısı. */
@@ -276,5 +304,9 @@ export class ConversationSignals {
     this.lastShortRepair = false;
     this.answerAskedQuestion = false;
     this.affirmRun = 0;
+    this.lastShortKey = null;
+    this.lastUserRepair = false;
+    this.prevAnswerVec = null;
+    this.ignoredRepair = false;
   }
 }

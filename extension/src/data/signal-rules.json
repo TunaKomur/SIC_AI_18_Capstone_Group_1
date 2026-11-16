@@ -41,6 +41,18 @@
     "tail_chars": 200,
     "repeat_strip_note": "Aynı kısa mesajın ('devam') repeat_streak kez üst üste gelmesi halkayı yükseltmez; gönderim öncesi şerit çıkar ve neyle, nasıl devam etmesini istediğini yazmayı önerir. Sohbet başına bir kez (Mert'in kararı, 14 Kasım). WildFeedback'te bu tekrarlarda memnuniyetsizlik onaylarda %2,2, diğerlerinde %4,7 (taban %5,85); şerit bir döngü uyarısı değil, yönü kullanıcıya geri veren bir öneri."
   },
+  "answer_repeat": {
+    "note": "Düzeltme alınmadı: kullanıcının mesajı güçlü bir onarım ifadesi taşıyor ('olmadı', 'hala aynı hata') ama yapay zekanın cevabının başı (ilk head_chars karakter) bir önceki cevaba similarity ve üstü benziyor; model düzeltmeyi almamış. Halka koyulaşır, çıkış kartı 'tekrar' gerekçesiyle açılabilir. WildFeedback (iki ayrık 20.000 sohbetlik örneklem): bu turlardan sonra memnuniyetsizlik %28,6 ve %29,4; onarımdan sonra farklı cevap gelince %13 ve %14. Yeniden oynatmada kart isabeti %30,4 → %31,0, tekrarlayan memnuniyetsizlikte yakalama %28,5 → %32,2, yeni kart nedeninin isabeti %51,9. Onarım olmadan kendini tekrar eden cevap (%9) halka ya da kart için kullanılmaz: denendi, isabeti düşürdü. Cevap metni yalnızca bellekte, yalnızca bu karşılaştırma için.",
+    "similarity": 0.85,
+    "head_chars": 600
+  },
+  "continue": {
+    "note": "Yönsüz devam isteği: 'devam', 'devam et', 'tamam devam', 'devam edebilir misin lütfen', 'kaldığın yerden devam', 'continue', 'go on'. Hepsi aynı niyet sayılır: kısa tekrar serisi metne değil bu niyete göre ilerler ve bu mesajlar tekrar dedektörüne girmez (bir isteği değil, akışı sürdürüyorlar). Yönlü devam ('devam et ama tablo olarak', 'continue to day 2') bu sınıfa girmez ve hiçbir öneri almaz; Kâfi'nin önerdiği davranış zaten budur. WildFeedback'te devam ailesi 579 farklı biçimde yazılmış; ardışık devam çiftlerinin %16'sı farklı biçimde.",
+    "words": ["devam", "continue", "proceed"],
+    "phrases": ["go on", "keep going", "carry on", "kaldığın yerden"],
+    "allowed": ["et", "edelim", "eder", "edebilir", "edin", "ediver", "etsene", "misin", "mısın", "lütfen", "please", "pls", "hadi", "bi", "bir", "şimdi", "now", "yaz", "yazmaya", "it", "on", "go", "going", "keep", "carry", "kaldığın", "yerden", "tamam", "evet", "ok", "okay", "yes", "peki", "o", "zaman", "sen"],
+    "max_words": 6
+  },
   "affirm": {
     "note": "Kısa onay zinciri: kullanıcı modelin soruyla biten cevaplarına (teklif: '… ekleyeyim mi?') üst üste streak kez yalnızca kısa bir onay ya da ret ile karşılık veriyor; yön modelde kalıyor. Cevabın altında gönderimi bekletmeyen bir öneri çıkar ve modelden şu ana kadar anladığını özetlemesini istemeyi önerir; sohbet başına bir kez. 'devam' gibi devam istekleri sayılmaz: uzun bir çıktıyı parça parça almak verimli bir iştir (WildFeedback'te 'devam' zinciri olan sohbetlerde memnuniyetsizlik %4,5). WildFeedback'te bu örüntü yalnızca 13 sohbette görüldü; isabet elle doğrulamada ve sayaçlarda ölçülecek.",
     "words": ["evet", "aynen", "tamam", "tamamdır", "olur", "peki", "olsun", "hayır", "yok", "ok", "okey", "okay", "yes", "yeah", "yep", "yup", "sure", "no", "nope"],

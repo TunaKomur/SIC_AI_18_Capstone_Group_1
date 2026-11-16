@@ -64,3 +64,11 @@ describe("kısa mesaj sinyalleri", () => {
     expect(ringText(s)).toMatch(/olmadığını/);
   });
 });
+
+describe("düzeltme alınmadı", () => {
+  it("kullanıcı düzeltme istediği hâlde cevap aynıysa halka koyulaşır ve nedenini söyler", () => {
+    const s = { prediction: null, similarCount: 0, ignoredRepair: true };
+    expect(ringLevel(s)).toBe(2);
+    expect(ringText(s)).toMatch(/düzeltmeyi almamış/);
+  });
+});

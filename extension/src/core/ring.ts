@@ -11,7 +11,8 @@ import type { Prediction } from "./turn-model";
  *                  başladı ya da üst üste iki kısa ve açıklamasız düzeltme isteği gönderildi. Aynı kısa
  *                  mesajın ("devam") üçüncü kez gelmesi halkayı yükseltmez; onun yerine şerit çıkar
  *   2  koyu        modelin yüksek güven eşiği geçildi, son mesajlardan iki ve daha fazlası öncekilere çok
- *                  benziyor ya da cevaplar üst üste iki kez özürle başladı
+ *                  benziyor, cevaplar üst üste iki kez özürle başladı ya da kullanıcı düzeltme istediği
+ *                  hâlde cevap öncekinin neredeyse aynısı
  *
  * Halka yalnızca son birkaç mesaja bakar (src/core/signals.ts): kullanıcı teşekkür edip döngüden
  * çıkınca ya da konu değişince sakinleşir (K32).
@@ -31,12 +32,14 @@ export interface RingSignals {
   shortRepeatStreak?: number;
   /** Son mesaj kısa bir onarımdı ("olmadı") */
   shortRepair?: boolean;
+  /** Kullanıcı düzeltme istedi ama son cevap öncekinin neredeyse aynısı */
+  ignoredRepair?: boolean;
 }
 
 export function ringLevel(s: RingSignals): RingLevel {
   const apology = s.apologyStreak ?? 0;
   const vague = s.vagueStreak ?? 0;
-  if (s.prediction?.level === "yuksek" || s.similarCount >= 2 || apology >= 2) return 2;
+  if (s.prediction?.level === "yuksek" || s.similarCount >= 2 || apology >= 2 || s.ignoredRepair) return 2;
   if (s.prediction?.level === "oneri" || s.similarCount === 1 || apology === 1 || vague >= 2) return 1;
   return 0;
 }
@@ -45,6 +48,7 @@ export function ringLevel(s: RingSignals): RingLevel {
 export function ringText(s: RingSignals): string {
   const level = ringLevel(s);
   if (level === 0) return "Şu an dikkat çeken bir şey yok.";
+  if (s.ignoredRepair) return "Düzeltme istedin ama son cevap öncekinin neredeyse aynısı; model düzeltmeyi almamış olabilir.";
   if ((s.apologyStreak ?? 0) >= 2) return "Son cevaplar üst üste özürle başladı; model aynı yerde dönüyor olabilir.";
   if (s.similarCount >= 2) return `Son mesajlarından ${s.similarCount} tanesi öncekilere çok benziyor.`;
   if (s.similarCount === 1 && s.shortRepair && s.prediction?.level !== "yuksek") {

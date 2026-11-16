@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 from kafiai.config import EXT_MIN_NORMALIZED_CHARS
-from kafiai.extension_similarity import cosine, fold_turkish, has_variation_cue, ngram_vector, normalize_text, with_folded
+from kafiai.extension_similarity import cosine, fold_turkish, has_variation_cue, is_bare_continue, ngram_vector, normalize_text, with_folded
 from kafiai.tasks import task_type
 
 RULES = json.loads(
@@ -107,6 +107,13 @@ def is_affirmation(text):
             and any(t in _AFFIRM_WORDS for t in tokens))
 
 
+def short_repeat_key(text):
+    """Kısa tekrar serisinin anahtarı: yönsüz devam istekleri tek seri ("niyet:devam"); signals.ts ile aynı."""
+    if is_bare_continue(text):
+        return "niyet:devam"
+    return normalize_text(text) if is_short(text) else None
+
+
 def is_short_repair(text):
     """Kısa ve güçlü onarım ifadesi taşıyan mesaj ("olmadı", "yanlış", "hala hata")."""
     return is_short(text) and _strong_repair(text) and not is_exit_message(text)
@@ -146,6 +153,10 @@ class ConversationSignals:
         self.last_short_repair = False
         self.answer_asked_question = False
         self.affirm_streak = 0
+        self.last_short_key = None
+        self.last_user_repair = False
+        self.prev_answer_vec = None
+        self.answer_ignored_repair = False
 
     def note_user(self, text, similar):
         index = self.turns
@@ -162,9 +173,9 @@ class ConversationSignals:
             self.vague_streak = 0
             self.short_repeat_streak = 0
         normalized = normalize_text(text)
-        previous = self.recent_texts[-1] if self.recent_texts else None
         self.last_short_repair = index > 0 and is_short_repair(text) and not is_offer_decline(text, self.answer_asked_question)
         self.affirm_streak = self.affirm_streak + 1 if self.answer_asked_question and is_affirmation(text) else 0
+        self.last_user_repair = _strong_repair(text) and not is_offer_decline(text, self.answer_asked_question)
         if is_exit_message(text):
             self.exited = True
             self.recent_flags = []
@@ -176,10 +187,12 @@ class ConversationSignals:
             if len(self.recent_flags) > RULES["recent_window"]:
                 self.recent_flags.pop(0)
             self.vague_streak = self.vague_streak + 1 if is_vague(text) else 0
-            if is_short(text) and not self.last_short_repair:
-                self.short_repeat_streak = self.short_repeat_streak + 1 if normalized == previous else 1
+            key = short_repeat_key(text)
+            if key is not None and not self.last_short_repair:
+                self.short_repeat_streak = self.short_repeat_streak + 1 if key == self.last_short_key else 1
             else:
                 self.short_repeat_streak = 0
+        self.last_short_key = None if self.exited else short_repeat_key(text)
         self.recent_texts.append(normalized)
         if len(self.recent_texts) > 5:
             self.recent_texts.pop(0)
@@ -187,6 +200,13 @@ class ConversationSignals:
     def note_answer(self, answer):
         self.apology_streak = self.apology_streak + 1 if apologizes(answer) else 0
         self.answer_asked_question = ends_with_question(answer)
+        # Düzeltme alınmadı: kullanıcı onarım istedi ama cevabın başı öncekinin neredeyse aynısı (signals.ts ile aynı).
+        rule = RULES["answer_repeat"]
+        head = normalize_text(" ".join((answer or "").split())[:rule["head_chars"]])
+        vec = ngram_vector(head) if head else None
+        repeated = vec is not None and self.prev_answer_vec is not None and cosine(vec, self.prev_answer_vec) >= rule["similarity"]
+        self.answer_ignored_repair = repeated and self.last_user_repair and not self.exited
+        self.prev_answer_vec = vec
 
     @property
     def recent_similar(self):

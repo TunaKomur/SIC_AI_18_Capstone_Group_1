@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fixture from "../../../tests/fixtures/signals_parity.json";
 import { apologizes, ConversationSignals, isAffirmation, isExitMessage, isNewTopic, isShortRepair, isVague, SHORT_REPEAT_STREAK } from "./signals";
+import { isBareContinue } from "./intents";
 import { normalizeText } from "./text";
 
 describe("sohbet sinyalleri: Python ikiziyle aynı karar (parite örnekleri)", () => {
@@ -9,6 +10,17 @@ describe("sohbet sinyalleri: Python ikiziyle aynı karar (parite örnekleri)", (
     for (const [text, expected] of fixture.units.exit as [string, boolean][]) expect([text, isExitMessage(text)]).toEqual([text, expected]);
     for (const [text, expected] of fixture.units.vague as [string, boolean][]) expect([text, isVague(text)]).toEqual([text, expected]);
     for (const [text, expected] of fixture.units.short_repair as [string, boolean][]) expect([text, isShortRepair(text)]).toEqual([text, expected]);
+    for (const [text, expected] of fixture.units.bare_continue as [string, boolean][]) expect([text, isBareContinue(text)]).toEqual([text, expected]);
+    for (const c of fixture.units.ignored_repair) {
+      const s = new ConversationSignals();
+      const got = c.user.map((u, i) => {
+        s.noteUser(u, { similar: false });
+        s.noteAnswer(c.answers[i] ?? null);
+        return s.answerIgnoredRepair;
+      });
+      expect([c.user, got]).toEqual([c.user, c.expected]);
+    }
+    for (const [text, expected] of fixture.units.affirmation as [string, boolean][]) expect([text, isAffirmation(text)]).toEqual([text, expected]);
   });
 
   it("sohbet boyunca durum aynı", () => {
