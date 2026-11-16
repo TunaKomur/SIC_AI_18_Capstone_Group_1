@@ -1,6 +1,7 @@
 import { MIN_NORMALIZED_CHARS, RECENT_MESSAGES, SIMILARITY_THRESHOLD, SOFT_SIMILARITY_THRESHOLD } from "../config";
 import rules from "../data/repeat-rules.json";
 import { ngramVector, cosine } from "./similarity";
+import { isBareContinue } from "./intents";
 import { hasStrongRepair } from "./strong-repair";
 import { foldTurkish, normalizeText, withFolded } from "./text";
 
@@ -112,7 +113,8 @@ export class RepeatDetector {
   /** Mesaj gönderilmeden önce çağrılır; mesajı listeye eklemez. */
   check(text: string): RepeatCheck {
     const normalized = normalizeText(text);
-    if (Array.from(normalized).length < MIN_NORMALIZED_CHARS) {
+    // Yönsüz devam ("devam edebilir misin lütfen") bir istek değil; kısa mesaj gibi karşılaştırılmaz.
+    if (Array.from(normalized).length < MIN_NORMALIZED_CHARS || isBareContinue(text)) {
       return { similar: false, soft: false, score: 0, tooShort: true, newContent: false, variation: false, hold: false, matches: 0 };
     }
     const vec = ngramVector(normalized);
@@ -145,7 +147,7 @@ export class RepeatDetector {
   /** Mesaj gönderildikten sonra çağrılır. Kısa mesajlar saklanmaz. */
   remember(text: string): void {
     const normalized = normalizeText(text);
-    if (Array.from(normalized).length < MIN_NORMALIZED_CHARS) return;
+    if (Array.from(normalized).length < MIN_NORMALIZED_CHARS || isBareContinue(text)) return;
     this.recent.push(remembered(normalized));
     if (this.recent.length > RECENT_MESSAGES) this.recent.shift();
   }
