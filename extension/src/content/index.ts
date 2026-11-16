@@ -129,7 +129,11 @@ function main(): boolean {
     record("card", `tetiklendi_${source}`);
     // Kart modelin yüksek güvenli tahmininden geliyorsa gerekçesi ve önerisi gösterilir.
     const reason =
-      source === "model" ? (lastPrediction?.reasons[0] ?? null) : source === "ozur" ? reasonByKey("ozur") : null;
+      source === "model"
+        ? (lastPrediction?.reasons[0] ?? null)
+        : source === "ozur" || source === "tekrar"
+          ? reasonByKey(source)
+          : null;
     const hide = (why: string) => {
       record("card", `gizlendi_${why}`);
       console.log(`[KafiAI] çıkış kartı gösterilmedi (${why}, tur ${session.turns})`);
@@ -158,7 +162,7 @@ function main(): boolean {
     suggesting() && intervening() && !personal && userTexts.length > 0 && !strip.visible && !exitCard.visible && adapter.composer() !== null;
 
   /** Çıkış kartını gösterir: kendiliğinden (norm, model) ya da pencereden istenince (elle). */
-  const showCard = (source: "norm" | "model" | "ozur" | "elle", reason: Prediction["reasons"][number] | null, anchor: Element) => {
+  const showCard = (source: "norm" | "model" | "ozur" | "tekrar" | "elle", reason: Prediction["reasons"][number] | null, anchor: Element) => {
     console.log(`[KafiAI] çıkış kartı gösterildi (tur ${session.turns}, ${source}${reason ? `: ${reason.key}` : ""})`);
     record("card", `gosterildi_${source}`);
     ring.hide();
@@ -273,6 +277,7 @@ function main(): boolean {
       vagueStreak: signals.vagueStreak,
       shortRepeatStreak: signals.shortRepeatStreak,
       shortRepair: signals.shortRepair,
+      ignoredRepair: signals.answerIgnoredRepair,
     };
     const level = ringLevel(ringSignals);
     if (level !== ringLogged) {
@@ -300,7 +305,7 @@ function main(): boolean {
    * Kullanıcı mesajını sohbet sinyallerine işler. Kullanıcı döngüden çıktıysa ya da konu değiştiyse
    * o ana kadarki benzer mesaj denemeleri çıkış kartını artık açtırmaz.
    */
-  const recordSignal = (detail: "ozur_dongusu" | "cikis" | "konu_kaymasi" | "belirsiz") => {
+  const recordSignal = (detail: "ozur_dongusu" | "cikis" | "konu_kaymasi" | "belirsiz" | "duzeltme_alinmadi") => {
     // Yalnızca bu ziyarette yazılan sohbetler sayılır; eski bir sohbete bakmak sayılmaz.
     if (!sentThisVisit || seenSignals.has(detail)) return;
     seenSignals.add(detail);
@@ -586,6 +591,12 @@ function main(): boolean {
       signals.noteAnswer(adapter.lastResponse?.() ?? null);
       if (signals.apologyStreak > 0) console.log(`[KafiAI] cevap özürle başladı (üst üste ${signals.apologyStreak})`);
       policy.noteApologies(signals.apologyStreak, session.turns);
+      if (signals.answerIgnoredRepair) {
+        // Düzeltme istendi ama cevap öncekinin neredeyse aynısı: halka koyulaşır, kart açılabilir.
+        console.log("[KafiAI] düzeltme istendi ama cevap öncekinin neredeyse aynısı");
+        policy.noteIgnoredRepair(session.turns);
+        recordSignal("duzeltme_alinmadi");
+      }
       if (signals.apologyStreak >= 2) recordSignal("ozur_dongusu");
       updateRing();
       maybeShowExitCard();

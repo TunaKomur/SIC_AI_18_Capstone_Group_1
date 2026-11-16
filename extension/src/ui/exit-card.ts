@@ -43,7 +43,8 @@ export class ExitCard {
     this.hide();
     const { host, box } = mountCard("exit-card", anchor);
     const apology = reason?.key === APOLOGY_REASON;
-    const chip = reason ? (apology ? "Aynı yerde dönüyor" : "Modelin önerisi") : "Uzun sohbet";
+    const ignored = reason?.key === IGNORED_REPAIR_REASON;
+    const chip = reason ? (apology ? "Aynı yerde dönüyor" : ignored ? "Düzeltme alınmadı" : "Modelin önerisi") : "Uzun sohbet";
 
     const el = <K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, cls?: string): HTMLElementTagNameMap[K] => {
       const node = document.createElement(tag);
@@ -81,7 +82,7 @@ export class ExitCard {
       box.replaceChildren(
         header(chip),
         el("p", reason ? modelCardMessage(reason) : exitCardMessage(turns, norm), "body"),
-        ...(reason ? [el("p", apology ? APOLOGY_NOTE : MODEL_NOTE, "note")] : []),
+        ...(reason ? [el("p", apology ? APOLOGY_NOTE : ignored ? IGNORED_REPAIR_NOTE : MODEL_NOTE, "note")] : []),
         row(
           fresh,
           button("Kısa ara ver", "secondary", showBreak),
@@ -177,6 +178,13 @@ export const MODEL_NOTE =
 
 /** Özür döngüsü kartının gerekçe anahtarı (src/data/model-reasons.json, K32). */
 export const APOLOGY_REASON = "ozur";
+
+/** "Düzeltme alınmadı" kartının gerekçe anahtarı (src/data/model-reasons.json). */
+export const IGNORED_REPAIR_REASON = "tekrar";
+
+/** "Düzeltme alınmadı" kartında, önerinin nereden geldiğini söyleyen kısa not. */
+export const IGNORED_REPAIR_NOTE =
+  "Bu öneri, son iki cevabın başını karşılaştıran basit bir kuraldan geliyor; cevaplar cihazından çıkmıyor.";
 
 /** Özür döngüsü kartında, önerinin nereden geldiğini söyleyen kısa not. */
 export const APOLOGY_NOTE =

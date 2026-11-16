@@ -70,6 +70,11 @@
       "short": "Cevaplar üst üste özürle başladı",
       "why": "Son cevaplar üst üste \"haklısınız, özür dilerim\" diye başladı.",
       "tip": "Bu genelde modelin aynı yerde takıldığını gösteriyor. İsteğini tek bir taslakta toplayıp yeni bir sohbette denemek çoğu zaman daha hızlı sonuç veriyor."
+    },
+    "tekrar": {
+      "short": "Düzeltme alınmadı",
+      "why": "Neyin olmadığını söyledin ama son cevap bir öncekinin neredeyse aynısı.",
+      "tip": "Model bu noktada düzeltmeyi almıyor olabilir. İsteğini ve neyin yanlış olduğunu tek bir taslakta toplayıp yeni bir sohbette denemek çoğu zaman daha hızlı sonuç veriyor."
     }
   }
 }

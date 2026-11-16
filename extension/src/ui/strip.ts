@@ -54,7 +54,7 @@ export function stripMessage(ctx: StripContext): { title: string; body: string; 
   const hint = ctx.task !== null ? (TASK_HINTS[ctx.task] ?? null) : null;
   if (ctx.kind === "short_repeat") {
     return {
-      title: "Aynı kısa mesajı üçüncü kez gönderiyorsun.",
+      title: "Üst üste üçüncü kez kısa bir mesajla devam ediyorsun.",
       body: "Model neyle ve nasıl devam edeceğini tahmin ediyor. Bunu bir cümleyle sen belirlersen döngüde kalmazsın.",
       hint: null,
     };
@@ -145,7 +145,7 @@ export class Strip {
       ctx.kind === "short_repair"
         ? "Kısa düzeltme"
         : ctx.kind === "short_repeat"
-          ? "Aynı kısa mesaj"
+          ? "Kısa devam"
           : ctx.kind === "affirm_hint"
             ? "Yön sende"
             : ctx.attempt >= 2
