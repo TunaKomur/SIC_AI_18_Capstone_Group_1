@@ -1,5 +1,5 @@
 {
-  "note": "Gerçek kullanıma dayanan Türkçe senaryolar (18 ile 30 yaş, ders ve iş). Her senaryo karar zincirinden (scripts/evaluate_replay.py içindeki replay, eklentinin Python ikizi) geçirilir; beklenenler tests/test_scenarios.py içinde sınanır. Aynı senaryolar elle doğrulamada ChatGPT ve Gemini'de yazılır. Cevap metinleri kısaltılmış örneklerdir; yalnızca özür kuralı cevabın başına bakar. Beklenen alanları: serit (gönderimi bekleten şerit sayısı), kisa_serit (kısa onarım şeridi sayısı), halka_en_az ve halka_en_cok (sohbet boyunca halkanın en yüksek seviyesi için sınırlar), kart (en az bir kart: true/false), kart_serit_turunda (şerit çıkan turda kart: her zaman false), cikis (döngüden çıkış görüldü), bolum (konu kaymasıyla oluşan bölüm sayısı), kisisel (ilk mesaj kişisel sayılır), kisa_tekrar_serit (aynı kısa mesajın üçüncü kez gelmesinde çıkan şerit sayısı), oneri (onay zinciri önerisi çıktı mı).",
+  "note": "Gerçek kullanıma dayanan Türkçe senaryolar (18 ile 30 yaş, ders ve iş). Her senaryo karar zincirinden (scripts/evaluate_replay.py içindeki replay, eklentinin Python ikizi) geçirilir; beklenenler tests/test_scenarios.py içinde sınanır. Aynı senaryolar elle doğrulamada ChatGPT ve Gemini'de yazılır. Cevap metinleri kısaltılmış örneklerdir; yalnızca özür kuralı cevabın başına bakar. Beklenen alanları: serit (gönderimi bekleten şerit sayısı), kisa_serit (kısa onarım şeridi sayısı), halka_en_az ve halka_en_cok (sohbet boyunca halkanın en yüksek seviyesi için sınırlar), kart (en az bir kart: true/false), kart_serit_turunda (şerit çıkan turda kart: her zaman false), cikis (döngüden çıkış görüldü), bolum (konu kaymasıyla oluşan bölüm sayısı), kisisel (ilk mesaj kişisel sayılır), kisa_tekrar_serit (aynı kısa mesajın üçüncü kez gelmesinde çıkan şerit sayısı), oneri (onay zinciri önerisi çıktı mı), kart_kaynagi (ilk kartın kaynağı: model, ozur, tekrar, norm).",
   "scenarios": [
     {
       "id": "odev_temiz",
@@ -355,6 +355,81 @@
         "oneri": false,
         "serit": 0,
         "kisa_serit": 0
+      }
+    },
+    {
+      "id": "devam_karisik",
+      "anlatim": "Aynı niyeti farklı biçimlerde yazıyor: devam, devam et, devam edelim",
+      "user": [
+        "Pazarlama dersi için 10 sayfalık bir rapor taslağı yaz",
+        "devam",
+        "devam et",
+        "devam edelim"
+      ],
+      "answers": [
+        "1. bölüm ...",
+        "2. bölüm ...",
+        "3. bölüm ...",
+        "4. bölüm ..."
+      ],
+      "beklenen": {
+        "kisa_tekrar_serit": 1,
+        "serit": 0,
+        "kisa_serit": 0
+      }
+    },
+    {
+      "id": "yonlu_devam",
+      "anlatim": "Devam ederken yön veriyor; öneri gerekmez",
+      "user": [
+        "Pazarlama dersi için 10 sayfalık bir rapor taslağı yaz",
+        "devam",
+        "devam et ama rakip analizini tablo olarak yaz",
+        "devam"
+      ],
+      "answers": [
+        "1. bölüm ...",
+        "2. bölüm ...",
+        "Tablo ...",
+        "4. bölüm ..."
+      ],
+      "beklenen": {
+        "kisa_tekrar_serit": 0,
+        "serit": 0
+      }
+    },
+    {
+      "id": "uzun_devam_tekrari",
+      "anlatim": "Uzun ama yönsüz devam isteğini iki kez yazıyor; bu bir tekrar sayılmamalı",
+      "user": [
+        "Bir Python Flask uygulaması için kullanıcı yönetimi kodunu yaz",
+        "devam edebilir misin lütfen",
+        "devam edebilir misin lütfen"
+      ],
+      "answers": [
+        "app.py ...",
+        "models.py ...",
+        "routes.py ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_tekrar_serit": 0
+      }
+    },
+    {
+      "id": "duzeltme_alinmadi",
+      "anlatim": "Kullanıcı hatayı söylüyor ama model neredeyse aynı kodu yeniden veriyor; tur modeli de yüksek güvende olduğu için kartı model açar (öncelik: model, özür, tekrar)",
+      "user": [
+        "Python'da bir CSV dosyasının sütun ortalamalarını hesaplayan kod yaz",
+        "Bu kod hata veriyor, sütunlarda metin var, düzeltir misin"
+      ],
+      "answers": [
+        "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+        "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+      ],
+      "beklenen": {
+        "kart": true,
+        "halka_en_az": 2
       }
     }
   ]

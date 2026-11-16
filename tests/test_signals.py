@@ -18,6 +18,20 @@ def test_unit_rules_match_fixture():
         assert is_exit_message(text) == expected, text
     for text, expected in FIXTURE["units"]["vague"]:
         assert is_vague(text) == expected, text
+    from kafiai.extension_similarity import is_bare_continue
+    from kafiai.signals import is_affirmation
+    for text, expected in FIXTURE["units"]["bare_continue"]:
+        assert is_bare_continue(text) == expected, text
+    for text, expected in FIXTURE["units"]["affirmation"]:
+        assert is_affirmation(text) == expected, text
+    for case in FIXTURE["units"]["ignored_repair"]:
+        s = ConversationSignals()
+        got = []
+        for user, answer in zip(case["user"], case["answers"]):
+            s.note_user(user, False)
+            s.note_answer(answer)
+            got.append(s.answer_ignored_repair)
+        assert got == case["expected"], case["user"]
     for text, expected in FIXTURE["units"]["short_repair"]:
         assert is_short_repair(text) == expected, text
 

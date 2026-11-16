@@ -10,7 +10,8 @@ memnuniyetsiz olduğu turlarla (DSAT) karşılaştırılır.
     sonra  varyasyon isteği, son mesajlara bakan halka, döngüden çıkış, özür döngüsü,
            belirsiz istek ve konu kayması (K31, K32); uzun sohbet kartı için iki döngü işareti
            birlikte: yakın zamanda benzer mesaj ve modelin öneri seviyesi; gönderimi bekleten şerit
-           yalnızca birebir tekrarda ya da onarım ifadesinde; şerit çıkan turda kart beklemez
+           yalnızca birebir tekrarda ya da onarım ifadesinde; düzeltme istendiği hâlde cevap öncekinin
+           neredeyse aynısıysa halka koyulaşır ve kart açılabilir ("tekrar"); şerit çıkan turda kart beklemez
            bir sonraki tura kalır
 
 Ölçütler (her biri hem "once" hem "sonra" için):
@@ -89,9 +90,10 @@ def detector_flags(msgs, use_variation):
     return flags
 
 
-def ring_level(prediction, similar_signal, apology, vague, short_repeat=0):
-    """Halka seviyesi (ring.ts). Aynı kısa mesajın tekrarı halkayı yükseltmez; onun yerine şerit çıkar."""
-    if (prediction and prediction["level"] == "yuksek") or similar_signal >= 2 or apology >= 2:
+def ring_level(prediction, similar_signal, apology, vague, short_repeat=0, ignored_repair=False):
+    """Halka seviyesi (ring.ts). Aynı kısa mesajın tekrarı halkayı yükseltmez; onun yerine şerit çıkar.
+    Düzeltme istendiği hâlde cevap öncekinin neredeyse aynısıysa halka koyulaşır."""
+    if (prediction and prediction["level"] == "yuksek") or similar_signal >= 2 or apology >= 2 or ignored_repair:
         return 2
     if (prediction and prediction["level"] == "oneri") or similar_signal == 1 or apology == 1 or vague >= 2:
         return 1
@@ -135,7 +137,8 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
         if after:
             signals.note_answer(answers[t] if t < len(answers) else "")
             level = ring_level(None if signals.exited else prediction, signals.recent_similar,
-                               signals.apology_streak, signals.vague_streak, signals.short_repeat_streak)
+                               signals.apology_streak, signals.vague_streak, signals.short_repeat_streak,
+                               signals.answer_ignored_repair)
         else:
             level = ring_level(prediction, similar_total, 0, 0)
         card = None
@@ -146,6 +149,8 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
                 card = "model"
             elif after and signals.apology_streak >= config.EXT_APOLOGY_CARD_STREAK:
                 card = "ozur"
+            elif after and signals.answer_ignored_repair:
+                card = "tekrar"
             elif n >= min_turns and repeats >= config.EXT_EXIT_CARD_MIN_REPEATS and (suggest or not after):
                 card = "norm"
         if card:

@@ -199,6 +199,130 @@
         "emin misin",
         true
       ]
+    ],
+    "bare_continue": [
+      [
+        "devam",
+        true
+      ],
+      [
+        "Devam et",
+        true
+      ],
+      [
+        "tamam devam",
+        true
+      ],
+      [
+        "devam edebilir misin lütfen",
+        true
+      ],
+      [
+        "kaldığın yerden devam et",
+        true
+      ],
+      [
+        "continue",
+        true
+      ],
+      [
+        "go on",
+        true
+      ],
+      [
+        "devam et ama tablo olarak",
+        false
+      ],
+      [
+        "continue to day 2",
+        false
+      ],
+      [
+        "next",
+        false
+      ],
+      [
+        "evet",
+        false
+      ]
+    ],
+    "affirmation": [
+      [
+        "evet",
+        true
+      ],
+      [
+        "aynen",
+        true
+      ],
+      [
+        "tamam",
+        true
+      ],
+      [
+        "hayır gerek yok",
+        true
+      ],
+      [
+        "evet lutfen",
+        true
+      ],
+      [
+        "devam",
+        false
+      ],
+      [
+        "evet harika",
+        false
+      ],
+      [
+        "tamam devam",
+        false
+      ]
+    ],
+    "ignored_repair": [
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "olmadı, hala TypeError veriyor"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+        ],
+        "expected": [
+          false,
+          true
+        ]
+      },
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "şimdi grafiğini de çiz"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+        ],
+        "expected": [
+          false,
+          false
+        ]
+      },
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "olmadı, hala TypeError veriyor"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Haklısınız. Sütunları önce sayıya çevirelim: df = df.apply(pd.to_numeric, errors='coerce') ardından ortalamayı alın."
+        ],
+        "expected": [
+          false,
+          false
+        ]
+      }
     ]
   },
   "conversations": [
@@ -570,6 +694,94 @@
           "segment_start": 0,
           "exited": false,
           "short_repeat": 0,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "React ile not alma uygulamasının tüm bileşenlerini yaz",
+        "devam",
+        "devam et",
+        "devam edelim",
+        "devam et ama tablo olarak",
+        "devam"
+      ],
+      "answers": [
+        "İlk bölüm",
+        "İkinci",
+        "Üçüncü",
+        "Dördüncü",
+        "Tablo",
+        "Son"
+      ],
+      "similar": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 2,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 3,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
           "short_repair": false
         }
       ]
