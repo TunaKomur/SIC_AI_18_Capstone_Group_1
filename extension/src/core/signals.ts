@@ -122,6 +122,28 @@ export function shortRepeatKey(text: string): string | null {
   return isShort(text) ? normalizeText(text) : null;
 }
 
+const RESTATE_PHRASES = withFolded(rules.restate.phrases);
+/** Taze başlat taslağına en fazla bu kadar yeniden hatırlatılan kural girer. */
+export const RESTATE_MAX_RULES: number = rules.restate.max_rules;
+
+/**
+ * Kullanıcı daha önce koyduğu bir kuralı yeniden mi hatırlatıyor ("söylemiştim", "dediğim gibi", "I told you")?
+ * Uzun mesajda (yapıştırılmış metin) yalnızca baş ve sona bakılır; talimat orada durur.
+ */
+export function restatesRule(text: string): boolean {
+  return forms(text).some((n) => {
+    const chars = Array.from(n);
+    const parts =
+      chars.length <= rules.restate.whole_chars
+        ? [n]
+        : [chars.slice(0, rules.restate.edge_chars).join(""), chars.slice(-rules.restate.edge_chars).join("")];
+    return parts.some((part) => {
+      const padded = ` ${part.trim()} `;
+      return RESTATE_PHRASES.some((p) => padded.includes(` ${p} `));
+    });
+  });
+}
+
 /** Kısa ve güçlü onarım ifadesi taşıyan mesaj mı ("olmadı", "yanlış", "hala hata")? */
 export function isShortRepair(text: string): boolean {
   return isShort(text) && hasStrongRepair(text) && !isExitMessage(text);
@@ -172,6 +194,7 @@ export class ConversationSignals {
   private ignoredRepair = false;
   private cleanRun = 0;
   private recovered = false;
+  private restateIndices: number[] = [];
 
   /**
    * Bu mesaj gönderilirse aynı kısa mesaj üst üste kaçıncı kez gelmiş olur (noteUser ile aynı kural)?
@@ -199,7 +222,10 @@ export class ConversationSignals {
       this.apologyRun = 0;
       this.vagueRun = 0;
       this.shortRepeatRun = 0;
+      this.restateIndices = [];
     }
+    // Kuralın yeniden hatırlatılması: yalnızca sıra numarası tutulur, metin değil (taslak userTexts'ten okur).
+    if (index > 0 && restatesRule(text)) this.restateIndices.push(index);
     const normalized = normalizeText(text);
     this.lastShortRepair = index > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
     this.lastUserRepair = hasStrongRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
@@ -265,6 +291,16 @@ export class ConversationSignals {
   /** Son cevap, kullanıcının düzeltme isteğine rağmen öncekinin neredeyse aynısı mı? */
   get answerIgnoredRepair(): boolean {
     return this.ignoredRepair;
+  }
+
+  /** Bu konu bölümünde kuralın yeniden hatırlatıldığı mesajların sırası (0'dan başlar). */
+  get restatedTurns(): number[] {
+    return [...this.restateIndices];
+  }
+
+  /** Son mesaj bir kuralı yeniden hatırlattı mı? */
+  get restatedNow(): boolean {
+    return this.restateIndices[this.restateIndices.length - 1] === this.turns - 1;
   }
 
   /** Soruyla biten cevaplara üst üste verilen kısa onay ya da ret sayısı. */
@@ -335,5 +371,6 @@ export class ConversationSignals {
     this.ignoredRepair = false;
     this.cleanRun = 0;
     this.recovered = false;
+    this.restateIndices = [];
   }
 }

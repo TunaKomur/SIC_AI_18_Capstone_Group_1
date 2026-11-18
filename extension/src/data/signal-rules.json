@@ -64,5 +64,26 @@
     "max_words": 3,
     "streak": 3
   },
-  "recent_window": 4
+  "recent_window": 4,
+  "restate": {
+    "note": "Kuralın yeniden hatırlatılması (K48): kullanıcı daha önce koyduğu bir kuralı yeniden hatırlatıyor ('söylemiştim', 'dediğim gibi', 'I told you'). Tetikleyici değildir: halka ve kart kararlarını değiştirmez. Kart başka bir nedenle açıldığında bir not ekler ve Taze başlat taslağı bu mesajları en başa 'kurallar' olarak koyar. İlk mesajda sayılmaz; konu değişince sıfırlanır. Uzun mesajda yalnızca baştaki ve sondaki edge_chars karaktere bakılır. WildFeedback seçim örnekleminde (scripts/evaluate_stage3.py): sohbetlerin %0,39'unda, o tur ya da sonrakinde memnuniyetsizlik %42,5; olayların %79'unda mevcut bir sinyal zaten var. Elle kontrolde yanlış çıkan biçimler ('how many times', 'did you forget', yalın 'i repeat', yalın 'kaç kez') listeye alınmadı.",
+    "whole_chars": 300,
+    "edge_chars": 150,
+    "max_rules": 3,
+    "phrases": [
+      "i told you", "i already told you", "i ve told you", "i have told you", "told you to", "as i said",
+      "like i said", "i already said", "as i mentioned", "i already mentioned", "as i asked", "i already asked",
+      "you forgot", "you ignored", "you are ignoring", "you keep ignoring", "you didn t follow",
+      "you did not follow", "you are not following", "follow my instructions", "read my instructions",
+      "read the instructions again", "i repeat again", "i asked you not to", "söylemiştim", "söyledim ya",
+      "dedim ya", "demiştim", "sana söyledim", "daha önce söyledim", "daha önce de söyledim", "zaten söyledim",
+      "zaten dedim", "kaç kere söyleyeceğim", "kaç kez söyleyeceğim", "kaç defa söyleyeceğim", "kaç kere söyledim",
+      "kaç kez söyledim", "kaç defa söyledim", "kaçıncı kez söylüyorum", "tekrar ediyorum", "tekrarlıyorum",
+      "tekrar yazıyorum", "bir daha yazıyorum", "yine söylüyorum", "bir daha söylüyorum", "tekrar söylüyorum",
+      "unuttun", "dediğim gibi", "söylediğim gibi", "belirttiğim gibi", "bahsettiğim gibi", "yazdığım gibi",
+      "talimatlarıma uy", "talimatlarıma uymadın", "dememiş miydim", "söylememiş miydim", "istememiş miydim",
+      "istemiştim", "belirtmiştim", "yazmıştım", "hatırlatırım", "hatırlatayım", "hatırlatıyorum",
+      "görmezden geliyorsun", "görmezden geldin", "dikkate almadın", "dinlemiyorsun", "uymadın", "uymuyorsun"
+    ]
+  }
 }

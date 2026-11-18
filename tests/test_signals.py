@@ -34,6 +34,17 @@ def test_unit_rules_match_fixture():
         assert got == case["expected"], case["user"]
     for text, expected in FIXTURE["units"]["short_repair"]:
         assert is_short_repair(text) == expected, text
+    from kafiai.signals import restates_rule
+    for text, expected in FIXTURE["units"]["restate"]:
+        assert restates_rule(text) == expected, text
+    for case in FIXTURE["units"]["restate_turns"]:
+        s = ConversationSignals()
+        got = []
+        for user in case["user"]:
+            s.note_user(user, False)
+            s.note_answer("...")
+            got.append(list(s.restated_turns))
+        assert got == case["expected"], case["user"]
 
 
 def test_conversation_states_match_fixture():

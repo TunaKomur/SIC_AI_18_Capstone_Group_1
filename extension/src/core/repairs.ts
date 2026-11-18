@@ -4,7 +4,7 @@
  * Cümleler iki türlüdür: iki nokta ile bitenler kullanıcının devam etmesini bekler.
  */
 export interface Repair {
-  id: "format" | "info" | "shorter" | "longer" | "error" | "expected" | "wrong_part" | "continue_what" | "continue_how" | "summary";
+  id: "format" | "info" | "shorter" | "longer" | "error" | "expected" | "wrong_part" | "continue_what" | "continue_how" | "summary" | "next_step";
   label: string;
   sentence: string;
 }
@@ -51,4 +51,14 @@ export const SUMMARY_REPAIR: Repair = {
   label: "Özetlet",
   sentence:
     "Devam etmeden önce şu ana kadar ne istediğimi nasıl anladığını üç maddede özetle ve bir sonraki adım için bana seçenekler sun.",
+};
+
+/**
+ * Kısa onay zincirinden sonra ikinci yol: yönü doğrudan kullanıcıya veren başlangıç cümlesi; kullanıcı
+ * tamamlayıp gönderir (K41'deki "Şununla devam et: " kalıbıyla aynı fikir).
+ */
+export const NEXT_STEP_REPAIR: Repair = {
+  id: "next_step",
+  label: "Adımı ben yazayım",
+  sentence: "Teklif sorma, bir sonraki adımı ben belirliyorum: ",
 };

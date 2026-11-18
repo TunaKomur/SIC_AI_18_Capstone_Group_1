@@ -172,7 +172,8 @@ def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None):
                       "looping_end": after and signals.looping,
                       "strip": hold, "short_strip": after and signals.last_short_repair,
                       "short_repeat_strip": short_repeat_strip, "hint": hint, "variation": variation, "ring": level, "card": card,
-                      "exit": after and signals.exited, "segments": signals.segments, "segment_start": signals.segment_start})
+                      "exit": after and signals.exited, "segments": signals.segments, "segment_start": signals.segment_start,
+                      "restated": after and bool(signals.restated_turns)})
     return turns
 
 
@@ -195,6 +196,7 @@ class Tally:
         self.ring1 = self.ring2 = self.ring2_hits = 0
         self.exits = self.exit_high = 0
         self.cards = self.card_hits = 0
+        self.rule_cards = self.rule_card_hits = 0
         self.card_by = {}
         self.multi = self.multi_caught = 0
         self.drifted = self.draft_all = self.draft_seg = 0
@@ -229,6 +231,9 @@ class Tally:
                 hit = (t in ds) or ((t + 1) in ds)
                 self.cards += 1
                 self.card_hits += hit
+                if d.get("restated"):
+                    self.rule_cards += 1
+                    self.rule_card_hits += hit
                 by = self.card_by.setdefault(d["card"], [0, 0])
                 by[0] += 1
                 by[1] += hit
@@ -278,7 +283,9 @@ class Tally:
             "kart": {"100_sohbette": round(100 * self.cards / n, 2), "isabet_yuzde": pct(self.card_hits, self.cards),
                      "kaynaga_gore": {k: {"sayi": v[0], "isabet_yuzde": pct(v[1], v[0])} for k, v in self.card_by.items()},
                      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": pct(self.multi_caught, self.multi),
-                     "tekrarlayan_memnuniyetsizlik_sohbeti": self.multi},
+                     "tekrarlayan_memnuniyetsizlik_sohbeti": self.multi,
+                     "kural_notlu_kart_yuzde": pct(self.rule_cards, self.cards),
+                     "kural_notlu_kart_isabet_yuzde": pct(self.rule_card_hits, self.rule_cards)},
             "taze_baslat": {"konu_kayan_sohbet_yuzde": pct(self.drifted, n),
                             "taslaktaki_istek_ortalama_once": round(self.draft_all / self.drifted, 2) if self.drifted else None,
                             "taslaktaki_istek_ortalama_sonra": round(self.draft_seg / self.drifted, 2) if self.drifted else None},

@@ -133,6 +133,22 @@ def is_new_topic(text, recent, segment_task):
     return all(cosine(vec, ngram_vector(r)) < RULES["topic"]["max_similarity"] for r in recent)
 
 
+_RESTATE = RULES["restate"]
+_RESTATE_PHRASES = with_folded(_RESTATE["phrases"])
+
+
+def restates_rule(text):
+    """Kullanıcı daha önce koyduğu bir kuralı yeniden mi hatırlatıyor (signals.ts restatesRule ile aynı)?"""
+    for n in _forms(text):
+        if len(n) <= _RESTATE["whole_chars"]:
+            parts = [n]
+        else:
+            parts = [n[:_RESTATE["edge_chars"]], n[-_RESTATE["edge_chars"]:]]
+        if any(f" {p} " in f" {part.strip()} " for part in parts for p in _RESTATE_PHRASES):
+            return True
+    return False
+
+
 class ConversationSignals:
     """ConversationSignals (signals.ts) ile aynı durum makinesi."""
 
@@ -159,6 +175,7 @@ class ConversationSignals:
         self.answer_ignored_repair = False
         self.clean_run = 0
         self.recovered = False
+        self.restated_turns = []
 
     def note_user(self, text, similar):
         index = self.turns
@@ -174,6 +191,10 @@ class ConversationSignals:
             self.apology_streak = 0
             self.vague_streak = 0
             self.short_repeat_streak = 0
+            self.restated_turns = []
+        # Kuralın yeniden hatırlatılması: yalnızca sıra numarası tutulur (signals.ts ile aynı).
+        if index > 0 and restates_rule(text):
+            self.restated_turns.append(index)
         normalized = normalize_text(text)
         self.last_short_repair = index > 0 and is_short_repair(text) and not is_offer_decline(text, self.answer_asked_question)
         self.affirm_streak = self.affirm_streak + 1 if self.answer_asked_question and is_affirmation(text) else 0

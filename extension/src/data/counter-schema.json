@@ -245,10 +245,11 @@
       "details": [
         "gosterildi",
         "ozetlet",
+        "adim_yaz",
         "yerinde_degil",
         "kapat"
       ],
-      "note": "Onay zinciri önerisi: kullanıcı modelin soruyla biten cevaplarına üst üste kısa onaylarla karşılık verdi; cevabın altında, gönderimi bekletmeden, sohbet başına bir kez. ozetlet: modelden şu ana kadar anladığını özetlemesini isteyen cümle mesaj kutusuna eklendi."
+      "note": "Onay zinciri önerisi: kullanıcı modelin soruyla biten cevaplarına üst üste kısa onaylarla karşılık verdi; cevabın altında, gönderimi bekletmeden, sohbet başına bir kez. ozetlet: modelden şu ana kadar anladığını özetlemesini isteyen cümle mesaj kutusuna eklendi; adim_yaz: 'Teklif sorma, bir sonraki adımı ben belirliyorum: ' başlangıcı eklendi."
     },
     "ring": {
       "dims": [
@@ -274,9 +275,10 @@
         "belirsiz",
         "duzeltme_alinmadi",
         "mesaj_kisaldi",
-        "toparlandi"
+        "toparlandi",
+        "kural_hatirlatildi"
       ],
-      "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği. Metin yok, yalnızca sayı."
+      "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği; duzeltme_alinmadi: onarımdan sonra cevap öncekinin neredeyse aynısı; mesaj_kisaldi: döngüde şikayet bir öncekinin yarısından kısa; toparlandi: iki temiz turla sakinleşti; kural_hatirlatildi: kullanıcı bir kuralı yeniden hatırlattı (K48). Metin yok, yalnızca sayı."
     }
   }
 }

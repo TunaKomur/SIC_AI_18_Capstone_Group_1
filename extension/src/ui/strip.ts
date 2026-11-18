@@ -1,4 +1,4 @@
-import { CONTINUE_REPAIRS, REPAIRS, SUMMARY_REPAIR, shortRepairs, type Repair } from "../core/repairs";
+import { CONTINUE_REPAIRS, NEXT_STEP_REPAIR, REPAIRS, SUMMARY_REPAIR, shortRepairs, type Repair } from "../core/repairs";
 import { header, mountCard } from "./theme";
 
 /**
@@ -62,7 +62,7 @@ export function stripMessage(ctx: StripContext): { title: string; body: string; 
   if (ctx.kind === "affirm_hint") {
     return {
       title: "Son mesajların modelin tekliflerine kısa onaylardı.",
-      body: "İstersen devam etmeden önce modelin şu ana kadar ne anladığını özetlemesini iste; bir sonraki adımı sen seç.",
+      body: "İstersen devam etmeden önce modelin şu ana kadar ne anladığını özetlemesini iste ya da bir sonraki adımı kendin yaz.",
       hint: null,
     };
   }
@@ -247,6 +247,10 @@ export class Strip {
         button(SUMMARY_REPAIR.label, "", () => {
           this.hide();
           actions.onRepair(SUMMARY_REPAIR.sentence, SUMMARY_REPAIR.id);
+        }),
+        button(NEXT_STEP_REPAIR.label, "secondary", () => {
+          this.hide();
+          actions.onRepair(NEXT_STEP_REPAIR.sentence, NEXT_STEP_REPAIR.id);
         }),
         spacer(),
       );

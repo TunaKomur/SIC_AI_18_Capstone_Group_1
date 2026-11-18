@@ -47,7 +47,9 @@
         }
       },
       "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.68,
-      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
+      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
+      "kural_notlu_kart_yuzde": 0.0,
+      "kural_notlu_kart_isabet_yuzde": null
     },
     "taze_baslat": {
       "konu_kayan_sohbet_yuzde": 0.0,
@@ -109,7 +111,9 @@
         }
       },
       "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 32.3,
-      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
+      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
+      "kural_notlu_kart_yuzde": 1.25,
+      "kural_notlu_kart_isabet_yuzde": 39.58
     },
     "taze_baslat": {
       "konu_kayan_sohbet_yuzde": 6.42,

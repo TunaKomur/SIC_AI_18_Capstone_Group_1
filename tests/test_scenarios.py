@@ -45,6 +45,7 @@ def test_scenario(scenario, model):
         "kisa_tekrar_serit": sum(bool(t["short_repeat_strip"]) for t in turns),
         "oneri": any(t["hint"] for t in turns),
         "kart_kaynagi": next((t["card"] for t in turns if t["card"]), None),
+        "kural_hatirlatildi": any(t["restated"] for t in turns),
     }
     for key, value in want.items():
         if key == "halka_en_az":

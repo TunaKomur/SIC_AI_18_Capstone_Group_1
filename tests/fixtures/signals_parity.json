@@ -323,6 +323,119 @@
           false
         ]
       }
+    ],
+    "restate": [
+      [
+        "Sana söylemiştim, tablo kullanma.",
+        true
+      ],
+      [
+        "soylemistim tablo kullanma",
+        true
+      ],
+      [
+        "Dediğim gibi sadece kod ver",
+        true
+      ],
+      [
+        "kaç kere söyleyeceğim emoji yok",
+        true
+      ],
+      [
+        "Bu kelime metinde kaç kez geçiyor?",
+        false
+      ],
+      [
+        "I told you not to use bullet points",
+        true
+      ],
+      [
+        "As I said, keep it under 100 words",
+        true
+      ],
+      [
+        "You forgot the part about pricing",
+        true
+      ],
+      [
+        "Did you forget to specify values?",
+        false
+      ],
+      [
+        "Can I repeat the process to make it stronger?",
+        false
+      ],
+      [
+        "Bunu tablo olarak yaz",
+        false
+      ],
+      [
+        "Önceki cevabı kısalt",
+        false
+      ],
+      [
+        "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x lütfen dediğim gibi yap",
+        true
+      ],
+      [
+        "dediğim gibi x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ",
+        true
+      ],
+      [
+        "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x dediğim gibi y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y",
+        false
+      ]
+    ],
+    "restate_turns": [
+      {
+        "user": [
+          "Bir ürün tanıtım metni yaz, emoji kullanma.",
+          "Sana söylemiştim, emoji kullanma.",
+          "Biraz kısalt",
+          "Dediğim gibi emoji olmasın"
+        ],
+        "expected": [
+          [],
+          [
+            1
+          ],
+          [
+            1
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "user": [
+          "Python'da bir CSV dosyasını okuyup sütun ortalamalarını hesaplayan kod yaz",
+          "Söylemiştim, pandas kullanma",
+          "Şu İngilizce paragrafı Türkçeye çevir: The weather is nice today and we are going out",
+          "Dediğim gibi resmi bir dil kullan"
+        ],
+        "expected": [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            3
+          ]
+        ]
+      },
+      {
+        "user": [
+          "Dediğim gibi kısa yaz",
+          "tamam"
+        ],
+        "expected": [
+          [],
+          []
+        ]
+      }
     ]
   },
   "conversations": [

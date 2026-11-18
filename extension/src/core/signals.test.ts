@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import fixture from "../../../tests/fixtures/signals_parity.json";
-import { apologizes, ConversationSignals, isAffirmation, isExitMessage, isNewTopic, isShortRepair, isVague, SHORT_REPEAT_STREAK } from "./signals";
+import { apologizes, ConversationSignals, isAffirmation, isExitMessage, isNewTopic, isShortRepair, isVague, restatesRule, SHORT_REPEAT_STREAK } from "./signals";
 import { isBareContinue } from "./intents";
 import { normalizeText } from "./text";
 
@@ -21,6 +21,28 @@ describe("sohbet sinyalleri: Python ikiziyle aynı karar (parite örnekleri)", (
       expect([c.user, got]).toEqual([c.user, c.expected]);
     }
     for (const [text, expected] of fixture.units.affirmation as [string, boolean][]) expect([text, isAffirmation(text)]).toEqual([text, expected]);
+  });
+
+  it("kuralın yeniden hatırlatılması (K48)", () => {
+    for (const [text, expected] of fixture.units.restate as [string, boolean][]) expect([text, restatesRule(text)]).toEqual([text, expected]);
+    for (const c of fixture.units.restate_turns) {
+      const s = new ConversationSignals();
+      const got = c.user.map((user) => {
+        s.noteUser(user, { similar: false });
+        s.noteAnswer("...");
+        return s.restatedTurns;
+      });
+      expect([c.user, got]).toEqual([c.user, c.expected]);
+    }
+  });
+
+  it("restatedNow yalnızca son mesaj hatırlattıysa doğru", () => {
+    const s = new ConversationSignals();
+    s.noteUser("Bir metin yaz, emoji kullanma", { similar: false });
+    s.noteUser("Söylemiştim, emoji kullanma", { similar: false });
+    expect(s.restatedNow).toBe(true);
+    s.noteUser("Biraz kısalt", { similar: false });
+    expect(s.restatedNow).toBe(false);
   });
 
   it("sohbet boyunca durum aynı", () => {

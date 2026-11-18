@@ -431,6 +431,24 @@
         "kart": true,
         "halka_en_az": 2
       }
+    },
+    {
+      "id": "kural_yeniden_hatirlatma",
+      "anlatim": "Kullanıcı ilk mesajda bir kural koyuyor (emoji kullanma), model uymuyor, kullanıcı 'söylemiştim' diye hatırlatıyor. Kuralın hatırlatılması tetikleyici değildir: tek başına kart açmaz; kart başka bir nedenle açılırsa not ekler ve Taze başlat taslağı kuralı başa koyar (K48)",
+      "user": [
+        "Yeni kahve dükkanım için Instagram tanıtım metni yaz, hiç emoji kullanma",
+        "Söylemiştim, emoji kullanma. Aynı metni emojisiz yaz",
+        "Biraz daha kısa olsun"
+      ],
+      "answers": [
+        "☕ Sabahlarınızı güzelleştiren kahve dükkanımız açıldı! ✨ Sizi bekliyoruz.",
+        "Sabahlarınızı güzelleştiren kahve dükkanımız açıldı! Taze çekirdekler ve sıcak bir ortamla sizi bekliyoruz.",
+        "Kahve dükkanımız açıldı; taze çekirdeklerle sizi bekliyoruz."
+      ],
+      "beklenen": {
+        "kural_hatirlatildi": true,
+        "kart": false
+      }
     }
   ]
 }

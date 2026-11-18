@@ -211,4 +211,13 @@ describe("kısa tekrar şeridi ve onay zinciri önerisi", () => {
     expect(a.onRepair).toHaveBeenCalledWith(expect.stringContaining("üç maddede özetle"), "summary");
     input.remove();
   });
+
+  it("onay zinciri önerisinde 'Adımı ben yazayım' yönü kullanıcıya veren başlangıcı ekler", () => {
+    const a = actions();
+    strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "affirm_hint" });
+    expect(shadowOf().textContent).toContain("bir sonraki adımı kendin yaz");
+    buttonByText("Adımı ben yazayım").click();
+    expect(a.onRepair).toHaveBeenCalledWith("Teklif sorma, bir sonraki adımı ben belirliyorum: ", "next_step");
+    expect(strip.visible).toBe(false);
+  });
 });

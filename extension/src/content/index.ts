@@ -19,7 +19,14 @@ import { isPersonal } from "../core/personal";
 import { hasStrongRepair } from "../core/strong-repair";
 import { normalizeText } from "../core/text";
 import { ringLevel, ringText } from "../core/ring";
-import { AFFIRM_STREAK, ConversationSignals, isOfferDecline, isShortRepair, SHORT_REPEAT_STREAK } from "../core/signals";
+import {
+  AFFIRM_STREAK,
+  ConversationSignals,
+  isOfferDecline,
+  isShortRepair,
+  RESTATE_MAX_RULES,
+  SHORT_REPEAT_STREAK,
+} from "../core/signals";
 import { RepeatDetector } from "../core/repeat-detector";
 import { Session } from "../core/session";
 import {
@@ -193,9 +200,13 @@ function main(): boolean {
           const onPage = adapter.readHistory();
           // Sohbet başka bir konuya kaydıysa taslağa yalnızca şu anki konunun istekleri girer (K32).
           const own = signals.segments > 1 ? userTexts.slice(signals.segmentStart) : userTexts;
-          return buildFreshStartDraft(userTexts.length >= onPage.length ? own : onPage);
+          if (userTexts.length < onPage.length) return buildFreshStartDraft(onPage);
+          // Yeniden hatırlatılan kurallar taslağın başına (K48); sıra numaraları bellekteki listeye göre.
+          const rules = signals.restatedTurns.map((i) => userTexts[i] ?? "");
+          return buildFreshStartDraft(own, rules, RESTATE_MAX_RULES);
         },
         focusedDraft: () => signals.segments > 1 && userTexts.length >= adapter.readHistory().length,
+        ruleRestated: () => signals.restatedTurns.length > 0,
         onFreshStart: async (draft) => {
           const copied = await copyToClipboard(draft);
           if (copied) {
@@ -253,10 +264,11 @@ function main(): boolean {
           console.log("[KafiAI] kullanıcı onay önerisi için 'Yerinde değildi' dedi");
           record("hint", "yerinde_degil");
         },
-        onRepair: (sentence) => {
+        onRepair: (sentence, id) => {
           const ok = adapter.insertText(sentence);
-          if (ok) record("hint", "ozetlet");
-          console.log(`[KafiAI] özet isteği eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
+          const detail = id === "next_step" ? "adim_yaz" : "ozetlet";
+          if (ok) record("hint", detail);
+          console.log(`[KafiAI] onay önerisi cümlesi eklendi (${detail}): ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
         },
       },
       { attempt: 1, exact: false, task: currentTask(), kind: "affirm_hint" },
@@ -323,7 +335,15 @@ function main(): boolean {
    * o ana kadarki benzer mesaj denemeleri çıkış kartını artık açtırmaz.
    */
   const recordSignal = (
-    detail: "ozur_dongusu" | "cikis" | "konu_kaymasi" | "belirsiz" | "duzeltme_alinmadi" | "mesaj_kisaldi" | "toparlandi",
+    detail:
+      | "ozur_dongusu"
+      | "cikis"
+      | "konu_kaymasi"
+      | "belirsiz"
+      | "duzeltme_alinmadi"
+      | "mesaj_kisaldi"
+      | "toparlandi"
+      | "kural_hatirlatildi",
   ) => {
     // Yalnızca bu ziyarette yazılan sohbetler sayılır; eski bir sohbete bakmak sayılmaz.
     if (!sentThisVisit || seenSignals.has(detail)) return;
@@ -336,6 +356,10 @@ function main(): boolean {
     const loopBefore = signals.recentSimilar > 0 || signals.apologyStreak > 0 || signals.vagueStreak >= 2;
     signals.noteUser(text, { similar });
     if (signals.exited && loopBefore) recordSignal("cikis");
+    if (signals.restatedNow) {
+      console.log("[KafiAI] kullanıcı bir kuralı yeniden hatırlattı");
+      recordSignal("kural_hatirlatildi");
+    }
     // Döngü sırasında şikayet bir öncekinin yarısından kısa: veride bu turlardan sonra döngü daha seyrek bitiyor.
     const previousText = userTexts[userTexts.length - 2];
     if (loopBefore && previousText !== undefined && hasStrongRepair(text) && wordCount(text) * 2 <= wordCount(previousText)) {
