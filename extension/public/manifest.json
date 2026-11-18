@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Kâfi",
+  "name": "Kâfi AI",
   "version": "0.1.0",
   "description": "Fark et. Durakla. Yeniden başla. Yapay zeka sohbetlerinde aynı yerde dönmeye başladığını fark eder ve çıkış yolu sunar; hiçbir mesaj cihazından çıkmaz.",
   "icons": {
@@ -22,7 +22,7 @@
     "https://www.google.com/search*"
   ],
   "action": {
-    "default_title": "Kâfi",
+    "default_title": "Kâfi AI",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",

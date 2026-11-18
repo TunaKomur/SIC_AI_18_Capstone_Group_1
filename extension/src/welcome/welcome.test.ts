@@ -11,7 +11,7 @@ beforeEach(() => {
 describe("karşılama ekranı", () => {
   it("başlık, giriş, beş bölüm ve düğmeyi gösterir", () => {
     mountWelcome(root, () => {});
-    expect(root.querySelector("h1")?.textContent).toBe("Kâfi'ye hoş geldin");
+    expect(root.querySelector("h1")?.textContent).toBe("Kâfi AI'ya hoş geldin");
     expect(root.querySelector(".tagline")?.textContent).toBe("Fark et. Durakla. Yeniden başla.");
     expect(root.querySelector(".lead")?.textContent).toBe(WELCOME_LEAD);
     expect(Array.from(root.querySelectorAll("h2")).map((h) => h.textContent)).toEqual([
@@ -28,7 +28,7 @@ describe("karşılama ekranı", () => {
     mountWelcome(root, () => {});
     const text = root.textContent ?? "";
     expect(text).toContain("Gönder'e bastığın anda");
-    expect(text).toContain("Cevabın metnini okumaz");
+    expect(text).toContain("cevabın başına ve sonuna yalnızca bellekte");
     expect(text).toContain("Klavyede bastığın tuşlara");
     expect(text).toContain("Hiçbir mesaj cihazından çıkmaz");
     expect(text).toContain("Mesaj metni kaydedilmez");

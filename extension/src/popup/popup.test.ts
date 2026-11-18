@@ -254,10 +254,10 @@ describe("popup", () => {
     expect(root.textContent).toContain("Şu an açılamadı");
   });
 
-  it("'Kâfi nasıl çalışır?' bağlantısı karşılama ekranını yeni sekmede açar", async () => {
+  it("'Kâfi AI nasıl çalışır?' bağlantısı karşılama ekranını yeni sekmede açar", async () => {
     await open();
     const link = root.querySelector("p.help a") as HTMLAnchorElement;
-    expect(link.textContent).toBe("Kâfi nasıl çalışır?");
+    expect(link.textContent).toBe("Kâfi AI nasıl çalışır?");
     expect(link.getAttribute("href")).toBe("welcome.html");
     expect(link.target).toBe("_blank");
     expect(link.rel).toBe("noopener");
