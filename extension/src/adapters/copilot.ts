@@ -1,6 +1,7 @@
 import { POLL_MS } from "../config";
 import { ResponseWatcher } from "../core/response-watcher";
-import { appendAsNewLine } from "./insert";
+import { appendInline } from "./insert";
+import { SendConfirmer } from "./send-confirmer";
 import type { Adapter, AdapterHandlers } from "./types";
 import { reportedUserTurns } from "./virtual-list";
 import { lastOf, responseText } from "./response-text";
@@ -146,7 +147,8 @@ export const copilotAdapter: Adapter = {
     const composer = heldComposer ?? findComposer();
     heldComposer = null;
     if (!composer) return false;
-    return appendAsNewLine(composer, text);
+    // Satır sonu denenmez: bazı düzenleyiciler "yeni paragraf" komutunu Enter sayıp mesajı gönderebiliyor (ChatGPT'de görüldü).
+    return appendInline(composer, text);
   },
 
   start(handlers: AdapterHandlers) {
@@ -179,12 +181,26 @@ export const copilotAdapter: Adapter = {
       return true;
     };
 
-    const handleSend = (text: string) => {
+    // Gönderim doğrulaması ve çift olay koruması (send-confirmer.ts, K38): mesaj ancak sayfada
+    // gönderildiği görülünce sayılır; Enter'dan sonra gelen aynı gönderimin tıklaması yeni girişim değildir.
+    const confirmer = new SendConfirmer<HTMLElement>(
+      {
+        composerText: readComposerText,
+        userCount: () => document.querySelectorAll(QUESTION_TEXT).length,
+        generating: () => isGenerating(document),
+      },
+      (text, now) => {
+        handlers.onSend({ text });
+        watcher.begin(now);
+        startPolling();
+      },
+      () => handlers.onSendNotSeen?.(),
+    );
+
+    const handleSend = (composer: HTMLElement, text: string) => {
       if (!text) return;
       heldComposer = null;
-      handlers.onSend({ text });
-      watcher.begin(Date.now());
-      startPolling();
+      confirmer.begin(composer, text);
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -194,8 +210,9 @@ export const copilotAdapter: Adapter = {
       if (isGenerating(document)) return;
       const text = readComposerText(composer);
       if (!text) return;
+      if (confirmer.isSameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı
       if (intercept(event, composer, text)) return;
-      handleSend(text);
+      handleSend(composer, text);
     };
 
     const onClick = (event: MouseEvent) => {
@@ -213,8 +230,9 @@ export const copilotAdapter: Adapter = {
       if (!composer) return;
       const text = readComposerText(composer);
       if (!text) return;
+      if (confirmer.isSameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı
       if (intercept(event, composer, text)) return;
-      handleSend(text);
+      handleSend(composer, text);
     };
 
     document.addEventListener("keydown", onKeyDown, true);
@@ -224,6 +242,7 @@ export const copilotAdapter: Adapter = {
       document.removeEventListener("keydown", onKeyDown, true);
       document.removeEventListener("click", onClick, true);
       watcher.cancel();
+      confirmer.cancel();
       heldComposer = null;
       if (timer !== undefined) window.clearInterval(timer);
     };

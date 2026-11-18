@@ -4,33 +4,10 @@ function rawText(box: HTMLElement): string {
 }
 
 /**
- * Metni kutunun sonuna, kutu doluysa yeni bir satır olarak ekler. Sayfanın kendi düzenleyicisi
- * değişikliği görsün diye tarayıcının yazma komutlarını kullanır; innerHTML'e dokunmaz.
- */
-export function appendAsNewLine(composer: HTMLElement, text: string): boolean {
-  if (typeof document.execCommand !== "function") return false;
-  composer.focus();
-  const selection = window.getSelection();
-  if (!selection) return false;
-  const range = document.createRange();
-  range.selectNodeContents(composer);
-  range.collapse(false); // imleci sona koy
-  selection.removeAllRanges();
-  selection.addRange(range);
-  if (rawText(composer).trim() !== "") {
-    // Önce yeni paragraf; düzenleyici bunu görmezse satır sonu dene.
-    const lineBreaks = () => (rawText(composer).match(/\n/g) ?? []).length;
-    const before = lineBreaks();
-    document.execCommand("insertParagraph");
-    if (lineBreaks() === before) document.execCommand("insertLineBreak");
-  }
-  return document.execCommand("insertText", false, text);
-}
-
-/**
- * Metni kutunun sonuna aynı satırda, bir boşlukla ekler. ProseMirror kullanan sitelerde (ChatGPT,
- * Claude) "yeni paragraf" komutu Enter gibi yorumlanıp mesajı göndertebiliyor (elle doğrulamada
- * ChatGPT'de görüldü); bu yüzden orada satır sonu hiç denenmez.
+ * Metni düzenlenebilir mesaj kutusunun sonuna aynı satırda, bir boşlukla ekler (ChatGPT, Gemini,
+ * Claude, Copilot). "Yeni paragraf" komutu bazı düzenleyicilerde Enter gibi yorumlanıp mesajı
+ * göndertebiliyor (elle doğrulamada ChatGPT'de görüldü); bu yüzden satır sonu hiç denenmez.
+ * Sayfanın düzenleyicisi değişikliği görsün diye tarayıcının yazma komutu kullanılır; innerHTML'e dokunmaz.
  */
 export function appendInline(composer: HTMLElement, text: string): boolean {
   if (typeof document.execCommand !== "function") return false;

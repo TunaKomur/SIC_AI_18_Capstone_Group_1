@@ -2,6 +2,7 @@ import { POLL_MS } from "../config";
 import { ResponseWatcher } from "../core/response-watcher";
 import type { Adapter, AdapterHandlers } from "./types";
 import { appendInline } from "./insert";
+import { SendConfirmer } from "./send-confirmer";
 import { lastOf, responseText } from "./response-text";
 
 /** Bekletilen gönderim (varsa) ve "bir sonraki girişimi engelleme" bayrağı. */
@@ -27,14 +28,6 @@ const USER_MESSAGE_SELECTOR = '[data-content-search-unit-key$=":user"]';
 const STOP_LABEL = /^(durdur|stop|arrêter|detener|parar|stoppen|stopp|fermare|остановить)/i;
 
 const HOSTS = new Set(["chatgpt.com", "chat.openai.com"]);
-
-/**
- * Gönderim doğrulaması: Enter ya da Gönder yakalandıktan sonra sayfanın mesajı gerçekten gönderdiği
- * görülene kadar beklenir. ChatGPT bazen Enter'ı işlemiyor (yeni açılmış sekmede ilk mesaj, elle
- * doğrulamada görüldü); o mesaj sayılırsa kullanıcının yeniden göndermesi tekrar sanılıyordu.
- */
-const CONFIRM_TICK_MS = 100;
-const CONFIRM_TIMEOUT_MS = 4000;
 
 const CONVERSATION_PATH = /\/c\/([^/?#]+)/;
 
@@ -211,49 +204,28 @@ export const chatgptAdapter: Adapter = {
       return true;
     };
 
-    // Doğrulanmayı bekleyen gönderim. Kanıt: kutu boşaldı, yeni kullanıcı mesajı belirdi ya da üretim başladı.
-    let pending: { text: string; composer: HTMLElement; users: number; startedAt: number } | null = null;
-    let confirmTimer: number | undefined;
-    const userCount = () => document.querySelectorAll(USER_MESSAGE_SELECTOR).length;
-    const stopConfirm = () => {
-      if (confirmTimer !== undefined) window.clearInterval(confirmTimer);
-      confirmTimer = undefined;
-    };
-    const sentNow = (p: NonNullable<typeof pending>) =>
-      !p.composer.isConnected || readComposerText(p.composer) === "" || userCount() > p.users || isGenerating(document);
-    const settle = (now: number) => {
-      const p = pending;
-      if (!p) return;
-      if (sentNow(p)) {
-        pending = null;
-        stopConfirm();
-        handlers.onSend({ text: p.text });
+    // Gönderim doğrulaması ve çift olay koruması (send-confirmer.ts, K38). ChatGPT Enter'a basılınca kendi
+    // Gönder düğmesine de tıklıyor: ikinci olay yeni bir girişim sayılmaz; yoksa "benzer mesaj" sanılıp
+    // bekletiliyor ve ChatGPT'nin asıl gönderimi durduruluyordu (elle doğrulamada görüldü).
+    const confirmer = new SendConfirmer<HTMLElement>(
+      {
+        composerText: readComposerText,
+        userCount: () => document.querySelectorAll(USER_MESSAGE_SELECTOR).length,
+        generating: () => isGenerating(document),
+      },
+      (text, now) => {
+        handlers.onSend({ text });
         watcher.begin(now);
         startPolling();
-      } else if (now - p.startedAt >= CONFIRM_TIMEOUT_MS) {
-        pending = null;
-        stopConfirm();
-        handlers.onSendNotSeen?.();
-      }
-    };
-
-    /**
-     * ChatGPT Enter'a basılınca kendi Gönder düğmesine de tıklıyor (elle doğrulamada görüldü): aynı
-     * gönderim iki olay olarak geliyor. İkincisi yeni bir girişim sayılmaz; aksi hâlde ilk kayıtta
-     * olduğu gibi "benzer mesaj" sanılıp bekletiliyor ve ChatGPT'nin asıl gönderimini durduruyordu.
-     */
-    const sameSubmission = (composer: HTMLElement, text: string) =>
-      pending !== null && pending.composer === composer && pending.text === text &&
-      Date.now() - pending.startedAt < CONFIRM_TIMEOUT_MS;
+      },
+      () => handlers.onSendNotSeen?.(),
+    );
+    const sameSubmission = (composer: HTMLElement, text: string) => confirmer.isSameSubmission(composer, text);
 
     const handleSend = (composer: HTMLElement, text: string) => {
       if (!text) return;
       heldComposer = null;
-      // Önceki girişim hâlâ bekliyorsa önce onu sonuçlandır (gitmediyse sayılmaz).
-      if (pending) settle(pending.startedAt + CONFIRM_TIMEOUT_MS);
-      pending = { text, composer, users: userCount(), startedAt: Date.now() };
-      stopConfirm();
-      confirmTimer = window.setInterval(() => settle(Date.now()), CONFIRM_TICK_MS);
+      confirmer.begin(composer, text);
     };
 
     // Yakalama (capture) aşamasında dinliyoruz: sayfanın kendi kodu mesaj kutusunu
@@ -299,8 +271,7 @@ export const chatgptAdapter: Adapter = {
       document.removeEventListener("keydown", onKeyDown, true);
       document.removeEventListener("click", onClick, true);
       watcher.cancel();
-      stopConfirm();
-      pending = null;
+      confirmer.cancel();
       heldComposer = null;
       if (timer !== undefined) window.clearInterval(timer);
     };

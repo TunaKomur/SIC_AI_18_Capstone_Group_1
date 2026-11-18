@@ -49,6 +49,12 @@ function type(text: string): HTMLTextAreaElement {
   return box;
 }
 
+/** Sayfanın mesajı gerçekten göndermesini taklit eder: kutu boşalır, doğrulama bir tik sonra görür (K38). */
+function pageSent(): void {
+  findComposer()!.value = "";
+  vi.advanceTimersByTime(150);
+}
+
 function pressEnter(target: Element, opts: KeyboardEventInit = {}): KeyboardEvent {
   const event = new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true, ...opts });
   target.dispatchEvent(event);
@@ -172,6 +178,28 @@ describe("start(): gönderme, bekletme, düzenleme ve cevap bitişi", () => {
     vi.useRealTimers();
   });
 
+  it("sayfa mesajı göndermezse (kutu dolu kalır) mesaj sayılmaz, onSendNotSeen çağrılır", () => {
+    const notSeen = vi.fn();
+    load("cevap_bitince");
+    stop = googleAiModeAdapter.start({ ...handlers, onSendNotSeen: notSeen });
+    const box = type("merhaba");
+    pressEnter(box);
+    vi.advanceTimersByTime(4100);
+    expect(handlers.onSend).not.toHaveBeenCalled();
+    expect(notSeen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Enter'dan sonra gelen Gönder tıklaması aynı gönderimdir: bir kez sorulur, bir kez sayılır", () => {
+    load("cevap_bitince");
+    stop = googleAiModeAdapter.start(handlers);
+    const box = type("merhaba");
+    pressEnter(box);
+    findSendButton(box)!.click();
+    pageSent();
+    expect(handlers.onBeforeSend).toHaveBeenCalledTimes(1);
+    expect(handlers.onSend).toHaveBeenCalledTimes(1);
+  });
+
   it("Enter ile gönderilen mesajı yakalar; Shift+Enter ve boş kutu sayılmaz", () => {
     load("bos_sohbet");
     stop = googleAiModeAdapter.start(handlers);
@@ -181,6 +209,7 @@ describe("start(): gönderme, bekletme, düzenleme ve cevap bitişi", () => {
     pressEnter(box, { shiftKey: true });
     expect(handlers.onSend).not.toHaveBeenCalled();
     pressEnter(box);
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
@@ -191,6 +220,7 @@ describe("start(): gönderme, bekletme, düzenleme ve cevap bitişi", () => {
     document.querySelector<HTMLButtonElement>('[data-xid="h4gG8"]')!.click();
     expect(handlers.onSend).not.toHaveBeenCalled();
     findSendButton(box)!.click();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "bir soru daha sor" });
   });
 
@@ -214,6 +244,7 @@ describe("start(): gönderme, bekletme, düzenleme ve cevap bitişi", () => {
     expect(handlers.onBeforeSend.mock.calls[0]![0].anchor.getAttribute("data-xid")).toBe("aim-mars-input-plate");
     expect(googleAiModeAdapter.submitHeld()).toBe(true);
     expect(pageClick).toHaveBeenCalledTimes(1);
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
     expect(googleAiModeAdapter.submitHeld()).toBe(false);
   });

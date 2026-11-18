@@ -66,6 +66,12 @@ function type(text: string): HTMLButtonElement {
   return send;
 }
 
+/** Sayfanın mesajı gerçekten göndermesini taklit eder: kutu boşalır, doğrulama bir tik sonra görür (K38). */
+function pageSent(): void {
+  findComposer()!.innerHTML = "<p></p>";
+  vi.advanceTimersByTime(150);
+}
+
 function pressEnter(opts: KeyboardEventInit = {}): KeyboardEvent {
   const event = new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true, ...opts });
   (findComposer()!.querySelector("span, p") ?? findComposer()!).dispatchEvent(event);
@@ -187,6 +193,28 @@ describe("start(): gönderme, bekletme, yeniden üretme ve cevap bitişi", () =>
     vi.useRealTimers();
   });
 
+  it("sayfa mesajı göndermezse (kutu dolu kalır) mesaj sayılmaz, onSendNotSeen çağrılır", () => {
+    const notSeen = vi.fn();
+    load("cevap_bitince");
+    stop = copilotAdapter.start({ ...handlers, onSendNotSeen: notSeen });
+    const send = type("merhaba");
+    pressEnter();
+    vi.advanceTimersByTime(4100);
+    expect(handlers.onSend).not.toHaveBeenCalled();
+    expect(notSeen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Enter'dan sonra gelen Gönder tıklaması aynı gönderimdir: bir kez sorulur, bir kez sayılır", () => {
+    load("cevap_bitince");
+    stop = copilotAdapter.start(handlers);
+    const send = type("merhaba");
+    pressEnter();
+    send.click();
+    pageSent();
+    expect(handlers.onBeforeSend).toHaveBeenCalledTimes(1);
+    expect(handlers.onSend).toHaveBeenCalledTimes(1);
+  });
+
   it("Enter ile gönderilen mesajı yakalar; Shift+Enter ve boş kutu sayılmaz", () => {
     load("bos_sohbet");
     stop = copilotAdapter.start(handlers);
@@ -196,6 +224,7 @@ describe("start(): gönderme, bekletme, yeniden üretme ve cevap bitişi", () =>
     pressEnter({ shiftKey: true });
     expect(handlers.onSend).not.toHaveBeenCalled();
     pressEnter();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
@@ -206,6 +235,7 @@ describe("start(): gönderme, bekletme, yeniden üretme ve cevap bitişi", () =>
     document.querySelector<HTMLButtonElement>('[data-testid="PlusMenuButton"]')!.click();
     expect(handlers.onSend).not.toHaveBeenCalled();
     send.click();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "bir soru daha sor" });
   });
 
@@ -230,6 +260,7 @@ describe("start(): gönderme, bekletme, yeniden üretme ve cevap bitişi", () =>
     expect(handlers.onBeforeSend.mock.calls[0]![0].anchor.classList.contains("fai-BebopLiteChatInput")).toBe(true);
     expect(copilotAdapter.submitHeld()).toBe(true);
     expect(pageClick).toHaveBeenCalledTimes(1);
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
     expect(copilotAdapter.submitHeld()).toBe(false);
   });
