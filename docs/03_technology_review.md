@@ -3,6 +3,8 @@
 **Proje:** Üretken yapay zeka kullanımında aşırı güven ve verimsiz kullanım döngülerinin tespiti
 **Grup:** SIC AI 18 Capstone, Grup 1
 
+> **Güncelleme notu (Kasım 2026).** Bu bölüm proje başındaki teknoloji incelemesidir. Uygulamada bazı seçimler değişti; değişiklikler 7. bölümdeki tabloda "Uygulamada" sütununda ve ilgili yerlerde notlarla gösterildi. Özetle: anlam modeli ve Transformers.js yerine eğitimsiz karakter 3-gram benzerliği ve JSON dosyası olarak gömülen kalibre bir lojistik regresyon kullanıldı (Bölüm 5, K03 ve K17); etiket LLM yerine kurallarla üretildi (K02); eklenti beş sitede çalışıyor; YEDAM yönlendirmesi kapsam dışında kaldı (K50).
+
 ---
 
 ## 1. Giriş
@@ -52,8 +54,8 @@ Projenin ilerleyen aşamasında iki sınıflandırma problemi çözeceğiz: bir 
 
 **Chrome Extension, Manifest V3.** Chrome eklentilerinin güncel mimarisi. Chrome, eski Manifest V2 eklentilerini Temmuz 2025'te (Chrome 138) tamamen devre dışı bıraktı; bu nedenle yeni bir eklenti MV3 ile yazılmak zorunda (Google, 2026a). Projemizde üç bileşen kullanacağız:
 
-- **Content script:** ChatGPT, Gemini, Copilot sayfalarında çalışıp kullanıcının mesajlarını okur.
-- **Service worker:** Arka planda modeli çalıştırır ve kararları verir.
+- **Content script:** Desteklenen sitelerin sayfalarında çalışıp kullanıcının mesajlarını okur. Uygulamada model ve kararlar da burada çalışıyor (ChatGPT, Gemini, Claude, Copilot, Google AI Modu).
+- **Service worker:** Arka plan işleri; uygulamada yalnızca kurulumda karşılama ekranını açıyor.
 - **chrome.storage.local:** Yalnızca özet sayaçları kullanıcının cihazında saklar.
 
 **Transformers.js ve ONNX Runtime Web.** Hugging Face'in geliştirdiği Transformers.js, Python'da eğitilen modellerin ONNX formatına çevrilerek doğrudan tarayıcıda, sunucuya ihtiyaç duymadan çalıştırılmasını sağlar. WebAssembly üzerinde CPU ile, WebGPU destekleyen cihazlarda ekran kartı ile çalışır (Hugging Face, 2026). Bu sayede kullanıcı mesajları hiçbir zaman cihazdan çıkmaz.
@@ -80,7 +82,7 @@ Projenin ilerleyen aşamasında iki sınıflandırma problemi çözeceğiz: bir 
 | Hazır etiket olmaması                                       | LLM ile etiketleme ve insan doğrulaması | Ölçüt tabanlı, ölçeklenebilir etiket üretimi                      |
 | Kullanıcıya neden uyarıldığını söyleyebilmek                | XGBoost ve SHAP                         | Her kararın gerekçesini özellik düzeyinde gösterir                |
 | Mesajların cihazdan çıkmaması                               | Transformers.js ve ONNX Runtime Web     | Model tarayıcıda yerel olarak çalışır                             |
-| Kullanıcının zaten çalıştığı ortamda bulunmak               | Chrome Extension MV3                    | ChatGPT, Gemini ve Copilot'un web arayüzlerinde aynı anda çalışır |
+| Kullanıcının zaten çalıştığı ortamda bulunmak               | Chrome Extension MV3                    | Beş sitenin web arayüzünde aynı çekirdekle çalışır                |
 
 
 ---
@@ -119,7 +121,7 @@ Bölüm 2'deki analizde iki yöntemi de denedik. Embedding tabanlı yöntem, art
 | **Değerlendirme**     | Başlangıç modeli    | **Ana karşılaştırma modeli** | Yeterli etiket olursa son model |
 
 
-Planımız, önce XGBoost ile güçlü ve açıklanabilir bir temel model kurmak, ardından yeterli etiketli veri oluştuğunda çok dilli bir Transformer modelini karşılaştırmak. Karşılaştırma yalnızca doğruluğa göre değil, açıklanabilirlik ve tarayıcıdaki hız da hesaba katılarak yapılacak.
+Planımız, önce XGBoost ile güçlü ve açıklanabilir bir temel model kurmak, ardından yeterli etiketli veri oluştuğunda çok dilli bir Transformer modelini karşılaştırmaktı. **Uygulamada:** XGBoost ve Logistic Regression başa baş çıktı; Logistic Regression daha küçük, kütüphanesiz ve gerekçesi doğrudan okunabildiği için seçildi (Bölüm 8 ve 9). Transformer karşılaştırması yapılmadı.
 
 ### 4.3 Çalıştırma ortamı
 
@@ -132,10 +134,10 @@ Planımız, önce XGBoost ile güçlü ve açıklanabilir bir temel model kurmak
 | Donanım gereksinimi                      | Düşük                                | Yüksek (22 GB disk, 16 GB RAM)           | Yok                                   |
 | Erişilebilirlik (öğrenci bilgisayarları) | Yüksek                               | Düşük                                    | Yüksek                                |
 | Kontrol ve özelleştirme                  | Tam                                  | Sınırlı                                  | Sınırlı                               |
-| **Değerlendirme**                        | **Seçilen yöntem**                   | Türkçe gelirse ileride                   | Yalnızca eğitim aşamasında etiketleme |
+| **Değerlendirme**                        | **Seçilen yöntem**                   | Seçilmedi                                | Kullanılmadı                          |
 
 
-Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğunu gösteriyor. Hedef grubumuzun bilgisayarlarının önemli bir kısmı Gemini Nano'nun donanım şartlarını karşılamayacaktır, Türkçe desteğinin olmaması ise belirleyicidir. Bulut API'si ise kullanıcı mesajlarının dışarı gönderilmesini gerektirdiği için ürünün kendisinde kabul edilemez.
+Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğunu gösteriyor. Hedef grubumuzun bilgisayarlarının önemli bir kısmı Gemini Nano'nun donanım şartlarını karşılamayacaktır, Türkçe desteğinin olmaması ise belirleyicidir. Bulut API'si ise kullanıcı mesajlarının dışarı gönderilmesini gerektirdiği için ürünün kendisinde kabul edilemez. **Uygulamada:** cihaz içi çalıştırma seçildi, ama Transformers.js gerekmedi; model 1,7 KB'lık bir JSON dosyası ve birkaç satır TypeScript ile çalışıyor (Bölüm 10).
 
 ---
 
@@ -151,7 +153,7 @@ Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğ
 
 **GPT Tutor (Bastani vd., 2025).** Türkiye'de yaklaşık 1.000 lise öğrencisiyle yapılan deneyde, öğrenmeyi koruyan yönergelerle tasarlanan yapay zeka asistanı, sınırsız ChatGPT erişiminin öğrenmeye verdiği zararı büyük ölçüde önledi. Teknolojinin kendisi aynı, fark tasarımda.
 
-**Yeşilay Danışmanlık Merkezi (YEDAM).** Yeşilay, teknoloji bağımlılığı dahil bağımlılık türlerinde 12 yaş ve üzeri bireylere ücretsiz psikososyal destek sunuyor; randevu ve danışma için 115 numaralı hat kullanılıyor (YEDAM, 2026). Ürünümüz yüksek risk sinyali gördüğünde kullanıcıyı bu profesyonel desteğe yönlendirecek.
+**Yeşilay Danışmanlık Merkezi (YEDAM).** Yeşilay, teknoloji bağımlılığı dahil bağımlılık türlerinde 12 yaş ve üzeri bireylere ücretsiz psikososyal destek sunuyor; randevu ve danışma için 115 numaralı hat kullanılıyor (YEDAM, 2026). İlk planda ürünün yoğun örüntülerde kullanıcıyı bu desteğe yönlendirmesi vardı; bu yönlendirme bu dönem ürüne girmedi (K50).
 
 ---
 
@@ -172,10 +174,10 @@ Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğ
 
 ### 6.2 Projemize özgü özelleştirmeler
 
-- Çok dilli embedding modelinin Türkçe yapay zeka sohbetleri üzerinde ayrıca test edilmesi.
-- Modelin ONNX formatına çevrilip küçültülmesi (quantization) ve tarayıcıda gecikmesinin ölçülmesi.
-- Kural tabanlı ilk sınıflandırmanın yerine etiketli veriyle eğitilmiş bir modelin geçirilmesi.
-- ChatGPT, Gemini ve Copilot'un sayfa yapıları değiştikçe content script'in güncellenmesi.
+- Türkçe yazımın (Türkçe karaktersiz yazım dahil) kurallarda tanınması (uygulandı, K36).
+- Modelin tarayıcıda kütüphanesiz çalışacak kadar küçük tutulması (uygulandı: 22 katsayı, JSON).
+- Kural tabanlı ilk sınıflandırmanın yanına etiketli veriyle eğitilmiş bir modelin eklenmesi (uygulandı: tur modeli, K17).
+- Sitelerin sayfa yapıları değiştikçe adaptörlerin güncellenmesi (temizlenmiş sayfa görüntüleriyle test ediliyor, K22).
 
 
 
@@ -184,12 +186,12 @@ Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğ
 
 | Risk                                                                  | Önlem                                                                                                                                                                                        |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Ürünün kendisinin yeni bir kompulsif kullanım kaynağına dönüşmesi** | Seri (streak), puan, rozet gibi oyunlaştırma öğeleri yok. Panel yalnızca haftalık özet gösterir, sürekli bildirim gönderilmez.                                                               |
+| **Ürünün kendisinin yeni bir kompulsif kullanım kaynağına dönüşmesi** | Seri (streak), puan, rozet gibi oyunlaştırma öğeleri yok. Pencere yalnızca kullanıcı açınca içgörü gösterir, bildirim gönderilmez.                                                           |
 | **Gizlilik ihlali**                                                   | Mesajlar cihaz içinde işlenir, saklanmaz ve hiçbir sunucuya gönderilmez. Yalnızca özet sayaçlar (örneğin "bu hafta 4 döngü") yerel olarak tutulur. Kullanıcı tüm veriyi tek tuşla silebilir. |
 | **Gözetim aracı olarak kötüye kullanım**                              | Ebeveyn veya işveren modu bulunmaz; eklenti yalnızca kullanıcının kendisine geri bildirim verir.                                                                                             |
-| **Yanlış alarm**                                                      | Her uyarı gerekçesini gösterir ("son 5 mesajda aynı talep"). Kullanıcı uyarıyı "yanlış" olarak işaretleyebilir; eşik kişiye göre ayarlanır.                                                  |
+| **Yanlış alarm**                                                      | Her uyarı gerekçesini gösterir. Kullanıcı uyarıyı "Yerinde değildi" diye işaretleyebilir; eşikler 20.000 gerçek sohbette yeniden oynatmayla seçildi (K28).                                     |
 | **Etiketleme ve damgalama**                                           | Ürün "bağımlısın" demez, teşhis koymaz. Yalnızca kullanım biçimindeki örüntüyü görünür kılar (Ciudad-Fernández vd., 2025).                                                                   |
-| **Profesyonel desteğin yerini alma**                                  | Ürün terapi veya danışmanlık sunmaz. Uzun süreli ve yoğun risk sinyallerinde kullanıcıyı YEDAM'a ve 115 hattına yönlendirir.                                                                 |
+| **Profesyonel desteğin yerini alma**                                  | Ürün terapi veya danışmanlık sunmaz; kişisel ve duygusal sohbetlerde öneri göstermez (K23).                                                                                                  |
 
 
 ---
@@ -201,16 +203,15 @@ Bu tablo, cihaz içi çalıştırmanın projemiz için tek uygun seçenek olduğ
 Teknoloji incelemesinden çıkan seçimlerimiz şöyle:
 
 
-| Katman        | Seçim                                                                                                |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| Veri          | Hugging Face Datasets ile WildChat 1M, LMSYS Chat 1M ve OASST1                                       |
-| Analiz        | Python, pandas, scikit-learn                                                                         |
-| Metin temsili | `paraphrase-multilingual-MiniLM-L12-v2` sentence embeddings                                          |
-| Etiketleme    | LLM ile ölçüt tabanlı etiketleme ve ekip tarafından insan doğrulaması                                |
-| Model         | XGBoost ve SHAP ile açıklanabilir temel model; yeterli veriyle çok dilli Transformer karşılaştırması |
-| Çalıştırma    | ONNX formatı, Transformers.js ile tarayıcı içinde                                                    |
-| Ürün          | Chrome Extension (Manifest V3), yerel depolama, YEDAM yönlendirmesi                                  |
-
+| Katman        | İncelemedeki seçim                                                                                   | Uygulamada (Kasım 2026)                                                                 |
+| ------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Veri          | Hugging Face Datasets ile WildChat 1M, LMSYS Chat 1M ve OASST1                                       | WildChat 4.8M ve 1M, WildFeedback; ShareChat ve LMSYS yalnızca değerlendirmede          |
+| Analiz        | Python, pandas, scikit-learn                                                                         | Aynı                                                                                    |
+| Metin temsili | `paraphrase-multilingual-MiniLM-L12-v2` sentence embeddings                                          | Eğitimsiz karakter 3-gram benzerliği (tarayıcıda birebir aynı hesap, K03)               |
+| Etiketleme    | LLM ile ölçüt tabanlı etiketleme ve ekip tarafından insan doğrulaması                                | Kural tabanlı etiket, WildFeedback ile doğrulandı (K02, K15)                            |
+| Model         | XGBoost ve SHAP ile açıklanabilir temel model; yeterli veriyle çok dilli Transformer karşılaştırması | Kalibre Logistic Regression (22 öznitelik), her turda çalışıyor (K17)                   |
+| Çalıştırma    | ONNX formatı, Transformers.js ile tarayıcı içinde                                                    | JSON katsayı dosyası, kütüphanesiz TypeScript                                           |
+| Ürün          | Chrome Extension (Manifest V3), yerel depolama, YEDAM yönlendirmesi                                  | Chrome Extension (Manifest V3), beş site, yerel sayaçlar; YEDAM yönlendirmesi yok (K50) |
 
 Bu seçimlerin ortak noktası, kullanıcının verisini cihazında tutmak, her kararı açıklayabilmek ve Türkçe konuşan bir hedef gruba hizmet edebilmek. Literatür, sorunun kullanım biçiminde olduğunu ve en etkili müdahalenin doğru anda yapılan küçük bir yönlendirme olduğunu gösteriyordu; seçtiğimiz teknolojiler bu yönlendirmeyi gizliliği koruyarak ve platformdan bağımsız biçimde sunmamızı sağlıyor.
 

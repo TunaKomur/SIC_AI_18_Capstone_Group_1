@@ -1,11 +1,13 @@
 # Bölüm 8: Veri Hazırlama, Feature Engineering ve Model Keşfi
 
-**Proje:** KafiAI, üretken yapay zeka sohbetlerinde verimsiz döngülerin erken tespiti
+**Proje:** Kâfi AI, üretken yapay zeka sohbetlerinde verimsiz döngülerin erken tespiti
 **Ekip:** SIC AI 18, Grup 1
 
 Bu bölüm, ilk iki mesajdan sohbetin döngüye girip girmeyeceğini tahmin eden modelin verisinin nasıl hazırlandığını ve hangi modellerin nasıl denendiğini anlatıyor. Bölüm 2'deki keşif analizi WildChat 1M üzerindeydi; bu aşamada ana veriyi daha büyük ve güncel olan **WildChat 4.8M**'e taşıdık, etiketi **WildFeedback** ile dışarıdan doğruladık ve modelleri kullanıcı bazlı çapraz doğrulamayla karşılaştırdık.
 
 Tüm sayılar `outputs/` altındaki JSON dosyalarından, tüm grafikler `figures/` altından geliyor. Bölümün sonundaki komutlar her şeyi baştan üretir.
+
+> **Güncelleme notu (Kasım 2026).** Sayılar etiketin ve onarım kuralının veriyle inceltilmesinden sonraki sürümdür (Bölüm 5, K35); bu yüzden döngü oranı ilk sürümdeki %6,7 yerine %9,0. Bu bölümdeki sohbet başına model bir ara adımdı: eklentide her turda çalışan tur modeli kullanılıyor (Bölüm 9, K17).
 
 ---
 
@@ -109,16 +111,16 @@ steps[f"{MAX_TURNS} turdan uzunlar çıkarıldı"] = len(df)
 
 *Şekil 18. Temizlenmiş eğitim tablolarında sohbet uzunluğu, ilk mesajın görev türü ve görev türüne göre döngü oranı.*
 
-**Eğitim tabloları birbirine benziyor.** Temizlikten sonra iki sürümde de çok turlu sohbetlerin medyanı 6 tur; uzunluk dağılımları neredeyse üst üste. Görev türü dağılımı da benzer; 4.8M'de kod sohbetlerinin payı biraz daha yüksek (%10,6'ya karşı %7,9). Bu, temizlemenin iki dönemi aynı türden "gerçek kullanıcı" verisine indirdiğini gösteriyor.
+**Eğitim tabloları birbirine benziyor.** Temizlikten sonra iki sürümde de çok turlu sohbetlerin medyanı 6 tur; uzunluk dağılımları neredeyse üst üste. Görev türü dağılımı da benzer; 4.8M'de kod sohbetlerinin payı biraz daha yüksek (%13,1'e karşı %10,0). Bu, temizlemenin iki dönemi aynı türden "gerçek kullanıcı" verisine indirdiğini gösteriyor.
 
-**Döngü en çok kod sohbetlerinde.** Yeni etikete göre kod yazma ve hata ayıklama ile başlayan sohbetlerin %19,8'i döngüye giriyor; genel oran %6,7, soru ve açıklama sohbetlerinde %6,0. Bu, çıkış kartının görev türüne göre ayarlanması kararını da destekliyor (Bölüm 5, K14).
+**Döngü en çok kod sohbetlerinde.** Yeni etikete göre kod yazma ve hata ayıklama ile başlayan sohbetlerin %26,7'si döngüye giriyor; genel oran %9,0, soru ve açıklama sohbetlerinde %8,0. Bu, çıkış kartının görev türüne göre ayarlanması kararını da destekliyor (Bölüm 5, K14).
 
 | Eğitim tablosu | Sohbet | Kullanıcı | Dönem | İlk etiket (v1) | Yeni etiket (v2) |
 |---|---|---|---|---|---|
-| WildChat 4.8M | 28.123 | 12.352 | Nis 2023 ile Tem 2025 | %10,2 | %6,7 |
-| WildChat 1M | 7.965 | 4.608 | Nis 2023 ile Nis 2024 | %11,0 | %4,6 |
-| 4.8M Türkçe | 267 | 146 | Nis 2023 ile Tem 2025 | %14,2 | %9,0 |
-| WildFeedback | 56.718 | (kimlik yok) | 1M dönemi | %14,6 | %8,3 |
+| WildChat 4.8M | 28.123 | 12.352 | Nis 2023 ile Tem 2025 | %10,2 | %9,0 |
+| WildChat 1M | 7.965 | 4.608 | Nis 2023 ile Nis 2024 | %11,0 | %6,6 |
+| 4.8M Türkçe | 267 | 146 | Nis 2023 ile Tem 2025 | %14,2 | %8,2 |
+| WildFeedback | 56.718 | (kimlik yok) | 1M dönemi | %14,6 | %11,5 |
 
 **Sohbet uzadıkça ne oluyor?** Projenin çıkış noktalarından biri, dil modellerinin uzun sohbette yolunu kaybetmesi: önde gelen modeller çok turlu sohbetlerde tek turlu kullanıma göre ortalama %39 daha düşük başarı gösteriyor ve yanlış bir yola saptıklarında toparlanamıyor (Laban vd., 2025). Bunun kullanıcı tarafındaki izini aradık: mesaj sırası ilerledikçe kullanıcının "olmadı, hâlâ hata veriyor" gibi bir güçlü onarım ifadesi yazma oranı (4.8M) ve WildFeedback'te memnuniyetsizlik işaretli mesaj oranı nasıl değişiyor?
 
@@ -128,23 +130,23 @@ steps[f"{MAX_TURNS} turdan uzunlar çıkarıldı"] = len(df)
 
 | Kullanıcı mesajı | 4.8M: güçlü onarım ifadesi | WildFeedback: memnuniyetsizlik |
 |---|---|---|
-| 2. mesaj | %3,9 | %4,6 |
-| 3. mesaj | %4,3 | %5,9 |
-| 4 ile 5 | %4,6 | %6,3 |
-| 6 ile 10 | %5,0 | %6,5 |
-| 11 ile 20 | %6,3 | %5,8 |
-| 21 ile 40 | %7,5 | %6,2 |
+| 2. mesaj | %5,2 | %4,6 |
+| 3. mesaj | %6,0 | %5,9 |
+| 4 ile 5 | %6,5 | %6,3 |
+| 6 ile 10 | %6,9 | %6,5 |
+| 11 ile 20 | %8,4 | %5,8 |
+| 21 ile 40 | %9,8 | %6,2 |
 
 Bulgular ve sınırları:
 
-- 4.8M'de onarım ifadesi oranı 2. mesajdan 21. mesaj ve sonrasına yaklaşık **iki katına** çıkıyor.
-- Bunun bir kısmı seçilim etkisi: uzun sürmüş sohbetler zaten sorun yaşanan sohbetler. Bunu ayırmak için yalnızca en az 20 turlu 1.027 sohbete bakınca da oran aynı sohbetlerin içinde 2. mesajda %5,1'den 17 ile 20. mesajlarda %7,2 ile %8,0 arasına çıkıyor. En az 10 turlu sohbetlerde artış daha küçük (%4,4'ten %5,5'e). Yani sohbet ilerledikçe sorun yaşama oranı aynı sohbet içinde de artıyor.
+- 4.8M'de onarım ifadesi oranı 2. mesajdan 21 ile 40. mesajlara yaklaşık **1,9 katına** çıkıyor.
+- Bunun bir kısmı seçilim etkisi: uzun sürmüş sohbetler zaten sorun yaşanan sohbetler. Bunu ayırmak için yalnızca en az 20 turlu 1.027 sohbete bakınca da oran aynı sohbetlerin içinde 2. mesajda %6,9'dan 17 ile 20. mesajlarda %9,0 ile %10,0 arasına çıkıyor. En az 10 turlu 5.870 sohbette artış daha küçük (%5,9'dan %7,7'ye). Yani sohbet ilerledikçe sorun yaşama oranı aynı sohbet içinde de artıyor.
 - WildFeedback'te artış ilk turlarda belirgin (%4,6'dan %6,5'e), 10. mesajdan sonra düzleşiyor. İki veri seti aynı eğriyi vermiyor; WildFeedback'in uzun sohbetleri az ve etiketleri farklı bir yöntemle üretilmiş.
 - Bu analiz, modelin bağlam penceresi (context window) içinde bilgiyi kaybettiğini doğrudan göstermiyor; yalnızca kullanıcı tarafında görünen sonucu ölçüyor. Laban vd.'nin kontrollü deneydeki bulgusuyla **aynı yönde** olduğunu söyleyebiliyoruz, nedenini kanıtladığını değil.
 
-Bu bulgu eklentinin "taze başlat" önerisinin gerekçesini veriyle destekliyor: uzayan bir sohbette isteği toparlayıp yeni bir sohbete taşımak, aynı sohbette devam etmekten daha az sorunla sonuçlanabilir. Bunu doğrudan test etmek pilot çalışmanın işi.
+Bu bulgu eklentinin "Taze başlat" önerisinin gerekçesini destekliyor: uzayan bir sohbette isteği toparlayıp yeni bir sohbete taşımak. Ama yeni sohbet tek başına yetmiyor: WildChat'te döngülü bir sohbetten sonraki 30 dakikada açılan yeni sohbetlerin %42'si yine döngülü. Bu yüzden Taze başlat taslağı isteği netleştiren satırlar ve sohbette yeniden hatırlatılan kuralları içeriyor (Bölüm 5, K46 ve K48).
 
-**Sınıf dengesizliği.** Pozitif sınıf (döngü) yaklaşık %7. Bu yüzden doğruluk (accuracy) yerine PR-AUC ana metrik; rastgele bir modelin PR-AUC değeri pozitif oranına eşit olduğu için sonuçları hep "rastgeleden kaç kat iyi" diye de veriyoruz. Modellerde sınıf ağırlıkları dengelendi (Bölüm 6).
+**Sınıf dengesizliği.** Pozitif sınıf (döngü) yaklaşık %9. Bu yüzden doğruluk (accuracy) yerine PR-AUC ana metrik; rastgele bir modelin PR-AUC değeri pozitif oranına eşit olduğu için sonuçları hep "rastgeleden kaç kat iyi" diye de veriyoruz. Modellerde sınıf ağırlıkları dengelendi (Bölüm 6).
 
 ### 5. Feature Engineering
 
@@ -158,17 +160,17 @@ Bunun üzerine her sinyali tek tek ölçtük. Ölçüm şöyle yapıldı: WildFe
 
 ![Etiket doğrulaması](../figures/19_label_validation.png)
 
-*Şekil 19. Her sinyalin geçtiği sohbetlerde memnuniyetsizlik oranının genel orana bölümü (WildFeedback kontrol yarısı, 28.494 sohbet). 1'in üstü, sinyalin memnuniyetsizliği gerçekten gösterdiği anlamına geliyor.*
+*Şekil 19. Her sinyalin geçtiği sohbetlerde memnuniyetsizlik oranının genel orana bölümü (WildFeedback kontrol yarısı). 1'in üstü, sinyalin memnuniyetsizliği gerçekten gösterdiği anlamına geliyor.*
 
 | Sinyal | Sohbetlerin payı | DSAT oranı / genel oran |
 |---|---|---|
 | İlk etiket (v1) | %14,6 | 1,09 |
 | Benzer mesaj (0,75 üstü) | %29,6 | 1,00 |
 | Birebir yeniden gönderim (0,97 üstü) | %11,5 | 1,26 |
-| Güçlü onarım ifadesi | %20,8 | 2,32 |
-| **Yeni etiket (v2)** | **%8,5** | **2,87** |
+| Güçlü onarım ifadesi | %25,5 | 2,43 |
+| **Yeni etiket (v2)** | **%11,7** | **3,05** |
 
-Benzerlik tek başına memnuniyetsizliği göstermiyor; birebir yeniden gönderim biraz gösteriyor; asıl sinyal kullanıcının "hâlâ hata veriyor", "aynı sorun", "olmadı", "you didn't" gibi ifadeleri. **Yeni etiket (v2)**: ilk iki turdan sonra en az 2 güçlü onarım ifadesi **ya da** 1 güçlü onarım ifadesi ile birlikte 1 birebir yeniden gönderim. Güçlü onarım listesi (`text.STRONG_REPAIR_PATTERNS`) yalnızca memnuniyetsizliği en az 2 kat artıran ifadelerden oluşuyor; "please", "try again" gibi normal iş akışının parçası olan ifadeler bilerek listede yok. Türkçe karşılıkları da eklendi; WildFeedback yalnızca İngilizce olduğu için Türkçe ifadeler henüz doğrulanmadı, bu iş Türkçe elle etiketleme setine kaldı.
+Benzerlik tek başına memnuniyetsizliği göstermiyor; birebir yeniden gönderim biraz gösteriyor; asıl sinyal kullanıcının "hâlâ hata veriyor", "aynı sorun", "olmadı", "you didn't" gibi ifadeleri. **Yeni etiket (v2)**: ilk iki turdan sonra en az 2 güçlü onarım ifadesi **ya da** 1 güçlü onarım ifadesi ile birlikte 1 birebir yeniden gönderim. Güçlü onarım listesi (`text.STRONG_REPAIR_PATTERNS`) yalnızca memnuniyetsizliği en az 2 kat artıran ifadelerden oluşuyor; "please", "try again" gibi normal iş akışının parçası olan ifadeler bilerek listede yok. Türkçe karşılıkları ve Türkçe karaktersiz yazımları da eklendi (K36); WildFeedback'te Türkçe neredeyse olmadığı ve etiketli Türkçe veri bulunmadığı için Türkçe ifadelerin isabeti ölçülemedi.
 
 ```python
 # src/kafiai/labels.py
@@ -178,7 +180,7 @@ def loop_label(user_messages, k=K_TURNS):
     return int(repairs >= LABEL_V2_MIN_REPAIRS or (repairs >= 1 and exact >= 1))
 ```
 
-Bu karar ürün için de bir şey söylüyor: eklentinin benzer mesaj şeridi (0,8 üstü benzerlik) kullanıcıya "bunu az önce de sordun" demek için doğru bir sinyal, ama tek başına "bu kullanıcı takıldı" demek için yeterli değil. Çıkış kartının yumuşak tekrar sayımını onarım ifadeleriyle birleştirmek bir sonraki adım (Bölüm 5, K15).
+Bu karar ürün için de bir şey söylüyor: eklentinin benzer mesaj şeridi (0,8 üstü benzerlik) kullanıcıya "bunu az önce de sordun" demek için doğru bir sinyal, ama tek başına "bu kullanıcı takıldı" demek için yeterli değil. Bu ayrım sonradan ürüne de yansıdı: benzer mesaj şeridi gönderimi yalnızca birebir tekrarda ya da onarım ifadesinde bekletiyor ve uzun sohbet kartı yakın bir döngü işareti istiyor (Bölüm 5, K33 ve K37).
 
 #### 5.2 Öznitelikler
 
@@ -226,7 +228,7 @@ for t in TASK_TYPES:
 | Standartlaştırma (`StandardScaler`) | Logistic Regression'a giren tüm sayısal öznitelikler | Katsayıları karşılaştırılabilir yapmak ve düzenlileştirmeyi (C) tüm özniteliklere eşit uygulamak |
 | Ölçekleme yok | XGBoost | Karar ağaçları eşik kullanır, ölçekten etkilenmez |
 | Hashing ile vektörleştirme, L2 normu | Metin özniteliği | Sözlük tutmadan, eğitim gerektirmeden sabit boyutlu vektör |
-| Sınıf ağırlığı (`class_weight="balanced"`, `scale_pos_weight`) | Tüm öğrenen modeller | Pozitif sınıf yaklaşık %7 |
+| Sınıf ağırlığı (`class_weight="balanced"`, `scale_pos_weight`) | Tüm öğrenen modeller | Pozitif sınıf yaklaşık %9 |
 
 Standartlaştırma ve hashing, `Pipeline` ve `ColumnTransformer` içinde yapılıyor. Böylece ortalama ve standart sapma her çapraz doğrulama katında yalnızca o katın eğitim kısmından öğreniliyor; doğrulama verisi sızmıyor.
 
@@ -242,7 +244,7 @@ logreg = LogisticRegression(max_iter=2000, class_weight="balanced")
 model = Pipeline([("oznitelik", text_features), ("model", logreg)])
 ```
 
-Eğitilen Logistic Regression'ın ölçekleme değerleri ve katsayıları `outputs/logreg_model.json` dosyasına yazılıyor. Eklenti bu dosyayı okuyarak aynı tahmini tarayıcıda, kütüphane kullanmadan yapabilir: `olasılık = sigmoid(Σ katsayı × (x − ortalama) / ölçek + sabit)`.
+Eğitilen Logistic Regression'ın ölçekleme değerleri ve katsayıları `outputs/logreg_model.json` dosyasına yazılıyor. Aynı tahmin tarayıcıda kütüphanesiz yapılabilir: `olasılık = sigmoid(Σ katsayı × (x − ortalama) / ölçek + sabit)`. Eklentide bu dosya değil, aynı yöntemle dışa aktarılan tur modeli (`turn-model.json`, Bölüm 9 ve 10) kullanılıyor.
 
 ---
 
@@ -254,7 +256,7 @@ Problem bir ikili sınıflandırma: ilk iki mesaja bakıp sohbetin sonradan dön
 
 | Yöntem | Ne | Güçlü yönü | Zayıf yönü |
 |---|---|---|---|
-| **Kural** | Eklentinin bugünkü mantığı: ikinci mesaj birinciye 0,8 üstü benziyorsa ya da ikinci mesajda güçlü onarım ifadesi varsa "risk" | Öğrenme yok, tamamen açıklanabilir | Tek bir eşik; sinyallerin ağırlığını ayarlayamaz |
+| **Kural** | Eklentinin ilk sürümündeki mantık: ikinci mesaj birinciye 0,8 üstü benziyorsa ya da ikinci mesajda güçlü onarım ifadesi varsa döngü | Öğrenme yok, tamamen açıklanabilir | Tek bir eşik; sinyallerin ağırlığını ayarlayamaz |
 | **LogReg (11 öznitelik)** | İlk sürümdeki öznitelikler ile Logistic Regression | Ölçüt (baseline): yeni özniteliklerin katkısını gösterir | Görev türü ve güçlü onarım bilgisi yok |
 | **LogReg (25 öznitelik)** | Genişletilmiş öznitelikler ile Logistic Regression | Küçük (25 katsayı), hızlı, her katsayı yorumlanabilir; tarayıcıda kütüphanesiz çalışır | Doğrusal; öznitelikler arası etkileşimleri kendi bulamaz |
 | **LogReg + metin** | 25 öznitelik ve ilk iki mesajın karakter n-gramları | Hangi kelimelerin döngüyle ilişkili olduğunu kendisi öğrenir | 65.536 ağırlık; yorumlanması ve eklentiye taşınması zor |
@@ -272,12 +274,12 @@ Derin öğrenme modelleri (ör. bir dil modelini ince ayarla eğitmek) bilerek d
 
 | Model | Denenen değerler | Seçilen |
 |---|---|---|
-| LogReg (11 öznitelik) | C: 0,01 / 0,1 / 1 / 10 | C = 1 |
+| LogReg (11 öznitelik) | C: 0,01 / 0,1 / 1 / 10 | C = 0,1 |
 | LogReg (25 öznitelik) | C: 0,01 / 0,1 / 1 / 10 | C = 0,01 |
 | LogReg + metin | C: 0,03 / 0,1 / 0,3 / 1 | C = 0,3 |
-| XGBoost | max_depth: 3 / 5, n_estimators: 200 / 400, learning_rate: 0,03 / 0,1, min_child_weight: 1 / 5 | 3, 400, 0,03, 5 |
+| XGBoost | max_depth: 3 / 5, n_estimators: 200 / 400, learning_rate: 0,03 / 0,1, min_child_weight: 1 / 5 | 3, 200, 0,03, 1 |
 
-Sabit tutulanlar: Logistic Regression'da `class_weight="balanced"` ve `max_iter=2000`; XGBoost'ta `subsample=0.8`, `colsample_bytree=0.8` ve pozitif sınıf ağırlığı (`scale_pos_weight` = negatif / pozitif sayısı, yaklaşık 14). XGBoost'un en sığ ağaçları (derinlik 3) ve daha temkinli yaprak ayarını (`min_child_weight=5`) seçmesi, veride karmaşık etkileşimlerden çok güçlü birkaç ana etki olduğunu gösteriyor. 25 öznitelikli LogReg'in en güçlü düzenlileştirmeyi (C = 0,01) seçmesi de aynı yönde.
+Sabit tutulanlar: Logistic Regression'da `class_weight="balanced"` ve `max_iter=2000`; XGBoost'ta `subsample=0.8`, `colsample_bytree=0.8` ve pozitif sınıf ağırlığı (`scale_pos_weight` = negatif / pozitif sayısı, yaklaşık 10). XGBoost'un en sığ ağaçları (derinlik 3) ve az sayıda ağacı (200) seçmesi, veride karmaşık etkileşimlerden çok güçlü birkaç ana etki olduğunu gösteriyor. 25 öznitelikli LogReg'in en güçlü düzenlileştirmeyi (C = 0,01) seçmesi de aynı yönde.
 
 **Karar eşiği.** Modeller olasılık veriyor; "döngü" demek için bir eşik gerekiyor. Eşik test verisine bakılmadan seçildi: eğitim verisinde katlar dışı (out-of-fold) tahminler üretildi ve F1'i en yüksek yapan eşik alındı.
 
@@ -295,7 +297,7 @@ prob = search.predict_proba(test[columns])[:, 1]
 
 ### 3. Model Değerlendirme
 
-**Metrikler.** Pozitif sınıf az olduğu için ana metrik **PR-AUC** (precision-recall eğrisinin altındaki alan). Rastgele bir modelin PR-AUC'si pozitif oranına eşit; 4.8M testinde bu 0,060. Yanında ROC-AUC, seçilen eşikte precision, recall ve F1, ve olasılıkların ne kadar isabetli olduğunu gösteren Brier skoru raporlandı.
+**Metrikler.** Pozitif sınıf az olduğu için ana metrik **PR-AUC** (precision-recall eğrisinin altındaki alan). Rastgele bir modelin PR-AUC'si pozitif oranına eşit; 4.8M testinde bu 0,089. Yanında ROC-AUC, seçilen eşikte precision, recall ve F1, ve olasılıkların ne kadar isabetli olduğunu gösteren Brier skoru raporlandı.
 
 ![Çapraz doğrulama](../figures/20_cv_scores.png)
 
@@ -303,32 +305,32 @@ prob = search.predict_proba(test[columns])[:, 1]
 
 | Model | CV PR-AUC | Test PR-AUC | Rastgeleye göre | Test ROC-AUC | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|---|
-| Kural | | 0,069 | 1,2 kat | 0,549 | 0,100 | 0,226 | 0,139 |
-| LogReg (11 öznitelik) | 0,195 ± 0,030 | 0,176 | 2,9 kat | 0,739 | 0,219 | 0,336 | 0,265 |
-| LogReg (25 öznitelik) | 0,245 ± 0,019 | 0,199 | 3,3 kat | 0,772 | 0,236 | 0,336 | 0,278 |
-| **LogReg + metin** | **0,275 ± 0,022** | **0,230** | **3,8 kat** | **0,813** | 0,236 | 0,378 | **0,290** |
-| XGBoost | 0,250 ± 0,018 | 0,216 | 3,6 kat | 0,771 | 0,215 | 0,384 | 0,276 |
+| Kural | | 0,106 | 1,2 kat | 0,561 | 0,154 | 0,261 | 0,194 |
+| LogReg (11 öznitelik) | 0,245 ± 0,025 | 0,246 | 2,8 kat | 0,730 | 0,291 | 0,364 | 0,323 |
+| LogReg (25 öznitelik) | 0,314 ± 0,027 | 0,268 | 3,0 kat | 0,765 | 0,280 | 0,466 | 0,350 |
+| **LogReg + metin** | **0,346 ± 0,027** | **0,304** | **3,4 kat** | **0,804** | 0,289 | 0,464 | 0,356 |
+| XGBoost | 0,329 ± 0,033 | 0,280 | 3,2 kat | 0,767 | 0,279 | 0,508 | **0,360** |
 
 Çıkardığımız sonuçlar:
 
-1. **Yeni öznitelikler işe yaradı.** Aynı modelde 11 öznitelikten 25'e geçmek CV PR-AUC'yi 0,195'ten 0,245'e çıkardı (%26 artış) ve katlar arası oynaklığı azalttı.
-2. **Kural yetmiyor.** Eklentinin bugünkü şerit mantığı döngüyü tahmin etmekte rastgeleden çok az iyi (1,2 kat). Bu beklenen bir sonuç: şerit "bunu az önce sordun" demek için tasarlandı, gelecekteki döngüyü tahmin etmek için değil. Tahmin için öğrenen bir model gerekiyor.
-3. **En iyi sonucu metin özellikli model veriyor**, ama fark küçük: 25 öznitelikli LogReg'in yaklaşık %16 üstünde. XGBoost iki LogReg'in arasında.
-4. **Test skorları CV ortalamasının biraz altında.** Test kullanıcılarında pozitif oranı %6,0, eğitimde %6,8; PR-AUC pozitif orana bağlı olduğu için bu fark beklenen bir düşüş. Rastgeleye oranla bakınca CV ve test birbirine yakın.
+1. **Yeni öznitelikler işe yaradı.** Aynı modelde 11 öznitelikten 25'e geçmek CV PR-AUC'yi 0,245'ten 0,314'e çıkardı (%28 artış).
+2. **Kural yetmiyor.** Basit şerit mantığı döngüyü tahmin etmekte rastgeleden çok az iyi (1,2 kat). Bu beklenen bir sonuç: şerit "bunu az önce sordun" demek için tasarlandı, gelecekteki döngüyü tahmin etmek için değil. Tahmin için öğrenen bir model gerekiyor.
+3. **En iyi PR-AUC'yi metin özellikli model veriyor**, ama fark küçük: 25 öznitelikli LogReg'in yaklaşık %14 üstünde. XGBoost iki LogReg'in arasında.
+4. **Test skorları CV ortalamasının biraz altında.** Test kullanıcıları eğitimde hiç görülmemiş kişiler; PR-AUC pozitif orana ve kişiden kişiye değişen kullanım biçimine duyarlı olduğu için bu düşüş beklenen bir şey.
 
 ![Karışıklık matrisleri](../figures/21_confusion_matrices.png)
 
 *Şekil 21. Test kullanıcılarında, eğitim verisinden seçilen eşikle karışıklık matrisleri.*
 
-Karışıklık matrisleri modelin pratikte ne yapacağını gösteriyor. 25 öznitelikli LogReg, test verisindeki 336 döngünün 113'ünü yakalıyor; bunun karşılığında 5.276 normal sohbetten 365'ine yanlış alarm veriyor (%6,9). Yani model "döngü" dediğinde yaklaşık 4 seferden 1'inde haklı. Bu, kullanıcıyı durduran bir uyarı için düşük, ama "bu sohbet uzayabilir, isteğini netleştirmek ister misin?" gibi yumuşak bir öneri için kabul edilebilir bir oran. Eklentide modelin kullanım biçimini bu yüzden "engel" değil "öneri" olarak tasarlıyoruz (Bölüm 6).
+Karışıklık matrisleri modelin pratikte ne yapacağını gösteriyor. 25 öznitelikli LogReg, test verisindeki 498 döngünün 232'sini yakalıyor; bunun karşılığında 5.114 normal sohbetten 596'sına yanlış alarm veriyor (%11,7). Yani model "döngü" dediğinde yaklaşık 7 seferden 2'sinde haklı. Bu, kullanıcıyı durduran bir uyarı için düşük, ama "bu sohbet uzayabilir, isteğini netleştirmek ister misin?" gibi yumuşak bir öneri için kabul edilebilir bir oran. Eklentide modelin kullanım biçimi bu yüzden "engel" değil "öneri" olarak tasarlandı (Bölüm 6).
 
 ![PR ve ROC eğrileri](../figures/22_pr_roc_curves.png)
 
 *Şekil 22. Test kullanıcılarında precision-recall ve ROC eğrileri. Kural tek bir karar verdiği için PR grafiğinde tek nokta.*
 
-PR eğrisinin sol başında kesinlik 0,3 ile 0,5 arasına çıkıyor: model en emin olduğu küçük bir grupta çok daha isabetli. Eklentide eşiği yüksek tutup yalnızca bu gruba öneri göstermek, yanlış alarmı azaltmanın en kolay yolu.
+PR eğrisinin sol başında kesinlik belirgin biçimde yükseliyor: model en emin olduğu küçük bir grupta çok daha isabetli. Eklentide eşiği yüksek tutup yalnızca bu gruba kart göstermek, yanlış alarmı azaltmanın en kolay yolu oldu (Bölüm 9, yüksek güven eşiği).
 
-**Olasılık kalibrasyonu.** Brier skorları 0,15 ile 0,21 arasında. Sınıf ağırlıkları dengelendiği için modeller döngü olasılığını olduğundan yüksek söylüyor; bu sıralamayı (PR-AUC, ROC-AUC) etkilemiyor ama "%70 olasılıkla döngü" gibi bir sayıyı kullanıcıya göstermeyi doğru kılmıyor. Kalibrasyon (Platt ya da isotonic) sonraki adım.
+**Olasılık kalibrasyonu.** Brier skorları 0,16 ile 0,21 arasında. Sınıf ağırlıkları dengelendiği için modeller döngü olasılığını olduğundan yüksek söylüyor; bu sıralamayı (PR-AUC, ROC-AUC) etkilemiyor ama olasılığı doğrudan kullanmayı doğru kılmıyor. Kalibrasyon eklentideki tur modelinde Platt ölçeklemeyle yapıldı (Bölüm 9).
 
 **Hangi öznitelik ne kadar etkili?**
 
@@ -340,7 +342,7 @@ PR eğrisinin sol başında kesinlik 0,3 ile 0,5 arasına çıkıyor: model en e
 
 - **Mesajların uzunluğu (kelime sayısı) en güçlü sinyal.** Uzun ve ayrıntılı ilk iki mesaj, yani karmaşık bir iş (çoğunlukla kod), döngü riskini artırıyor.
 - **İkinci mesajdaki güçlü onarım ifadesi** üçüncü sırada: daha ikinci turda "olmadı" diyen kullanıcı sonra da takılıyor.
-- **Kod görevleri** (`task_kod`, `has_code`) riski artırıyor; Şekil 18'deki %19,8'lik döngü oranıyla tutarlı.
+- **Kod görevleri** (`task_kod`, `has_code`) riski artırıyor; Şekil 18'deki %26,7'lik döngü oranıyla tutarlı.
 - **`ext_sim` riski azaltıyor.** İlk iki mesajı birbirine çok benzeyen sohbetler daha az döngüye giriyor. Bu ilk bakışta şaşırtıcı ama Bölüm 5.1'deki bulguyla aynı: erken benzerlik çoğunlukla verimli seri işlere işaret ediyor.
 
 **Dış testler: model eğitimde görmediği verilerde.**
@@ -351,22 +353,22 @@ PR eğrisinin sol başında kesinlik 0,3 ile 0,5 arasına çıkıyor: model en e
 
 | Dış test | Sohbet | Pozitif oranı | LogReg (25) PR-AUC | Rastgeleye göre | LogReg + metin | XGBoost |
 |---|---|---|---|---|---|---|
-| WildChat 1M (farklı dönem) | 5.414 | %4,4 | 0,206 | 4,7 kat | 0,197 | 0,202 |
-| Türkçe (4.8M) | 267 | %9,0 | 0,217 | 2,4 kat | 0,197 | 0,199 |
-| WildFeedback, bizim etiket | 51.474 | %8,2 | 0,221 | 2,7 kat | 0,234 | 0,234 |
-| **WildFeedback, DSAT etiketi** | 51.474 | %13,1 | 0,212 | 1,6 kat | 0,219 | 0,214 |
+| WildChat 1M (farklı dönem) | 5.414 | %6,2 | 0,274 | 4,4 kat | 0,269 | 0,259 |
+| Türkçe (4.8M) | 267 | %8,2 | 0,268 | 3,3 kat | 0,214 | 0,220 |
+| WildFeedback, bizim etiket | 51.474 | %11,5 | 0,291 | 2,5 kat | 0,311 | 0,305 |
+| **WildFeedback, DSAT etiketi** | 51.474 | %13,1 | 0,240 | 1,8 kat | 0,249 | 0,237 |
 
-- **Farklı dönem (1M):** Model eski veride de çalışıyor, hatta rastgeleye oranla daha iyi (4,7 kat). Öğrenilen ilişki belirli bir modele ya da döneme bağlı değil.
-- **Türkçe:** Model neredeyse tamamen İngilizce ve diğer dillerle eğitildi; Türkçede yine rastgelenin 2,4 katı. Ama bu test 267 sohbette yalnızca 24 pozitif içeriyor, sonuç çok oynak. Burada 25 öznitelikli model metin modelini geçiyor: dile bağlı olmayan öznitelikler başka dillere daha iyi taşınıyor.
-- **Gerçek memnuniyetsizlik (DSAT):** Bizim etiketimizle eğitilen model, sohbetin ilerleyen turlarında kullanıcının memnuniyetsizlik göstereceğini de rastgeleden 1,6 kat iyi tahmin ediyor. Fark mütevazı, ama modelin yalnızca kendi kurallarımızı ezberlemediğini, gerçek bir kullanıcı deneyimiyle ilişkili bir şey öğrendiğini gösteriyor.
+- **Farklı dönem (1M):** Model eski veride de çalışıyor, hatta rastgeleye oranla daha iyi (4,4 kat). Öğrenilen ilişki belirli bir modele ya da döneme bağlı değil.
+- **Türkçe:** Model neredeyse tamamen İngilizce ve diğer dillerle eğitildi; Türkçede yine rastgelenin 3,3 katı. Ama bu test 267 sohbette yalnızca 22 pozitif içeriyor, sonuç çok oynak. Burada 25 öznitelikli model metin modelini geçiyor: dile bağlı olmayan öznitelikler başka dillere daha iyi taşınıyor.
+- **Gerçek memnuniyetsizlik (DSAT):** Bizim etiketimizle eğitilen model, sohbetin ilerleyen turlarında kullanıcının memnuniyetsizlik göstereceğini de rastgeleden 1,8 kat iyi tahmin ediyor. Fark mütevazı, ama modelin yalnızca kendi kurallarımızı ezberlemediğini, gerçek bir kullanıcı deneyimiyle ilişkili bir şey öğrendiğini gösteriyor.
 
-**Seçilen model.** Eklenti için **25 öznitelikli Logistic Regression**'ı seçiyoruz. Metin modeli ana testte %16 daha iyi, ama Türkçe testte geride kalıyor, DSAT testinde fark neredeyse yok, 65.536 ağırlık taşıyor ve neden uyarı verdiğini kullanıcıya açıklamak zor. Seçilen model 25 katsayı ve bir sabitten ibaret; `outputs/logreg_model.json` olarak dışa aktarıldı ve eklentiye birkaç satır kodla eklenebiliyor. Her uyarının gerekçesi en büyük katkıyı yapan öznitelikten okunabiliyor ("ikinci mesajında 'hâlâ olmadı' dedin ve bu bir kod sorusu").
+**Seçilen model.** Bu aşamada **25 öznitelikli Logistic Regression** seçildi. Metin modeli ana testte %14 daha iyi, ama Türkçe testte geride kalıyor, DSAT testinde fark küçük (0,249 ile 0,240), 65.536 ağırlık taşıyor ve neden uyarı verdiğini kullanıcıya açıklamak zor. Seçilen model 25 katsayı ve bir sabitten ibaret; `outputs/logreg_model.json` olarak dışa aktarıldı. Eklentiye ise bunun yerine aynı yaklaşımla kurulan ve her turda çalışan tur modeli girdi (Bölüm 9, K17). Her uyarının gerekçesi en büyük katkıyı yapan öznitelikten okunabiliyor ("ikinci mesajında 'hâlâ olmadı' dedin ve bu bir kod sorusu").
 
 **Sınırlar.**
 
-- Etiket hâlâ kurallardan geliyor. WildFeedback ile doğruladık, ama 300 sohbetlik elle doğrulama (Bölüm 5, K02) henüz yapılmadı.
-- Türkçe test seti küçük. Pilot çalışmadan ve elle etiketlenecek Türkçe setten gelecek veriyle güçlendirilecek.
-- Model yalnızca ilk iki turu görüyor. Sonraki adımda aynı modelin 3. ve 4. turlarda yeniden çalıştırılması denenecek.
+- Etiket kurallardan gelen bir vekil etiket. WildFeedback ile doğrulandı; 300 sohbetlik elle doğrulama yapılmadı (Bölüm 5, K02).
+- Türkçe test seti küçük (267 sohbet, 22 pozitif) ve etiketli Türkçe veri yok.
+- Model yalnızca ilk iki turu görüyor. Bu sınır, her turda yeniden çalışan tur modeliyle aşıldı (Bölüm 9).
 
 ### 4. Kod
 
@@ -401,7 +403,7 @@ python scripts/train_models.py              # Şekil 20-24, yaklaşık 25 dakika
 python -m pytest tests
 ```
 
-Bütün sayılar şu dosyalarda: `outputs/dataset_summary_*.json` (temizleme ve etiket oranları), `outputs/eda_48m_summary.json` (4.8M keşif analizi), `outputs/label_validation.json` (etiket doğrulaması), `outputs/model_metrics.json` (tüm modeller, tüm testler, karışıklık matrisleri), `outputs/logreg_model.json` (eklentiye taşınacak model).
+Bütün sayılar şu dosyalarda: `outputs/dataset_summary_*.json` (temizleme ve etiket oranları), `outputs/eda_48m_summary.json` (4.8M keşif analizi), `outputs/label_validation.json` (etiket doğrulaması), `outputs/model_metrics.json` (tüm modeller, tüm testler, karışıklık matrisleri), `outputs/logreg_model.json` (bu bölümün modeli; eklentideki model `extension/src/data/turn-model.json`).
 
 ### 5. Bulguların Proje Sorusuna Anlamı
 
@@ -409,11 +411,11 @@ Projenin sorusu, üretken yapay zekanın verimsiz kullanımının sohbet davran�
 
 | Bulgu | Sayı | Kaynak | Sınırı |
 |---|---|---|---|
-| Kullanıcıların takıldığı sohbetler azımsanmayacak bir pay | Gerçek kullanıcıların en az 4 turlu sohbetlerinin %6,7'si döngüye giriyor | Şekil 18, `dataset_summary_48m.json` | Etiket kurallardan geliyor; gerçek oran daha yüksek ya da düşük olabilir |
-| Kod ve hata ayıklama en riskli iş | Kod ile başlayan sohbetlerin %19,8'i döngüye giriyor, genel oranın 3 katı | Şekil 18 | Görev türü ilk mesajdan kurallarla çıkarılıyor |
-| Sohbet uzadıkça sorun artıyor | Onarım ifadesi oranı 2. mesajdan 21. mesaja yaklaşık iki katına çıkıyor; aynı uzun sohbetlerin içinde de artıyor | Şekil 25 | Kullanıcı tarafından görülen sonuç; modelin içini ölçmüyor |
-| Benzer mesaj tek başına sorun değil | Benzer mesaj içeren sohbetlerde memnuniyetsizlik genel orandan farksız (1,00 kat); güçlü onarım ifadesi 2,32 kat | Şekil 19 | WildFeedback İngilizce |
-| Döngü ilk iki mesajdan önceden sezilebiliyor | Seçilen model rastgelenin 3,3 katı; görmediği dönemde 4,7, Türkçede 2,4 katı | Şekil 22, 24 | Model döngü dediğinde 4 seferden 1'inde haklı |
+| Kullanıcıların takıldığı sohbetler azımsanmayacak bir pay | Gerçek kullanıcıların en az 4 turlu sohbetlerinin %9,0'ı döngüye giriyor | Şekil 18, `dataset_summary_48m.json` | Etiket kurallardan geliyor; gerçek oran daha yüksek ya da düşük olabilir |
+| Kod ve hata ayıklama en riskli iş | Kod ile başlayan sohbetlerin %26,7'si döngüye giriyor, genel oranın 3 katı | Şekil 18 | Görev türü ilk mesajdan kurallarla çıkarılıyor |
+| Sohbet uzadıkça sorun artıyor | Onarım ifadesi oranı 2. mesajdan 21 ile 40. mesajlara yaklaşık 1,9 katına çıkıyor; aynı uzun sohbetlerin içinde de artıyor | Şekil 25 | Kullanıcı tarafından görülen sonuç; modelin içini ölçmüyor |
+| Benzer mesaj tek başına sorun değil | Benzer mesaj içeren sohbetlerde memnuniyetsizlik genel orandan farksız (1,00 kat); güçlü onarım ifadesi 2,43 kat | Şekil 19 | WildFeedback İngilizce |
+| Döngü ilk iki mesajdan önceden sezilebiliyor | Seçilen model rastgelenin 3,0 katı; görmediği dönemde 4,4, Türkçede 3,3 katı | Şekil 22, 24 | Model döngü dediğinde yaklaşık 7 seferden 2'sinde haklı |
 | İkinci mesajdaki şikâyet erken bir işaret | En güçlü üçüncü öznitelik `second_strong_repair` | Şekil 23 | İlişki, neden değil |
 | Ekran süresi değil kullanım biçimi | Döngüyü en iyi ayıran sinyaller mesaj uzunluğu, görev türü ve onarım dili; süre bilgisi modelde hiç yok | Şekil 23 | Süre ile karşılaştırma yapılmadı |
 
