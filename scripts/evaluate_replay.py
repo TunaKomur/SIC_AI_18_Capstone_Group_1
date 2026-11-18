@@ -100,10 +100,15 @@ def ring_level(prediction, similar_signal, apology, vague, short_repeat=0, ignor
     return 0
 
 
-def replay(msgs, answers, model, reasons, policy, predictions=None):
+def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None):
     """Bir sohbeti oynatır; her tur için kararları döner. "sonra" eklentideki sırayı birebir izler
     (src/content/index.ts): mesaj gönderilir, tekrar ve sinyaller işlenir, model tahmin yapar,
-    cevap gelir, özür sinyali işlenir, halka güncellenir, kart koşuluna bakılır."""
+    cevap gelir, özür sinyali işlenir, halka güncellenir, kart koşuluna bakılır.
+
+    extra: aday kural denemesi için (scripts/evaluate_stage3.py). {"ring": {tur: seviye}, "card": {tur: gerekçe}};
+    kart soğuma süresine ve bir turda tek müdahale kuralına uyar, öncelikte "tekrar"dan sonra gelir."""
+    extra_ring = (extra or {}).get("ring", {})
+    extra_card = (extra or {}).get("card", {})
     after = policy == "sonra"
     flags = detector_flags(msgs, use_variation=after)
     signals = ConversationSignals()
@@ -141,6 +146,8 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
                                signals.answer_ignored_repair)
         else:
             level = ring_level(prediction, similar_total, 0, 0)
+        if t in extra_ring:
+            level = max(level, extra_ring[t])
         card = None
         # Bir turda tek müdahale: bu mesajda şerit çıktıysa kart en erken sonraki turda gelir.
         stripped = after and (hold or signals.last_short_repair or short_repeat_strip)
@@ -151,6 +158,8 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
                 card = "ozur"
             elif after and signals.answer_ignored_repair:
                 card = "tekrar"
+            elif t in extra_card:
+                card = extra_card[t]
             elif n >= min_turns and repeats >= config.EXT_EXIT_CARD_MIN_REPEATS and (suggest or not after):
                 card = "norm"
         if card:
@@ -159,7 +168,9 @@ def replay(msgs, answers, model, reasons, policy, predictions=None):
         hint = (after and not hint_shown and not card and not stripped
                 and signals.affirm_streak >= SIGNAL_RULES["affirm"]["streak"])
         hint_shown = hint_shown or hint
-        turns.append({"strip": hold, "short_strip": after and signals.last_short_repair,
+        turns.append({"looping": after and (signals.looping or signals.last_short_repair),
+                      "looping_end": after and signals.looping,
+                      "strip": hold, "short_strip": after and signals.last_short_repair,
                       "short_repeat_strip": short_repeat_strip, "hint": hint, "variation": variation, "ring": level, "card": card,
                       "exit": after and signals.exited, "segments": signals.segments, "segment_start": signals.segment_start})
     return turns
@@ -180,6 +191,7 @@ class Tally:
         self.short_strips = self.short_strip_hits = 0
         self.short_repeat_strips = self.short_repeat_hits = 0
         self.hints = self.hint_hits = 0
+        self.loop_convs = self.loop_left = self.loop_left_dsat = self.loop_rec = self.loop_rec_dsat = 0
         self.ring1 = self.ring2 = self.ring2_hits = 0
         self.exits = self.exit_high = 0
         self.cards = self.card_hits = 0
@@ -226,6 +238,17 @@ class Tally:
             self.multi += 1
             self.multi_caught += caught
         last = turns[-1]
+        # Döngü sonucu (sohbet sonu ölçümü): döngü sürerken bitti mi (bırakıldı), sakinleşmiş miydi (toparlandı)?
+        if any(d.get("looping") for d in turns):
+            self.loop_convs += 1
+            n = len(turns)
+            ended_unhappy = bool({n - 1, n - 2} & ds)
+            if last.get("looping_end"):
+                self.loop_left += 1
+                self.loop_left_dsat += ended_unhappy
+            else:
+                self.loop_rec += 1
+                self.loop_rec_dsat += ended_unhappy
         if last["segments"] > 1:
             self.drifted += 1
             self.draft_all += n_msgs
@@ -240,6 +263,10 @@ class Tally:
             "serit": {"100_sohbette": round(100 * self.strips / n, 2), "isabet_yuzde": pct(self.strip_hits, self.strips)},
             "kisa_onarim_seridi": {"100_sohbette": round(100 * self.short_strips / n, 2),
                                    "isabet_yuzde": pct(self.short_strip_hits, self.short_strips)},
+            "dongu_sonu": {"donguli_sohbet_yuzde": pct(self.loop_convs, n),
+                           "birakildi_yuzde": pct(self.loop_left, self.loop_convs),
+                           "birakildi_son_turlarda_memnuniyetsizlik_yuzde": pct(self.loop_left_dsat, self.loop_left),
+                           "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": pct(self.loop_rec_dsat, self.loop_rec)},
             "kisa_tekrar_seridi": {"100_sohbette": round(100 * self.short_repeat_strips / n, 2),
                                    "isabet_yuzde": pct(self.short_repeat_hits, self.short_repeat_strips)},
             "onay_zinciri_onerisi": {"100_sohbette": round(100 * self.hints / n, 3),

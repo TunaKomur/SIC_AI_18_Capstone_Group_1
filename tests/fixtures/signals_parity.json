@@ -549,7 +549,7 @@
           "short_repair": false
         },
         {
-          "recent_similar": 2,
+          "recent_similar": 0,
           "apology": 0,
           "vague": 0,
           "segments": 1,
@@ -559,7 +559,7 @@
           "short_repair": false
         },
         {
-          "recent_similar": 1,
+          "recent_similar": 0,
           "apology": 0,
           "vague": 0,
           "segments": 1,
@@ -782,6 +782,81 @@
           "segment_start": 0,
           "exited": false,
           "short_repeat": 1,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "Bir SQL sorgusu yaz: en çok satan 5 ürün",
+        "Bir SQL sorgusu yaz: en çok satan 5 ürün",
+        "Şimdi bunu aylara göre grupla",
+        "Sonuçları azalan sırada göster",
+        "Bunu bir görünüm olarak kaydet"
+      ],
+      "answers": [
+        "SELECT ...",
+        "SELECT ... (tekrar)",
+        "GROUP BY ay ...",
+        "ORDER BY ... DESC",
+        "CREATE VIEW ..."
+      ],
+      "similar": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
           "short_repair": false
         }
       ]

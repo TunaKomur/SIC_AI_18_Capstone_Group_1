@@ -157,6 +157,8 @@ class ConversationSignals:
         self.last_user_repair = False
         self.prev_answer_vec = None
         self.answer_ignored_repair = False
+        self.clean_run = 0
+        self.recovered = False
 
     def note_user(self, text, similar):
         index = self.turns
@@ -176,6 +178,9 @@ class ConversationSignals:
         self.last_short_repair = index > 0 and is_short_repair(text) and not is_offer_decline(text, self.answer_asked_question)
         self.affirm_streak = self.affirm_streak + 1 if self.answer_asked_question and is_affirmation(text) else 0
         self.last_user_repair = _strong_repair(text) and not is_offer_decline(text, self.answer_asked_question)
+        clean = not similar and not self.last_user_repair and not self.last_short_repair and not is_vague(text)
+        self.clean_run = self.clean_run + 1 if clean else 0
+        self.recovered = False
         if is_exit_message(text):
             self.exited = True
             self.recent_flags = []
@@ -207,7 +212,22 @@ class ConversationSignals:
         repeated = vec is not None and self.prev_answer_vec is not None and cosine(vec, self.prev_answer_vec) >= rule["similarity"]
         self.answer_ignored_repair = repeated and self.last_user_repair and not self.exited
         self.prev_answer_vec = vec
+        # Davranışsal çıkış: döngü sinyali varken iki temiz tur (signals.ts ile aynı).
+        if self.apology_streak > 0 or self.answer_ignored_repair:
+            self.clean_run = 0
+        looping = self.recent_similar > 0 or self.apology_streak > 0 or self.vague_streak >= 2
+        if looping and self.clean_run >= RULES["recovery"]["clean_turns"]:
+            self.recent_flags = []
+            self.apology_streak = 0
+            self.vague_streak = 0
+            self.clean_run = 0
+            self.recovered = True
 
     @property
     def recent_similar(self):
         return sum(self.recent_flags)
+
+    @property
+    def looping(self):
+        """Şu an bir döngü sinyali sürüyor mu (sohbet sonu ölçümü için)?"""
+        return self.recent_similar > 0 or self.apology_streak > 0 or self.vague_streak >= 2 or self.answer_ignored_repair

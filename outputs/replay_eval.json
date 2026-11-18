@@ -12,6 +12,12 @@
       "100_sohbette": 0.0,
       "isabet_yuzde": null
     },
+    "dongu_sonu": {
+      "donguli_sohbet_yuzde": 0.0,
+      "birakildi_yuzde": null,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": null,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": null
+    },
     "kisa_tekrar_seridi": {
       "100_sohbette": 0.0,
       "isabet_yuzde": null
@@ -60,6 +66,12 @@
       "100_sohbette": 0.91,
       "isabet_yuzde": 57.69
     },
+    "dongu_sonu": {
+      "donguli_sohbet_yuzde": 23.8,
+      "birakildi_yuzde": 51.42,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": 32.86,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": 17.08
+    },
     "kisa_tekrar_seridi": {
       "100_sohbette": 0.51,
       "isabet_yuzde": 5.88
@@ -69,19 +81,19 @@
       "sonraki_tur_memnuniyetsizlik_yuzde": 0.0
     },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.36,
-      "seviye2_tur_yuzde": 9.53,
-      "seviye2_isabet_yuzde": 29.63,
+      "seviye1_ve_ustu_tur_yuzde": 21.4,
+      "seviye2_tur_yuzde": 9.42,
+      "seviye2_isabet_yuzde": 29.87,
       "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
       "cikis_mesaji": 336
     },
     "kart": {
-      "100_sohbette": 19.18,
-      "isabet_yuzde": 31.0,
+      "100_sohbette": 19.12,
+      "isabet_yuzde": 31.03,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3101,
-          "isabet_yuzde": 27.73
+          "sayi": 3102,
+          "isabet_yuzde": 27.72
         },
         "ozur": {
           "sayi": 485,
@@ -92,8 +104,8 @@
           "isabet_yuzde": 51.44
         },
         "norm": {
-          "sayi": 42,
-          "isabet_yuzde": 14.29
+          "sayi": 30,
+          "isabet_yuzde": 13.33
         }
       },
       "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 32.3,

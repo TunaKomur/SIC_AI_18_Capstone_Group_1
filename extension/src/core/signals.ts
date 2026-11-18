@@ -170,6 +170,8 @@ export class ConversationSignals {
   private lastUserRepair = false;
   private prevAnswerVec: Map<number, number> | null = null;
   private ignoredRepair = false;
+  private cleanRun = 0;
+  private recovered = false;
 
   /**
    * Bu mesaj gönderilirse aynı kısa mesaj üst üste kaçıncı kez gelmiş olur (noteUser ile aynı kural)?
@@ -201,6 +203,9 @@ export class ConversationSignals {
     const normalized = normalizeText(text);
     this.lastShortRepair = index > 0 && isShortRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
     this.lastUserRepair = hasStrongRepair(text) && !isOfferDecline(text, this.answerAskedQuestion);
+    // Temiz tur: kullanıcı şikayet etmiyor ve aynı isteğe dönmüyor (cevap tarafı noteAnswer'da bakılır).
+    this.cleanRun = !turn.similar && !this.lastUserRepair && !this.lastShortRepair && !isVague(text) ? this.cleanRun + 1 : 0;
+    this.recovered = false;
     // Soruyla biten cevaba verilen kısa onay ya da ret zinciri (yön modelde kalıyor).
     this.affirmRun = this.answerAskedQuestion && isAffirmation(text) ? this.affirmRun + 1 : 0;
     if (isExitMessage(text)) {
@@ -235,6 +240,26 @@ export class ConversationSignals {
     const repeated = vec !== null && this.prevAnswerVec !== null && cosine(vec, this.prevAnswerVec) >= rules.answer_repeat.similarity;
     this.ignoredRepair = repeated && this.lastUserRepair && !this.lastExit;
     this.prevAnswerVec = vec;
+    // Davranışsal çıkış: döngü sinyali varken iki temiz tur geldi; teşekkür beklenmeden sakinleşir.
+    if (this.apologyRun > 0 || this.ignoredRepair) this.cleanRun = 0;
+    const looping = this.recentSimilar > 0 || this.apologyRun > 0 || this.vagueRun >= 2;
+    if (looping && this.cleanRun >= rules.recovery.clean_turns) {
+      this.recentFlags = [];
+      this.apologyRun = 0;
+      this.vagueRun = 0;
+      this.cleanRun = 0;
+      this.recovered = true;
+    }
+  }
+
+  /** Bu cevapla döngü sinyalleri davranışla sakinleşti mi (iki temiz tur)? */
+  get recoveredNow(): boolean {
+    return this.recovered;
+  }
+
+  /** Şu an bir döngü sinyali sürüyor mu (sohbet sonu ölçümü için)? */
+  get looping(): boolean {
+    return this.recentSimilar > 0 || this.apologyRun > 0 || this.vagueRun >= 2 || this.ignoredRepair;
   }
 
   /** Son cevap, kullanıcının düzeltme isteğine rağmen öncekinin neredeyse aynısı mı? */
@@ -308,5 +333,7 @@ export class ConversationSignals {
     this.lastUserRepair = false;
     this.prevAnswerVec = null;
     this.ignoredRepair = false;
+    this.cleanRun = 0;
+    this.recovered = false;
   }
 }

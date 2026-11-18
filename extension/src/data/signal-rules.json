@@ -41,6 +41,10 @@
     "tail_chars": 200,
     "repeat_strip_note": "Aynı kısa mesajın ('devam') repeat_streak kez üst üste gelmesi halkayı yükseltmez; gönderim öncesi şerit çıkar ve neyle, nasıl devam etmesini istediğini yazmayı önerir. Sohbet başına bir kez (Mert'in kararı, 14 Kasım). WildFeedback'te bu tekrarlarda memnuniyetsizlik onaylarda %2,2, diğerlerinde %4,7 (taban %5,85); şerit bir döngü uyarısı değil, yönü kullanıcıya geri veren bir öneri."
   },
+  "recovery": {
+    "note": "Davranışsal çıkış: döngü sinyali varken (benzer mesaj, özür, belirsiz istek serisi) clean_turns kez üst üste temiz tur gelirse (kullanıcının mesajında onarım ifadesi, tekrar ya da belirsiz istek yok, cevapta özür ya da 'düzeltme alınmadı' yok) döngü sinyalleri sakinleşir; teşekkür etmeyi beklemez. Yeniden oynatmada halka 1+ turlar %22,3 → %21,4, halka 2 isabeti %29,7 → %29,9; kart ve yakalama değişmedi.",
+    "clean_turns": 2
+  },
   "answer_repeat": {
     "note": "Düzeltme alınmadı: kullanıcının mesajı güçlü bir onarım ifadesi taşıyor ('olmadı', 'hala aynı hata') ama yapay zekanın cevabının başı (ilk head_chars karakter) bir önceki cevaba similarity ve üstü benziyor; model düzeltmeyi almamış. Halka koyulaşır, çıkış kartı 'tekrar' gerekçesiyle açılabilir. WildFeedback (iki ayrık 20.000 sohbetlik örneklem): bu turlardan sonra memnuniyetsizlik %28,6 ve %29,4; onarımdan sonra farklı cevap gelince %13 ve %14. Yeniden oynatmada kart isabeti %30,4 → %31,0, tekrarlayan memnuniyetsizlikte yakalama %28,5 → %32,2, yeni kart nedeninin isabeti %51,9. Onarım olmadan kendini tekrar eden cevap (%9) halka ya da kart için kullanılmaz: denendi, isabeti düşürdü. Cevap metni yalnızca bellekte, yalnızca bu karşılaştırma için.",
     "similarity": 0.85,

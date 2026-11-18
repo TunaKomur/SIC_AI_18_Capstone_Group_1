@@ -16,6 +16,8 @@ import { buildFreshStartDraft } from "../core/fresh-start";
 import { HistoryWatcher, historySeed, historySignature } from "../core/history-watcher";
 import { isPopupMessage, MSG_OPEN_CARD, type ConversationSnapshot } from "../core/messages";
 import { isPersonal } from "../core/personal";
+import { hasStrongRepair } from "../core/strong-repair";
+import { normalizeText } from "../core/text";
 import { ringLevel, ringText } from "../core/ring";
 import { AFFIRM_STREAK, ConversationSignals, isOfferDecline, isShortRepair, SHORT_REPEAT_STREAK } from "../core/signals";
 import { RepeatDetector } from "../core/repeat-detector";
@@ -38,6 +40,9 @@ import { Strip } from "../ui/strip";
 
 /** "Taze başlat" ile açılan yeni sohbetin tanınması için geçerlilik süresi. */
 const FRESH_START_WINDOW_MS = 10 * 60 * 1000;
+
+/** Sadeleştirilmiş metindeki kelime sayısı; metnin kendisi saklanmaz. */
+const wordCount = (text: string): number => normalizeText(text).split(" ").filter((w) => w !== "").length;
 
 /** true: bu sayfada bir platform bulundu ve eklenti başladı. */
 function main(): boolean {
@@ -75,6 +80,9 @@ function main(): boolean {
   let sentThisVisit = false;
   /** Bu sohbet "Taze başlat" ile mi açıldı? */
   let freshFollowup = false;
+  /** Bu sohbette bir döngü sinyali görüldü mü ve kullanıcı taze başlatı kullandı mı (sohbet sonu ölçümü)? */
+  let loopSeen = false;
+  let freshStartUsed = false;
   /** Sohbet kişisel ya da duygusal görünüyor mu? Öyleyse bu sohbette öneri gösterilmez. */
   let personal = false;
   /** Bu sohbette öncekine çok benzeyen mesaj sayısı ("Bu sohbet" bölümü için) */
@@ -116,9 +124,17 @@ function main(): boolean {
       if (hiddenTurns === 0) extra.first_len = firstLenBucket(userTexts[0] ?? "");
       record("conversation", loopOutcome(userTexts), extra);
       if (freshFollowup) record("fresh_followup", lenBucket(turns));
+      if (loopSeen) {
+        // Döngü nasıl bitti: taze başlat kullanıldı, döngü sürerken çıkıldı ya da aynı sohbette toparlandı.
+        const outcome = freshStartUsed ? "yeni_sohbet" : signals.looping ? "birakildi" : "toparlandi";
+        record("loop_end", outcome, { len: lenBucket(turns) });
+        console.log(`[KafiAI] döngü sonucu: ${outcome}`);
+      }
     }
     sentThisVisit = false;
     freshFollowup = false;
+    loopSeen = false;
+    freshStartUsed = false;
   };
 
   /** Cevap bitti: kart koşulu sağlanıyorsa, kullanıcı yazmaya başlamadan çıkış kartını göster. */
@@ -187,6 +203,7 @@ function main(): boolean {
             void chromeStorage.set({ [PENDING_FRESH_KEY]: { platform, until: Date.now() + FRESH_START_WINDOW_MS } });
             window.open(adapter.newChatUrl(), "_blank", "noopener");
             record("card_action", "taze_baslat");
+            freshStartUsed = true;
           }
           console.log(`[KafiAI] taze başlat: ${copied ? "panoya kopyalandı, yeni sohbet açıldı" : "kopyalanamadı"}`);
           return copied;
@@ -305,7 +322,9 @@ function main(): boolean {
    * Kullanıcı mesajını sohbet sinyallerine işler. Kullanıcı döngüden çıktıysa ya da konu değiştiyse
    * o ana kadarki benzer mesaj denemeleri çıkış kartını artık açtırmaz.
    */
-  const recordSignal = (detail: "ozur_dongusu" | "cikis" | "konu_kaymasi" | "belirsiz" | "duzeltme_alinmadi") => {
+  const recordSignal = (
+    detail: "ozur_dongusu" | "cikis" | "konu_kaymasi" | "belirsiz" | "duzeltme_alinmadi" | "mesaj_kisaldi" | "toparlandi",
+  ) => {
     // Yalnızca bu ziyarette yazılan sohbetler sayılır; eski bir sohbete bakmak sayılmaz.
     if (!sentThisVisit || seenSignals.has(detail)) return;
     seenSignals.add(detail);
@@ -317,6 +336,12 @@ function main(): boolean {
     const loopBefore = signals.recentSimilar > 0 || signals.apologyStreak > 0 || signals.vagueStreak >= 2;
     signals.noteUser(text, { similar });
     if (signals.exited && loopBefore) recordSignal("cikis");
+    // Döngü sırasında şikayet bir öncekinin yarısından kısa: veride bu turlardan sonra döngü daha seyrek bitiyor.
+    const previousText = userTexts[userTexts.length - 2];
+    if (loopBefore && previousText !== undefined && hasStrongRepair(text) && wordCount(text) * 2 <= wordCount(previousText)) {
+      recordSignal("mesaj_kisaldi");
+    }
+    if (signals.looping || signals.shortRepair) loopSeen = true;
     if (signals.segments > segmentsBefore) recordSignal("konu_kaymasi");
     if (signals.vagueStreak >= 2) recordSignal("belirsiz");
     policy.setRepeats(signals.recentSimilar);
@@ -591,6 +616,12 @@ function main(): boolean {
       signals.noteAnswer(adapter.lastResponse?.() ?? null);
       if (signals.apologyStreak > 0) console.log(`[KafiAI] cevap özürle başladı (üst üste ${signals.apologyStreak})`);
       policy.noteApologies(signals.apologyStreak, session.turns);
+      if (signals.looping) loopSeen = true;
+      if (signals.recoveredNow) {
+        // Kart politikası bir sonraki gönderimde güncel sayıyı alır (yeniden oynatmayla aynı sıra).
+        console.log("[KafiAI] iki temiz tur: döngü sinyalleri sakinleşti");
+        recordSignal("toparlandi");
+      }
       if (signals.answerIgnoredRepair) {
         // Düzeltme istendi ama cevap öncekinin neredeyse aynısı: halka koyulaşır, kart açılabilir.
         console.log("[KafiAI] düzeltme istendi ama cevap öncekinin neredeyse aynısı");

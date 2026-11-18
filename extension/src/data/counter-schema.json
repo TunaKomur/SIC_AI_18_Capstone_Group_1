@@ -224,6 +224,19 @@
       ],
       "note": "Haftalık içgörü. pencere: araç çubuğu penceresi içgörüyle açıldı (görev 'na'); ayrinti: bir görev satırı açıldı."
     },
+    "loop_end": {
+      "dims": [
+        "platform",
+        "task",
+        "len"
+      ],
+      "details": [
+        "toparlandi",
+        "birakildi",
+        "yeni_sohbet"
+      ],
+      "note": "Döngü görülen sohbet bittiğinde bir kez: toparlandi (döngü aynı sohbette sakinleşti), birakildi (döngü sürerken sohbetten çıkıldı), yeni_sohbet (taze başlat kullanıldı). WildFeedback'te döngülerin %62'si bırakılarak bitiyor; alışkanlık göstergesi olarak haftalık karşılaştırmaya girer."
+    },
     "hint": {
       "dims": [
         "platform",
@@ -259,7 +272,9 @@
         "cikis",
         "konu_kaymasi",
         "belirsiz",
-        "duzeltme_alinmadi"
+        "duzeltme_alinmadi",
+        "mesaj_kisaldi",
+        "toparlandi"
       ],
       "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği. Metin yok, yalnızca sayı."
     }
