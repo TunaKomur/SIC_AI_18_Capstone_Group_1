@@ -35,6 +35,11 @@ export function buildFreshStartDraft(texts: string[]): string {
     "",
     ...lines,
     "",
+    // Yeni sohbet tek başına döngüyü çözmüyor (WildChat: yeniden başlayanlarda da %42 döngü); isteği
+    // netleştirmek için kullanıcının dolduracağı iki satır.
+    "Beklediğim sonuç: ",
+    "Önceki denemelerde olmayan kısım: ",
+    "",
     "Bunları birlikte düşünerek, tek seferde ele alır mısın?",
   ].join("\n");
 }

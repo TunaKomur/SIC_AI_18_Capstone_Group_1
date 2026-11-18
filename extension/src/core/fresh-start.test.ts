@@ -48,3 +48,12 @@ describe("buildFreshStartDraft", () => {
     expect(draft).toContain("2. devam et");
   });
 });
+
+describe("taslağın netleştirme satırları", () => {
+  it("kullanıcının dolduracağı 'Beklediğim sonuç' ve 'olmayan kısım' satırlarını içerir", () => {
+    const draft = buildFreshStartDraft(["CSV ortalamalarını hesaplayan kod yaz", "sütunlarda metin var, hata veriyor"]);
+    expect(draft).toContain("Beklediğim sonuç: ");
+    expect(draft).toContain("Önceki denemelerde olmayan kısım: ");
+    expect(draft.indexOf("Beklediğim sonuç")).toBeGreaterThan(draft.indexOf("2. "));
+  });
+});
