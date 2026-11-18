@@ -170,3 +170,39 @@ describe("ExitCardPolicy: uzun sohbette döngü işareti (K33)", () => {
     expect(p.triggerSource(2)).toBeNull();
   });
 });
+
+describe("bir turda tek müdahale", () => {
+  it("şerit gösterilen turda kart bekler, sonraki turda koşul sürüyorsa açılabilir", () => {
+    const p = new ExitCardPolicy();
+    p.noteStrip(3);
+    p.noteRisk("yuksek", 3);
+    expect(p.triggerSource(3)).toBe("model");
+    expect(p.stripShownThisTurn(3)).toBe(true);
+    expect(p.inCooldown(4)).toBe(false); // bekleme süresi başlamadı
+    p.noteRisk("yuksek", 4);
+    expect(p.stripShownThisTurn(4)).toBe(false);
+    expect(p.shouldShow(4)).toBe(true);
+  });
+
+  it("reset şerit işaretini siler", () => {
+    const p = new ExitCardPolicy();
+    p.noteStrip(2);
+    p.reset();
+    expect(p.stripShownThisTurn(2)).toBe(false);
+  });
+});
+
+describe("düzeltme alınmadı kartı", () => {
+  it("kaynak 'tekrar' olur; model ve özür önce gelir; konu değişince silinir", () => {
+    const p = new ExitCardPolicy();
+    p.noteIgnoredRepair(3);
+    expect(p.triggerSource(3)).toBe("tekrar");
+    expect(p.shouldShow(3)).toBe(true);
+    p.noteApologies(2, 3);
+    expect(p.triggerSource(3)).toBe("ozur");
+    p.clearRepeats();
+    p.noteIgnoredRepair(5);
+    p.clearRepeats();
+    expect(p.triggerSource(5)).toBe(null);
+  });
+});

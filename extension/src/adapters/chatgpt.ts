@@ -1,6 +1,8 @@
 import { POLL_MS } from "../config";
 import { ResponseWatcher } from "../core/response-watcher";
 import type { Adapter, AdapterHandlers } from "./types";
+import { appendInline } from "./insert";
+import { SendConfirmer } from "./send-confirmer";
 import { lastOf, responseText } from "./response-text";
 
 /** Bekletilen gönderim (varsa) ve "bir sonraki girişimi engelleme" bayrağı. */
@@ -165,26 +167,9 @@ export const chatgptAdapter: Adapter = {
   insertText(text) {
     const composer = heldComposer ?? findComposer();
     heldComposer = null;
-    if (!composer || typeof document.execCommand !== "function") return false;
-    composer.focus();
-    const selection = window.getSelection();
-    if (!selection) return false;
-    const range = document.createRange();
-    range.selectNodeContents(composer);
-    range.collapse(false); // imleci sona koy
-    selection.removeAllRanges();
-    selection.addRange(range);
-    // Sayfanın kendi düzenleyicisi (ProseMirror) değişikliği görsün diye tarayıcının
-    // yazma komutunu kullanıyoruz; innerHTML ile müdahale etmiyoruz.
-    if (readComposerText(composer) !== "") {
-      // Önce yeni paragraf; düzenleyici bunu görmezse satır sonu dene. Kırpılmamış metindeki
-      // satır sonu sayısına bakılır (kullanıcının kendi mesajı da çok satırlı olabilir).
-      const lineBreaks = () => ((composer.innerText || composer.textContent || "").match(/\n/g) ?? []).length;
-      const before = lineBreaks();
-      document.execCommand("insertParagraph");
-      if (lineBreaks() === before) document.execCommand("insertLineBreak");
-    }
-    return document.execCommand("insertText", false, text);
+    if (!composer) return false;
+    // Satır sonu denenmez: ChatGPT'nin düzenleyicisi "yeni paragraf" komutunu Enter sayıp mesajı gönderiyor.
+    return appendInline(composer, text);
   },
 
   start(handlers: AdapterHandlers) {
@@ -219,12 +204,28 @@ export const chatgptAdapter: Adapter = {
       return true;
     };
 
-    const handleSend = (text: string) => {
+    // Gönderim doğrulaması ve çift olay koruması (send-confirmer.ts, K38). ChatGPT Enter'a basılınca kendi
+    // Gönder düğmesine de tıklıyor: ikinci olay yeni bir girişim sayılmaz; yoksa "benzer mesaj" sanılıp
+    // bekletiliyor ve ChatGPT'nin asıl gönderimi durduruluyordu (elle doğrulamada görüldü).
+    const confirmer = new SendConfirmer<HTMLElement>(
+      {
+        composerText: readComposerText,
+        userCount: () => document.querySelectorAll(USER_MESSAGE_SELECTOR).length,
+        generating: () => isGenerating(document),
+      },
+      (text, now) => {
+        handlers.onSend({ text });
+        watcher.begin(now);
+        startPolling();
+      },
+      () => handlers.onSendNotSeen?.(),
+    );
+    const sameSubmission = (composer: HTMLElement, text: string) => confirmer.isSameSubmission(composer, text);
+
+    const handleSend = (composer: HTMLElement, text: string) => {
       if (!text) return;
       heldComposer = null;
-      handlers.onSend({ text });
-      watcher.begin(Date.now());
-      startPolling();
+      confirmer.begin(composer, text);
     };
 
     // Yakalama (capture) aşamasında dinliyoruz: sayfanın kendi kodu mesaj kutusunu
@@ -241,8 +242,9 @@ export const chatgptAdapter: Adapter = {
       if (isGenerating(document)) return; // üretim sürerken Enter mesaj göndermez
       const text = readComposerText(composer);
       if (!text) return;
+      if (sameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı: dokunma
       if (intercept(event, composer, text)) return;
-      handleSend(text);
+      handleSend(composer, text);
     };
 
     const onClick = (event: MouseEvent) => {
@@ -257,8 +259,9 @@ export const chatgptAdapter: Adapter = {
       if (!composer) return;
       const text = readComposerText(composer);
       if (!text) return;
+      if (sameSubmission(composer, text)) return; // aynı gönderimin ikinci olayı: dokunma
       if (intercept(event, composer, text)) return;
-      handleSend(text);
+      handleSend(composer, text);
     };
 
     document.addEventListener("keydown", onKeyDown, true);
@@ -268,6 +271,7 @@ export const chatgptAdapter: Adapter = {
       document.removeEventListener("keydown", onKeyDown, true);
       document.removeEventListener("click", onClick, true);
       watcher.cancel();
+      confirmer.cancel();
       heldComposer = null;
       if (timer !== undefined) window.clearInterval(timer);
     };

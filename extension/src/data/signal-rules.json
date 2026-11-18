@@ -34,7 +34,56 @@
   },
   "short": {
     "note": "Karşılaştırılamayacak kadar kısa mesajlar (12 karakterden az). Güçlü onarım ifadesi taşıyan kısa mesaj ('olmadı', 'yanlış', 'hala hata') tekrar denemesi gibi sayılır: WildFeedback'te o turda memnuniyetsizlik %45,8 (genel %5,8). Aynı kısa mesajın ('devam', 'alternatif') üst üste gelmesi tek başına memnuniyetsizlik göstermiyor (%4,9); yalnızca repeat_streak kez üst üste gelince halka bir kademe yükselir. Sayıların kaynağı: scripts/evaluate_short_messages.py (outputs/short_messages.json).",
-    "repeat_streak": 3
+    "repeat_streak": 3,
+    "decline_note": "Yapay zekanın cevabı bir soruyla bittiyse ('Grafik de ekleyeyim mi?') yalnızca 'hayır' ya da 'no' demek bir teklifi geri çevirmektir, şikayet değildir: kısa onarım sayılmaz. WildFeedback'te yalın 'no/hayır' mesajlarında memnuniyetsizlik önceki cevap soruyla bittiğinde %4,9, bitmediğinde %57,9. Cevabın sonundaki soru, cevabın son tail_chars karakterine bakılarak bulunur (yalnızca bellekte).",
+    "decline_words": ["hayır", "no", "nope", "nah", "yok"],
+    "decline_max_words": 2,
+    "tail_chars": 200,
+    "repeat_strip_note": "Aynı kısa mesajın ('devam') repeat_streak kez üst üste gelmesi halkayı yükseltmez; gönderim öncesi şerit çıkar ve neyle, nasıl devam etmesini istediğini yazmayı önerir. Sohbet başına bir kez (Mert'in kararı, 14 Kasım). WildFeedback'te bu tekrarlarda memnuniyetsizlik onaylarda %2,2, diğerlerinde %4,7 (taban %5,85); şerit bir döngü uyarısı değil, yönü kullanıcıya geri veren bir öneri."
   },
-  "recent_window": 4
+  "recovery": {
+    "note": "Davranışsal çıkış: döngü sinyali varken (benzer mesaj, özür, belirsiz istek serisi) clean_turns kez üst üste temiz tur gelirse (kullanıcının mesajında onarım ifadesi, tekrar ya da belirsiz istek yok, cevapta özür ya da 'düzeltme alınmadı' yok) döngü sinyalleri sakinleşir; teşekkür etmeyi beklemez. Yeniden oynatmada halka 1+ turlar %22,3 → %21,4, halka 2 isabeti %29,7 → %29,9; kart ve yakalama değişmedi.",
+    "clean_turns": 2
+  },
+  "answer_repeat": {
+    "note": "Düzeltme alınmadı: kullanıcının mesajı güçlü bir onarım ifadesi taşıyor ('olmadı', 'hala aynı hata') ama yapay zekanın cevabının başı (ilk head_chars karakter) bir önceki cevaba similarity ve üstü benziyor; model düzeltmeyi almamış. Halka koyulaşır, çıkış kartı 'tekrar' gerekçesiyle açılabilir. WildFeedback (iki ayrık 20.000 sohbetlik örneklem): bu turlardan sonra memnuniyetsizlik %28,6 ve %29,4; onarımdan sonra farklı cevap gelince %13 ve %14. Yeniden oynatmada kart isabeti %30,4 → %31,0, tekrarlayan memnuniyetsizlikte yakalama %28,5 → %32,2, yeni kart nedeninin isabeti %51,9. Onarım olmadan kendini tekrar eden cevap (%9) halka ya da kart için kullanılmaz: denendi, isabeti düşürdü. Cevap metni yalnızca bellekte, yalnızca bu karşılaştırma için.",
+    "similarity": 0.85,
+    "head_chars": 600
+  },
+  "continue": {
+    "note": "Yönsüz devam isteği: 'devam', 'devam et', 'tamam devam', 'devam edebilir misin lütfen', 'kaldığın yerden devam', 'continue', 'go on'. Hepsi aynı niyet sayılır: kısa tekrar serisi metne değil bu niyete göre ilerler ve bu mesajlar tekrar dedektörüne girmez (bir isteği değil, akışı sürdürüyorlar). Yönlü devam ('devam et ama tablo olarak', 'continue to day 2') bu sınıfa girmez ve hiçbir öneri almaz; Kâfi'nin önerdiği davranış zaten budur. WildFeedback'te devam ailesi 579 farklı biçimde yazılmış; ardışık devam çiftlerinin %16'sı farklı biçimde.",
+    "words": ["devam", "continue", "proceed"],
+    "phrases": ["go on", "keep going", "carry on", "kaldığın yerden"],
+    "allowed": ["et", "edelim", "eder", "edebilir", "edin", "ediver", "etsene", "misin", "mısın", "lütfen", "please", "pls", "hadi", "bi", "bir", "şimdi", "now", "yaz", "yazmaya", "it", "on", "go", "going", "keep", "carry", "kaldığın", "yerden", "tamam", "evet", "ok", "okay", "yes", "peki", "o", "zaman", "sen"],
+    "max_words": 6
+  },
+  "affirm": {
+    "note": "Kısa onay zinciri: kullanıcı modelin soruyla biten cevaplarına (teklif: '… ekleyeyim mi?') üst üste streak kez yalnızca kısa bir onay ya da ret ile karşılık veriyor; yön modelde kalıyor. Cevabın altında gönderimi bekletmeyen bir öneri çıkar ve modelden şu ana kadar anladığını özetlemesini istemeyi önerir; sohbet başına bir kez. 'devam' gibi devam istekleri sayılmaz: uzun bir çıktıyı parça parça almak verimli bir iştir (WildFeedback'te 'devam' zinciri olan sohbetlerde memnuniyetsizlik %4,5). WildFeedback'te bu örüntü yalnızca 13 sohbette görüldü; isabet elle doğrulamada ve sayaçlarda ölçülecek.",
+    "words": ["evet", "aynen", "tamam", "tamamdır", "olur", "peki", "olsun", "hayır", "yok", "ok", "okey", "okay", "yes", "yeah", "yep", "yup", "sure", "no", "nope"],
+    "allowed": ["lütfen", "please", "yap", "et", "go", "ahead", "do", "it", "bu", "şekilde", "öyle", "gerek"],
+    "max_words": 3,
+    "streak": 3
+  },
+  "recent_window": 4,
+  "restate": {
+    "note": "Kuralın yeniden hatırlatılması (K48): kullanıcı daha önce koyduğu bir kuralı yeniden hatırlatıyor ('söylemiştim', 'dediğim gibi', 'I told you'). Tetikleyici değildir: halka ve kart kararlarını değiştirmez. Kart başka bir nedenle açıldığında bir not ekler ve Taze başlat taslağı bu mesajları en başa 'kurallar' olarak koyar. İlk mesajda sayılmaz; konu değişince sıfırlanır. Uzun mesajda yalnızca baştaki ve sondaki edge_chars karaktere bakılır. WildFeedback seçim örnekleminde (scripts/evaluate_stage3.py): sohbetlerin %0,39'unda, o tur ya da sonrakinde memnuniyetsizlik %42,5; olayların %79'unda mevcut bir sinyal zaten var. Elle kontrolde yanlış çıkan biçimler ('how many times', 'did you forget', yalın 'i repeat', yalın 'kaç kez') listeye alınmadı.",
+    "whole_chars": 300,
+    "edge_chars": 150,
+    "max_rules": 3,
+    "phrases": [
+      "i told you", "i already told you", "i ve told you", "i have told you", "told you to", "as i said",
+      "like i said", "i already said", "as i mentioned", "i already mentioned", "as i asked", "i already asked",
+      "you forgot", "you ignored", "you are ignoring", "you keep ignoring", "you didn t follow",
+      "you did not follow", "you are not following", "follow my instructions", "read my instructions",
+      "read the instructions again", "i repeat again", "i asked you not to", "söylemiştim", "söyledim ya",
+      "dedim ya", "demiştim", "sana söyledim", "daha önce söyledim", "daha önce de söyledim", "zaten söyledim",
+      "zaten dedim", "kaç kere söyleyeceğim", "kaç kez söyleyeceğim", "kaç defa söyleyeceğim", "kaç kere söyledim",
+      "kaç kez söyledim", "kaç defa söyledim", "kaçıncı kez söylüyorum", "tekrar ediyorum", "tekrarlıyorum",
+      "tekrar yazıyorum", "bir daha yazıyorum", "yine söylüyorum", "bir daha söylüyorum", "tekrar söylüyorum",
+      "unuttun", "dediğim gibi", "söylediğim gibi", "belirttiğim gibi", "bahsettiğim gibi", "yazdığım gibi",
+      "talimatlarıma uy", "talimatlarıma uymadın", "dememiş miydim", "söylememiş miydim", "istememiş miydim",
+      "istemiştim", "belirtmiştim", "yazmıştım", "hatırlatırım", "hatırlatayım", "hatırlatıyorum",
+      "görmezden geliyorsun", "görmezden geldin", "dikkate almadın", "dinlemiyorsun", "uymadın", "uymuyorsun"
+    ]
+  }
 }

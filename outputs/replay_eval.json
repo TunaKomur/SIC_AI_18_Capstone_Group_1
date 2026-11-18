@@ -5,35 +5,51 @@
     "sohbet": 20000,
     "kullanici_turu": 115052,
     "serit": {
-      "100_sohbette": 18.84,
-      "isabet_yuzde": 15.02
+      "100_sohbette": 18.77,
+      "isabet_yuzde": 15.08
     },
     "kisa_onarim_seridi": {
       "100_sohbette": 0.0,
       "isabet_yuzde": null
     },
+    "dongu_sonu": {
+      "donguli_sohbet_yuzde": 0.0,
+      "birakildi_yuzde": null,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": null,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": null
+    },
+    "kisa_tekrar_seridi": {
+      "100_sohbette": 0.0,
+      "isabet_yuzde": null
+    },
+    "onay_zinciri_onerisi": {
+      "100_sohbette": 0.0,
+      "sonraki_tur_memnuniyetsizlik_yuzde": null
+    },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.47,
-      "seviye2_tur_yuzde": 9.75,
-      "seviye2_isabet_yuzde": 25.09,
+      "seviye1_ve_ustu_tur_yuzde": 22.48,
+      "seviye2_tur_yuzde": 9.76,
+      "seviye2_isabet_yuzde": 25.11,
       "cikistan_sonra_yuksek_kalan_yuzde": null,
       "cikis_mesaji": 0
     },
     "kart": {
-      "100_sohbette": 30.64,
-      "isabet_yuzde": 18.21,
+      "100_sohbette": 30.66,
+      "isabet_yuzde": 18.23,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3142,
-          "isabet_yuzde": 29.98
+          "sayi": 3148,
+          "isabet_yuzde": 29.99
         },
         "norm": {
-          "sayi": 2986,
+          "sayi": 2985,
           "isabet_yuzde": 5.83
         }
       },
-      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.44,
-      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.68,
+      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
+      "kural_notlu_kart_yuzde": 0.0,
+      "kural_notlu_kart_isabet_yuzde": null
     },
     "taze_baslat": {
       "konu_kayan_sohbet_yuzde": 0.0,
@@ -49,40 +65,60 @@
       "isabet_yuzde": 21.51
     },
     "kisa_onarim_seridi": {
-      "100_sohbette": 1.09,
-      "isabet_yuzde": 48.62
+      "100_sohbette": 0.91,
+      "isabet_yuzde": 57.69
+    },
+    "dongu_sonu": {
+      "donguli_sohbet_yuzde": 23.8,
+      "birakildi_yuzde": 51.42,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": 32.86,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": 17.08
+    },
+    "kisa_tekrar_seridi": {
+      "100_sohbette": 0.51,
+      "isabet_yuzde": 5.88
+    },
+    "onay_zinciri_onerisi": {
+      "100_sohbette": 0.02,
+      "sonraki_tur_memnuniyetsizlik_yuzde": 0.0
     },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.55,
-      "seviye2_tur_yuzde": 9.31,
-      "seviye2_isabet_yuzde": 29.21,
+      "seviye1_ve_ustu_tur_yuzde": 21.4,
+      "seviye2_tur_yuzde": 9.42,
+      "seviye2_isabet_yuzde": 29.87,
       "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
       "cikis_mesaji": 336
     },
     "kart": {
-      "100_sohbette": 18.89,
-      "isabet_yuzde": 31.29,
+      "100_sohbette": 19.12,
+      "isabet_yuzde": 31.03,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3186,
-          "isabet_yuzde": 28.84
+          "sayi": 3102,
+          "isabet_yuzde": 27.72
         },
         "ozur": {
-          "sayi": 538,
-          "isabet_yuzde": 46.65
+          "sayi": 485,
+          "isabet_yuzde": 44.54
+        },
+        "tekrar": {
+          "sayi": 208,
+          "isabet_yuzde": 51.44
         },
         "norm": {
-          "sayi": 53,
-          "isabet_yuzde": 22.64
+          "sayi": 30,
+          "isabet_yuzde": 13.33
         }
       },
-      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 28.67,
-      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 32.3,
+      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
+      "kural_notlu_kart_yuzde": 1.25,
+      "kural_notlu_kart_isabet_yuzde": 39.58
     },
     "taze_baslat": {
-      "konu_kayan_sohbet_yuzde": 7.04,
-      "taslaktaki_istek_ortalama_once": 6.35,
-      "taslaktaki_istek_ortalama_sonra": 4.21
+      "konu_kayan_sohbet_yuzde": 6.42,
+      "taslaktaki_istek_ortalama_once": 6.4,
+      "taslaktaki_istek_ortalama_sonra": 4.22
     }
   }
 }

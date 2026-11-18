@@ -21,7 +21,8 @@ export const WELCOME_SECTIONS: WelcomeSection[] = [
     title: "Neye bakar",
     lines: [
       "Sohbette gönderdiğin mesajlara. Gönder'e bastığın anda, mesajın daha önce yazdıklarına çok benzeyip benzemediğine bakar.",
-      "Yapay zekanın cevabının ne zaman bittiğine. Cevabın metnini okumaz.",
+      // Cevabın başı ve sonu özür, düzeltme alınmadı ve teklif sorusu kuralları için okunur (K32, K40, K44).
+      "Yapay zekanın cevabının ne zaman bittiğine; cevabın başına ve sonuna yalnızca bellekte, birkaç kural için bakar.",
     ],
   },
   {
@@ -78,7 +79,7 @@ export function mountWelcome(root: HTMLElement, close: () => void): void {
   mark.width = 64;
   mark.height = 64;
   const titles = el("div");
-  titles.append(el("h1", undefined, `${BRAND_NAME}'ye hoş geldin`), el("p", "tagline", BRAND_TAGLINE));
+  titles.append(el("h1", undefined, `${BRAND_NAME}'ya hoş geldin`), el("p", "tagline", BRAND_TAGLINE));
   hero.append(mark, titles);
   root.replaceChildren(hero, el("span", "privacy-chip", "Veriler cihazında kalır"), el("p", "lead", WELCOME_LEAD), ...sections, done);
 }

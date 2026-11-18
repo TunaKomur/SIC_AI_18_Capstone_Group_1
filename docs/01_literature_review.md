@@ -242,7 +242,7 @@ Literatürü dört tema altında topladık. Bu düzen, problemi tanımlamaktan �
 
 ### 4.3 Projenin katkısı
 
-Projemiz bu boşluğu, açık kaynak sohbet veri setleri (WildChat, LMSYS Chat 1M, OpenAssistant) üzerinde eğitilen bir model ve bu modeli kullanıcının tarayıcısında çalıştıran bir Chrome eklentisi ile doldurmayı hedefliyor. Bilimsel katkısı, problemli yapay zeka kullanımını öz bildirim yerine davranış verisiyle tanımlayan bir yaklaşım önermesi; uygulamadaki katkısı ise Bastani vd. (2025) çalışmasındaki "koruyucu kural" fikrini herhangi bir yapay zeka aracında kullanılabilecek, gizliliği koruyan bir ürüne dönüştürmesidir.
+Projemiz bu boşluğu, açık kaynak sohbet veri setleri (WildChat, WildFeedback) üzerinde eğitilip doğrulanan bir model ve bu modeli kullanıcının tarayıcısında çalıştıran bir Chrome eklentisi (Kâfi AI) ile doldurmayı hedefliyor. Bilimsel katkısı, problemli yapay zeka kullanımını öz bildirim yerine davranış verisiyle tanımlayan bir yaklaşım önermesi; uygulamadaki katkısı ise Bastani vd. (2025) çalışmasındaki "koruyucu kural" fikrini herhangi bir yapay zeka aracında kullanılabilecek, gizliliği koruyan bir ürüne dönüştürmesidir.
 
 ---
 

@@ -17,7 +17,7 @@ describe("halka görünümü", () => {
     expect(ring.update(anchor, 2, "Son mesajlarından 2 tanesi öncekilere çok benziyor.")).toBe(true);
     expect(wrapOf().dataset.level).toBe("2");
     expect(wrapOf().querySelector(".tip")!.textContent).toContain("2 tanesi");
-    expect(wrapOf().querySelector("button")!.getAttribute("aria-label")).toContain("Kâfi:");
+    expect(wrapOf().querySelector("button")!.getAttribute("aria-label")).toContain("Kâfi AI:");
     expect(ring.update(anchor, 1, "x")).toBe(false);
   });
 

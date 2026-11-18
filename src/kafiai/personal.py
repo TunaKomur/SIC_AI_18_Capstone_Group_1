@@ -13,17 +13,21 @@ kendine zarar ifadeleri sayılır. Metin iki kez sadeleştirilir: Türkçe kural
 import json
 from pathlib import Path
 
-from kafiai.extension_similarity import normalize_text
+from kafiai.extension_similarity import fold_turkish, normalize_text, with_folded
 
 RULES_FILE = Path(__file__).resolve().parents[2] / "extension" / "src" / "data" / "personal-rules.json"
 _RULES = json.loads(RULES_FILE.read_text(encoding="utf-8"))
+# Türkçe karaktersiz yazım da kişisel sayılır ("cok yalniz hissediyorum"); personal.ts ile aynı.
+_PHRASES = with_folded(_RULES["phrases"])
+_FICTION_MARKERS = with_folded(_RULES["fiction_markers"])
+_FICTION_EXEMPT = with_folded(_RULES["fiction_exempt"])
 
 
 def _variants(text):
     raw = text or ""
     tr = normalize_text(raw)
     en = normalize_text(raw.replace("I", "i"))
-    return [f" {tr} "] if tr == en else [f" {tr} ", f" {en} "]
+    return [f" {v} " for v in dict.fromkeys([tr, en, fold_turkish(tr)])]
 
 
 def _hit(padded_variants, phrases):
@@ -32,6 +36,6 @@ def _hit(padded_variants, phrases):
 
 def is_personal(text):
     variants = _variants(text)
-    if _hit(variants, _RULES["fiction_markers"]):
-        return _hit(variants, _RULES["fiction_exempt"])
-    return _hit(variants, _RULES["phrases"])
+    if _hit(variants, _FICTION_MARKERS):
+        return _hit(variants, _FICTION_EXEMPT)
+    return _hit(variants, _PHRASES)

@@ -45,6 +45,12 @@ function renderPage(
     </input-area-v2>`;
 }
 
+/** Sayfanın mesajı gerçekten göndermesini taklit eder: kutu boşalır, doğrulama bir tik sonra görür (K38). */
+function pageSent() {
+  document.getElementById("real")!.innerHTML = "<p></p>";
+  vi.advanceTimersByTime(150);
+}
+
 function pressEnter(opts: KeyboardEventInit = {}) {
   document
     .getElementById("real")!
@@ -203,7 +209,33 @@ describe("start(): gönderme, bekletme ve cevap bitişi", () => {
     stop = geminiAdapter.start(handlers);
     pressEnter();
     expect(handlers.onBeforeSend).toHaveBeenCalledTimes(1);
+    expect(handlers.onSend).not.toHaveBeenCalled(); // sayfada görülene kadar sayılmaz
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
+  });
+
+  it("sayfa mesajı göndermezse (kutu dolu kalır) mesaj sayılmaz, onSendNotSeen çağrılır", () => {
+    const notSeen = vi.fn();
+    renderPage({ text: "merhaba" });
+    stop = geminiAdapter.start({ ...handlers, onSendNotSeen: notSeen });
+    pressEnter();
+    vi.advanceTimersByTime(4100);
+    expect(handlers.onSend).not.toHaveBeenCalled();
+    expect(notSeen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Enter'dan sonra gelen Gönder tıklaması aynı gönderimdir: bir kez sorulur, bir kez sayılır", () => {
+    renderPage({ text: "merhaba" });
+    stop = geminiAdapter.start(handlers);
+    const pageClick = vi.fn();
+    const button = document.querySelector<HTMLButtonElement>('button[aria-label="Mesaj gönder"]')!;
+    button.addEventListener("click", pageClick);
+    pressEnter();
+    button.click();
+    pageSent();
+    expect(handlers.onBeforeSend).toHaveBeenCalledTimes(1);
+    expect(pageClick).toHaveBeenCalledTimes(1); // sayfanın gönderimi durdurulmadı
+    expect(handlers.onSend).toHaveBeenCalledTimes(1);
   });
 
   it("Shift+Enter, IME ve boş kutu mesaj sayılmaz", () => {
@@ -229,6 +261,7 @@ describe("start(): gönderme, bekletme ve cevap bitişi", () => {
     document.querySelector<HTMLButtonElement>('button[aria-label="Dikte et (⌘⇧D)"]')!.click();
     expect(handlers.onSend).not.toHaveBeenCalled();
     document.querySelector<HTMLButtonElement>('button[aria-label="Mesaj gönder"]')!.click();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
@@ -264,6 +297,7 @@ describe("start(): gönderme, bekletme ve cevap bitişi", () => {
     expect(handlers.onSend).not.toHaveBeenCalled();
     expect(geminiAdapter.submitHeld()).toBe(true);
     expect(pageClick).toHaveBeenCalledTimes(1);
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
     expect(geminiAdapter.submitHeld()).toBe(false); // bekleyen kalmadı
   });
@@ -332,14 +366,10 @@ describe("insertText, composer ve focusComposer", () => {
     delete (document as unknown as { execCommand?: unknown }).execCommand;
   });
 
-  it("dolu kutuda önce yeni paragraf, sonra metni ekler", () => {
+  it("dolu kutuda yeni paragraf açmadan, aynı satıra boşlukla ekler", () => {
     renderPage({ text: "merhaba" });
-    exec.mockImplementation((cmd: string) => {
-      if (cmd === "insertParagraph") document.getElementById("real")!.textContent = "merhaba\n";
-      return true;
-    });
     expect(geminiAdapter.insertText("Daha kısa yaz.")).toBe(true);
-    expect(exec.mock.calls.map((c) => c[0])).toEqual(["insertParagraph", "insertText"]);
+    expect(exec.mock.calls).toEqual([["insertText", false, " Daha kısa yaz."]]);
   });
 
   it("boş kutuda satır sonu eklemez", () => {

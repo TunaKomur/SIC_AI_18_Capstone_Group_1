@@ -6,8 +6,9 @@
 
 > **Güncelleme notu.** Bu bölüm projenin ilk keşif analizidir ve olduğu gibi korunuyor. Üç bulgu sonradan daha sıkı bir yöntemle yeniden hesaplandı; güncel sayılar [`outputs/findings.json`](../outputs/findings.json) ve README'de:
 > (1) Tekrar oranı (%31,6) boş ve 12 karakterden kısa mesajları ve şablonları da sayıyordu; eklentinin benzerlik hesabıyla ve bu ayrımlarla oran %24,9. Ayrıca benzer mesajın tek başına memnuniyetsizlik göstermediği görüldü ([Bölüm 8](08_data_preparation_and_model.md), Bölüm 5.1).
-> (2) Gece kullanımı şablonlar çıkarılınca ve kullanıcı ağırlıklı bakılınca %18,0 (%95 güven aralığı %12,9 ile %23,1); saatler eşit dağılsaydı bu 6 saatin payı %25 olurdu, yani gece öne çıkmıyor.
-> (3) Uzun sohbetlerdeki memnuniyetsizlik artışı (yaklaşık 7 kat) sohbet başına hesaplanmıştı; mesaj başına artış yaklaşık 2 kat.
+> (2) Gece kullanımı şablonlar çıkarılınca ve kullanıcı ağırlıklı bakılınca 1M'de %18,0 (%95 güven aralığı %12,9 ile %23,1), 4.8M'de %15,3 (%12,4 ile %18,4). İnsanlar gece uyuduğu için saatlerin eşit dağılması uygun bir karşılaştırma ölçüsü değil; yalnızca değer ve güven aralığı veriliyor.
+> (3) Uzun sohbetlerdeki memnuniyetsizlik artışı (yaklaşık 7 kat) sohbet başına hesaplanmıştı; mesaj başına artış yaklaşık 1,9 kat.
+> (4) Bölüm 4.3'teki kullanıcı çalışması yapılmadı; ürün WildFeedback üzerinde çevrimdışı yeniden oynatmayla değerlendirildi (Bölüm 5, K28). Eklenti hiçbir kullanıcı verisi toplamıyor.
 
 ---
 

@@ -1,10 +1,12 @@
-# KafiAI
+# Kâfi AI
 
 ### Üretken yapay zeka sohbetlerinde verimsiz döngülerin erken fark edilmesi
 
 Samsung Innovation Campus Yapay Zeka programı 18. dönem bitirme projesi, Grup 1. Program UNDP Türkiye ve Yeşilay iş birliğiyle yürütülüyor; bu yılın teması **dijital bağımlılık**.
 
 **Kısaca: ekran süresi değil, kısır döngü.**
+
+> Ürünün adı **Kâfi AI**. Kodda kalan teknik adlar (`[KafiAI]` konsol öneki, `kafiai` Python paketi, depolama anahtarları) kullanıcı verisi kaybolmasın diye değişmedi.
 
 ---
 
@@ -16,45 +18,70 @@ Dijital iyi oluş araçları bunu göremiyor, çünkü yalnızca **süreyi** öl
 
 **Verimsiz döngü:** kullanıcının bir önceki cevabın işe yaramadığını tekrar tekrar söylediği ya da aynı isteği yeniden gönderdiği, uzayan ama sonuca ulaşmayan sohbet.
 
-Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düşünme devri" de vardı. Sohbet verisinden güvenilir biçimde ölçülemediği için kapsamdan çıkarıldı; gelecek çalışma olarak duruyor.
+Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düşünme devri" de vardı. Sohbet verisinden güvenilir biçimde ölçülemediği için kapsamdan çıkarıldı.
 
 **Hedef grup:** Ders ve iş için üretken yapay zeka kullanan 18 ile 30 yaş arası yetişkinler.
 
 ---
 
-## Ürün: KafiAI Chrome eklentisi
+## Ürün: Kâfi AI Chrome eklentisi
 
-`extension/` klasöründe ChatGPT ve Gemini'nin web arayüzünde çalışan bir Chrome eklentisi (Manifest V3, TypeScript) var. Bugün yaptıkları:
+`extension/` klasöründe ChatGPT, Gemini, Claude, Copilot ve Google AI Modu'nun web arayüzünde çalışan bir Chrome eklentisi (Manifest V3, TypeScript) var. Sloganı "Fark et. Durakla. Yeniden başla." Hiçbir şeyi engellemez; her öneri tek tıkla geçilir. Ayrıntılı ürün anlatımı: [Bölüm 6](docs/06_product_scope.md).
 
 | Özellik | Ne yapar | Ne zaman |
 |---|---|---|
-| **Benzer mesaj şeridi** | Gönder'e basıldığında mesaj son 5 mesajla karşılaştırılır; neredeyse aynıysa mesaj gönderilmeden önce kısa bir şerit çıkar: "Yine de gönder", onarım düğmeleri ("Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yerinde değildi". | Benzerlik 0,8 ve üstü ([K14](docs/05_architecture_decisions.md)). Mesaj öncekinde olmayan yeni bir içerik kelimesi getiriyorsa ("1. soruyu çöz" / "2. soruyu çöz") şerit çıkmaz ([K20](docs/05_architecture_decisions.md)) |
-| **Çıkış kartı** | Cevap bittikten sonra, kullanıcı yazmaya başlamadan çıkar. "Taze başlat" sohbetteki istekleri tek bir taslakta toplar, panoya kopyalar ve yeni sohbet açar. | İki yoldan biriyle: sohbet, görev türünün normunu aştı ve tekrar görüldü ([K14](docs/05_architecture_decisions.md)); ya da tur modeli yüksek güvenle döngü tahmin etti ve sohbette en az bir "olmadı" ifadesi var ([K17](docs/05_architecture_decisions.md)) |
-| **Gerekçeli öneri** | Model kaynaklı kart nedenini ve somut bir öneriyi söyler; örneğin "Son mesajında bir önceki cevabın işe yaramadığını söyledin. Neyin yanlış olduğunu ve tam olarak ne beklediğini tek cümleyle yazmak…" | Model kartında |
-| **Araç çubuğu penceresi** | Eklentiyi, önerileri ve çıkış kartını açıp kapatma; son 7 günün sayaçları; "Sayaçlarımı kopyala"; "Tüm verilerimi sil". | Her zaman |
-| **Karşılama ekranı** | Eklenti ilk kurulduğunda bir sekmede açılır: neye baktığını, neye bakmadığını ve verinin nerede durduğunu söyler. Araç çubuğu penceresindeki "KafiAI nasıl çalışır?" bağlantısıyla yeniden açılır. | İlk kurulumda ve istendiğinde ([K21](docs/05_architecture_decisions.md)) |
-| **Yalnızca say** | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca "gösterilecek olsaydı" sayılır. Pilot karşılaştırması için. | Ayarlardan |
+| **Halka** | Mesaj kutusunun köşesinde 18 piksellik sessiz gösterge. Döngü sinyalleri arttıkça aynı rengin tonu koyulaşır; kırmızı yok. Üzerine gelince neyi ölçtüğünü tek satırla söyler | Her zaman; üç seviye. İki temiz turdan sonra sakinleşir |
+| **Benzer mesaj şeridi** | Mesaj gönderilmeden önce kısa bir şerit: "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede "Yeni sohbete geç" | Mesaj birebir tekrarsa ya da öncekine çok benzeyip "olmadı" gibi bir onarım ifadesi taşıyorsa. Bilerek yapılan seri istekler ("başka bir slogan öner") ve yeni içerik getiren mesajlar şerit açmaz |
+| **Kısa düzeltme şeridi** | "Olmadı", "yanlış" gibi kısa bir düzeltmede neyin olmadığını eklemeyi önerir: "Hata mesajını ekle", "Beklediğimi yaz" | 12 karakterden kısa onarım ifadesinde; ilk mesajda ve teklif sorusuna verilen yalın "hayır"da çıkmaz |
+| **Kısa devam şeridi** | Üçüncü "devam"da yönü sorar: "Neyle devam etsin, yaz", "Nasıl devam etsin, yaz" | Üst üste üçüncü yönsüz devam isteğinde |
+| **Çıkış kartı** | Cevap bittikten sonra çıkar, nedenini ve somut bir öneriyi söyler. "Taze başlat" istekleri tek bir taslakta toplar, panoya kopyalar ve yeni sohbet açar | Dört yoldan biriyle: tur modeli yüksek güvenle döngü tahmin etti; cevaplar üst üste iki kez özürle başladı; kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı; sohbet görev normunu aştı ve döngü işareti var |
+| **Taze başlat taslağı** | Benzer denemeler tek maddeye iner; konu değiştiyse yalnızca son konu girer; sohbette yeniden hatırlatılan kurallar ("söylemiştim, emoji kullanma") en başa konur; sonunda "Beklediğim sonuç:" ve "Önceki denemelerde olmayan kısım:" satırları | Karttan |
+| **Yön sende** | Modelin teklif sorularına üst üste kısa onaylarda ("evet", "tamam") "Özetlet" ya da "Adımı ben yazayım" önerir | Üç kısa onaydan sonra, sohbet başına bir kez |
+| **Araç çubuğu penceresi** | "Bu sohbet" özeti, son 7 günün içgörüleri, ayarlar (eklenti, öneriler, halka, çıkış kartı), "Sayaçlarımı kopyala", "Tüm verilerimi sil" | Her zaman |
+| **Karşılama ekranı** | Neye baktığını, neye bakmadığını ve verinin nerede durduğunu söyler | İlk kurulumda ve "Kâfi AI nasıl çalışır?" bağlantısıyla |
+| **Yalnızca say** | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca sayılır | Ayarlardan |
 
-**Tur modeli.** Eklenti, kullanıcının her yeni mesajında o ana kadarki kullanıcı mesajlarından 22 sayı hesaplar ve sohbetin döngüye girme olasılığını tahmin eder. Model 22 katsayılı bir Logistic Regression; eklentide yaklaşık 2 KB'lık bir JSON dosyası ([`turn-model.json`](extension/src/data/turn-model.json)) olarak duruyor, kütüphane kullanmadan çalışıyor. Python ile eklentinin aynı sohbete aynı sonucu verdiği parite testleriyle kontrol ediliyor. Ayrıntılar: [Bölüm 9](docs/09_turn_model.md).
+Kişisel ve duygusal sohbetlerde hiçbir öneri gösterilmez.
 
-**Henüz olmayanlar.** Claude, Copilot ve Google AI Modu desteği; mesaj kutusu kenarındaki halka göstergesi; YEDAM ya da başka bir destek kanalına yönlendirme (ikinci dalga, [Bölüm 6](docs/06_product_scope.md)). Güncel durum tablosu: [Bölüm 6, Uygulama durumu](docs/06_product_scope.md).
+**Karar çekirdeği tek, siteler beş.** Tekrar, onarım ifadesi, görev türü, sohbet sinyalleri, tur modeli, halka ve kart kuralları `extension/src/core/` altında tek bir yerde durur ve beş sitede aynı çalışır. Siteye özel olan yalnızca sayfayı okuyan adaptörlerdir (`extension/src/adapters/`). Mesaj ancak sayfada gerçekten gönderildiği görülünce sayılır ve Enter ile sitenin kendi Gönder tıklaması tek gönderim sayılır; bu korumalar beş sitede ortak. Adaptörler temizlenmiş gerçek sayfa görüntüleriyle (`extension/test-snapshots/`) test edilir.
+
+**Tur modeli.** Eklenti her yeni mesajda o ana kadarki kullanıcı mesajlarından 22 sayı hesaplar ve sohbetin döngüye girme olasılığını tahmin eder. Model 22 katsayılı, kalibre edilmiş bir lojistik regresyon; eklentide 1,7 KB'lık bir JSON dosyası ([`turn-model.json`](extension/src/data/turn-model.json)) olarak duruyor ve kütüphane kullanmadan çalışıyor. Python ile eklentinin aynı sohbete aynı sonucu verdiği parite testleriyle kontrol ediliyor. Ayrıntılar: [Bölüm 9](docs/09_turn_model.md).
+
+### Gerçek memnuniyetsizliğe karşı isabet
+
+Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur tur yeniden oynatıldı ve kararları kullanıcının gerçekten memnuniyetsiz olduğu turlarla karşılaştırıldı (tüm turlarda memnuniyetsizlik %5,04). Kurallar bundan ayrık bir seçim örnekleminde seçildi. Kaynak: [`outputs/replay_eval.json`](outputs/replay_eval.json).
+
+| Karar | 100 sohbette | İsabet |
+|---|---|---|
+| Benzer mesaj şeridi | 10,13 | %21,5 |
+| Kısa düzeltme şeridi | 0,91 | %57,7 |
+| Halka, koyu seviye | turların %9,4'ü | %29,9 |
+| Çıkış kartı (tümü) | 19,12 | %31,0 |
+| Çıkış kartı, düzeltme alınmadı | 1,04 | %51,4 |
+| Çıkış kartı, özür döngüsü | 2,43 | %44,5 |
+| Çıkış kartı, tur modeli | 15,51 | %27,7 |
+| Çıkış kartı, uzun sohbet | 0,15 | %13,3 |
+
+İsabet: şeritlerde o mesajda, halka ve kartta o turda ya da bir sonrakinde kullanıcının memnuniyetsiz olması. Kullanıcının iki ya da daha fazla kez memnuniyetsiz olduğu sohbetlerin %32,3'ünde kart ikinci şikayetten önce geliyor. Bu sayılar eklentinin her uyarıda haklı olmadığını da gösteriyor; bu yüzden hiçbir uyarı bir şeyi engellemez, hepsi tek tıkla geçilir ve "Yerinde değildi" ile işaretlenebilir.
+
+**Sınırlar.** WildFeedback'in memnuniyetsizlik etiketi bir dil modeliyle üretildi ve çoğunlukla İngilizce; Türkçe kullanım için etiketli veri yok. Yeniden oynatma, kullanıcının bir öneriyi gördükten sonra davranışını değiştirip değiştirmediğini ölçmez. Kısa devam şeridi ve "Yön sende" önerisi bir döngü uyarısı değil, yön önerisi; eski veride seyrek oldukları için etkileri ölçülemedi. Gönderim korumaları ChatGPT'de canlı sitede, diğer dört sitede sayfa görüntüleriyle sınandı.
 
 ### Gizlilik
 
-- Mesaj metni yalnızca sekmenin belleğinde durur; sekme kapanınca silinir. `chrome.storage` içinde yalnızca ayarlar ve günlük sayılar (90 gün) tutulur. Konsola metin değil, yalnızca uzunluk, skor ve olasılık yazılır.
-- Eklentide ağ isteği yapan kod yoktur. Eklenti sayfaları ve arka plan çalışanı için manifestte `connect-src 'none'` var. İçerik betiği ChatGPT ve Gemini sayfasının içinde çalıştığı için bu kural onu kapsamaz; içerik betiği için güvence [`no-network.test.ts`](extension/src/no-network.test.ts): derlenmiş kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource` ve `importScripts` geçmediğini her test çalıştırmasında denetler ([K11](docs/05_architecture_decisions.md)).
-- Eklenti yalnızca `storage` ve `clipboardWrite` izni ister ve yalnızca chatgpt.com, chat.openai.com ve gemini.google.com adreslerinde çalışır.
+- Mesaj metni yalnızca sekmenin belleğinde durur; sekme kapanınca ya da sohbet değişince silinir. Cevabın yalnızca başı ve sonu, yalnızca bellekte ve yalnızca birkaç kural için okunur (özürle mi başladı, öncekinin aynısı mı, soruyla mı bitti).
+- `chrome.storage` içinde yalnızca ayarlar ve günlük sayılar (90 gün) tutulur. Sayaç anahtarlarına metin, sohbet kimliği ya da adres giremez. Konsola metin değil, yalnızca `[KafiAI]` önekli sayı ve etiket yazılır.
+- Eklentide ağ isteği yapan kod yoktur. Eklenti sayfaları ve arka plan çalışanı için manifestte `connect-src 'none'` var. İçerik betiği sohbet sitesinin sayfasında çalıştığı için bu kural onu kapsamaz; onun güvencesi [`no-network.test.ts`](extension/src/no-network.test.ts): derlenmiş kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource`, `importScripts`, `eval` ve izinsiz bir web adresi geçmediğini her test çalıştırmasında denetler ([K11](docs/05_architecture_decisions.md)).
+- Eklenti yalnızca `storage` ve `clipboardWrite` izni ister ve yalnızca chatgpt.com, chat.openai.com, gemini.google.com, claude.ai, copilot.microsoft.com ve google.com/search (yalnızca AI Modu) adreslerinde çalışır. Yazı tipi dahil hiçbir kaynak ağdan yüklenmez.
 
 ### Kurulum (geliştirici modu)
 
 ```bash
 cd extension
-npm install
-npm test             # 359 test
-npm run build        # çıktı: extension/dist
+npm ci
+npm run check        # tip kontrolü, 555 test, derleme (çıktı: extension/dist)
 ```
 
-Chrome'da `chrome://extensions` sayfasını aç, **Geliştirici modu**nu aç, **Paketlenmemiş öğe yükle** ile `extension/dist` klasörünü seç. Kurulumdan hemen sonra karşılama ekranı açılır. ChatGPT ya da Gemini sekmesini yenile. Ne olduğunu görmek için sayfada geliştirici konsolunu açıp `[KafiAI]` diye süz.
+Chrome'da `chrome://extensions` sayfasını aç, **Geliştirici modu**nu aç, **Paketlenmemiş öğe yükle** ile `extension/dist` klasörünü seç. Kurulumdan hemen sonra karşılama ekranı açılır. Açık sohbet sekmesini yenile. Ne olduğunu görmek için sayfada geliştirici konsolunu açıp `[KafiAI]` diye süz. Chrome Web Store yayını planlanan son dağıtım adımı ([Bölüm 10](docs/10_deployment.md)).
 
 ---
 
@@ -66,31 +93,35 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 |---|---|---|
 | Programların otomatik gönderdiği şablon sohbetlerin payı | WildChat 1M'de **%16,3**, WildChat 4.8M'de **%44,2** | `outputs/findings.json` → `1m.templated_pct`, `48m_sample.templated_pct` |
 | En az 3 turlu gerçek sohbetlerde, kullanıcının en az bir kez öncekine çok benzeyen bir mesaj gönderdiği sohbetler | 1M'de **%24,9**, 4.8M'de **%21,9** | `findings.json` → `*.repeat.conversations_with_similar_pct` |
-| Aynı oran 10 tur ve üzeri sohbetlerde | 1M'de **%38,4**, 4.8M'de **%36,8** | `findings.json` → `*.repeat.similar_by_length_pct.10+` |
+| Aynı oran 10 tur ve üzeri sohbetlerde (sohbet başına) | 1M'de **%38,4**, 4.8M'de **%36,8** | `findings.json` → `*.repeat.similar_by_length_pct.10+` |
 | Mesajın birebir yeniden gönderildiği sohbetler | 1M'de **%9,3**, 4.8M'de **%8,1** | `findings.json` → `*.repeat.conversations_with_exact_pct` |
-| Kullanıcının "olmadı, hâlâ hata" gibi bir ifade yazdığı mesajların oranı, 2. mesajda ve 21. mesaj ve sonrasında | **%3,9 → %7,5**, mesaj başına yaklaşık **2 kat** | `findings.json` → `repair_per_message_48m` |
-| 4.8M'de döngüye giren sohbetler (en az 4 turlu gerçek sohbetler) | **%6,7**; kod ve hata ayıklama sohbetlerinde **%19,8** | `outputs/dataset_summary_48m.json` → `positive_rate_pct`; `outputs/eda_48m_summary.json` → `train_tables.48m.label_v2_by_task_pct.kod` |
+| Kullanıcının "olmadı, hâlâ hata" gibi bir ifade yazdığı mesajların oranı, 2. mesajda ve 21. ile 40. mesajlar arasında | **%5,2 → %9,8**, mesaj başına yaklaşık **1,9 kat** | `findings.json` → `repair_per_message_48m` |
+| 4.8M'de döngüye giren sohbetler (en az 4 turlu gerçek sohbetler) | **%9,0**; kod ve hata ayıklama sohbetlerinde **%26,7** | `outputs/dataset_summary_48m.json` → `positive_rate_pct`; `outputs/eda_48m_summary.json` → `train_tables.48m.label_v2_by_task_pct.kod` |
 | En yoğun %1 kullanıcının sohbetlerdeki payı (şablonlar hariç, 1M) | **%23,9** (en yoğun %10: **%51,6**) | `findings.json` → `1m.concentration_organic` |
-| Tur modeli, test kullanıcılarında | PR-AUC **0,251** (rastgele 0,066); kart açıldığında isabet **%37,6** | `outputs/turn_model_metrics.json` → `models.logreg.test` |
+| Tur modeli, test kullanıcılarında | PR-AUC **0,321** (rastgele 0,098, yani 3,3 kat); yüksek güven eşiğinde kesinlik **%44,6** | `outputs/turn_model_metrics.json` → `models.logreg.test` |
+| Yapay zekanın cevabı özürle başladıktan sonra kullanıcının memnuniyetsiz olma oranı | **%29,7** (özürsüz %4,8); üst üste iki özürden sonra **%43,8** | `outputs/response_signal.json` |
 
 **Bu sayıları okurken:**
 
-- Benzerlik eklentinin kendi hesabıyla ölçüldü (karakter 3-gram, eşik 0,8). 12 karakterden kısa mesajlar ("devam et", "evet") ve şablonlar hariç. İlk keşif analizindeki %31,6 bu ayrımları yapmıyordu.
-- Benzer mesaj tek başına sorun anlamına gelmiyor. WildFeedback'teki memnuniyetsizlik işaretleriyle karşılaştırınca benzer mesaj içeren sohbetlerde memnuniyetsizlik genel orandan farksız çıktı (1,00 kat), çoğu "AA için listele, AB için listele" gibi verimli seri işler. Döngü etiketimiz bu yüzden onarım ifadelerine dayanıyor (2,87 kat). Kaynak: `outputs/label_validation.json`.
+- Benzerlik eklentinin kendi hesabıyla ölçüldü (karakter 3-gram, eşik 0,8). 12 karakterden kısa mesajlar ("devam et", "evet") ve şablonlar hariç. İlk keşif analizindeki %31,6 hem bu ayrımları yapmıyordu hem de farklı bir ölçüyle (çok dilli anlam modeli, 0,85 eşiği) hesaplanmıştı; iki sayı doğrudan karşılaştırılmamalı.
+- Şablon eşiği ("aynı ilk 80 karakter 20 ya da daha fazla kez") örneklem büyüdükçe daha çok sohbet yakalar; 4.8M'deki daha büyük pay kısmen bundan geliyor.
+- Uzunluğa göre tekrar oranı sohbet başına; uzun sohbetin daha çok mesaj çifti olduğu için doğal olarak yüksek çıkar.
+- Benzer mesaj tek başına sorun anlamına gelmiyor. WildFeedback'teki memnuniyetsizlik işaretleriyle karşılaştırınca benzer mesaj içeren sohbetlerde memnuniyetsizlik genel orandan farksız (1,00 kat); çoğu "AA için listele, AB için listele" gibi verimli seri işler. Döngü etiketimiz bu yüzden onarım ifadelerine dayanıyor. Kaynak: `outputs/label_validation.json`.
+- Döngü etiketi kurallarla üretilmiş bir **vekil etiket**; elle doğrulanmış bir set yok. Bu yüzden ürünün başarısını etiketten bağımsız olarak gerçek memnuniyetsizlik işaretleriyle (yeniden oynatma) ölçtük.
 - Mesaj başına onarım oranının sohbet uzadıkça artması, dil modellerinin uzun sohbette yolunu kaybettiği bulgusuyla (Laban vd., 2025) aynı yönde; ama nedenini göstermiyor. Uzun sohbetler zaten sorunlu sohbetlerden oluşuyor olabilir. Aynı uzun sohbetlerin içinde de artış görülüyor ([Şekil 25](figures/25_repair_by_turn.png)).
-- **Gece kullanımı öne çıkmıyor.** Türkiye'den gelen şablonsuz sohbetlerde yerel saatle 00:00 ile 05:59 arasının kullanıcı ağırlıklı payı 1M'de %18,0 (%95 güven aralığı %12,9 ile %23,1), 4.8M'de %15,3 (%12,4 ile %18,4). Saatler eşit dağılsaydı bu 6 saatin payı %25 olurdu. İlk analizdeki sohbet bazlı %30,7'nin büyük kısmı birkaç yoğun kullanıcıdan geliyordu. Kaynak: `findings.json` → `*.turkey_night`.
-- İlk analizdeki "uzun sohbetlerde memnuniyetsizlik yaklaşık 7 kat" sohbet başına hesaplanmıştı; uzun sohbetin daha çok mesajı olduğu için şişkindi. Mesaj başına artış yaklaşık 2 kat (yukarıdaki tablo).
+- **Gece kullanımı.** Türkiye'den gelen şablonsuz sohbetlerde yerel saatle 00:00 ile 05:59 arasının kullanıcı ağırlıklı payı 4.8M'de %15,3 (%95 güven aralığı %12,4 ile %18,4), 1M'de %18,0 (%12,9 ile %23,1). İlk analizdeki sohbet bazlı %30,7'nin büyük kısmı birkaç yoğun kullanıcıdan geliyordu. Kaynak: `findings.json` → `*.turkey_night`.
+- Kurallar veriyle inceltildi: onarım kuralının her parçası WildFeedback'te ayrı ölçüldü ve her değişiklik verinin bir yarısında seçilip öbür yarısında doğrulandı ([Bölüm 5, K35](docs/05_architecture_decisions.md)). Türkçe onarım kelimeleri ("olmadı", "yine", "hala") WildFeedback'te neredeyse hiç geçmediği için ayrıca ölçülemedi; Türkçe karaktersiz yazım da tanınıyor (K36).
 
 | | |
 |---|---|
 | ![Mesaj sırasına göre onarım](figures/25_repair_by_turn.png) **Sohbet uzadıkça "olmadı" oranı artıyor.** Sağda aynı uzun sohbetlerin içinde. | ![Etiket doğrulaması](figures/19_label_validation.png) **Benzer mesaj tek başına memnuniyetsizlik göstermiyor;** onarım ifadeleri gösteriyor. |
-| ![Otomatik trafik](figures/17_wildchat48_over_time.png) **WildChat 4.8M'de otomatik trafik zamanla artıyor;** temizleme olmadan model bunu öğrenirdi. | ![Tur modeli](figures/26_turn_model_by_k.png) **Model sohbet ilerledikçe daha iyi görüyor;** 6. turda rastgelenin 4,7 katı. |
+| ![Otomatik trafik](figures/17_wildchat48_over_time.png) **WildChat 4.8M'de otomatik trafik zamanla artıyor;** temizleme olmadan model bunu öğrenirdi. | ![Tur modeli](figures/26_turn_model_by_k.png) **Model sohbet ilerledikçe daha iyi görüyor;** 6. turda PR-AUC 0,375 (rastgele 0,113). |
 
 ---
 
 ## Bu repoyu nasıl okumalı?
 
-**Kısaca anlamak için:** bu sayfa, [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) ve [Bölüm 9, Tur modeli](docs/09_turn_model.md).
+**Kısaca anlamak için:** bu sayfa, [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) ve [Bölüm 10, Deployment](docs/10_deployment.md).
 
 | Soru | Nereye bakmalı |
 |---|---|
@@ -98,11 +129,13 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 | İlk veri analizi | [Bölüm 2, Veri araştırması](docs/02_data_research.md) |
 | Neden bu teknolojiler? | [Bölüm 3, Teknoloji incelemesi](docs/03_technology_review.md) |
 | Proje önerisi | [Bölüm 4, Konsept notu](docs/04_concept_note.md) |
-| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K17) |
+| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K50) |
 | Ürün neyi yapıyor, neyi yapmıyor? | [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) |
 | Veri setleri ve kaynaklar | [Bölüm 7, Kaynaklar](docs/07_resources.md) |
 | Veri hazırlama, etiket, model karşılaştırması | [Bölüm 8](docs/08_data_preparation_and_model.md) |
 | Eklentideki model, kalibrasyon, gerekçeler | [Bölüm 9](docs/09_turn_model.md) |
+| Model nasıl pakete giriyor, güvenlik, izleme, güncel sonuçlar | [Bölüm 10, Deployment](docs/10_deployment.md) |
+| Neler değişti? | [CHANGELOG](CHANGELOG.md) |
 
 ---
 
@@ -110,26 +143,32 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 
 ```
 SIC_AI_18_Capstone_Group_1/
-├── README.md
-├── requirements.txt                Python paketleri
-├── docs/                           Rapor bölümleri 01 ile 09, diyagramlar
+├── README.md, CHANGELOG.md, Makefile
+├── requirements.txt                Python paketleri (requirements-ci.txt: CI için hafif liste)
+├── docs/                           Rapor bölümleri 01 ile 10, diyagramlar
 ├── src/kafiai/                     Python paketi
 │   ├── data.py                     Veri kaynakları ve 6 adımlı temizleme
 │   ├── labels.py, text.py          Döngü etiketi ve güçlü onarım ifadeleri
 │   ├── features.py                 İlk iki mesajdan öznitelikler (Bölüm 8)
 │   ├── turn_features.py            Her turda öznitelikler (eklentiyle aynı)
 │   ├── turn_model.py               Tur modelinin tahmin hesabı (eklentiyle aynı)
-│   ├── extension_similarity.py     Eklentinin benzerlik hesabının Python ikizi
-│   └── tasks.py, split.py, config.py
+│   ├── extension_similarity.py     Eklentinin benzerlik ve tekrar kurallarının Python ikizi
+│   ├── signals.py, personal.py     Sohbet sinyalleri ve kişisel sohbet kuralı (eklentiyle aynı)
+│   ├── counters.py, insights.py    Sayaç şeması ve haftalık içgörü (eklentiyle aynı)
+│   ├── correction_patterns.py      Ters yönlü düzeltme ve kural yeniden yazma ölçümü (K47)
+│   └── tasks.py, split.py, config.py, external.py
 ├── scripts/                        Veri indirme, analiz, eğitim ve değerlendirme
-├── tests/                          Python testleri ve Python ile eklentinin ortak örnekleri
+├── tests/                          Python testleri, Türkçe senaryolar, Python ile eklentinin ortak örnekleri
 ├── extension/                      Chrome eklentisi
-│   ├── src/adapters/               ChatGPT ve Gemini sayfalarını okuma
-│   ├── src/core/                   Tekrar, onarım, görev türü, tur modeli, çıkış kartı kuralı
-│   ├── src/ui/                     Şerit ve çıkış kartı
+│   ├── src/adapters/               Beş sitenin sayfalarını okuma ve ortak gönderim doğrulaması
+│   ├── src/core/                   Tekrar, onarım, görev türü, sohbet sinyalleri, tur modeli, halka ve kart kuralı
+│   ├── src/ui/                     Şerit, halka ve çıkış kartı
+│   ├── src/popup/, src/welcome/    Araç çubuğu penceresi ve karşılama ekranı
 │   ├── src/data/                   Model, kurallar ve metinler (JSON; Python da okur)
+│   ├── test-snapshots/             Temizlenmiş gerçek sayfa görüntüleri
 │   └── public/manifest.json
-├── figures/                        Grafikler 01 ile 28
+├── brand/                          Logo kaynağı
+├── figures/                        Grafikler 01 ile 29
 ├── outputs/                        Tüm sayılar (JSON); README'deki her sayı buradan
 └── data/README.md                  Veri kaynakları (ham veri repoya girmez)
 ```
@@ -142,21 +181,33 @@ SIC_AI_18_Capstone_Group_1/
 |---|---|---|---|
 | [WildChat 4.8M](https://huggingface.co/datasets/allenai/WildChat-4.8M) | 86 dosyadan zamana yayılmış 10'u: 150 bin rastgele sohbet, 29.508 çok turlu ve 2.403 Türkçe sohbet (Nisan 2023 ile Temmuz 2025) | Ana eğitim ve test verisi | ODC BY |
 | [WildChat 1M](https://huggingface.co/datasets/allenai/WildChat-1M) | Sabit tohumla 50 bin sohbet | İlk keşif analizi, farklı dönem testi | ODC BY |
-| [WildFeedback](https://huggingface.co/datasets/microsoft/WildFeedback) | 88.920 sohbet ve mesaj düzeyinde memnuniyetsizlik işaretleri | Etiket doğrulaması, dış test | ODC BY |
+| [WildFeedback](https://huggingface.co/datasets/microsoft/WildFeedback) | 88.920 sohbet ve mesaj düzeyinde memnuniyetsizlik işaretleri | Etiket doğrulaması, yeniden oynatma değerlendirmesi | ODC BY |
+| ShareChat, LMSYS-Chat | Platform ve model ailesine göre sohbetler | Yalnızca platform değerlendirmesi (K25); ham veri depoya girmez | CC BY-NC ve LMSYS lisansı |
 | [OpenAssistant OASST1](https://huggingface.co/datasets/OpenAssistant/oasst1) | 30 bin mesaj ve kalite puanları | Yalnızca ilk keşif analizi | Apache 2.0 |
 
-Ham veri repoya girmez; scriptler veriyi `data/processed/` altına indirir.
+Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 
 ---
+
+## Geliştirme ve testler
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+make test            # Python testleri (161) ve eklenti: tip kontrolü, testler (555), derleme
+```
+
+Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:
+
+```bash
+grep -E "fetch\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource" extension/dist/*.js
+```
+
+Bir kural değişikliği her zaman iki dilde (TypeScript ve Python) birlikte yapılır ve `tests/fixtures/*_parity.json` içine örnek eklenir. Yeni bir sayfa görüntüsü eklemek için ham sayfa `snapshots_raw/` altına (git dışında) kaydedilir ve `python scripts/sanitize_snapshot.py --name "Ad Soyad"` ile temizlenir; mesajlar uydurma olmalı.
 
 ## Her şeyi baştan üretmek
 
 ```bash
-git clone https://github.com/edasaruhan/SIC_AI_18_Capstone_Group_1.git
-cd SIC_AI_18_Capstone_Group_1
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
 python scripts/run_eda.py                     # WildChat 1M örneklemi ve ilk analiz
 python scripts/fetch_wildchat48.py            # yaklaşık 2 GB
 python scripts/fetch_wildfeedback.py          # yaklaşık 0,6 GB
@@ -166,7 +217,10 @@ python scripts/compute_findings.py            # outputs/findings.json, README bu
 python scripts/train_models.py                # Bölüm 8 model karşılaştırması
 python scripts/build_turn_dataset.py --source 48m   # ayrıca 48m_turkish, 1m, wildfeedback
 python scripts/train_turn_model.py            # eklentinin modeli, Şekil 26-28
+python scripts/calibrate_extension.py         # görev normları (kurallar değiştiyse)
 python scripts/make_turn_parity_fixture.py    # model değiştiyse mutlaka
+python scripts/evaluate_replay.py             # eklentiyi gerçek sohbetlerde yeniden oynatma (yaklaşık 10 dk)
+python scripts/evaluate_stage3.py             # ters yönlü düzeltme ve kural yeniden yazma ölçümü (K47)
 python -m pytest tests
 ```
 
@@ -175,8 +229,9 @@ python -m pytest tests
 ## Yaklaşımımızın ilkeleri
 
 - **Yasak değil, yönlendirme.** Eklenti hiçbir şeyi engellemez, süre sınırı koymaz. Öneriler kapatılabilir.
-- **Etiketleme değil, farkındalık.** Kimseye "bağımlısın" denmez, puan, seri ya da rozet yoktur; yalnızca kullanım biçimindeki örüntü görünür kılınır.
+- **Etiketleme değil, farkındalık.** Kimseye "bağımlısın" denmez; puan, seri ya da rozet yoktur; yalnızca kullanım biçimindeki örüntü görünür kılınır.
 - **Gizlilik öncelikli.** Mesajlar cihazda işlenir ve saklanmaz; eklentide ağ isteği yapan kod yoktur.
 - **Açıklanabilirlik.** Her öneri nedenini söyler.
-- **Suçlamayan dil.** Döngünün bir kısmı modelin uzun sohbette yolunu kaybetmesinden geliyor; metinler bunu da söyler.
-- **Profesyonel desteğin yerini almaz.** Destek kanallarına yönlendirme ikinci dalgada, kullanıcının isteğiyle ve tek bir sohbete bakılarak değil.
+- **Suçlamayan dil.** Döngünün bir kısmı modelin uzun sohbette yolunu kaybetmesinden geliyor; metinler bunu da söyler ve "İstersen…" diye başlar.
+- **Ölçülmeyen eklenmez.** Her kural önce ayrık bir seçim örnekleminde seçilir, rapor örnekleminde doğrulanır; net bir iyileşme vermeyen aday eklenmez.
+- **Profesyonel desteğin yerini almaz.** Kâfi AI bir farkındalık aracıdır; kişisel ve duygusal sohbetlerde öneri göstermez.

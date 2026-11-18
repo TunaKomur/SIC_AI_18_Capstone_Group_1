@@ -1,0 +1,454 @@
+{
+  "note": "Gerçek kullanıma dayanan Türkçe senaryolar (18 ile 30 yaş, ders ve iş). Her senaryo karar zincirinden (scripts/evaluate_replay.py içindeki replay, eklentinin Python ikizi) geçirilir; beklenenler tests/test_scenarios.py içinde sınanır. Aynı senaryolar elle doğrulamada ChatGPT ve Gemini'de yazılır. Cevap metinleri kısaltılmış örneklerdir; yalnızca özür kuralı cevabın başına bakar. Beklenen alanları: serit (gönderimi bekleten şerit sayısı), kisa_serit (kısa onarım şeridi sayısı), halka_en_az ve halka_en_cok (sohbet boyunca halkanın en yüksek seviyesi için sınırlar), kart (en az bir kart: true/false), kart_serit_turunda (şerit çıkan turda kart: her zaman false), cikis (döngüden çıkış görüldü), bolum (konu kaymasıyla oluşan bölüm sayısı), kisisel (ilk mesaj kişisel sayılır), kisa_tekrar_serit (aynı kısa mesajın üçüncü kez gelmesinde çıkan şerit sayısı), oneri (onay zinciri önerisi çıktı mı), kart_kaynagi (ilk kartın kaynağı: model, ozur, tekrar, norm).",
+  "scenarios": [
+    {
+      "id": "odev_temiz",
+      "anlatim": "Ders sorusu, verimli akış ve teşekkür",
+      "user": [
+        "Türev alma kuralları nelerdir?",
+        "Zincir kuralını bir örnekle açıklar mısın?",
+        "Peki bölüm kuralı nasıl uygulanıyor?",
+        "teşekkürler, anladım"
+      ],
+      "answers": [
+        "Temel kurallar şunlar...",
+        "Örnek: f(x) = (3x+1)^2 ...",
+        "Bölüm kuralı: (f/g)' = ...",
+        "Rica ederim!"
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "halka_en_cok": 0,
+        "kart": false,
+        "cikis": true
+      }
+    },
+    {
+      "id": "kod_hata_dongusu",
+      "anlatim": "Kod hatası düzelmiyor, model özür dileyip benzer çözümler veriyor",
+      "user": [
+        "Python'da bir CSV dosyasını okuyup sütun ortalamalarını hesaplayan kod yaz",
+        "TypeError: unsupported operand type(s) for +: 'int' and 'str' hatası alıyorum",
+        "hala aynı hata",
+        "olmadı",
+        "yine aynı hatayı veriyor, tamamen baştan yaz"
+      ],
+      "answers": [
+        "import pandas as pd ...",
+        "Haklısınız, özür dilerim. Sütunları sayıya çevirelim ...",
+        "Özür dilerim, şu şekilde deneyin ...",
+        "Haklısınız, kusura bakmayın ...",
+        "Özür dilerim, işte baştan yazılmış kod ..."
+      ],
+      "beklenen": {
+        "kisa_serit": 1,
+        "halka_en_az": 2,
+        "kart": true,
+        "kart_serit_turunda": false
+      }
+    },
+    {
+      "id": "birebir_tekrar",
+      "anlatim": "Beğenmediği cevap için aynı uzun isteği olduğu gibi yeniden gönderiyor",
+      "user": [
+        "Staj başvurum için yapay zeka mühendisliği öğrencisi olarak kısa bir ön yazı hazırla, motivasyonumu ve Python deneyimimi öne çıkar",
+        "Staj başvurum için yapay zeka mühendisliği öğrencisi olarak kısa bir ön yazı hazırla, motivasyonumu ve Python deneyimimi öne çıkar",
+        "Staj başvurum için yapay zeka mühendisliği öğrencisi olarak kısa bir ön yazı hazırla, motivasyonumu ve Python deneyimimi öne çıkar"
+      ],
+      "answers": [
+        "Sayın Yetkili, ...",
+        "Sayın Yetkili, ...",
+        "Sayın Yetkili, ..."
+      ],
+      "beklenen": {
+        "serit": 2,
+        "halka_en_az": 2
+      }
+    },
+    {
+      "id": "yeniden_yazim_lutfen",
+      "anlatim": "Kısa isteği sonuna 'lütfen' ekleyerek yeniden gönderiyor",
+      "user": [
+        "bu paragrafı daha resmi bir dille yaz",
+        "bu paragrafı daha resmi bir dille yaz lütfen"
+      ],
+      "answers": [
+        "Elbette: ...",
+        "Tabii: ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "halka_en_cok": 1
+      }
+    },
+    {
+      "id": "varyasyon_basliklar",
+      "anlatim": "Sosyal medya için bilerek yeni seçenekler istiyor",
+      "user": [
+        "Kahve dükkanım için Instagram'a 5 başlık öner",
+        "başka",
+        "baska fikirler ver",
+        "farklı bir tonda 5 tane daha yaz"
+      ],
+      "answers": [
+        "1. ... 5. ...",
+        "İşte yenileri ...",
+        "Başka fikirler ...",
+        "Daha samimi tonda ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "halka_en_cok": 0,
+        "kart": false
+      }
+    },
+    {
+      "id": "sinav_soru_serisi",
+      "anlatim": "Sınav hazırlığında soruları tek tek istiyor",
+      "user": [
+        "Veri yapıları vizesine hazırlanıyorum, bana çoktan seçmeli bir soru sor",
+        "cevabım B",
+        "sonraki soruyu sor",
+        "cevabım C",
+        "sonraki soruyu sor",
+        "cevabım A",
+        "sonraki soruyu sor"
+      ],
+      "answers": [
+        "Soru 1: ... A) B) C) D)",
+        "Doğru!",
+        "Soru 2: ...",
+        "Yanlış, doğrusu D.",
+        "Soru 3: ...",
+        "Doğru!",
+        "Soru 4: ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "halka_en_cok": 0,
+        "kart": false
+      }
+    },
+    {
+      "id": "devam_zinciri",
+      "anlatim": "Uzun kod çıktısını parça parça devam ettiriyor",
+      "user": [
+        "React ile not alma uygulamasının tüm bileşenlerini yaz",
+        "devam",
+        "devam",
+        "devam",
+        "devam"
+      ],
+      "answers": [
+        "İlk bölüm: App.jsx ...",
+        "NoteList.jsx ...",
+        "NoteEditor.jsx ...",
+        "styles.css ...",
+        "Son bölüm ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "kart": false,
+        "kisa_tekrar_serit": 1,
+        "halka_en_cok": 0,
+        "oneri": false
+      }
+    },
+    {
+      "id": "onay_zinciri",
+      "anlatim": "Modelin tekliflerine ('… ekleyeyim mi?') üst üste kısa onaylarla karşılık veriyor; yön modelde",
+      "user": [
+        "Bitirme projem için bir zaman planı çıkar",
+        "evet",
+        "aynen",
+        "tamam",
+        "olur"
+      ],
+      "answers": [
+        "Önerim şu: ... Haftalara bölelim mi?",
+        "Haftalık plan: ... Görev dağılımı da ekleyeyim mi?",
+        "Görevler: ... Risk bölümü de ister misin?",
+        "Riskler: ...",
+        "Hazır!"
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "kart": false,
+        "oneri": true,
+        "kisa_tekrar_serit": 0
+      }
+    },
+    {
+      "id": "konu_kaymasi",
+      "anlatim": "CV üzerinde çalışırken alakasız bir konuya geçiyor",
+      "user": [
+        "Özgeçmişimdeki deneyim maddelerini daha etkili yazmama yardım et",
+        "İlk maddeyi ölçülebilir sonuçla yeniden yaz",
+        "İstanbul'da hafta sonu gezilecek tarihi yerler hangileri"
+      ],
+      "answers": [
+        "Şöyle yazabilirsin ...",
+        "Örnek: ... %20 ...",
+        "Sultanahmet, Topkapı ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kart": false,
+        "bolum": 2
+      }
+    },
+    {
+      "id": "kisisel_sohbet",
+      "anlatim": "Duygusal bir konu açıyor; öneri gösterilmemeli",
+      "user": [
+        "Son zamanlarda kendimi çok yalnız hissediyorum",
+        "Son zamanlarda kendimi çok yalnız hissediyorum"
+      ],
+      "answers": [
+        "Bunu paylaştığın için teşekkürler ...",
+        "Buradayım ..."
+      ],
+      "beklenen": {
+        "kisisel": true
+      }
+    },
+    {
+      "id": "kisisel_sohbet_duz_harf",
+      "anlatim": "Aynı duygusal mesaj Türkçe karakter olmadan",
+      "user": [
+        "Son zamanlarda kendimi cok yalniz hissediyorum"
+      ],
+      "answers": [
+        "Bunu paylaştığın için teşekkürler ..."
+      ],
+      "beklenen": {
+        "kisisel": true
+      }
+    },
+    {
+      "id": "belirsiz_istekler",
+      "anlatim": "Neyin değişmesi gerektiğini söylemeden düzeltme istiyor",
+      "user": [
+        "Pazarlama dersi için ürün tanıtım metni yaz",
+        "daha iyi yap",
+        "kısalt",
+        "daha güzel olsun"
+      ],
+      "answers": [
+        "Tanıtım metni ...",
+        "Daha etkili hâli ...",
+        "Kısa hâli ...",
+        "Yeni hâli ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "halka_en_az": 1
+      }
+    },
+    {
+      "id": "duz_harf_kod_dongusu",
+      "anlatim": "Türkçe karakter kullanmadan yazan kullanıcı kodunun çalışmadığını söylüyor",
+      "user": [
+        "SQL ile en cok satan 5 urunu getiren sorgu yaz",
+        "kod calismiyor",
+        "yanlis",
+        "olmadi"
+      ],
+      "answers": [
+        "SELECT ...",
+        "Özür dilerim, şöyle deneyin ...",
+        "Haklısınız ...",
+        "Özür dilerim ..."
+      ],
+      "beklenen": {
+        "kisa_serit": 2,
+        "halka_en_az": 2
+      }
+    },
+    {
+      "id": "ceviri_seri_isi",
+      "anlatim": "Farklı cümleleri sırayla çevirtiyor",
+      "user": [
+        "Şu cümleyi İngilizceye çevir: Toplantı yarın saat onda başlayacak",
+        "Şu cümleyi İngilizceye çevir: Raporu cuma gününe kadar göndermeniz gerekiyor",
+        "Şu cümleyi İngilizceye çevir: Sunum için slaytları hazırladım"
+      ],
+      "answers": [
+        "The meeting will start ...",
+        "You need to send ...",
+        "I prepared the slides ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kart": false
+      }
+    },
+    {
+      "id": "evet_hayir_cevabi",
+      "anlatim": "Modelin evet hayır sorusuna 'hayır' diyor; bu bir şikayet değil",
+      "user": [
+        "Aylık bütçe tablosu için Excel formülleri öner",
+        "hayır"
+      ],
+      "answers": [
+        "Şu formülleri kullanabilirsin ... Grafik de ekleyeyim mi?",
+        "Tamam, grafiksiz bırakıyorum."
+      ],
+      "beklenen": {
+        "kisa_serit": 0
+      }
+    },
+    {
+      "id": "uzun_verimli_sohbet",
+      "anlatim": "Uzun ama her mesajı yeni bir adım olan proje sohbeti",
+      "user": [
+        "Flask ile basit bir REST API iskeleti kur",
+        "Kullanıcı modeli için SQLAlchemy sınıfını ekle",
+        "Kayıt ve giriş uç noktalarını yaz",
+        "Şifreleri bcrypt ile sakla",
+        "JWT ile kimlik doğrulama ekle",
+        "Uç noktalar için pytest testleri yaz",
+        "Dockerfile hazırla",
+        "README'ye kurulum adımlarını ekle",
+        "GitHub Actions ile testleri çalıştıran bir iş akışı yaz",
+        "Son olarak hata yönetimini merkezi hâle getir"
+      ],
+      "answers": [
+        "app.py ...",
+        "models.py ...",
+        "routes ...",
+        "bcrypt ...",
+        "JWT ...",
+        "tests ...",
+        "Dockerfile ...",
+        "README ...",
+        "workflow ...",
+        "errors ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_serit": 0,
+        "kart": false
+      }
+    },
+    {
+      "id": "onay_soru_yok",
+      "anlatim": "Kısa onaylar var ama model soru sormuyor; öneri çıkmamalı",
+      "user": [
+        "Sunum için 5 slaytlık bir taslak çıkar",
+        "tamam",
+        "evet",
+        "aynen"
+      ],
+      "answers": [
+        "1. Giriş ... 5. Sonuç.",
+        "Tamam, ilk slaytı ayrıntılandırdım.",
+        "İkinci slayt da hazır.",
+        "Hepsi hazır."
+      ],
+      "beklenen": {
+        "oneri": false,
+        "serit": 0,
+        "kisa_serit": 0
+      }
+    },
+    {
+      "id": "devam_karisik",
+      "anlatim": "Aynı niyeti farklı biçimlerde yazıyor: devam, devam et, devam edelim",
+      "user": [
+        "Pazarlama dersi için 10 sayfalık bir rapor taslağı yaz",
+        "devam",
+        "devam et",
+        "devam edelim"
+      ],
+      "answers": [
+        "1. bölüm ...",
+        "2. bölüm ...",
+        "3. bölüm ...",
+        "4. bölüm ..."
+      ],
+      "beklenen": {
+        "kisa_tekrar_serit": 1,
+        "serit": 0,
+        "kisa_serit": 0
+      }
+    },
+    {
+      "id": "yonlu_devam",
+      "anlatim": "Devam ederken yön veriyor; öneri gerekmez",
+      "user": [
+        "Pazarlama dersi için 10 sayfalık bir rapor taslağı yaz",
+        "devam",
+        "devam et ama rakip analizini tablo olarak yaz",
+        "devam"
+      ],
+      "answers": [
+        "1. bölüm ...",
+        "2. bölüm ...",
+        "Tablo ...",
+        "4. bölüm ..."
+      ],
+      "beklenen": {
+        "kisa_tekrar_serit": 0,
+        "serit": 0
+      }
+    },
+    {
+      "id": "uzun_devam_tekrari",
+      "anlatim": "Uzun ama yönsüz devam isteğini iki kez yazıyor; bu bir tekrar sayılmamalı",
+      "user": [
+        "Bir Python Flask uygulaması için kullanıcı yönetimi kodunu yaz",
+        "devam edebilir misin lütfen",
+        "devam edebilir misin lütfen"
+      ],
+      "answers": [
+        "app.py ...",
+        "models.py ...",
+        "routes.py ..."
+      ],
+      "beklenen": {
+        "serit": 0,
+        "kisa_tekrar_serit": 0
+      }
+    },
+    {
+      "id": "duzeltme_alinmadi",
+      "anlatim": "Kullanıcı hatayı söylüyor ama model neredeyse aynı kodu yeniden veriyor; tur modeli de yüksek güvende olduğu için kartı model açar (öncelik: model, özür, tekrar)",
+      "user": [
+        "Python'da bir CSV dosyasının sütun ortalamalarını hesaplayan kod yaz",
+        "Bu kod hata veriyor, sütunlarda metin var, düzeltir misin"
+      ],
+      "answers": [
+        "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+        "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+      ],
+      "beklenen": {
+        "kart": true,
+        "halka_en_az": 2
+      }
+    },
+    {
+      "id": "kural_yeniden_hatirlatma",
+      "anlatim": "Kullanıcı ilk mesajda bir kural koyuyor (emoji kullanma), model uymuyor, kullanıcı 'söylemiştim' diye hatırlatıyor. Kuralın hatırlatılması tetikleyici değildir: tek başına kart açmaz; kart başka bir nedenle açılırsa not ekler ve Taze başlat taslağı kuralı başa koyar (K48)",
+      "user": [
+        "Yeni kahve dükkanım için Instagram tanıtım metni yaz, hiç emoji kullanma",
+        "Söylemiştim, emoji kullanma. Aynı metni emojisiz yaz",
+        "Biraz daha kısa olsun"
+      ],
+      "answers": [
+        "☕ Sabahlarınızı güzelleştiren kahve dükkanımız açıldı! ✨ Sizi bekliyoruz.",
+        "Sabahlarınızı güzelleştiren kahve dükkanımız açıldı! Taze çekirdekler ve sıcak bir ortamla sizi bekliyoruz.",
+        "Kahve dükkanımız açıldı; taze çekirdeklerle sizi bekliyoruz."
+      ],
+      "beklenen": {
+        "kural_hatirlatildi": true,
+        "kart": false
+      }
+    }
+  ]
+}

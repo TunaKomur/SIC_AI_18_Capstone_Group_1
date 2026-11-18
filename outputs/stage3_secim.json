@@ -1,0 +1,931 @@
+{
+  "kaynak": "WildFeedback (sat_dsat_annotation)",
+  "orneklem": "secim",
+  "sohbet": 20000,
+  "not": "isabet ve memnuniyetsizlik: olay turunda ya da bir sonrakinde DSAT; aday kart öncelikte 'tekrar'dan sonra",
+  "taban": {
+    "tur": 94513,
+    "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 8.25,
+    "mevcut_sinyal_yokken_memnuniyetsizlik_yuzde": 3.72
+  },
+  "aileler": {
+    "A_donus": {
+      "olay": 61,
+      "sohbet_yuzde": 0.22,
+      "100_sohbette": 0.3,
+      "o_turda_memnuniyetsizlik_yuzde": 11.48,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 13.11,
+      "aralik_95": [
+        6.8,
+        23.8
+      ],
+      "mevcut_sinyal_var_yuzde": 13.11,
+      "mevcut_sinyal_yokken": {
+        "olay": 53,
+        "memnuniyetsizlik_yuzde": 9.43,
+        "aralik_95": [
+          4.1,
+          20.3
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 5
+    },
+    "A_geri": {
+      "olay": 50,
+      "sohbet_yuzde": 0.21,
+      "100_sohbette": 0.25,
+      "o_turda_memnuniyetsizlik_yuzde": 10.0,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 12.0,
+      "aralik_95": [
+        5.6,
+        23.8
+      ],
+      "mevcut_sinyal_var_yuzde": 42.0,
+      "mevcut_sinyal_yokken": {
+        "olay": 29,
+        "memnuniyetsizlik_yuzde": 3.45,
+        "aralik_95": [
+          0.6,
+          17.2
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 0
+    },
+    "A_hepsi": {
+      "olay": 111,
+      "sohbet_yuzde": 0.42,
+      "100_sohbette": 0.56,
+      "o_turda_memnuniyetsizlik_yuzde": 10.81,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 12.61,
+      "aralik_95": [
+        7.7,
+        20.1
+      ],
+      "mevcut_sinyal_var_yuzde": 26.13,
+      "mevcut_sinyal_yokken": {
+        "olay": 82,
+        "memnuniyetsizlik_yuzde": 7.32,
+        "aralik_95": [
+          3.4,
+          15.1
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 5
+    },
+    "A_salinim": {
+      "olay": 15,
+      "sohbet_yuzde": 0.04,
+      "100_sohbette": 0.07,
+      "o_turda_memnuniyetsizlik_yuzde": 6.67,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 6.67,
+      "aralik_95": [
+        1.2,
+        29.8
+      ],
+      "mevcut_sinyal_var_yuzde": 13.33,
+      "mevcut_sinyal_yokken": {
+        "olay": 13,
+        "memnuniyetsizlik_yuzde": 7.69,
+        "aralik_95": [
+          1.4,
+          33.3
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 1
+    },
+    "A_ve_B": {
+      "olay": 2450,
+      "sohbet_yuzde": 6.16,
+      "100_sohbette": 12.25,
+      "o_turda_memnuniyetsizlik_yuzde": 10.86,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 12.37,
+      "aralik_95": [
+        11.1,
+        13.7
+      ],
+      "mevcut_sinyal_var_yuzde": 44.57,
+      "mevcut_sinyal_yokken": {
+        "olay": 1358,
+        "memnuniyetsizlik_yuzde": 4.57,
+        "aralik_95": [
+          3.6,
+          5.8
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 46
+    },
+    "B1_genis": {
+      "olay": 402,
+      "sohbet_yuzde": 1.55,
+      "100_sohbette": 2.01,
+      "o_turda_memnuniyetsizlik_yuzde": 16.42,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 18.66,
+      "aralik_95": [
+        15.2,
+        22.8
+      ],
+      "mevcut_sinyal_var_yuzde": 48.51,
+      "mevcut_sinyal_yokken": {
+        "olay": 207,
+        "memnuniyetsizlik_yuzde": 7.73,
+        "aralik_95": [
+          4.8,
+          12.2
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 9
+    },
+    "B1_guclu": {
+      "olay": 87,
+      "sohbet_yuzde": 0.39,
+      "100_sohbette": 0.43,
+      "o_turda_memnuniyetsizlik_yuzde": 39.08,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 42.53,
+      "aralik_95": [
+        32.7,
+        53.0
+      ],
+      "mevcut_sinyal_var_yuzde": 79.31,
+      "mevcut_sinyal_yokken": {
+        "olay": 18,
+        "memnuniyetsizlik_yuzde": 16.67,
+        "aralik_95": [
+          5.8,
+          39.2
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 2
+    },
+    "B2_60": {
+      "olay": 2414,
+      "sohbet_yuzde": 5.89,
+      "100_sohbette": 12.07,
+      "o_turda_memnuniyetsizlik_yuzde": 9.65,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 11.14,
+      "aralik_95": [
+        9.9,
+        12.5
+      ],
+      "mevcut_sinyal_var_yuzde": 43.54,
+      "mevcut_sinyal_yokken": {
+        "olay": 1363,
+        "memnuniyetsizlik_yuzde": 4.18,
+        "aralik_95": [
+          3.2,
+          5.4
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 39
+    },
+    "B2_70": {
+      "olay": 2260,
+      "sohbet_yuzde": 5.44,
+      "100_sohbette": 11.3,
+      "o_turda_memnuniyetsizlik_yuzde": 9.73,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 11.15,
+      "aralik_95": [
+        9.9,
+        12.5
+      ],
+      "mevcut_sinyal_var_yuzde": 44.34,
+      "mevcut_sinyal_yokken": {
+        "olay": 1258,
+        "memnuniyetsizlik_yuzde": 4.21,
+        "aralik_95": [
+          3.2,
+          5.5
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 39
+    },
+    "B2_70_benzer_disi": {
+      "olay": 524,
+      "sohbet_yuzde": 1.35,
+      "100_sohbette": 2.62,
+      "o_turda_memnuniyetsizlik_yuzde": 5.53,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 6.3,
+      "aralik_95": [
+        4.5,
+        8.7
+      ],
+      "mevcut_sinyal_var_yuzde": 36.07,
+      "mevcut_sinyal_yokken": {
+        "olay": 335,
+        "memnuniyetsizlik_yuzde": 1.79,
+        "aralik_95": [
+          0.8,
+          3.9
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 3
+    },
+    "B2_80": {
+      "olay": 2148,
+      "sohbet_yuzde": 5.16,
+      "100_sohbette": 10.74,
+      "o_turda_memnuniyetsizlik_yuzde": 9.54,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 10.99,
+      "aralik_95": [
+        9.7,
+        12.4
+      ],
+      "mevcut_sinyal_var_yuzde": 44.97,
+      "mevcut_sinyal_yokken": {
+        "olay": 1182,
+        "memnuniyetsizlik_yuzde": 4.23,
+        "aralik_95": [
+          3.2,
+          5.5
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 36
+    },
+    "B_hepsi": {
+      "olay": 2340,
+      "sohbet_yuzde": 5.78,
+      "100_sohbette": 11.7,
+      "o_turda_memnuniyetsizlik_yuzde": 10.85,
+      "o_tur_ya_da_sonraki_memnuniyetsizlik_yuzde": 12.35,
+      "aralik_95": [
+        11.1,
+        13.7
+      ],
+      "mevcut_sinyal_var_yuzde": 45.47,
+      "mevcut_sinyal_yokken": {
+        "olay": 1276,
+        "memnuniyetsizlik_yuzde": 4.39,
+        "aralik_95": [
+          3.4,
+          5.7
+        ]
+      },
+      "yeni_yakalanan_memnuniyetsiz_tur": 41
+    }
+  },
+  "mevcut_durum": {
+    "halka1_ve_ustu_tur_yuzde": 21.43,
+    "halka1_ve_ustu_isabet_yuzde": 21.21,
+    "halka2_tur_yuzde": 9.53,
+    "halka2_isabet_yuzde": 28.67,
+    "kart_100_sohbette": 19.34,
+    "kart_isabet_yuzde": 30.94,
+    "kart_yakalama_yuzde": 33.59,
+    "yeni_kart": null
+  },
+  "aday_kurallar": {
+    "A_salinim": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 21.45,
+        "halka1_ve_ustu_isabet_yuzde": 21.2,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 21.45,
+        "halka1_ve_ustu_isabet_yuzde": 21.2,
+        "halka2_tur_yuzde": 9.54,
+        "halka2_isabet_yuzde": 28.64,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.39,
+        "kart_isabet_yuzde": 30.9,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": {
+          "sayi": 8,
+          "isabet_yuzde": 12.5
+        }
+      }
+    },
+    "A_geri": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 21.46,
+        "halka1_ve_ustu_isabet_yuzde": 21.18,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 21.46,
+        "halka1_ve_ustu_isabet_yuzde": 21.18,
+        "halka2_tur_yuzde": 9.56,
+        "halka2_isabet_yuzde": 28.6,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.48,
+        "kart_isabet_yuzde": 30.76,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": {
+          "sayi": 27,
+          "isabet_yuzde": 3.7
+        }
+      }
+    },
+    "A_hepsi": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 21.51,
+        "halka1_ve_ustu_isabet_yuzde": 21.16,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 21.51,
+        "halka1_ve_ustu_isabet_yuzde": 21.16,
+        "halka2_tur_yuzde": 9.62,
+        "halka2_isabet_yuzde": 28.51,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.68,
+        "kart_isabet_yuzde": 30.54,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": {
+          "sayi": 69,
+          "isabet_yuzde": 7.25
+        }
+      }
+    },
+    "B1_guclu": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 21.45,
+        "halka1_ve_ustu_isabet_yuzde": 21.2,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 21.45,
+        "halka1_ve_ustu_isabet_yuzde": 21.2,
+        "halka2_tur_yuzde": 9.57,
+        "halka2_isabet_yuzde": 28.64,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.52,
+        "kart_isabet_yuzde": 30.75,
+        "kart_yakalama_yuzde": 33.74,
+        "yeni_kart": {
+          "sayi": 38,
+          "isabet_yuzde": 21.05
+        }
+      }
+    },
+    "B2_70": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 22.53,
+        "halka1_ve_ustu_isabet_yuzde": 20.38,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 22.53,
+        "halka1_ve_ustu_isabet_yuzde": 20.38,
+        "halka2_tur_yuzde": 11.07,
+        "halka2_isabet_yuzde": 25.54,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 23.77,
+        "kart_isabet_yuzde": 25.89,
+        "kart_yakalama_yuzde": 35.36,
+        "yeni_kart": {
+          "sayi": 941,
+          "isabet_yuzde": 4.89
+        }
+      }
+    },
+    "B_hepsi": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 22.55,
+        "halka1_ve_ustu_isabet_yuzde": 20.37,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 22.55,
+        "halka1_ve_ustu_isabet_yuzde": 20.37,
+        "halka2_tur_yuzde": 11.11,
+        "halka2_isabet_yuzde": 25.54,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 23.93,
+        "kart_isabet_yuzde": 25.78,
+        "kart_yakalama_yuzde": 35.51,
+        "yeni_kart": {
+          "sayi": 977,
+          "isabet_yuzde": 5.53
+        }
+      }
+    },
+    "A_ve_B": {
+      "halka1": {
+        "halka1_ve_ustu_tur_yuzde": 22.62,
+        "halka1_ve_ustu_isabet_yuzde": 20.33,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "halka2": {
+        "halka1_ve_ustu_tur_yuzde": 22.62,
+        "halka1_ve_ustu_isabet_yuzde": 20.33,
+        "halka2_tur_yuzde": 11.19,
+        "halka2_isabet_yuzde": 25.42,
+        "kart_100_sohbette": 19.34,
+        "kart_isabet_yuzde": 30.94,
+        "kart_yakalama_yuzde": 33.59,
+        "yeni_kart": null
+      },
+      "kart": {
+        "halka1_ve_ustu_tur_yuzde": 21.43,
+        "halka1_ve_ustu_isabet_yuzde": 21.21,
+        "halka2_tur_yuzde": 9.53,
+        "halka2_isabet_yuzde": 28.67,
+        "kart_100_sohbette": 24.25,
+        "kart_isabet_yuzde": 25.55,
+        "kart_yakalama_yuzde": 35.51,
+        "yeni_kart": {
+          "sayi": 1043,
+          "isabet_yuzde": 5.66
+        }
+      }
+    }
+  },
+  "en_sik_sozluk_ogeleri": [
+    [
+      "b1_genis:remember",
+      242
+    ],
+    [
+      "b1_genis:i said",
+      95
+    ],
+    [
+      "b1_genis:once again",
+      38
+    ],
+    [
+      "b1_guclu:you forgot",
+      23
+    ],
+    [
+      "b1_genis:i mentioned",
+      19
+    ],
+    [
+      "geri:revert*",
+      18
+    ],
+    [
+      "b1_guclu:i told you",
+      17
+    ],
+    [
+      "uzunluk_kisa:shorter",
+      14
+    ],
+    [
+      "uzunluk_uzun:longer",
+      13
+    ],
+    [
+      "b1_genis:i asked for",
+      12
+    ],
+    [
+      "b1_guclu:how many times",
+      9
+    ],
+    [
+      "geri:go back to the",
+      9
+    ],
+    [
+      "b1_guclu:follow the instruction*",
+      9
+    ],
+    [
+      "uzunluk_uzun:elaborate*",
+      8
+    ],
+    [
+      "b1_guclu:told you to",
+      8
+    ],
+    [
+      "geri:undo",
+      8
+    ],
+    [
+      "geri:the first version",
+      7
+    ],
+    [
+      "uzunluk_kisa:condense*",
+      7
+    ],
+    [
+      "uzunluk_uzun:expand*",
+      6
+    ],
+    [
+      "b1_genis:i asked you to",
+      6
+    ],
+    [
+      "b1_guclu:i repeat",
+      5
+    ],
+    [
+      "b1_guclu:as i said",
+      5
+    ],
+    [
+      "uzunluk_kisa:shorten*",
+      4
+    ],
+    [
+      "uzunluk_uzun:write more",
+      4
+    ],
+    [
+      "uzunluk_uzun:too short",
+      3
+    ],
+    [
+      "b1_guclu:like i said",
+      3
+    ],
+    [
+      "uzunluk_uzun:add more",
+      3
+    ],
+    [
+      "geri:bring back",
+      3
+    ],
+    [
+      "duzey_basit:easier to understand",
+      3
+    ],
+    [
+      "geri:previous version",
+      3
+    ],
+    [
+      "b1_guclu:did you forget",
+      3
+    ],
+    [
+      "duzey_basit:for beginners",
+      3
+    ],
+    [
+      "uslup_resmi:too casual",
+      2
+    ],
+    [
+      "uzunluk_uzun:more details",
+      2
+    ],
+    [
+      "b1_guclu:you didn t follow",
+      2
+    ],
+    [
+      "b1_guclu:follow my instruction*",
+      2
+    ],
+    [
+      "b1_guclu:as i mentioned",
+      2
+    ],
+    [
+      "b1_genis:as instructed",
+      2
+    ],
+    [
+      "geri:old version",
+      2
+    ],
+    [
+      "b1_guclu:i ve said",
+      2
+    ],
+    [
+      "duzey_basit:simplify*",
+      2
+    ],
+    [
+      "bicim_duz:in prose",
+      1
+    ],
+    [
+      "uzunluk_uzun:flesh it out",
+      1
+    ],
+    [
+      "b1_guclu:i ve asked",
+      1
+    ],
+    [
+      "b1_guclu:i already told you",
+      1
+    ],
+    [
+      "uzunluk_uzun:more detailed",
+      1
+    ],
+    [
+      "uslup_samimi:more casual",
+      1
+    ],
+    [
+      "b1_guclu:you are ignoring",
+      1
+    ],
+    [
+      "b1_genis:i specifically",
+      1
+    ],
+    [
+      "b1_guclu:you ignored",
+      1
+    ],
+    [
+      "b1_guclu:i have told you",
+      1
+    ],
+    [
+      "duzey_basit:simpler",
+      1
+    ],
+    [
+      "geri:the original version",
+      1
+    ],
+    [
+      "bicim_liste:bullet point",
+      1
+    ],
+    [
+      "uslup_resmi:more professional",
+      1
+    ],
+    [
+      "uslup_resmi:professional tone",
+      1
+    ],
+    [
+      "uzunluk_uzun:more detail",
+      1
+    ],
+    [
+      "duzey_basit:too complex",
+      1
+    ],
+    [
+      "uzunluk_kisa:too long",
+      1
+    ]
+  ],
+  "turkce": {
+    "kaynak": "WildChat 4.8M Türkçe sohbetler (etiket yok)",
+    "sohbet": 574,
+    "vekil": "bir sonraki kullanıcı mesajında güçlü onarım ifadesi",
+    "taban_sonraki_onarim_yuzde": 6.38,
+    "aileler": {
+      "A_donus": {
+        "olay": 5,
+        "sohbet_yuzde": 0.52,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          49.0
+        ]
+      },
+      "A_geri": {
+        "olay": 2,
+        "sohbet_yuzde": 0.35,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          79.3
+        ]
+      },
+      "A_hepsi": {
+        "olay": 7,
+        "sohbet_yuzde": 0.87,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          -0.0,
+          43.4
+        ]
+      },
+      "A_salinim": {
+        "olay": 1,
+        "sohbet_yuzde": 0.17,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          79.3
+        ]
+      },
+      "A_ve_B": {
+        "olay": 68,
+        "sohbet_yuzde": 5.75,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          7.4
+        ]
+      },
+      "B1_genis": {
+        "olay": 2,
+        "sohbet_yuzde": 0.35,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          65.8
+        ]
+      },
+      "B1_guclu": {
+        "olay": 4,
+        "sohbet_yuzde": 0.7,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          65.8
+        ]
+      },
+      "B2_60": {
+        "olay": 58,
+        "sohbet_yuzde": 4.36,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          8.6
+        ]
+      },
+      "B2_70": {
+        "olay": 57,
+        "sohbet_yuzde": 4.18,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          8.6
+        ]
+      },
+      "B2_70_benzer_disi": {
+        "olay": 1,
+        "sohbet_yuzde": 0.17,
+        "sonraki_onarim_yuzde": null,
+        "aralik_95": null
+      },
+      "B2_80": {
+        "olay": 57,
+        "sohbet_yuzde": 4.18,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          8.6
+        ]
+      },
+      "B_hepsi": {
+        "olay": 61,
+        "sohbet_yuzde": 4.88,
+        "sonraki_onarim_yuzde": 0.0,
+        "aralik_95": [
+          0.0,
+          8.2
+        ]
+      }
+    },
+    "en_sik_sozluk_ogeleri": [
+      [
+        "b1_genis:unutma",
+        2
+      ],
+      [
+        "b1_guclu:kaç defa",
+        2
+      ],
+      [
+        "b1_guclu:kaç kere",
+        1
+      ],
+      [
+        "bicim_duz:paragraf olarak",
+        1
+      ],
+      [
+        "uzunluk_kisa:kısalt*",
+        1
+      ],
+      [
+        "uzunluk_kisa:çok uzun",
+        1
+      ],
+      [
+        "uzunluk_kisa:uzun oldu",
+        1
+      ],
+      [
+        "b1_guclu:dinlemiyorsun",
+        1
+      ],
+      [
+        "geri:önceki sürüm*",
+        1
+      ],
+      [
+        "bicim_liste:liste olarak",
+        1
+      ],
+      [
+        "uzunluk_kisa:daha kısa",
+        1
+      ],
+      [
+        "geri:ilk haline",
+        1
+      ],
+      [
+        "duzey_basit:daha sade",
+        1
+      ],
+      [
+        "duzey_ileri:çok basit",
+        1
+      ]
+    ]
+  }
+}

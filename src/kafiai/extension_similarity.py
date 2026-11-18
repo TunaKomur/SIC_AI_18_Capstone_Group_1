@@ -91,9 +91,30 @@ def similarity(a, b):
     return cosine(ngram_vector(normalize_text(a)), ngram_vector(normalize_text(b)))
 
 
+_SIGNAL_RULES = json.loads(
+    (Path(__file__).resolve().parents[2] / "extension" / "src" / "data" / "signal-rules.json").read_text(encoding="utf-8")
+)
+_CONTINUE = _SIGNAL_RULES["continue"]
+
+
+def is_bare_continue(text):
+    """Yönsüz devam isteği ("devam", "devam et", "tamam devam", "continue", "go on"); intents.ts ile aynı.
+
+    Yönlü devam ("devam et ama tablo olarak", "continue to day 2") sayılmaz.
+    """
+    words = set(with_folded(_CONTINUE["words"]))
+    allowed = set(with_folded(_CONTINUE["allowed"] + _CONTINUE["words"]))
+    normalized = fold_turkish(normalize_text(text))
+    tokens = normalized.split()
+    if not tokens or len(tokens) > _CONTINUE["max_words"] or not all(t in allowed for t in tokens):
+        return False
+    padded = f" {normalized} "
+    return any(t in words for t in tokens) or any(f" {p} " in padded for p in with_folded(_CONTINUE["phrases"]))
+
+
 def is_comparable(text):
-    """Eklenti 12 karakterden kısa mesajları ("devam et", "evet") hiç karşılaştırmaz."""
-    return len(normalize_text(text)) >= EXT_MIN_NORMALIZED_CHARS
+    """Eklenti 12 karakterden kısa mesajları ("devam et", "evet") ve yönsüz devam isteklerini karşılaştırmaz."""
+    return len(normalize_text(text)) >= EXT_MIN_NORMALIZED_CHARS and not is_bare_continue(text)
 
 
 _REPEAT_RULES = json.loads(

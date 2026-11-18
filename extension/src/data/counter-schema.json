@@ -89,6 +89,8 @@
         "gosterildi",
         "tetiklendi_kisa",
         "gosterildi_kisa",
+        "tetiklendi_tekrar",
+        "gosterildi_tekrar",
         "gizlendi_sayim",
         "gizlendi_rastgele",
         "gizlendi_bekleme",
@@ -96,7 +98,7 @@
         "gizlendi_platform",
         "gizlendi_kisisel"
       ],
-      "note": "Benzer mesaj şeridi. tetiklendi: koşul sağlandı; ardından gösterildi ya da gizlendi (nedeniyle) sayılır. gizlendi_kisisel: sohbet kişisel ya da duygusal görünüyor, öneri gösterilmedi (içeriği değil yalnızca sayısı). tetiklendi_kisa ve gosterildi_kisa: kısa onarım şeridi ('olmadı' gibi mesajlarda neyin olmadığını ekleme önerisi); gizlenme nedenleri iki şerit için ortak."
+      "note": "Benzer mesaj şeridi. tetiklendi: koşul sağlandı; ardından gösterildi ya da gizlendi (nedeniyle) sayılır. gizlendi_kisisel: sohbet kişisel ya da duygusal görünüyor, öneri gösterilmedi (içeriği değil yalnızca sayısı). tetiklendi_kisa ve gosterildi_kisa: kısa onarım şeridi ('olmadı' gibi mesajlarda neyin olmadığını ekleme önerisi). tetiklendi_tekrar ve gosterildi_tekrar: aynı kısa mesaj ('devam') üçüncü kez, neyle ve nasıl devam edeceğini yazma önerisi (sohbet başına bir kez). Gizlenme nedenleri şeritler için ortak."
     },
     "strip_action": {
       "dims": [
@@ -122,9 +124,11 @@
         "error",
         "expected",
         "wrong_part",
+        "continue_what",
+        "continue_how",
         "na"
       ],
-      "note": "Onarım düğmesi; ayrıntı düğmenin türü (src/core/repairs.ts). 'na': sürüm 1'den göç edilen, türü bilinmeyen sayılar."
+      "note": "Onarım düğmesi; ayrıntı düğmenin türü (src/core/repairs.ts). continue_what ve continue_how: kısa tekrar şeridindeki 'Neyle devam etsin' ve 'Nasıl devam etsin' cümleleri. 'na': sürüm 1'den göç edilen, türü bilinmeyen sayılar."
     },
     "card": {
       "dims": [
@@ -136,9 +140,11 @@
         "tetiklendi_norm",
         "tetiklendi_model",
         "tetiklendi_ozur",
+        "tetiklendi_tekrar",
         "gosterildi_norm",
         "gosterildi_model",
         "gosterildi_ozur",
+        "gosterildi_tekrar",
         "gosterildi_elle",
         "gizlendi_sayim",
         "gizlendi_rastgele",
@@ -146,9 +152,10 @@
         "gizlendi_kapali",
         "gizlendi_platform",
         "gizlendi_yaziyor",
-        "gizlendi_kisisel"
+        "gizlendi_kisisel",
+        "gizlendi_serit"
       ],
-      "note": "Çıkış kartı. norm: görev normu (K14); model: tur modeli (K17). elle: kullanıcı araç çubuğu penceresindeki 'Bu sohbet' bölümünden açtı."
+      "note": "Çıkış kartı. norm: görev normu (K14); model: tur modeli (K17); tekrar: kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı. elle: kullanıcı araç çubuğu penceresindeki 'Bu sohbet' bölümünden açtı. gizlendi_serit: aynı turda şerit gösterildi, kart en erken sonraki turda gelebilir (bir turda tek müdahale)."
     },
     "card_action": {
       "dims": [
@@ -217,6 +224,33 @@
       ],
       "note": "Haftalık içgörü. pencere: araç çubuğu penceresi içgörüyle açıldı (görev 'na'); ayrinti: bir görev satırı açıldı."
     },
+    "loop_end": {
+      "dims": [
+        "platform",
+        "task",
+        "len"
+      ],
+      "details": [
+        "toparlandi",
+        "birakildi",
+        "yeni_sohbet"
+      ],
+      "note": "Döngü görülen sohbet bittiğinde bir kez: toparlandi (döngü aynı sohbette sakinleşti), birakildi (döngü sürerken sohbetten çıkıldı), yeni_sohbet (taze başlat kullanıldı). WildFeedback'te döngülerin %62'si bırakılarak bitiyor; alışkanlık göstergesi olarak haftalık karşılaştırmaya girer."
+    },
+    "hint": {
+      "dims": [
+        "platform",
+        "task"
+      ],
+      "details": [
+        "gosterildi",
+        "ozetlet",
+        "adim_yaz",
+        "yerinde_degil",
+        "kapat"
+      ],
+      "note": "Onay zinciri önerisi: kullanıcı modelin soruyla biten cevaplarına üst üste kısa onaylarla karşılık verdi; cevabın altında, gönderimi bekletmeden, sohbet başına bir kez. ozetlet: modelden şu ana kadar anladığını özetlemesini isteyen cümle mesaj kutusuna eklendi; adim_yaz: 'Teklif sorma, bir sonraki adımı ben belirliyorum: ' başlangıcı eklendi."
+    },
     "ring": {
       "dims": [
         "platform",
@@ -238,9 +272,13 @@
         "ozur_dongusu",
         "cikis",
         "konu_kaymasi",
-        "belirsiz"
+        "belirsiz",
+        "duzeltme_alinmadi",
+        "mesaj_kisaldi",
+        "toparlandi",
+        "kural_hatirlatildi"
       ],
-      "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği. Metin yok, yalnızca sayı."
+      "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği; duzeltme_alinmadi: onarımdan sonra cevap öncekinin neredeyse aynısı; mesaj_kisaldi: döngüde şikayet bir öncekinin yarısından kısa; toparlandi: iki temiz turla sakinleşti; kural_hatirlatildi: kullanıcı bir kuralı yeniden hatırlattı (K48). Metin yok, yalnızca sayı."
     }
   }
 }

@@ -58,6 +58,12 @@ function type(text: string): void {
   findSendButton()?.removeAttribute("disabled");
 }
 
+/** Sayfanın mesajı gerçekten göndermesini taklit eder: kutu boşalır, doğrulama bir tik sonra görür (K38). */
+function pageSent(): void {
+  findComposer()!.innerHTML = "<p></p>";
+  vi.advanceTimersByTime(150);
+}
+
 function pressEnter(opts: KeyboardEventInit = {}): KeyboardEvent {
   const event = new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true, ...opts });
   findComposer()!.querySelector("p")!.dispatchEvent(event);
@@ -184,6 +190,28 @@ describe("start(): gerçek sayfa yapısında gönderme, bekletme ve cevap bitiş
     vi.useRealTimers();
   });
 
+  it("sayfa mesajı göndermezse (kutu dolu kalır) mesaj sayılmaz, onSendNotSeen çağrılır", () => {
+    const notSeen = vi.fn();
+    load("bos_sohbet");
+    stop = claudeAdapter.start({ ...handlers, onSendNotSeen: notSeen });
+    type("merhaba");
+    pressEnter();
+    vi.advanceTimersByTime(4100);
+    expect(handlers.onSend).not.toHaveBeenCalled();
+    expect(notSeen).toHaveBeenCalledTimes(1);
+  });
+
+  it("Enter'dan sonra gelen Gönder tıklaması aynı gönderimdir: bir kez sorulur, bir kez sayılır", () => {
+    load("bos_sohbet");
+    stop = claudeAdapter.start(handlers);
+    type("merhaba");
+    pressEnter();
+    findSendButton()!.click();
+    pageSent();
+    expect(handlers.onBeforeSend).toHaveBeenCalledTimes(1);
+    expect(handlers.onSend).toHaveBeenCalledTimes(1);
+  });
+
   it("Enter ile gönderilen mesajı yakalar; Shift+Enter ve boş kutu sayılmaz", () => {
     load("bos_sohbet");
     stop = claudeAdapter.start(handlers);
@@ -193,6 +221,7 @@ describe("start(): gerçek sayfa yapısında gönderme, bekletme ve cevap bitiş
     pressEnter({ shiftKey: true });
     expect(handlers.onSend).not.toHaveBeenCalled();
     pressEnter();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
@@ -203,6 +232,7 @@ describe("start(): gerçek sayfa yapısında gönderme, bekletme ve cevap bitiş
     document.querySelector<HTMLButtonElement>('[data-testid="chat-input-attach"]')!.click();
     expect(handlers.onSend).not.toHaveBeenCalled();
     findSendButton()!.click();
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
@@ -239,6 +269,7 @@ describe("start(): gerçek sayfa yapısında gönderme, bekletme ve cevap bitiş
     expect(handlers.onSend).not.toHaveBeenCalled();
     expect(claudeAdapter.submitHeld()).toBe(true);
     expect(pageClick).toHaveBeenCalledTimes(1);
+    pageSent();
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
     expect(claudeAdapter.submitHeld()).toBe(false);
   });
@@ -262,6 +293,7 @@ describe("start(): gerçek sayfa yapısında gönderme, bekletme ve cevap bitiş
     stop = claudeAdapter.start(handlers);
     type("merhaba");
     pressEnter();
+    pageSent();
     vi.advanceTimersByTime(16_000);
     expect(handlers.onNoSignal).toHaveBeenCalledTimes(1);
   });
@@ -303,7 +335,7 @@ describe("lastResponse: son cevabın başı (yalnızca özür kuralı için)", (
     const text = claudeAdapter.lastResponse!()!;
     expect(text).toMatch(/ters çevirmenin/);
     expect(text).not.toMatch(/Claude responded/);
-    expect(text.length).toBeLessThanOrEqual(600);
+    expect(text.length).toBeLessThanOrEqual(803); // ilk 600 + " … " + son 200 karakter
   });
 
   it("boş sohbette null", () => {

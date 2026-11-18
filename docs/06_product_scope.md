@@ -1,189 +1,139 @@
 # Bölüm 6: Ürün Kapsamı
 
-Bu belge KafiAI'nin kullanıcıya nasıl görüneceğini, neyi yapıp neyi yapmayacağını ve hangi özelliklerin hangi sırayla geleceğini anlatıyor. Modelin nasıl eğitildiği [Bölüm 4](04_concept_note.md) içinde, teknik kararların gerekçeleri [Bölüm 5](05_architecture_decisions.md) içinde.
+Bu belge Kâfi AI'nın kullanıcıya nasıl göründüğünü, neyi yapıp neyi yapmadığını ve neyin bilerek kapsam dışında bırakıldığını anlatıyor. Kararların gerekçeleri [Bölüm 5](05_architecture_decisions.md) içinde K numaralarıyla, modelin ayrıntıları [Bölüm 9](09_turn_model.md), dağıtım ve sonuçlar [Bölüm 10](10_deployment.md) içinde.
 
 ---
 
-## 1. Tek cümlede KafiAI
+## 1. Tek cümlede Kâfi AI
 
 **Ekran süresi değil, kısır döngü.**
 
-KafiAI, ChatGPT ve Gemini'yi tarayıcıda kullanan gençlerin yapay zekayla aynı yerde dönüp dönmediğini fark eden, bunu sakin bir göstergeyle görünür kılan ve tek tıkla çıkış yolu sunan, yapay zeka kullanımında iyi oluşla beraber insan irade ve bilincinin devre dışı kalmasının önüne geçen bir Chrome eklentisidir. Hiçbir mesaj cihazdan çıkmaz.
+Kâfi AI, ChatGPT, Gemini, Claude, Copilot ve Google AI Modu'nu tarayıcıda kullananların yapay zekayla aynı yerde dönmeye başladığını fark eden, bunu sakin bir göstergeyle görünür kılan ve tek tıkla çıkış yolu sunan bir Chrome eklentisidir. Hiçbir şeyi engellemez; hiçbir mesaj cihazdan çıkmaz. Sloganı: "Fark et. Durakla. Yeniden başla."
 
 ## 2. Kimin için?
 
-Ders ve iş için üretken yapay zeka kullanan 18 ile 30 yaş arası üniversite öğrencileri ve genç çalışanlar. Bu grup yapay zekayı çoğunlukla bilgisayarda, tarayıcı üzerinden kullanıyor; eklentinin ilk sürümü de yalnızca masaüstü Chrome'u hedefliyor.
+Ders ve iş için üretken yapay zeka kullanan 18 ile 30 yaş arası üniversite öğrencileri ve genç çalışanlar. Bu grup yapay zekayı çoğunlukla bilgisayarda, tarayıcı üzerinden kullanıyor; eklenti de masaüstü Chrome'u hedefliyor. Arayüz Türkçe; kurallar Türkçe ve İngilizce mesajları, Türkçe karaktersiz yazımı da tanır (K36).
 
 ## 3. Kullanıcı ne yaşar?
 
 ### 3.1 Kurulum
 
-Kurulumdan sonra kısa bir tanıtım ekranı çıkar. Ekranda üç şey yazar: eklentinin neye baktığı (gönderilen mesajlar ve cevabın bitişi), neye bakmadığı (klavye, diğer siteler, kişisel bilgiler) ve verinin cihazdan çıkmadığı.
-
-Kullanıcı iki tercih yapar:
-
-1. Yapay zekayı çoğunlukla ne için kullanıyor? (ders, iş, kod, kişisel)
-2. İsterse kendine bir gece sınırı koyar.
+Kurulumdan hemen sonra bir sekmede karşılama ekranı açılır (K21). Ekran eklentinin neye baktığını (gönderilen mesajlar, cevabın başı ve bitişi), neye bakmadığını (klavye, diğer siteler, kişisel bilgiler) ve verinin cihazdan çıkmadığını söyler; tek düğmesi "Anladım". Araç çubuğu penceresindeki "Kâfi AI nasıl çalışır?" bağlantısı ekranı yeniden açar.
 
 ### 3.2 Sohbet sırasında
 
-Eklenti üç katmanda çalışır. Her katman bir öncekinden daha az sıklıkla devreye girer.
+Eklenti kesinti derecesi giderek artan dört yüzeyle çalışır. Hepsi tek tıkla geçilir; bir turda en fazla biri çıkar (K39).
 
-**Katman 1: Halka**
+**Halka (K29).** Mesaj kutusunun köşesinde 18 piksellik bir halka durur. Sohbet verimli giderken neredeyse görünmezdir; döngü sinyalleri arttıkça aynı rengin tonu koyulaşır. Kırmızı alarm, puan ya da "risk" kelimesi yoktur. Üzerine gelince neyi ölçtüğünü tek satırla söyler, örneğin:
 
-Mesaj kutusunun kenarında küçük bir halka durur. Sohbet verimli giderken neredeyse görünmezdir. Döngü sinyalleri arttıkça rengi yavaşça koyulaşır. Kırmızı alarm, puan ya da "risk" kelimesi yoktur. Üzerine gelindiğinde tek satır açıklama çıkar:
+> Son mesajlarından 2 tanesi öncekilere çok benziyor.
 
-> Son üç mesajın birbirine çok benziyor.
+Halkayı tur modeli ve sohbet sinyalleri besler: benzer mesajlar, özürle başlayan cevaplar, üst üste belirsiz istekler ve "düzeltme alınmadı" (kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı, K44). İki temiz tur gelince sakinleşir (K45).
 
-Halkayı model besler. Model yanılsa bile kullanıcının önüne hiçbir şey çıkmaz; yalnızca halkanın tonu değişir.
+**Gönderirken şerit.** Mesaj gönderilmeden hemen önce, mesaj kutusunun üstünde ince bir şerit çıkar. Üç durumda:
 
-**Katman 2: Gönderirken yakalama**
+| Şerit | Ne zaman | Ne der | Düğmeler |
+|---|---|---|---|
+| Benzer mesaj (K37, K26) | Mesaj son mesajlardan biriyle birebir aynı ya da öncekine çok benziyor ve "olmadı" gibi bir onarım ifadesi taşıyor | "Bunu az önce de sormuştun." İkinci denemede "Aynı isteğe ikinci kez dönüyorsun."; üçüncüde "Birkaç denemedir aynı yerdesin." | "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede önce "Yeni sohbete geç" |
+| Kısa düzeltme (K34, K40) | 12 karakterden kısa bir onarım ifadesi ("olmadı", "yanlış"); ilk mesajda ve soruyla biten bir teklife verilen yalın "hayır"da çıkmaz | "Neyin olmadığını bir cümleyle eklersen cevap daha isabetli olur." | "Hata mesajını ekle" ya da "Neyin yanlış olduğunu yaz", "Beklediğimi yaz", "Olduğu gibi gönder" |
+| Kısa devam (K41, K43) | Üst üste üçüncü yönsüz devam isteği ("devam", "devam et", "continue") | "Üst üste üçüncü kez kısa bir mesajla devam ediyorsun." | "Neyle devam etsin, yaz", "Nasıl devam etsin, yaz", "Olduğu gibi gönder" |
 
-Kullanıcı son mesajlarından birine çok benzeyen bir mesaj göndermek üzereyse, mesaj kutusunun üstünde ince bir şerit belirir:
+Hazır cümle seçilince mesaj kutusuna eklenir; kullanıcı tamamlayıp kendisi gönderir. Bilerek yapılan seri istekler ("başka bir slogan öner", "sonraki soruyu sor") ve yeni içerik getiren mesajlar ("1. soruyu çöz" / "2. soruyu çöz") şerit açmaz (K20). Her şeritte "Yerinde değildi" ve "Kapat" vardır.
 
-> Bunu az önce de sormuştun.
-> **Yine de gönder** · **Neyin eksik olduğunu söyle**
+**Çıkış kartı.** Döngü sürerse, yapay zekanın cevabı bittikten sonra ve kullanıcı yazmaya başlamadan önce küçük bir kart görünür. Nedenini ve somut bir öneriyi söyler. Dört yoldan açılır:
 
-İkinci seçenek üç hazır onarım düğmesi açar:
-
-| Düğme | Mesaj kutusuna eklenen cümle |
-|---|---|
-| Biçim yanlış | "Cevabın içeriği doğru ama biçimi istediğim gibi değil. Şu biçimde yaz: ___" |
-| Bilgi yanlış | "Önceki cevabın şu kısmı yanlış: ___. Sadece onu düzelt." |
-| Fazla uzun ya da kısa | "Aynı cevabı daha kısa (ya da daha ayrıntılı) yaz." |
-
-Kullanıcı boşlukları doldurur ve gönderir. Bu katman tahmine değil, gerçekten olmuş bir tekrara dayandığı için isabeti yüksektir.
-
-**Katman 3: Çıkış kartı**
-
-Döngü sürerse, yapay zekanın cevabı bittikten sonra ve kullanıcı yazmaya başlamadan önce küçük bir kart görünür:
-
-> Kod hatası sohbetlerinin çoğu 6 turda bitiyor, bu 11. tur. Uzun sohbetlerde yapay zeka modelleri yolunu kaybedebiliyor; isteklerini tek mesajda toplayıp yeni sohbet açmak genelde daha hızlı.
-> **Taze başlat** · **Kısa ara ver** · **Kapat**
-
-"Taze başlat" düğmesi, kullanıcının o sohbette yazdığı istekleri madde madde tek bir taslakta toplar. Bu işlem cihazda, basit metin birleştirmeyle yapılır. Kullanıcı taslağı düzenler; taslak panoya kopyalanır ve yeni bir sohbet açılır.
-
-Karttaki sayılar (bu tür işlerin genelde kaç turda bittiği) WildChat'teki talep türlerinin ortanca tur sayısından hesaplanır. Kart yalnızca bu sınırı aşan kullanıcılara gösterilir.
-
-**Öğrenme sorusu**
-
-Talep ödev ya da kavram öğrenmeye benziyorsa oturumda bir kez sorulur:
-
-> Bunu öğrenmek mi, bitirmek mi istiyorsun?
-
-Cevap "öğrenmek" ise iki öneri gelir: istemin başına "Önce ipucu ver, cevabı hemen söyleme" eklemek ve sohbetin sonunda "Bana bu konuda 3 kısa soru sor" demek.
-
-### 3.3 Haftalık özet
-
-Eklenti panelinde haftada bir güncellenen kısa bir özet bulunur. Özetteki her şey tahmin değil, kesin sayımdır:
-
-| Bölüm | Örnek |
-|---|---|
-| Genel görünüm | Bu hafta 34 yapay zeka oturumu, 6'sında döngü |
-| Ne zaman | Döngülerin 4'ü saat 23:00'ten sonra |
-| Ne tür işte | En çok kod hatası ayıklarken |
-| Ne işe yaradı | "Taze başlat" 3 kez kullanıldı, 2'sinde sohbet 3 turda bitti |
-| Değişim | Geçen haftaya göre daha az döngü |
-
-Bu ekranda yargılayan bir dil kullanılmaz, kimseyle kıyaslama ya da sıralama yapılmaz.
-
-### 3.4 Destek yolu
-
-Destek yolu kademelidir ve her adım kullanıcının isteğine bağlıdır:
-
-1. Sohbet içinde onarım ve çıkış önerileri
-2. Haftalık özet
-3. Birkaç hafta üst üste yoğun örüntü görülürse isteğe bağlı kısa bir öz değerlendirme
-4. Kullanıcı isterse Yeşilay Danışmanlık Merkezi (YEDAM) bilgisi. Mesai saatleri dışında telefon yerine e-randevu bağlantısı gösterilir.
-
-Tek bir sohbete bakılarak kimse YEDAM'a yönlendirilmez. Metinler "İstersen..." diye başlayan, kişiyi suçlamayan bir dille yazılır.
-
-## 4. Özellikler ve öncelik sırası
-
-| Öncelik | Özellik | Ne işe yarar |
+| Kaynak | Ne zaman | Kartın etiketi |
 |---|---|---|
-| Çekirdek | ChatGPT ve Gemini sohbetlerini okuma | Gönderilen mesajları ve cevabın bitişini yakalar |
-| Çekirdek | Tekrar tespiti ve gönderirken uyarı şeridi | Tekrarı olduğu anda yakalar |
-| Çekirdek | Onarım düğmeleri | Kullanıcıya neyin eksik olduğunu söylemenin hazır yolunu verir |
-| Çekirdek | Halka | Modelin erken sinyalini sakin bir şekilde gösterir |
-| Çekirdek | Çıkış kartı, görev normları ve "Taze başlat" | Uzayan döngüden tek tıkla çıkış |
-| Çekirdek | Ayarlar | Hassasiyet, kapatma, "bu öneri yerinde değildi", tüm veriyi silme |
-| Çekirdek | Haftalık özet | Örüntüyü kesin sayımlarla görünür kılar |
-| İkinci dalga | Öğrenme sorusu ve "kendini test et" önerisi | Öğrencilerin aracı düşünmeyi destekleyecek şekilde kullanması |
-| İkinci dalga | Kademeli destek yolu ve YEDAM e-randevu bağlantısı | Gerektiğinde profesyonel desteğe kapı açar |
-| İkinci dalga | Kendi koyduğun gece sınırı ve "yarına ertele" | Gece saatlerinde açılan yeni sohbetler için hatırlatma |
-| Sonraki sürüm | Copilot ve Claude desteği | Daha fazla platform |
-| Sonraki sürüm | Kişiye göre ayarlanan eşik | Herkesin kendi alışkanlığına göre öneri |
-| Sonraki sürüm | Veri bağışı | Kullanıcının kendi ChatGPT verisini, içerik paylaşmadan, yalnızca özet öznitelik olarak bağışlaması |
-| Sonraki sürüm | Telefon uygulaması | Mobil kullanımın da görülmesi |
+| Tur modeli (K17, K35) | Yüksek güven (olasılık en az 0,30) ve sohbette en az bir "olmadı" ifadesi | "Modelin önerisi"; gerekçe ve öneri modelin en çok etkilenen özniteliğinden |
+| Özür döngüsü (K32) | Yapay zekanın cevapları üst üste iki kez özürle başladı | "Aynı yerde dönüyor" |
+| Düzeltme alınmadı (K44) | Kullanıcı düzeltme istedi, cevap öncekinin neredeyse aynısı | "Düzeltme alınmadı" |
+| Uzun sohbet (K14, K33) | Sohbet görev türünün normunu aştı, son mesajlarda benzer mesaj var ve model en az öneri seviyesinde | "Uzun sohbet" |
+
+Kullanıcı sohbette bir kuralı yeniden hatırlatmak zorunda kaldıysa ("söylemiştim, emoji kullanma"), kart ayrıca şunu söyler: "Bu sohbette bir kuralı yeniden hatırlatman gerekti. Taze başlat taslağı bu kuralı en başa koyar; yeni sohbette baştan geçerli olur." (K48)
+
+Kartın düğmeleri: **Taze başlat**, **Kısa ara ver**, **Kapat**; model kaynaklı kartta **Yerinde değildi**; ayrıca **Bir daha gösterme**. Kart kapanınca 5 tur bekleme süresi başlar.
+
+**Taze başlat.** Kullanıcının o sohbette yazdığı istekleri tek bir taslakta toplar: birbirine çok benzeyen denemeler tek maddeye iner, konu değiştiyse yalnızca son konunun istekleri girer (K32), yeniden hatırlatılan kurallar en başa konur (K48). Taslağın sonunda kullanıcının dolduracağı iki satır vardır: "Beklediğim sonuç:" ve "Önceki denemelerde olmayan kısım:". Gerekçe: yeni sohbet tek başına döngüyü çözmüyor, isteğin netleşmesi gerekiyor. Bu işlem cihazda, basit metin birleştirmeyle yapılır; hiçbir model ya da ağ kullanılmaz. Kullanıcı taslağı düzenler; taslak panoya kopyalanır ve yeni bir sohbet açılır.
+
+**Yön sende (K42, K49).** Kullanıcı modelin teklif sorularına ("… ekleyeyim mi?") üst üste üç kez yalnızca "evet", "aynen", "tamam" gibi kısa onaylarla karşılık verirse cevabın altında bir öneri çıkar: "İstersen devam etmeden önce modelin şu ana kadar ne anladığını özetlemesini iste ya da bir sonraki adımı kendin yaz." Düğmeler: **Özetlet** (modelden üç maddelik özet ve seçenek isteyen cümle) ve **Adımı ben yazayım** ("Teklif sorma, bir sonraki adımı ben belirliyorum: "). Gönderimi bekletmez, odağı almaz, sohbet başına bir kez çıkar.
+
+### 3.3 Araç çubuğu penceresi
+
+| Bölüm | İçerik |
+|---|---|
+| Bu sohbet | Açık sohbetin o anki durumu: son mesajlardaki benzerlik, özür serisi, belirsiz istekler, konu değişimi; kullanıcı "oldu" dediyse "şimdilik bir şey önermiyorum". İstenirse çıkış kartı buradan açılır (K24) |
+| Son 7 gün | Sayaçlardan hesaplanan içgörüler: görev türüne göre sohbet ve tekrar sayısı, görev normu, uzun sohbetler, saat dilimi, platform dağılımı, Taze başlat'tan sonra yeni sohbetlerin kaç turda bittiği, önceki haftayla sayı karşılaştırması ve "İstersen…" tonunda tek öneri. En az 5 sohbet gerekir |
+| Eklentinin yaptıkları | Son 7 günün sayıları: benzer mesaj uyarısı, "Yine de gönder", eklenen eksik cümlesi, çıkış kartı (ve bunlardan modelin önerdiği), Taze başlat |
+| Ayarlar | Eklenti açık, Öneriler (kapalıyken "yalnızca say"), Halka, Çıkış kartı; "Sayaçlarımı kopyala", "Tüm verilerimi sil", "Kâfi AI nasıl çalışır?" |
+
+Bu ekranda yargılayan bir dil kullanılmaz; kimseyle kıyaslama, sıralama, puan ya da seri yoktur.
+
+### 3.4 Destek ve sınırlar
+
+Kâfi AI bir verimlilik ve farkındalık aracıdır; profesyonel desteğin yerini almaz ve kimseyi bir destek kanalına yönlendirmez. Kişisel ve duygusal sohbetlerde hiçbir öneri göstermez (K23).
+
+## 4. Özellikler ve durum
+
+| Özellik | Durum | Not |
+|---|---|---|
+| Beş sitede sohbetleri okuma | Hazır | ChatGPT, Gemini, Claude, Copilot, Google AI Modu. Gönderim doğrulaması, çift olay koruması ve satır içi ekleme beşinde ortak (K38). ChatGPT'de canlı sitede elle doğrulandı; diğer dört site temizlenmiş sayfa görüntüleriyle test ediliyor |
+| Benzer mesaj şeridi ve onarım cümleleri | Hazır | Karakter 3-gram benzerliği, son 5 mesaj; gönderim yalnızca birebir tekrarda ve onarım ifadesinde bekletilir (K37) |
+| Kısa düzeltme ve kısa devam şeritleri | Hazır | K34, K40, K41, K43 |
+| Halka | Hazır | Üç seviye; ayardan kapatılabilir (K29) |
+| Tur modeli | Hazır | 22 öznitelikli lojistik regresyon, kalibre, beş sitede açık (K17, K25) |
+| Sohbet sinyalleri | Hazır | Özür döngüsü, çıkış, belirsiz istek, konu kayması, düzeltme alınmadı, davranışsal çıkış, kuralın yeniden hatırlatılması (K32, K44, K45, K48) |
+| Çıkış kartı ve Taze başlat | Hazır | Dört kaynak; taslakta netleştirme satırları ve hatırlatılan kurallar |
+| Yön sende önerisi | Hazır | İki düğme (K49) |
+| Araç çubuğu penceresi ve haftalık içgörü | Hazır | K24 |
+| Karşılama ekranı | Hazır | K21 |
+| Kişisel sohbette öneri yok | Hazır | Kural tabanlı (K23) |
+| Yalnızca say modu | Hazır | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca sayılır |
+| Ağ isteği yok | Hazır | Eklenti sayfalarında `connect-src 'none'`; içerik betiği için derlenmiş kodu denetleyen test (K11) |
+| Chrome Web Store yayını | Planlandı | Bölüm 10 |
 
 ## 5. Ürünün yapmayacakları
 
 - Mesaj metnini saklamaz ve hiçbir sunucuya göndermez. Kodda ağ isteği yoktur.
 - Klavye tuşlarını izlemez, diğer sitelere bakmaz.
-- Hiçbir şeyi engellemez, süre sınırı koymaz.
+- Hiçbir şeyi engellemez, süre sınırı koymaz. Bekletilen bir mesaj tek tıkla olduğu gibi gönderilir.
 - "Bağımlısın" demez, puan vermez; seri, rozet ya da oyunlaştırma kullanmaz.
 - Ebeveyn ya da işveren modu yoktur; eklenti yalnızca kullanıcının kendisine konuşur.
 - Kişisel ve duygusal sohbetlerde verimlilik önerisi göstermez.
+- Sohbetin içeriğini anlamaya çalışmaz; özetlemeyi ya da yeniden yazmayı sohbetteki yapay zeka yapar, Kâfi AI yalnızca hazır cümleyi kutuya koyar.
 - Sayfa yapısı değişip emin olamadığında sessizce devre dışı kalır.
 
 ## 6. Arka planda neler çalışıyor?
 
-Eklentinin içinde iki ayrı karar mekanizması bulunur:
+Eklentinin içinde iki tür karar mekanizması var:
 
 | Mekanizma | Neye dayanır | Neyi tetikler | Yanılırsa ne olur |
 |---|---|---|---|
-| Kesin kurallar | Mesaj benzerliği, tur sayısı, görev normları | Uyarı şeridi; görev normunu aşan sohbette çıkış kartı | Nadiren yanılır, çünkü olmuş bir şeyi ölçer (şerit eşiğinde tahmini isabet %83) |
-| Tur modeli | Kullanıcının o ana kadarki mesajlarından 22 öznitelik; kalibre edilmiş olasılık | Yalnızca yüksek güvende ve sohbette en az bir "olmadı" ifadesi varsa gerekçeli çıkış kartı | Kart kapatılabilir; testte kart açıldığında yaklaşık 8 seferden 3'ünde sohbet gerçekten döngüye giriyor |
+| Ölçülmüş kurallar | Mesaj benzerliği, onarım ifadeleri, kısa mesajlar, cevabın başı ve sonu, görev normları | Şeritler; halkanın çoğu seviyesi; özür, düzeltme alınmadı ve uzun sohbet kartları; Yön sende önerisi | Olmuş bir şeyi ölçtükleri için isabetleri yüksek; en isabetlileri kısa düzeltme şeridi (%57,7) ve düzeltme alınmadı kartı (%51,4) |
+| Tur modeli | Kullanıcının o ana kadarki mesajlarından 22 öznitelik; kalibre edilmiş olasılık | Halkanın öneri seviyesi; yalnızca yüksek güvende ve sohbette en az bir "olmadı" ifadesi varsa gerekçeli çıkış kartı | Kart kapatılabilir ve "Yerinde değildi" ile işaretlenebilir; model kartlarının isabeti %27,7 |
 
-İlk tasarımda model yalnızca halkanın tonunu etkileyecekti, çünkü tek bir sohbet için erken tahminin isabeti sınırlı. Model kalibre edilip kanıt şartı eklendikten sonra (Bölüm 5, K17) kartı da açabiliyor; ama kart yine engellemiyor, gerekçesini söylüyor ve "Yerinde değildi" seçeneği sunuyor. Halka henüz yok.
+İsabet sayıları WildFeedback'teki 20.000 gerçek sohbette yeniden oynatmadan (Bölüm 10, 6.3). Hiçbir uyarı her seferinde haklı değil; bu yüzden hiçbiri bir şeyi engellemiyor.
 
-## 7. Pilot çalışma
+## 7. Değerlendirme
 
-> **Kapsam notu (Kasım 2026).** KafiAI bu dönem prototip olarak sunulacak; pilot yapılmayacak. Bu bölüm sonraki çalışma için plan olarak duruyor.
+Pilot yapılmadı (K28). Ürünün başarısı iki yoldan ölçüldü:
 
-| Konu | Plan |
-|---|---|
-| Katılımcılar | Yakın çevremizden 10 kişi; 18 ile 30 yaş arası, yapay zekayı ders veya iş için kullanan |
-| Süre | Bir hafta. İlk iki gün öneriler kapalı, yalnızca sayım yapılır; sonraki günler öneriler açılır. |
-| Hazırlık | Kısa aydınlatma metni, rıza formu, kurulum rehberi |
-| Ölçülenler | Şerit veya kart gösterildikten sonraki mesajın tekrar olma oranı; "yerinde değildi" oranı; düğmelerin kullanımı; hafta sonunda kısa anket |
-| Nasıl sunulacak | Doğruluk iddiası olmadan, bir uygulanabilirlik denemesi olarak. Katılımcıların yakın çevreden seçildiği ve sayının küçük olduğu açıkça yazılacak. |
-
-## 8. Başarıyı nasıl anlayacağız?
-
-| Soru | Ölçüt |
-|---|---|
-| Öneriler işe yarıyor mu? | Şerit veya kart gösterildikten sonra bir sonraki mesajın tekrar olma oranı, öneri kapalıyken olan orandan düşük mü? |
-| Kullanıcıyı rahatsız ediyor mu? | "Yerinde değildi" oranı ve eklentiyi kapatan kullanıcı sayısı |
-| Anlaşılıyor mu? | Ankette "neden uyarıldığımı anladım" diyenlerin oranı |
-| Gizlilik vaadi tutuyor mu? | Eklentinin hiçbir ağ isteği yapmadığının açık kaynak kodla gösterilmesi |
-
-## 9. Uygulama durumu (Kasım 2026)
-
-Yukarıdaki bölümler hedef ürünü anlatıyor. Aşağıdaki tablo `extension/` klasöründeki gerçek durumu gösteriyor. Bu bölüm her önemli özellikten sonra güncellenir.
-
-| Özellik | Durum | Not |
+| Yol | Ne ölçülüyor | Nerede |
 |---|---|---|
-| ChatGPT ve Gemini sohbetlerini okuma | Hazır | Gönderme, cevabın bitişi, sohbet geçişi ve geçmişi okuma iki sitede de canlı sınandı. Gemini Gems sayfaları ve çok uzun sohbetlerde tembel yüklenen geçmiş doğrulanmadı. Claude, Copilot ve Google AI Modu henüz yok. |
-| Tekrar tespiti ve gönderirken uyarı şeridi | Hazır | Karakter 3-gram, son 5 mesaj. Şerit eşiği 0,8; 0,6 ile 0,8 arası yalnızca çıkış kartı için sayılır (Bölüm 5, K14). "Yine de gönder", "Yerinde değildi", "Kapat" seçenekleri var. Mesaj yeni bir içerik kelimesi getiriyorsa şerit çıkmaz (K20). |
-| Onarım düğmeleri | Hazır | Seçilen cümle mesaj kutusuna yeni satır olarak eklenir. |
-| Tur modeli | Hazır | 22 öznitelikli Logistic Regression, eklentide JSON olarak (`src/data/turn-model.json`); her gönderimde yeniden hesaplanır. Python ile birebir aynı sonucu verdiği parite testleriyle kontrol ediliyor (Bölüm 9, K17). |
-| Çıkış kartı ve "Taze başlat" (Katman 3) | Hazır | İki yoldan açılır: görev normunu aşan ve en az bir tekrar olan sohbet (K14) ya da modelin yüksek güvenli tahmini ve kanıt şartı (K17). Model kaynaklı kart gerekçe, somut öneri ve "Yerinde değildi" düğmesi gösterir. "Taze başlat", "Kısa ara ver", "Kapat" ve "Bir daha gösterme" çalışıyor. 5 tur bekleme süresi iki yol için de aynı. |
-| Halka (Katman 1) | Yok | Yalnızca sağlık ölçütlerini geçerse, bayrak arkasında ve varsayılan kapalı eklenecek. |
-| Öğrenme sorusu | Yok | İkinci dalga. |
-| Ayarlar | Kısmen | Eklenti açma/kapama, "Öneriler" (kapalıyken yalnızca say modu), çıkış kartı açma/kapama, "Sayaçlarımı kopyala" ve "Tüm verilerimi sil" araç çubuğu penceresinde. Hassasiyet ayarı yok. "Yerinde değildi" şeritte ve model kartında, yalnızca sayaç olarak. |
-| Haftalık özet | Kısmen | Pencerede son 7 günün sayaçları var (şerit, "Yine de gönder", onarım, çıkış kartı, modelin önerdiği kartlar, "Taze başlat"). Saat, görev türü, platform ve önceki haftayla değişim bölümleri yok. |
-| Kurulum tanıtım ekranı ve tercihler | Kısmen | Tanıtım ekranı hazır: ilk kurulumda açılır, pencereden yeniden açılabilir (K21). Kullanım amacı ve gece sınırı tercihleri sorulmuyor. |
-| Kademeli destek yolu ve YEDAM bağlantısı | Yok | İkinci dalga. Eklenti şu an hiçbir yere yönlendirme yapmıyor. |
-| Gece sınırı ve "yarına ertele" | Yok | İkinci dalga. |
-| Ağ isteği yok | Hazır | Eklenti sayfaları ve arka plan çalışanında `connect-src 'none'`; içerik betiği için derlenmiş kodda ağ API'si geçmediğini denetleyen test (Bölüm 5, K11). |
+| Çevrimdışı yeniden oynatma | Eklentinin karar zinciri WildFeedback'teki 20.000 gerçek sohbette tur tur oynatılıyor; her müdahalenin gerçek memnuniyetsizlikle ne kadar örtüştüğü. Kural seçimi ayrık bir seçim örnekleminde, doğrulama rapor örnekleminde | `scripts/evaluate_replay.py`, `outputs/replay_eval.json` |
+| Gerçek kullanım senaryoları | 22 Türkçe senaryoda beklenen davranış (şerit, halka, kart, konu değişimi, kişisel sohbet) | `tests/fixtures/scenarios_tr.json`, `tests/test_scenarios.py` |
+| Elle doğrulama | ChatGPT'de gerçek kullanımda davranışın ve konsol günlüklerinin kontrolü | Bölüm 5, K38 ve K39 |
 
-**Pilot ölçüm altyapısı.** "Öneriler" kapalıyken eklenti yalnızca sayar: şerit ve çıkış kartı gösterilmez, mesajlar bekletilmez. Gönderilen mesajlar açık ve kapalı günler için ayrı sayılır (karşılaştırılabilen ve bunlardan benzer olan gönderimler). Günlük tekrar oranı, benzer gönderimlerin karşılaştırılan gönderimlere bölünmesiyle bulunur. Kapalıyken şerit, çıkış kartı ya da model kartı gösterilecek olsaydı bu da ayrıca sayılır. Sayaçlar yalnızca sayıdır; pencereden "Sayaçlarımı kopyala" ile alınabilir.
+Gerçek kullanımda önerilerin ne sıklıkta çıktığı ve hangi düğmenin seçildiği, kullanıcının kopyalayabildiği sayaç dökümüyle izlenebilir (Bölüm 10, 6.1).
 
-**Pilottan önce eksik olanlar.** (Pilot bu dönem yapılmayacağı için sonraki çalışmaya kalan işler.)
+## 8. Başarıyı nasıl anlıyoruz?
 
-- Bölüm 8'deki ilk ölçüt ("şerit veya kart gösterildikten sonra bir sonraki mesajın tekrar olma oranı") ile uygulanan ölçüt (günlük tekrar oranı) aynı tanım değil; pilot hazırlığında uygulanan tanıma eşitlenecek.
-- Açık ve kapalı günleri katılımcı elle değiştiriyor; kurulumdan itibaren otomatik geçiş yok.
-- Sayaçlar platform, saat dilimi ve sohbet uzunluğuna göre ayrılmıyor (sayaç şemasının ikinci sürümünde).
-- Rıza ve aydınlatma metni, kurulum rehberi ve anket henüz hazır değil.
+| Soru | Ölçüt | Bugünkü değer |
+|---|---|---|
+| Uyarılar doğru anda mı çıkıyor? | Uyarı turunda ya da sonrakinde kullanıcının memnuniyetsiz olma oranı, tüm turlardaki orana göre (%5,04) | Kart %31,0, halka koyu seviye %29,9, benzer mesaj şeridi %21,5, kısa düzeltme şeridi %57,7 |
+| Döngüyü kaçırıyor muyuz? | Kullanıcının iki kez şikayet ettiği sohbetlerde kartın ikinci şikayetten önce gelme oranı | %32,3 |
+| Rahatsız ediyor mu? | 100 sohbette kaç uyarı | Kart 19,1, şerit 10,1 |
+| Gizlilik vaadi tutuyor mu? | Derlenmiş kodda ağ isteği, `eval` ve izinsiz adres olmadığının her test çalıştırmasında gösterilmesi | Test geçiyor |
+
+## 9. Kapsam dışı
+
+İlk ürün tasarımında olan ama bu dönem yapılmayan işler (K50): öğrenme sorusu ("Bunu öğrenmek mi, bitirmek mi istiyorsun?"), kendi koyduğun gece sınırı, kurulumda kullanım amacı tercihi, kademeli destek yolu ve YEDAM bağlantısı, hassasiyet ayarı, kişiye göre ayarlanan eşik, veri bağışı ve telefon uygulaması. Tur modelinin daha uzun sohbetlere uzatılması ve WildFeedback etiketiyle yeniden eğitilmesi sonraki çalışma olarak duruyor. ChatGPT'de durdur düğmesi, menüdeki yeniden üretme ve cevap sürümü gibi yeni davranış sinyalleri, eğitim ve değerlendirme verisinde bulunmadıkları için eklenmedi.

@@ -34,6 +34,7 @@ export class ExitCardPolicy {
   private highRiskTurn = -1;
   private suggestTurn = -1;
   private apologyTurn = -1;
+  private ignoredRepairTurn = -1;
   /** Tur modeli bu sohbette en az bir tahmin yaptı mı? */
   private modelSeen = false;
 
@@ -64,12 +65,18 @@ export class ExitCardPolicy {
   clearRepeats(): void {
     this.repeats = 0;
     this.apologyTurn = -1;
+    this.ignoredRepairTurn = -1;
     this.suggestTurn = -1;
   }
 
   /** Cevaplar üst üste özürle başladı (src/core/signals.ts); iki ve üstü kartı açabilir (K32). */
   noteApologies(streak: number, turns: number): void {
     if (streak >= APOLOGY_CARD_STREAK) this.apologyTurn = turns;
+  }
+
+  /** Bu turda kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı (kaynak "tekrar"). */
+  noteIgnoredRepair(turns: number): void {
+    this.ignoredRepairTurn = turns;
   }
 
   /** Tur modelinin bu turdaki tahmini. Yalnızca "yuksek" seviye kartı açabilir. */
@@ -89,9 +96,10 @@ export class ExitCardPolicy {
    * Model yolu önce gelir, çünkü gerekçe gösterebilir. Sayaçlar "tetiklendi" ile "gösterildi"
    * arasındaki farkı (bekleme, ayar, sayım modu) bu sayede ayırabiliyor.
    */
-  triggerSource(turns: number): "norm" | "model" | "ozur" | null {
+  triggerSource(turns: number): "norm" | "model" | "ozur" | "tekrar" | null {
     if (this.highRiskTurn === turns) return "model";
     if (this.apologyTurn === turns) return "ozur";
+    if (this.ignoredRepairTurn === turns) return "tekrar";
     if (this.longAndLooping(turns)) return "norm";
     return null;
   }
@@ -102,6 +110,22 @@ export class ExitCardPolicy {
     return this.modelSeen ? this.suggestTurn === turns : this.repeats >= EXIT_CARD_MIN_REPEATS_NO_MODEL;
   }
 
+  /** Bu turun mesajı için şerit gösterildi (bir turda tek müdahale). */
+  private stripTurn = -1;
+
+  /** Şerit gösterildi; turns, şeridin ait olduğu mesajın tur numarasıdır (gönderimden sonraki sayı). */
+  noteStrip(turns: number): void {
+    this.stripTurn = turns;
+  }
+
+  /**
+   * Aynı turda şerit çıktıysa kart o turda gösterilmez, en erken sonraki turda gelebilir. Yeniden
+   * oynatmada (20.000 sohbet) kart 100 sohbette 18,9'dan 18,4'e, yakalama %28,7'den %28,5'e iniyor.
+   */
+  stripShownThisTurn(turns: number): boolean {
+    return this.stripTurn === turns;
+  }
+
   /** Kart kısa süre önce kapatıldı ya da yok sayıldı; bekleme süresi dolmadı. */
   inCooldown(turns: number): boolean {
     return turns < this.quietUntilTurn;
@@ -109,7 +133,9 @@ export class ExitCardPolicy {
 
   shouldShow(turns: number): boolean {
     if (turns < this.quietUntilTurn) return false;
-    return this.longAndLooping(turns) || this.highRiskTurn === turns || this.apologyTurn === turns;
+    return (
+      this.longAndLooping(turns) || this.highRiskTurn === turns || this.apologyTurn === turns || this.ignoredRepairTurn === turns
+    );
   }
 
   /** Kart kapatıldı ya da yok sayıldı: bir süre tekrar çıkmasın. */
@@ -124,6 +150,8 @@ export class ExitCardPolicy {
     this.highRiskTurn = -1;
     this.suggestTurn = -1;
     this.apologyTurn = -1;
+    this.ignoredRepairTurn = -1;
     this.modelSeen = false;
+    this.stripTurn = -1;
   }
 }

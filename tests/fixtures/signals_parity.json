@@ -199,6 +199,243 @@
         "emin misin",
         true
       ]
+    ],
+    "bare_continue": [
+      [
+        "devam",
+        true
+      ],
+      [
+        "Devam et",
+        true
+      ],
+      [
+        "tamam devam",
+        true
+      ],
+      [
+        "devam edebilir misin lütfen",
+        true
+      ],
+      [
+        "kaldığın yerden devam et",
+        true
+      ],
+      [
+        "continue",
+        true
+      ],
+      [
+        "go on",
+        true
+      ],
+      [
+        "devam et ama tablo olarak",
+        false
+      ],
+      [
+        "continue to day 2",
+        false
+      ],
+      [
+        "next",
+        false
+      ],
+      [
+        "evet",
+        false
+      ]
+    ],
+    "affirmation": [
+      [
+        "evet",
+        true
+      ],
+      [
+        "aynen",
+        true
+      ],
+      [
+        "tamam",
+        true
+      ],
+      [
+        "hayır gerek yok",
+        true
+      ],
+      [
+        "evet lutfen",
+        true
+      ],
+      [
+        "devam",
+        false
+      ],
+      [
+        "evet harika",
+        false
+      ],
+      [
+        "tamam devam",
+        false
+      ]
+    ],
+    "ignored_repair": [
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "olmadı, hala TypeError veriyor"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+        ],
+        "expected": [
+          false,
+          true
+        ]
+      },
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "şimdi grafiğini de çiz"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Şu kodu deneyebilirsiniz:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar."
+        ],
+        "expected": [
+          false,
+          false
+        ]
+      },
+      {
+        "user": [
+          "CSV ortalamalarını hesaplayan kod yaz",
+          "olmadı, hala TypeError veriyor"
+        ],
+        "answers": [
+          "Şu kodu deneyin:\n```python\nimport pandas as pd\ndf = pd.read_csv('veri.csv')\nprint(df.mean())\n```\nBu kod sütun ortalamalarını hesaplar.",
+          "Haklısınız. Sütunları önce sayıya çevirelim: df = df.apply(pd.to_numeric, errors='coerce') ardından ortalamayı alın."
+        ],
+        "expected": [
+          false,
+          false
+        ]
+      }
+    ],
+    "restate": [
+      [
+        "Sana söylemiştim, tablo kullanma.",
+        true
+      ],
+      [
+        "soylemistim tablo kullanma",
+        true
+      ],
+      [
+        "Dediğim gibi sadece kod ver",
+        true
+      ],
+      [
+        "kaç kere söyleyeceğim emoji yok",
+        true
+      ],
+      [
+        "Bu kelime metinde kaç kez geçiyor?",
+        false
+      ],
+      [
+        "I told you not to use bullet points",
+        true
+      ],
+      [
+        "As I said, keep it under 100 words",
+        true
+      ],
+      [
+        "You forgot the part about pricing",
+        true
+      ],
+      [
+        "Did you forget to specify values?",
+        false
+      ],
+      [
+        "Can I repeat the process to make it stronger?",
+        false
+      ],
+      [
+        "Bunu tablo olarak yaz",
+        false
+      ],
+      [
+        "Önceki cevabı kısalt",
+        false
+      ],
+      [
+        "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x lütfen dediğim gibi yap",
+        true
+      ],
+      [
+        "dediğim gibi x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x ",
+        true
+      ],
+      [
+        "x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x dediğim gibi y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y y",
+        false
+      ]
+    ],
+    "restate_turns": [
+      {
+        "user": [
+          "Bir ürün tanıtım metni yaz, emoji kullanma.",
+          "Sana söylemiştim, emoji kullanma.",
+          "Biraz kısalt",
+          "Dediğim gibi emoji olmasın"
+        ],
+        "expected": [
+          [],
+          [
+            1
+          ],
+          [
+            1
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "user": [
+          "Python'da bir CSV dosyasını okuyup sütun ortalamalarını hesaplayan kod yaz",
+          "Söylemiştim, pandas kullanma",
+          "Şu İngilizce paragrafı Türkçeye çevir: The weather is nice today and we are going out",
+          "Dediğim gibi resmi bir dil kullan"
+        ],
+        "expected": [
+          [],
+          [
+            1
+          ],
+          [],
+          [
+            3
+          ]
+        ]
+      },
+      {
+        "user": [
+          "Dediğim gibi kısa yaz",
+          "tamam"
+        ],
+        "expected": [
+          [],
+          []
+        ]
+      }
     ]
   },
   "conversations": [
@@ -425,7 +662,7 @@
           "short_repair": false
         },
         {
-          "recent_similar": 2,
+          "recent_similar": 0,
           "apology": 0,
           "vague": 0,
           "segments": 1,
@@ -435,7 +672,7 @@
           "short_repair": false
         },
         {
-          "recent_similar": 1,
+          "recent_similar": 0,
           "apology": 0,
           "vague": 0,
           "segments": 1,
@@ -461,6 +698,277 @@
           "segments": 1,
           "segment_start": 0,
           "exited": true,
+          "short_repeat": 0,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "Aylık bütçe tablosu için Excel formülleri öner",
+        "hayır"
+      ],
+      "answers": [
+        "Şu formülleri kullanabilirsin. Grafik de ekleyeyim mi? 🙂",
+        "Tamam, grafiksiz bırakıyorum."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "Aylık bütçe tablosu için Excel formülleri öner",
+        "hayır"
+      ],
+      "answers": [
+        "Şu formülleri kullanabilirsin: TOPLA ve EĞER.",
+        "Haklısınız, düzeltiyorum."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 1,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": true
+        }
+      ]
+    },
+    {
+      "user": [
+        "Kahve dükkanım için Instagram'a 5 başlık öner",
+        "farklı bir tonda 5 tane daha yaz"
+      ],
+      "answers": [
+        "1. ...",
+        "Daha samimi tonda ..."
+      ],
+      "similar": [
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "React ile not alma uygulamasının tüm bileşenlerini yaz",
+        "devam",
+        "devam et",
+        "devam edelim",
+        "devam et ama tablo olarak",
+        "devam"
+      ],
+      "answers": [
+        "İlk bölüm",
+        "İkinci",
+        "Üçüncü",
+        "Dördüncü",
+        "Tablo",
+        "Son"
+      ],
+      "similar": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 2,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 3,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 1,
+          "short_repair": false
+        }
+      ]
+    },
+    {
+      "user": [
+        "Bir SQL sorgusu yaz: en çok satan 5 ürün",
+        "Bir SQL sorgusu yaz: en çok satan 5 ürün",
+        "Şimdi bunu aylara göre grupla",
+        "Sonuçları azalan sırada göster",
+        "Bunu bir görünüm olarak kaydet"
+      ],
+      "answers": [
+        "SELECT ...",
+        "SELECT ... (tekrar)",
+        "GROUP BY ay ...",
+        "ORDER BY ... DESC",
+        "CREATE VIEW ..."
+      ],
+      "similar": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "expected": [
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 1,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
+          "short_repeat": 0,
+          "short_repair": false
+        },
+        {
+          "recent_similar": 0,
+          "apology": 0,
+          "vague": 0,
+          "segments": 1,
+          "segment_start": 0,
+          "exited": false,
           "short_repeat": 0,
           "short_repair": false
         }

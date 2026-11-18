@@ -24,6 +24,8 @@ export interface ExitCardActions {
   onNotRelevant?(): void;
   /** Sohbette konu değiştiyse true: taslağa yalnızca son konunun istekleri girer ve bu söylenir (K32). */
   focusedDraft?(): boolean;
+  /** Kullanıcı bu konuda bir kuralı yeniden hatırlattıysa true: kartta not çıkar, taslak kuralı başa koyar (K48). */
+  ruleRestated?(): boolean;
 }
 
 
@@ -43,7 +45,8 @@ export class ExitCard {
     this.hide();
     const { host, box } = mountCard("exit-card", anchor);
     const apology = reason?.key === APOLOGY_REASON;
-    const chip = reason ? (apology ? "Aynı yerde dönüyor" : "Modelin önerisi") : "Uzun sohbet";
+    const ignored = reason?.key === IGNORED_REPAIR_REASON;
+    const chip = reason ? (apology ? "Aynı yerde dönüyor" : ignored ? "Düzeltme alınmadı" : "Modelin önerisi") : "Uzun sohbet";
 
     const el = <K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, cls?: string): HTMLElementTagNameMap[K] => {
       const node = document.createElement(tag);
@@ -81,7 +84,8 @@ export class ExitCard {
       box.replaceChildren(
         header(chip),
         el("p", reason ? modelCardMessage(reason) : exitCardMessage(turns, norm), "body"),
-        ...(reason ? [el("p", apology ? APOLOGY_NOTE : MODEL_NOTE, "note")] : []),
+        ...(actions.ruleRestated?.() ? [el("p", RULE_RESTATED_NOTE, "body")] : []),
+        ...(reason ? [el("p", apology ? APOLOGY_NOTE : ignored ? IGNORED_REPAIR_NOTE : MODEL_NOTE, "note")] : []),
         row(
           fresh,
           button("Kısa ara ver", "secondary", showBreak),
@@ -171,12 +175,26 @@ export function exitCardMessage(turns: number, norm: TaskNorm | null): string {
   return `${norm.label} sohbetlerinin çoğu ${p75} turda ya da daha kısa sürede bitiyor; bu sohbet ${turns}. turunda. ${tail}`;
 }
 
+/**
+ * Kural yeniden hatırlatıldıysa kartın ikinci cümlesi (K48). WildFeedback'te bu anlarda memnuniyetsizlik
+ * yüksek; ama yeni sohbet tek başına çözmüyor, kuralın baştan verilmesi gerekiyor.
+ */
+export const RULE_RESTATED_NOTE =
+  "Bu sohbette bir kuralı yeniden hatırlatman gerekti. Taze başlat taslağı bu kuralı en başa koyar; yeni sohbette baştan geçerli olur.";
+
 /** Model kaynaklı kartta, önerinin nereden geldiğini söyleyen kısa not. */
 export const MODEL_NOTE =
   "Bu öneri, sohbetin şu ana kadarki mesajlarına bakan küçük bir modelden geliyor; mesajların cihazından çıkmıyor.";
 
 /** Özür döngüsü kartının gerekçe anahtarı (src/data/model-reasons.json, K32). */
 export const APOLOGY_REASON = "ozur";
+
+/** "Düzeltme alınmadı" kartının gerekçe anahtarı (src/data/model-reasons.json). */
+export const IGNORED_REPAIR_REASON = "tekrar";
+
+/** "Düzeltme alınmadı" kartında, önerinin nereden geldiğini söyleyen kısa not. */
+export const IGNORED_REPAIR_NOTE =
+  "Bu öneri, son iki cevabın başını karşılaştıran basit bir kuraldan geliyor; cevaplar cihazından çıkmıyor.";
 
 /** Özür döngüsü kartında, önerinin nereden geldiğini söyleyen kısa not. */
 export const APOLOGY_NOTE =

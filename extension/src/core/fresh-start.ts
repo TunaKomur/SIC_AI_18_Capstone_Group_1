@@ -13,9 +13,9 @@ function clip(text: string, max: number): string {
  * toplar. Basit metin birleştirmedir, cihazda yapılır, hiçbir model veya ağ kullanılmaz.
  * Birbirine çok benzeyen istekler (yeniden denemeler) tek maddeye iner: en son hali kalır.
  */
-export function buildFreshStartDraft(texts: string[]): string {
+/** Birbirine çok benzeyen metinleri tek maddeye indirir; en son hâli kalır. */
+function dedupe(texts: string[]): string[] {
   const items: { text: string; vec: Map<number, number> | null }[] = [];
-
   for (const raw of texts) {
     const text = raw.trim();
     if (text === "") continue;
@@ -27,13 +27,34 @@ export function buildFreshStartDraft(texts: string[]): string {
     if (similarIndex >= 0) items[similarIndex] = { text, vec };
     else items.push({ text, vec });
   }
+  return items.map((item) => item.text);
+}
 
+/**
+ * rules: kullanıcının sohbet içinde yeniden hatırlattığı kurallar (K48). Varsa taslağın en başına
+ * girer; yeni sohbette baştan geçerli olsunlar diye. En fazla maxRules tane, en yenileri.
+ */
+export function buildFreshStartDraft(texts: string[], rules: string[] = [], maxRules = 3): string {
+  const items = dedupe(texts);
   if (items.length === 0) return "";
-  const lines = items.map((item, i) => `${i + 1}. ${clip(item.text, FRESH_START_MAX_CHARS)}`);
+  const lines = items.map((text, i) => `${i + 1}. ${clip(text, FRESH_START_MAX_CHARS)}`);
+  const ruleLines = dedupe(rules)
+    .slice(-maxRules)
+    .map((text) => `- ${clip(text, FRESH_START_MAX_CHARS)}`);
+  const ruleBlock =
+    ruleLines.length > 0
+      ? ["Bu sohbette baştan uymanı istediğim kurallar (önceki sohbette bunları yeniden hatırlatmam gerekti):", ...ruleLines, ""]
+      : [];
   return [
+    ...ruleBlock,
     "Önceki bir sohbetimde şunları istemiştim:",
     "",
     ...lines,
+    "",
+    // Yeni sohbet tek başına döngüyü çözmüyor (WildChat: yeniden başlayanlarda da %42 döngü); isteği
+    // netleştirmek için kullanıcının dolduracağı iki satır.
+    "Beklediğim sonuç: ",
+    "Önceki denemelerde olmayan kısım: ",
     "",
     "Bunları birlikte düşünerek, tek seferde ele alır mısın?",
   ].join("\n");

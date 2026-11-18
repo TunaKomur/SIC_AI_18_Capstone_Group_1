@@ -86,5 +86,17 @@
  {
   "text": "Toplantıdan erken ayrıldık",
   "personal": false
+ },
+ {
+  "text": "Son zamanlarda kendimi cok yalniz hissediyorum",
+  "personal": true
+ },
+ {
+  "text": "sevgilimden ayrildim ne yapacagimi bilmiyorum",
+  "personal": true
+ },
+ {
+  "text": "bana super bir slogan yaz",
+  "personal": false
  }
 ]

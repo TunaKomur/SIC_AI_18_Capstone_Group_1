@@ -54,7 +54,7 @@ describe("ChatGPT sayfa görüntüleri", () => {
     expect(texts[0]).toMatch(/listeyi/);
     const answer = chatgptAdapter.lastResponse!()!;
     expect(answer.length).toBeGreaterThan(50);
-    expect(answer.length).toBeLessThanOrEqual(600);
+    expect(answer.length).toBeLessThanOrEqual(803); // ilk 600 + " … " + son 200 karakter
     expect(isGenerating()).toBe(false);
   });
 

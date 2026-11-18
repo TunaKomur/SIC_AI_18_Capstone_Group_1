@@ -4,11 +4,11 @@ import platforms from "./data/platforms.json";
  * Marka: ad, slogan, renkler, logo işareti ve desteklenen sitelerin adları. Arayüzdeki her yüzey
  * (kartlar, halka, pencere, karşılama ekranı) buradan beslenir; ad ya da renk tek yerden değişir.
  *
- * Görünen ad "Kâfi". Kodun içindeki teknik adlar (kafiai.* depolama anahtarları, klasörler) kullanıcı
+ * Görünen ad "Kâfi AI". Kodun içindeki teknik adlar (kafiai.* depolama anahtarları, klasörler) kullanıcı
  * verisi kaybolmasın diye değişmez. Şapka yalnızca marka adında kullanılır; diğer metinler şapkasızdır.
  */
 
-export const BRAND_NAME = "Kâfi";
+export const BRAND_NAME = "Kâfi AI";
 export const BRAND_TAGLINE = "Fark et. Durakla. Yeniden başla.";
 
 /** Marka paleti (tasarım panosundaki değerler). */
