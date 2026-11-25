@@ -1,0 +1,2485 @@
+{
+ "pairs": [
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başknti neresidir?",
+   "aligned": "ankaranın başkenti neresidir",
+   "score": 1.0
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaaranın bşakenti neresidir?",
+   "aligned": "ankaranın başkenti neresidir",
+   "score": 1.0
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranin baskenti neresidir?",
+   "aligned": "ankaranın başkenti neresidir",
+   "score": 1.0
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başkenti nedir",
+   "aligned": "ankaranın başkenti nedir",
+   "score": 0.848668
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başkenti hangi şehir",
+   "aligned": "ankaranın başkenti hangi şehir",
+   "score": 0.655562
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankarqnın başkenti nedir",
+   "aligned": "ankaranın başkenti nedir",
+   "score": 0.848668
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın nüfusu kaç",
+   "aligned": "ankaranın nüfusu kaç",
+   "score": 0.380319
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "anksranın nüfusu kaç",
+   "aligned": "ankaranın nüfusu kaç",
+   "score": 0.380319
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "python ile dosya nasıl okunur",
+   "aligned": "python ile dosya nasıl okunur",
+   "score": 0.035093
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "pyton ile dosya nasıl okunur",
+   "aligned": "pyton ile dosya nasıl okunur",
+   "score": 0.035714
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyeenin başkenti nerei",
+   "aligned": "türkiyenin başkenti neresi",
+   "score": 1.0
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyenn bşkenti ndresi",
+   "aligned": "türkiyenin başkenti neresi",
+   "score": 1.0
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "turkiyenin baskenti neresi",
+   "aligned": "türkiyenin başkenti neresi",
+   "score": 1.0
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyenin başkenti hangi şehir",
+   "aligned": "türkiyenin başkenti hangi şehir",
+   "score": 0.669246
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiye'nin başkenti nedir",
+   "aligned": "türkiye nin başkenti nedir",
+   "score": 0.730769
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türikyenin başkenti hangi şehir",
+   "aligned": "türkiyenin başkenti hangi şehir",
+   "score": 0.669246
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "amerikanın başkenti neresi",
+   "aligned": "amerikanın başkenti neresi",
+   "score": 0.615385
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "ameriikanın başkenti neresi",
+   "aligned": "ameriikanın başkenti neresi",
+   "score": 0.603881
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyenin en kalabalık şehri neresi",
+   "aligned": "türkiyenin en kalabalık şehri neresi",
+   "score": 0.555662
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyenin en kalabalık şehfi neresi",
+   "aligned": "türkiyenin en kalabalık şehfi neresi",
+   "score": 0.555662
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dosya nasıl oknuur",
+   "aligned": "python ile dosya nasıl okunur",
+   "score": 1.0
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dşsya nasıl oknur",
+   "aligned": "python ile dosya nasıl okunur",
+   "score": 1.0
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dosya nasil okunur",
+   "aligned": "python ile dosya nasıl okunur",
+   "score": 1.0
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python'da bir dosyayı nasıl okurum",
+   "aligned": "python da bir dosyayı nasıl okurum",
+   "score": 0.573237
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "pythonda dosya okuma nasıl yapılır",
+   "aligned": "pythonda dosya okuma nasıl yapılır",
+   "score": 0.573237
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python'da bir dosyyı nsaıl okurum",
+   "aligned": "python da bir dosyyı nasıl okurum",
+   "score": 0.549532
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dosya nasıl yazılır",
+   "aligned": "python ile dosya nasıl yazılır",
+   "score": 0.74587
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dosya nasıl ywzılır",
+   "aligned": "python ile dosya nasıl ywzılır",
+   "score": 0.74587
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "java ile dosya nasıl okunur",
+   "aligned": "java ile dosya nasıl okunur",
+   "score": 0.786216
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "javaa ile dosya nasıl ounur",
+   "aligned": "javaa ile dosya nasıl okunur",
+   "score": 0.772049
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu düzelt çalışmııyor",
+   "aligned": "bu kodu düzelt çalışmıyor",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu düzellt çalışmıyro",
+   "aligned": "bu kodu düzelt çalışmıyor",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu duzelt calismiyor",
+   "aligned": "bu kodu düzelt çalışmıyor",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "kod hala çalışmıyor düzeltsene",
+   "aligned": "kodu hala çalışmıyor düzeltsene",
+   "score": 0.691301
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "şu kodu onar, olmuyor",
+   "aligned": "şu kodu onar olmuyor",
+   "score": 0.369274
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "kod halw çalışmıyor düzeltsene",
+   "aligned": "kodu halw çalışmıyor düzeltsene",
+   "score": 0.691301
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu koda yorum satırları ekle",
+   "aligned": "bu kodu yorum satırları ekle",
+   "score": 0.462069
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodaa yorum satırlar ekle",
+   "aligned": "bu kodaa yorum satırlar ekle",
+   "score": 0.340207
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu javascripte çevir",
+   "aligned": "bu kodu javascripte çevir",
+   "score": 0.333333
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu javascript çevir",
+   "aligned": "bu kodu javascript çevir",
+   "score": 0.377426
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "mettni daaha kısa yaz",
+   "aligned": "metni daha kısa yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daah kıs yaz",
+   "aligned": "metni daha kısa yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daha kisa yaz",
+   "aligned": "metni daha kısa yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "bunu kısalt, çok uzun olmuş",
+   "aligned": "bunu kısalt çok uzun olmuş",
+   "score": 0.216777
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni kısaltır mısın",
+   "aligned": "metni kısaltır mısın",
+   "score": 0.410391
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "bınu kısalt, çok uzun olmuş",
+   "aligned": "bınu kısalt çok uzun olmuş",
+   "score": 0.179969
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daha uzun yaz",
+   "aligned": "metni daha uzun yaz",
+   "score": 0.684211
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daha uuzn yaz",
+   "aligned": "metni daha uuzn yaz",
+   "score": 0.684211
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni ingilizceye çevir",
+   "aligned": "metni ingilizceye çevir",
+   "score": 0.229416
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni ihgilizceye çevir",
+   "aligned": "metni ihgilizceye çevir",
+   "score": 0.229416
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "bana fotoseentezi anlat",
+   "aligned": "bana fotosentezi anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "baana fotosentezi ançat",
+   "aligned": "bana fotosentezi anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "bana fotosentezi anlat",
+   "aligned": "bana fotosentezi anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez nedir açıklar mısın",
+   "aligned": "fotosentezi nedir açıklar mısın",
+   "score": 0.482475
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez nasıl gerçekleşir anlatır mısın",
+   "aligned": "fotosentezi nasıl gerçekleşir anlatır mısın",
+   "score": 0.520205
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez nedir aıklar mısn",
+   "aligned": "fotosentezi nedir aıklar mısn",
+   "score": 0.497796
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "bana mitoz bölünmeyi anlat",
+   "aligned": "bana mitoz bölünmeyi anlat",
+   "score": 0.418121
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "bana mitooz bölünmeyi alnat",
+   "aligned": "bana mitooz bölünmeyi anlat",
+   "score": 0.410305
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez hakkında 5 soruluk test hazırla",
+   "aligned": "fotosentezi hakkında 5 soruluk test hazırla",
+   "score": 0.373182
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez hakkında 5 soruluk test hazrıla",
+   "aligned": "fotosentezi hakkında 5 soruluk test hazrıla",
+   "score": 0.373182
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu htaanın sebebi ne",
+   "aligned": "bu hatanın sebebi ne",
+   "score": 1.0
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu haatnın sebwbi ne",
+   "aligned": "bu hatanın sebebi ne",
+   "score": 1.0
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu hatanin sebebi ne",
+   "aligned": "bu hatanın sebebi ne",
+   "score": 1.0
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "neden bu hatayı alıyorum",
+   "aligned": "neden bu hatayı alıyorum",
+   "score": 0.319505
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu hata neden çıkıyor",
+   "aligned": "bu hata neden çıkıyor",
+   "score": 0.341565
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "neden bu hatayı allyorum",
+   "aligned": "neden bu hatayı allyorum",
+   "score": 0.319505
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu hatayı nasıl düzeltirim",
+   "aligned": "bu hatayı nasıl düzeltirim",
+   "score": 0.263117
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu hatayı nasıl dzüeltirim",
+   "aligned": "bu hatayı nasıl dzüeltirim",
+   "score": 0.263117
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu uyarının sebebi ne",
+   "aligned": "bu uyarının sebebi ne",
+   "score": 0.68313
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu uyarının sebeebi ne",
+   "aligned": "bu uyarının sebebi ne",
+   "score": 0.68313
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "exccel'de iki sütunu nasıl birleştiririm",
+   "aligned": "excel de iki sütunu nasıl birleştiririm",
+   "score": 1.0
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel'de iki sütunu nassıl brileştiririm",
+   "aligned": "excel de iki sütunu nasıl birleştiririm",
+   "score": 1.0
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel'de iki sutunu nasil birlestiririm",
+   "aligned": "excel de iki sütunu nasıl birleştiririm",
+   "score": 1.0
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excelde iki kolonu birleştirmenin yolu ne",
+   "aligned": "excelde iki kolonu birleştirmenin yolu ne",
+   "score": 0.476326
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel iki sütunu tek sütunda birleştirme",
+   "aligned": "excel iki sütunu tek sütunda birleştirme",
+   "score": 0.634432
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excelde iki kollonu birleştirmenin yolu ne",
+   "aligned": "excelde iki kollonu birleştirmenin yolu ne",
+   "score": 0.470621
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel'de iki sütunu nasıl karşılaştırırım",
+   "aligned": "excel de iki sütunu nasıl karşılaştırırım",
+   "score": 0.604651
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel'de iki sütunu nasıl karşıaştırırım",
+   "aligned": "excel de iki sütunu nasıl karşıaştırırım",
+   "score": 0.611807
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "google sheets'te iki sütunu nasıl birleştiririm",
+   "aligned": "google sheets te iki sütunu nasıl birleştiririm",
+   "score": 0.747392
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "google sheets'te iki sütnuu nasıll birleştiririm",
+   "aligned": "google sheets te iki sütunu nasıl birleştiririm",
+   "score": 0.747392
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu markdown formatıında ver",
+   "aligned": "tabloyu markdown formatında ver",
+   "score": 1.0
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tablyu markdown foramtında ver",
+   "aligned": "tabloyu markdown formatında ver",
+   "score": 1.0
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu markdown formatinda ver",
+   "aligned": "tabloyu markdown formatında ver",
+   "score": 1.0
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "bunu markdown tablo olarak yaz",
+   "aligned": "bunu markdown tablo olarak yaz",
+   "score": 0.426287
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu markdown olarak gösterir misin",
+   "aligned": "tabloyu markdown olarak gösterir misin",
+   "score": 0.466173
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "bunu markdown tabl olaak yaz",
+   "aligned": "bunu markdown tabl olaak yaz",
+   "score": 0.407307
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu csv formatında ver",
+   "aligned": "tabloyu csv formatında ver",
+   "score": 0.739693
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu csv formatınnda ver",
+   "aligned": "tabloyu csv formatında ver",
+   "score": 0.739693
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu tarihe göre sırala",
+   "aligned": "tabloyu tarihe göre sırala",
+   "score": 0.271538
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu tarihe gör sırala",
+   "aligned": "tabloyu tarihe gör sırala",
+   "score": 0.27652
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimi daah profesyonel yap",
+   "aligned": "özgeçmişimi daha profesyonel yap",
+   "score": 1.0
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgemçişimi daa profesyonle yap",
+   "aligned": "özgeçmişimi daha profesyonel yap",
+   "score": 1.0
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "ozgecmisimi daha profesyonel yap",
+   "aligned": "özgeçmişimi daha profesyonel yap",
+   "score": 1.0
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "cv'mi daha profesyonel hale getir",
+   "aligned": "cv mi daha profesyonel hale getir",
+   "score": 0.575829
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimi daha profesyonel bir dille yeniden yaz",
+   "aligned": "özgeçmişimi daha profesyonel bir dille yeniden yaz",
+   "score": 0.758721
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "cv'mi dahaa profesyonel hale grtir",
+   "aligned": "cv mi daha profesyonel hale grtir",
+   "score": 0.575829
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimi ingilizceye çevir",
+   "aligned": "özgeçmişimi ingilizceye çevir",
+   "score": 0.438727
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimmi ingilizceye çeivr",
+   "aligned": "özgeçmişimi ingilizceye çeivr",
+   "score": 0.451826
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "ön yazımı daha profesyonel yap",
+   "aligned": "ön yazımı daha profesyonel yap",
+   "score": 0.65957
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "ön yazımı daha profesyoonel yap",
+   "aligned": "ön yazımı daha profesyonel yap",
+   "score": 0.65957
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postayı daah resmi yaz",
+   "aligned": "e postayı daha resmi yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postay dha rdsmi yaz",
+   "aligned": "e postayı daha resmi yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postayi daha resmi yaz",
+   "aligned": "e postayı daha resmi yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "maili daha resmi bir dille yaz",
+   "aligned": "maili daha resmi bir dille yaz",
+   "score": 0.484481
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "bu e-postayı resmi hale getir",
+   "aligned": "bu e postayı resmi hale getir",
+   "score": 0.530669
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "mailii daha resmi bir dillle yaz",
+   "aligned": "mailii daha resmi bir dillle yaz",
+   "score": 0.469097
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postayı daha samimi yaz",
+   "aligned": "e postayı daha samimi yaz",
+   "score": 0.775672
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postayı daaha samimi yaz",
+   "aligned": "e postayı daha samimi yaz",
+   "score": 0.775672
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postaya bir kapanış cümlesi ekle",
+   "aligned": "e postayı bir kapanış cümlesi ekle",
+   "score": 0.306186
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postaya bir kapanış cümlesi eklle",
+   "aligned": "e postayı bir kapanış cümlesi eklle",
+   "score": 0.30202
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümeyi ingilzceye çevir",
+   "aligned": "bu cümleyi ingilizceye çevir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümldyi ingillizceye çevri",
+   "aligned": "bu cümleyi ingilizceye çevir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cumleyi ingilizceye cevir",
+   "aligned": "bu cümleyi ingilizceye çevir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümlenin ingilizcesi ne",
+   "aligned": "bu cümlenin ingilizceye ne",
+   "score": 0.690066
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bunu ingilizce yazar mısın",
+   "aligned": "bunu ingilizce yazar mısın",
+   "score": 0.358057
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümlenni ingilizcesi ne",
+   "aligned": "bu cümlenni ingilizceye ne",
+   "score": 0.690066
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümleyi almancaya çevir",
+   "aligned": "bu cümleyi almancaya çevir",
+   "score": 0.586556
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümelyi almancaya çevir",
+   "aligned": "bu cümleyi almancaya çevir",
+   "score": 0.586556
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümledeki yazım hatalarını düzelt",
+   "aligned": "bu cümledeki yazım hatalarını düzelt",
+   "score": 0.207322
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümledeik yazım hatalarını düzetl",
+   "aligned": "bu cümledeik yazım hatalarını düzetl",
+   "score": 0.23694
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "liteyi allfabetik sırala",
+   "aligned": "listeyi alfabetik sırala",
+   "score": 1.0
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "liteyi alfabetil sırala",
+   "aligned": "listeyi alfabetik sırala",
+   "score": 1.0
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi alfabetik sirala",
+   "aligned": "listeyi alfabetik sırala",
+   "score": 1.0
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi a'dan z'ye sırala",
+   "aligned": "listeyi a dan z ye sırala",
+   "score": 0.588348
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "bu listeyi alfabetik sıraya koy",
+   "aligned": "bu listeyi alfabetik sırala koy",
+   "score": 0.887625
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi a'dan z'ye sjrala",
+   "aligned": "listeyi a dan z ye sırala",
+   "score": 0.588348
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi tersten sırala",
+   "aligned": "listeyi tersten sırala",
+   "score": 0.560449
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi tersten sjrala",
+   "aligned": "listeyi tersten sırala",
+   "score": 0.560449
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listedeki tekrar edenleri sil",
+   "aligned": "listedeki tekrar edenleri sil",
+   "score": 0.140894
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeeki tekrar edenleri sil",
+   "aligned": "listeeki tekrar edenleri sil",
+   "score": 0.14825
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul için hxva durumu",
+   "aligned": "istanbul için hava durumu",
+   "score": 1.0
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istnbul iin havaa duumu",
+   "aligned": "istanbul için hava durumu",
+   "score": 1.0
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul icin hava durumu",
+   "aligned": "istanbul için hava durumu",
+   "score": 1.0
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbulda hava nasıl",
+   "aligned": "istanbulda hava nasıl",
+   "score": 0.500435
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul hava durumu ne",
+   "aligned": "istanbul hava durumu ne",
+   "score": 0.792355
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbulda hava nasıll",
+   "aligned": "istanbulda hava nasıll",
+   "score": 0.489898
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "izmir için hava durumu",
+   "aligned": "izmir için hava durumu",
+   "score": 0.682242
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "izmr içinn hava durumu",
+   "aligned": "izmr için hava durumu",
+   "score": 0.698297
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul için gezilecek yerler",
+   "aligned": "istanbul için gezilecek yerler",
+   "score": 0.511208
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "isttanbul içn gezielcek yerler",
+   "aligned": "istanbul için gezielcek yerler",
+   "score": 0.511208
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denkemini çöz",
+   "aligned": "3x 5 20 denklemini çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denklemihi çöz",
+   "aligned": "3x 5 20 denklemini çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denklemini coz",
+   "aligned": "3x 5 20 denklemini çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denkleminde x kaç",
+   "aligned": "3x 5 20 denklemini x kaç",
+   "score": 0.783349
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 ise x nedir",
+   "aligned": "3x 5 20 ise x nedir",
+   "score": 0.342381
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denklehinde x kaç",
+   "aligned": "3x 5 20 denklehinde x kaç",
+   "score": 0.554322
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "4x-2=10 denklemini çöz",
+   "aligned": "4x 2 10 denklemini çöz",
+   "score": 0.681818
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "4x-2=10 denkçemini çöz",
+   "aligned": "4x 2 10 denklemini çöz",
+   "score": 0.681818
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denklemini grafikle göster",
+   "aligned": "3x 5 20 denklemini grafikle göster",
+   "score": 0.675136
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denlkemini grafikle göster",
+   "aligned": "3x 5 20 denklemini grafikle göster",
+   "score": 0.675136
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk pragrafı özetle",
+   "aligned": "ilk paragrafı özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafı özetlee",
+   "aligned": "ilk paragrafı özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafi ozetle",
+   "aligned": "ilk paragrafı özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafın özetini çıkar",
+   "aligned": "ilk paragrafı özetini çıkar",
+   "score": 0.731564
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "birinci paragrafı kısaca özetle",
+   "aligned": "birinci paragrafı kısaca özetle",
+   "score": 0.602414
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrfın özetini çıkar",
+   "aligned": "ilk paragrafı özetini çıkar",
+   "score": 0.731564
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ikinci paragrafı özetle",
+   "aligned": "ikinci paragrafı özetle",
+   "score": 0.746004
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ikinci paragrafı özele",
+   "aligned": "ikinci paragrafı özetle",
+   "score": 0.746004
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafı ingilizceye çevir",
+   "aligned": "ilk paragrafı ingilizceye çevir",
+   "score": 0.544949
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafı ingilşzceye çevir",
+   "aligned": "ilk paragrafı ingilşzceye çevir",
+   "score": 0.544949
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'ge sate nasıll güncellenir",
+   "aligned": "react ge state nasıl güncellenir",
+   "score": 0.913346
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "reactt'te statw nassıl güncelleenir",
+   "aligned": "react te state nasıl güncellenir",
+   "score": 1.0
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'te state nasil guncellenir",
+   "aligned": "react te state nasıl güncellenir",
+   "score": 1.0
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "reactta state güncelleme nasıl yapılır",
+   "aligned": "reactta state güncelleme nasıl yapılır",
+   "score": 0.648886
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react state'i nasıl değiştiririm",
+   "aligned": "react state i nasıl değiştiririm",
+   "score": 0.45733
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "reactta state günncelleme nasıl yapıılır",
+   "aligned": "reactta state günncelleme nasıl yapıılır",
+   "score": 0.606103
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "vue'da state nasıl güncellenir",
+   "aligned": "vue da state nasıl güncellenir",
+   "score": 0.766032
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "vue'da state nasıll güncelleni",
+   "aligned": "vue da state nasıl güncellenir",
+   "score": 0.766032
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'te nasıl api isteği atılır",
+   "aligned": "react te nasıl api isteği atılır",
+   "score": 0.471405
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'te naısl api issteği aılır",
+   "aligned": "react te nasıl api issteği aılır",
+   "score": 0.471405
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusunda jon nasıl kullanılır",
+   "aligned": "sql sorgusunda join nasıl kullanılır",
+   "score": 1.0
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusuda jooin naqıl kullamılır",
+   "aligned": "sql sorgusunda join nasıl kullanılır",
+   "score": 1.0
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusunda join nasil kullanilir",
+   "aligned": "sql sorgusunda join nasıl kullanılır",
+   "score": 1.0
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql'de join kullanımını anlat",
+   "aligned": "sql de join kullanımını anlat",
+   "score": 0.437037
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "join ifadesi sql'de nasıl yazılır",
+   "aligned": "join ifadesi sql de nasıl yazılır",
+   "score": 0.451826
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql'de join kullanmını anlat",
+   "aligned": "sql de join kullanmını anlat",
+   "score": 0.430155
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusunda group by nasıl kullanılır",
+   "aligned": "sql sorgusunda group by nasıl kullanılır",
+   "score": 0.807041
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusundx group by nasul kullanılır",
+   "aligned": "sql sorgusunda group by nasıl kullanılır",
+   "score": 0.807041
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "mongodb'de join nasıl yapılır",
+   "aligned": "mongodb de join nasıl yapılır",
+   "score": 0.391609
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "mongodb'de join nasıl yqpılır",
+   "aligned": "mongodb de join nasıl yqpılır",
+   "score": 0.378766
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruy çöz",
+   "aligned": "1 soruyu çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruuyu çöz",
+   "aligned": "1 soruyu çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruyu coz",
+   "aligned": "1 soruyu çöz",
+   "score": 1.0
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "birinci soruyu çözer misin",
+   "aligned": "birinci soruyu çözer misin",
+   "score": 0.509525
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. sorunun çözümünü yaz",
+   "aligned": "1 sorunun çözümünü yaz",
+   "score": 0.43082
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "birinci soruyu çöze misin",
+   "aligned": "birinci soruyu çöz misin",
+   "score": 0.589256
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "2. soruyu çöz",
+   "aligned": "2 soruyu çöz",
+   "score": 0.833333
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "2. souyu çöz",
+   "aligned": "2 soruyu çöz",
+   "score": 0.833333
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruyu açıkla ama çözme",
+   "aligned": "1 soruyu açıkla ama çözme",
+   "score": 0.57735
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruyu açıkla ama çzöme",
+   "aligned": "1 soruyu açıkla ama çzöme",
+   "score": 0.46188
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "ban bir şiir yaz",
+   "aligned": "bana bir şiir yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "banna bir şiirr yaz",
+   "aligned": "bana bir şiir yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bana bir siir yaz",
+   "aligned": "bana bir şiir yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bir şiir yazar mısın",
+   "aligned": "bir şiir yazar mısın",
+   "score": 0.635851
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "benim için bir şiir yaz",
+   "aligned": "benim için bir şiir yaz",
+   "score": 0.642364
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bir şiir yaazar mıısın",
+   "aligned": "bir şiir yaazar mıısın",
+   "score": 0.561951
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bana bir hikaye yaz",
+   "aligned": "bana bir hikaye yaz",
+   "score": 0.631579
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bna bir hikaye yaz",
+   "aligned": "bana bir hikaye yaz",
+   "score": 0.631579
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bu şiiri analiz et",
+   "aligned": "bu şiir analiz et",
+   "score": 0.333849
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bu şiiri analz et",
+   "aligned": "bu şiir analz et",
+   "score": 0.344124
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransanın nüfuus kaç",
+   "aligned": "fransanın nüfusu kaç",
+   "score": 1.0
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fragsanın nüfussu kaç",
+   "aligned": "fransanın nüfusu kaç",
+   "score": 1.0
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransanin nufusu kac",
+   "aligned": "fransanın nüfusu kaç",
+   "score": 1.0
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransa'nın nüfusu ne kadar",
+   "aligned": "fransa nın nüfusu ne kadar",
+   "score": 0.657794
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransada kaç kişi yaşıyor",
+   "aligned": "fransada kaç kişi yaşıyor",
+   "score": 0.387298
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "frznsa'nın nüusu ne kadar",
+   "aligned": "frznsa nın nüfusu ne kadar",
+   "score": 0.526235
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "almanyanın nüfusu kaç",
+   "aligned": "almanyanın nüfusu kaç",
+   "score": 0.68313
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "almanyanınn nüfusu kaç",
+   "aligned": "almanyanınn nüfusu kaç",
+   "score": 0.619751
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransanın yüzölçümü kaç",
+   "aligned": "fransanın yüzölçümü kaç",
+   "score": 0.559503
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransanın yüzölçümmü kaç",
+   "aligned": "fransanın yüzölçümmü kaç",
+   "score": 0.547723
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha hızı hale getir",
+   "aligned": "bu fonksiyonu daha hızlı hale getir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksioynu dahha hızşı hale getir",
+   "aligned": "bu fonksiyonu daha hızlı hale getir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha hizli hale getir",
+   "aligned": "bu fonksiyonu daha hızlı hale getir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu hızlandır",
+   "aligned": "bu fonksiyonu hızlandır",
+   "score": 0.601133
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonun performansını iyileştir",
+   "aligned": "bu fonksiyonu performansını iyileştir",
+   "score": 0.486486
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonuu hızlandır",
+   "aligned": "bu fonksiyonu hızlandır",
+   "score": 0.601133
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyona test yaz",
+   "aligned": "bu fonksiyonu test yaz",
+   "score": 0.4907
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonkisyona test yaz",
+   "aligned": "bu fonksiyonu test yaz",
+   "score": 0.4907
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha okunur hale getir",
+   "aligned": "bu fonksiyonu daha okunur hale getir",
+   "score": 0.800071
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha okunur hale getri",
+   "aligned": "bu fonksiyonu daha okunur hale getir",
+   "score": 0.800071
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaleyi 200 kelimeeyle özetle",
+   "aligned": "makaleyi 200 kelimeyle özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "mwkaleyi 200 kelimeyle özetle",
+   "aligned": "makaleyi 200 kelimeyle özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaleyi 200 kelimeyle ozetle",
+   "aligned": "makaleyi 200 kelimeyle özetle",
+   "score": 1.0
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makalenin 200 kelimelik özetini yaz",
+   "aligned": "makaleyi 200 kelimelik özetini yaz",
+   "score": 0.688487
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaleyi 200 kelimede özetler misin",
+   "aligned": "makaleyi 200 kelimeyle özetle misin",
+   "score": 0.915335
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makalenin 200 kelimellik özetinii yaz",
+   "aligned": "makaleyi 200 kelimellik özetinii yaz",
+   "score": 0.658553
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaleyi 500 kelimeyle özetle",
+   "aligned": "makaleyi 500 kelimeyle özetle",
+   "score": 0.903226
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "maaleyi 500 kelijeyle özetle",
+   "aligned": "makaleyi 500 kelimeyle özetle",
+   "score": 0.903226
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaledeki kaynakları listele",
+   "aligned": "makaledeki kaynakları listele",
+   "score": 0.300167
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "mkaledeki kaynakları listelle",
+   "aligned": "mkaledeki kaynakları listelle",
+   "score": 0.200111
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce bir e-osta taslağı yaz",
+   "aligned": "ingilizce bir e posta taslağı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingiliace bir e-psota taslaı yaz",
+   "aligned": "ingilizce bir e posta taslağı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce bir e-posta taslagi yaz",
+   "aligned": "ingilizce bir e posta taslağı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce mail taslağı hazırla",
+   "aligned": "ingilizce mail taslağı hazırla",
+   "score": 0.508513
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce bir e-posta taslağı hazırlar mısın",
+   "aligned": "ingilizce bir e posta taslağı hazırlar mısın",
+   "score": 0.761053
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce mial taslağj hazırla",
+   "aligned": "ingilizce mial taslağı hazırla",
+   "score": 0.508513
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "almanca bir e-posta taslağı yaz",
+   "aligned": "almanca bir e posta taslağı yaz",
+   "score": 0.719101
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "almancaa bir e-posta taslağı yaz",
+   "aligned": "almancaa bir e posta taslağı yaz",
+   "score": 0.707776
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce bir özgeçmiş taslağı yaz",
+   "aligned": "ingilizce bir özgeçmiş taslağı yaz",
+   "score": 0.725324
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilice bir özgeçiş taslağk yaz",
+   "aligned": "ingilizce bir özgeçiş taslağı yaz",
+   "score": 0.735612
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev alm kurallarınnı anlat",
+   "aligned": "türev alma kurallarını anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türrev ama kurallarını anla",
+   "aligned": "türev alma kurallarını anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "turev alma kurallarini anlat",
+   "aligned": "türev alma kurallarını anlat",
+   "score": 1.0
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev kuralları nelerdir",
+   "aligned": "türev kuralları nelerdir",
+   "score": 0.540062
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev nasıl alınır kurallarıyla anlat",
+   "aligned": "türev nasıl alınır kurallarıyla anlat",
+   "score": 0.652438
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türevv kurallarıı nelerdir",
+   "aligned": "türev kurallarını nelerdir",
+   "score": 0.630062
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "integral alma kurallarını anlat",
+   "aligned": "integral alma kurallarını anlat",
+   "score": 0.756644
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "intergal almaa kuralllarını analt",
+   "aligned": "intergal alma kurallarını anlat",
+   "score": 0.746729
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev ile ilgili 10 soru hazırla",
+   "aligned": "türev ile ilgili 10 soru hazırla",
+   "score": 0.162051
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev ile ilgil 10 sooru hazırla",
+   "aligned": "türev ile ilgil 10 sooru hazırla",
+   "score": 0.162051
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevi kaynakçal yaz",
+   "aligned": "bu ödevi kaynakçalı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödeevi kaynaçalı yaz",
+   "aligned": "bu ödevi kaynakçalı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu odevi kaynakcali yaz",
+   "aligned": "bu ödevi kaynakçalı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevi kaynakça ekleyerek yaz",
+   "aligned": "bu ödevi kaynakça ekleyerek yaz",
+   "score": 0.725954
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "ödevi kaynaklarıyla birlikte yaz",
+   "aligned": "ödevi kaynaklarıyla birlikte yaz",
+   "score": 0.500639
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevvi kaynakça ekleyerek yaz",
+   "aligned": "bu ödevi kaynakça ekleyerek yaz",
+   "score": 0.725954
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevi kaynakçasız yaz",
+   "aligned": "bu ödevi kaynakçasız yaz",
+   "score": 0.808694
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevi kaynakçasjz yaz",
+   "aligned": "bu ödevi kaynakçasjz yaz",
+   "score": 0.808694
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevin sunumunu hazırla",
+   "aligned": "bu ödevi sunumunu hazırla",
+   "score": 0.321029
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevin sunumunuu hazırla",
+   "aligned": "bu ödevi sunumunuu hazırla",
+   "score": 0.315244
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "dockr cotainer nsıl durdurulur",
+   "aligned": "docker container nasıl durdurulur",
+   "score": 1.0
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "dockdr contaier naısl durddurulur",
+   "aligned": "docker container nasıl durdurulur",
+   "score": 1.0
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker container nasil durdurulur",
+   "aligned": "docker container nasıl durdurulur",
+   "score": 1.0
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker'da container durdurma komutu ne",
+   "aligned": "docker da container durdurma komutu ne",
+   "score": 0.594818
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "çalışan docker container'ı nasıl durdururum",
+   "aligned": "çalışan docker container ı nasıl durdurulur",
+   "score": 0.863282
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker'da container dudrurma komutu ne",
+   "aligned": "docker da container dudrurma komutu ne",
+   "score": 0.456612
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker container nasıl başlatılır",
+   "aligned": "docker container nasıl başlatılır",
+   "score": 0.666924
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker contaier nasıl başlatılır",
+   "aligned": "docker container nasıl başlatılır",
+   "score": 0.666924
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker image nasıl silinir",
+   "aligned": "docker image nasıl silinir",
+   "score": 0.419137
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker iage nasıl silinir",
+   "aligned": "docker iage nasıl silinir",
+   "score": 0.427437
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'tee son commt nasıl geri alınır",
+   "aligned": "git tee son commit nasıl geri alınır",
+   "score": 0.960085
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'e son committ nasıl gerii alınıd",
+   "aligned": "git e son commit nasıl geri alınır",
+   "score": 0.931594
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te son commit nasil geri alinir",
+   "aligned": "git te son commit nasıl geri alınır",
+   "score": 1.0
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "son commit'i nasıl geri alırım",
+   "aligned": "son commit i nasıl geri alırım",
+   "score": 0.72036
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git son commit'i geri alma komutu",
+   "aligned": "git son commit i geri alma komutu",
+   "score": 0.583559
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "son commit'i nasıl gei alırım",
+   "aligned": "son commit i nasıl geri alırım",
+   "score": 0.72036
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te yeni branch nasıl açılır",
+   "aligned": "git te yeni branch nasıl açılır",
+   "score": 0.38385
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "giit'te yeni branch nasıl açılır",
+   "aligned": "git te yeni branch nasıl açılır",
+   "score": 0.38385
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te son commit mesajı nasıl değiştirilir",
+   "aligned": "git te son commit mesajı nasıl değiştirilir",
+   "score": 0.599501
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te son commit messajı nasıl değiştirilir",
+   "aligned": "git te son commit messajı nasıl değiştirilir",
+   "score": 0.593224
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafı daha akucı yaz",
+   "aligned": "bu paragrafı daha akıcı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragafı daha akıc yaz",
+   "aligned": "bu paragrafı daha akıcı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafi daha akici yaz",
+   "aligned": "bu paragrafı daha akıcı yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "paragrafı daha akıcı hale getir",
+   "aligned": "paragrafı daha akıcı hale getir",
+   "score": 0.700389
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafın akışını düzelt",
+   "aligned": "bu paragrafı akışını düzelt",
+   "score": 0.586207
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "paragrafı daha akııcı hlae getir",
+   "aligned": "paragrafı daha akıcı hlae getir",
+   "score": 0.700389
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafı daha resmi yaz",
+   "aligned": "bu paragrafı daha resmi yaz",
+   "score": 0.758621
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafı daha resmp yaz",
+   "aligned": "bu paragrafı daha resmp yaz",
+   "score": 0.758621
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafa bir başlık öner",
+   "aligned": "bu paragrafı bir başlık öner",
+   "score": 0.456211
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrfaa bir balşık öner",
+   "aligned": "bu paragrafı bir balşık öner",
+   "score": 0.456211
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftallk çalıma plnı hazırla",
+   "aligned": "haftalık çalışma planı hazırla",
+   "score": 1.0
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftalı çalışka planı haazırla",
+   "aligned": "haftalık çalışma planı hazırla",
+   "score": 1.0
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftalik calisma plani hazirla",
+   "aligned": "haftalık çalışma planı hazırla",
+   "score": 1.0
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "bana haftalık bir çalışma programı yap",
+   "aligned": "bana haftalık bir çalışma programı yap",
+   "score": 0.51521
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "bir haftalık ders çalışma planı oluştur",
+   "aligned": "bir haftalık ders çalışma planı oluştur",
+   "score": 0.642806
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "bana haftalık bir çalşıma programı yap",
+   "aligned": "bana haftalık bir çalışma programı yap",
+   "score": 0.51521
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "aylık çalışma planı hazırla",
+   "aligned": "aylık çalışma planı hazırla",
+   "score": 0.858128
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "aylık çalışma plnı hazırla",
+   "aligned": "aylık çalışma planı hazırla",
+   "score": 0.858128
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftalık yemek planı hazırla",
+   "aligned": "haftalık yemek planı hazırla",
+   "score": 0.757924
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftaalık yemek planı hazırla",
+   "aligned": "haftalık yemek planı hazırla",
+   "score": 0.757924
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabı tablo haliinde ver",
+   "aligned": "cevabı tablo halinde ver",
+   "score": 1.0
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevaabı taablo halinnde ver",
+   "aligned": "cevabı tablo halinde ver",
+   "score": 1.0
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabi tablo halinde ver",
+   "aligned": "cevabı tablo halinde ver",
+   "score": 1.0
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabını tablo olarak yaz",
+   "aligned": "cevabını tablo olarak yaz",
+   "score": 0.449073
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "bunu tabloya dök",
+   "aligned": "bunu tabloya dök",
+   "score": 0.204124
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabnıı tablo olarak yaz",
+   "aligned": "cevabnıı tablo olarak yaz",
+   "score": 0.408248
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabı madde madde ver",
+   "aligned": "cevabı madde madde ver",
+   "score": 0.433013
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevbaı madde madde ver",
+   "aligned": "cevabı madde madde ver",
+   "score": 0.433013
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabı kısalt",
+   "aligned": "cevabı kısalt",
+   "score": 0.339683
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cedabı kısalt",
+   "aligned": "cevabı kısalt",
+   "score": 0.339683
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun ne yaptığıjı açıkla",
+   "aligned": "bu kodun ne yaptığını açıkla",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kdun ne yaptığını açıkkla",
+   "aligned": "bu kodun ne yaptığını açıkla",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun ne yaptigini acikla",
+   "aligned": "bu kodun ne yaptığını açıkla",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kod ne işe yarıyor",
+   "aligned": "bu kod ne işe yarıyor",
+   "score": 0.385758
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodu satır satır açıklar mısın",
+   "aligned": "bu kodun satır satır açıkla mısın",
+   "score": 0.474342
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kod ne işe yarıor",
+   "aligned": "bu kod ne işe yarıor",
+   "score": 0.395285
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun hatasını bul",
+   "aligned": "bu kodun hatasını bul",
+   "score": 0.459619
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun htaasını bul",
+   "aligned": "bu kodun htaasını bul",
+   "score": 0.459619
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun karmaşıklığını hesapla",
+   "aligned": "bu kodun karmaşıklığını hesapla",
+   "score": 0.507972
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun karmaşıklığını hesala",
+   "aligned": "bu kodun karmaşıklığını hesala",
+   "score": 0.515388
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahvve mi çay mı dhaa saağlıklı",
+   "aligned": "kahve mi çay mı daha sağlıklı",
+   "score": 1.0
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahvee mi çay mı dahaa sğalıklı",
+   "aligned": "kahve mi çay mı daha sağlıklı",
+   "score": 1.0
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahve mi cay mi daha saglikli",
+   "aligned": "kahve mi çay mi daha sağlıklı",
+   "score": 0.905111
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "çay mı kahve mi daha sağlıklı",
+   "aligned": "çay mı kahve mi daha sağlıklı",
+   "score": 0.931034
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "sağlık açısından kahve mi çay mı",
+   "aligned": "sağlık açısından kahve mi çay mı",
+   "score": 0.656532
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "çay mı kahce mi daaha sağlıklı",
+   "aligned": "çay mı kahve mi daha sağlıklı",
+   "score": 0.931034
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahve mi çay mı daha ucuz",
+   "aligned": "kahve mi çay mı daha ucuz",
+   "score": 0.742781
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahve mi çay mı daha ucz",
+   "aligned": "kahve mi çay mı daha ucz",
+   "score": 0.758098
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahve nasıl demlenir",
+   "aligned": "kahve nasıl demlenir",
+   "score": 0.207614
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahhve nası demlenir",
+   "aligned": "kahve nası demlenir",
+   "score": 0.255609
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikincii dünya savaşının sebeplerini yaz",
+   "aligned": "ikincii dünya savaşının sebeplerini yaz",
+   "score": 0.96112
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikini dünay savaşını sebplerini yaz",
+   "aligned": "ikini dünya savaşının sebeplerini yaz",
+   "score": 0.937385
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikinci dunya savasinin sebeplerini yaz",
+   "aligned": "ikinci dünya savaşının sebeplerini yaz",
+   "score": 1.0
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "2. dünya savaşı neden çıktı",
+   "aligned": "2 dünya savaşı neden çıktı",
+   "score": 0.381771
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikinci dünya savaşının nedenleri neler",
+   "aligned": "ikinci dünya savaşının nedenleri neler",
+   "score": 0.621874
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "2. dünyaa savaşı neden çıktı",
+   "aligned": "2 dünya savaşı neden çıktı",
+   "score": 0.381771
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "birinci dünya savaşının sebeplerini yaz",
+   "aligned": "birinci dünya savaşının sebeplerini yaz",
+   "score": 0.91205
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "birinci düya savaşımın sebepkerini yaz",
+   "aligned": "birinci dünya savaşının sebeplerini yaz",
+   "score": 0.91205
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikinci dünya savaşının sonuçlarını yaz",
+   "aligned": "ikinci dünya savaşının sonuçlarını yaz",
+   "score": 0.692535
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikinci dnüya svaşının sonuçlagını yaz",
+   "aligned": "ikinci dünya savaşının sonuçlagını yaz",
+   "score": 0.692535
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu meitndeki yazım hatalarını düxelt",
+   "aligned": "bu metindeki yazım hatalarını düzelt",
+   "score": 1.0
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki yaaım hatalaını düzeltt",
+   "aligned": "bu metindeki yazım hatalarını düzelt",
+   "score": 1.0
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki yazim hatalarini duzelt",
+   "aligned": "bu metindeki yazım hatalarını düzelt",
+   "score": 1.0
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "metindeki yazım yanlışlarını düzelt",
+   "aligned": "metindeki yazım yanlışlarını düzelt",
+   "score": 0.779287
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu yazıdaki imla hatalarını düzeltir misin",
+   "aligned": "bu yazıdaki imla hatalarını düzeltir misin",
+   "score": 0.597956
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "metideki yzaım yalışlarını düzelt",
+   "aligned": "metindeki yazım yalışlarını düzelt",
+   "score": 0.789474
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metni özetle",
+   "aligned": "bu metni özetle",
+   "score": 0.293198
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metni özetlee",
+   "aligned": "bu metni özetlee",
+   "score": 0.243332
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki anlatım bozukluklarını bul",
+   "aligned": "bu metindeki anlatım bozukluklarını bul",
+   "score": 0.483651
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki anlatım boozukluklarını bul",
+   "aligned": "bu metindeki anlatım boozukluklarını bul",
+   "score": 0.478365
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascriptte dizi nasıl sıralnır",
+   "aligned": "javascriptte dizi nasıl sıralanır",
+   "score": 1.0
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javwscriptte diiz nasıl sıraalanır",
+   "aligned": "javascriptte dizi nasıl sıralanır",
+   "score": 1.0
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascriptte dizi nasil siralanir",
+   "aligned": "javascriptte dizi nasıl sıralanır",
+   "score": 1.0
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "js'de array sıralama nasıl yapılır",
+   "aligned": "js de array sıralama nasıl yapılır",
+   "score": 0.358249
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascript dizisini nasıl sıralarım",
+   "aligned": "javascript dizisini nasıl sıralanır",
+   "score": 0.823886
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "js'de array sıralamaa nasıl yapıllır",
+   "aligned": "js de array sıralamaa nasıl yapıllır",
+   "score": 0.348155
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascriptte dizi nasıl ters çevrilir",
+   "aligned": "javascriptte dizi nasıl ters çevrilir",
+   "score": 0.658218
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascriptte dizi nasul ters çevrrilir",
+   "aligned": "javascriptte dizi nasıl ters çevrrilir",
+   "score": 0.6495
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "pythonda dizi nasıl sıralanır",
+   "aligned": "pythonda dizi nasıl sıralanır",
+   "score": 0.656571
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "pythonda dizi nasıl sıalanır",
+   "aligned": "pythonda dizi nasıl sıralanır",
+   "score": 0.656571
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunu için 10 slayt başlığğı öner",
+   "aligned": "sunum için 10 slayt başlığı öner",
+   "score": 1.0
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "suum için 10 slayyt başlığı öenr",
+   "aligned": "sunum için 10 slayt başlığı öner",
+   "score": 1.0
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum icin 10 slayt basligi oner",
+   "aligned": "sunum için 10 slayt başlığı öner",
+   "score": 1.0
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunumum için 10 tane slayt başlığı ver",
+   "aligned": "sunumum için 10 tane slayt başlığı ver",
+   "score": 0.774278
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "10 slaytlık sunuma başlık öner",
+   "aligned": "10 slaytlık sunum başlık öner",
+   "score": 0.615457
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunumumm için 10 tane slayt başlığı ver",
+   "aligned": "sunumumm için 10 tane slayt başlığı ver",
+   "score": 0.745413
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum için 5 slayt başlığı öner",
+   "aligned": "sunum için 5 slayt başlığı öner",
+   "score": 0.889001
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunuh için 5 slayt başlığıı öner",
+   "aligned": "sunum için 5 slayt başlığı öner",
+   "score": 0.889001
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum için konuşma metni yaz",
+   "aligned": "sunum için konuşma metni yaz",
+   "score": 0.322749
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum içim konuşma metni yaz",
+   "aligned": "sunum için konuşma metni yaz",
+   "score": 0.322749
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi 4 kiğilik yap",
+   "aligned": "bu tarifi 4 kişilik yap",
+   "score": 1.0
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi 4 kişiliik yap",
+   "aligned": "bu tarifi 4 kişilik yap",
+   "score": 1.0
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi 4 kisilik yap",
+   "aligned": "bu tarifi 4 kişilik yap",
+   "score": 1.0
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "tarifi 4 kişiye göre ayarla",
+   "aligned": "tarifi 4 kişiye göre ayarla",
+   "score": 0.481543
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi dört kişilik hale getir",
+   "aligned": "bu tarifi dört kişilik hale getir",
+   "score": 0.599171
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "tarifi 4 kişiye göre ayyarla",
+   "aligned": "tarifi 4 kişiye göre ayyarla",
+   "score": 0.472866
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi 8 kişilik yap",
+   "aligned": "bu tarifi 8 kişilik yap",
+   "score": 0.869565
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu taarifi 8 kişilik yap",
+   "aligned": "bu tarifi 8 kişilik yap",
+   "score": 0.869565
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi vegan yap",
+   "aligned": "bu tarifi vegan yap",
+   "score": 0.574038
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi vfgan yap",
+   "aligned": "bu tarifi vfgan yap",
+   "score": 0.574038
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta sorulailecek sorularıı listele",
+   "aligned": "mülakatta sorulabilecek soruları listele",
+   "score": 1.0
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta sorulabilecek sıruları lğstele",
+   "aligned": "mülakatta sorulabilecek soruları listele",
+   "score": 1.0
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mulakatta sorulabilecek sorulari listele",
+   "aligned": "mülakatta sorulabilecek soruları listele",
+   "score": 1.0
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "iş görüşmesinde hangi sorular sorulur",
+   "aligned": "iş görüşmesinde hangi soruları sorulur",
+   "score": 0.458732
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakat soruları neler olabilir",
+   "aligned": "mülakat soruları neler olabilir",
+   "score": 0.584201
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "iş görüşmesind hangi sorular sorulur",
+   "aligned": "iş görüşmesind hangi soruları sorulur",
+   "score": 0.442719
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta sorulacak sorulara cevap yaz",
+   "aligned": "mülakatta sorulacak soruları cevap yaz",
+   "score": 0.7
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mlüakatta sorulacak sorulara cevap yaz",
+   "aligned": "mülakatta sorulacak soruları cevap yaz",
+   "score": 0.7
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta ne giymeliyim",
+   "aligned": "mülakatta ne giymeliyim",
+   "score": 0.265396
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta ne gymeliyim",
+   "aligned": "mülakatta ne gymeliyim",
+   "score": 0.27136
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlenin özesini bul",
+   "aligned": "bu cümlenin öznesini bul",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cülenin özesini bul",
+   "aligned": "bu cümlenin öznesini bul",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cumlenin oznesini bul",
+   "aligned": "bu cümlenin öznesini bul",
+   "score": 1.0
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlede özne hangisi",
+   "aligned": "bu cümlede özne hangisi",
+   "score": 0.470679
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "cümlenin öznesi ne",
+   "aligned": "cümlenin öznesi ne",
+   "score": 0.657794
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümelde özne hangisi",
+   "aligned": "bu cümelde özne hangisi",
+   "score": 0.392232
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlenin yüklemini bul",
+   "aligned": "bu cümlenin yüklemini bul",
+   "score": 0.717109
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlenin yükleminni bul",
+   "aligned": "bu cümlenin yükleminni bul",
+   "score": 0.667124
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümleyi ögelerine ayır",
+   "aligned": "bu cümleyi ögelerine ayır",
+   "score": 0.313786
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümleyii ögelerine ayır",
+   "aligned": "bu cümleyii ögelerine ayır",
+   "score": 0.307692
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "anksrabın baskebti neresifir",
+   "aligned": "ankaranın başkenti neresidir",
+   "score": 1.0
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "anksrabın baskebti neresifir",
+   "aligned": "ankaranın başkenti neresidir",
+   "score": 1.0
+  },
+  {
+   "previous": "bu kodu düzelt",
+   "new": "bu kodu düzeltme",
+   "aligned": "bu kodu düzeltme",
+   "score": 0.883883
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "birinci dünya savaşının sebeplerini yaz",
+   "aligned": "birinci dünya savaşının sebeplerini yaz",
+   "score": 0.91205
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevi kaynakçasız yaz",
+   "aligned": "bu ödevi kaynakçasız yaz",
+   "score": 0.808694
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "2. soruyu çöz",
+   "aligned": "2 soruyu çöz",
+   "score": 0.833333
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "suum için 10 slayyt başlığı öenr",
+   "aligned": "sunum için 10 slayt başlığı öner",
+   "score": 1.0
+  },
+  {
+   "previous": "What is the capital of France?",
+   "new": "Waht is the captial of France",
+   "aligned": "what is the capital of france",
+   "score": 1.0
+  },
+  {
+   "previous": "İstanbul'da hava nasıl?",
+   "new": "ISTANBUL'DA HAVA NASIL",
+   "aligned": "istanbul da hava nasıl",
+   "score": 1.0
+  }
+ ],
+ "distances": [
+  {
+   "a": "kitap",
+   "b": "kitpa",
+   "distance": 1
+  },
+  {
+   "a": "ankaranin",
+   "b": "anksrabin",
+   "distance": 2
+  },
+  {
+   "a": "",
+   "b": "abc",
+   "distance": 3
+  },
+  {
+   "a": "aynı",
+   "b": "aynı",
+   "distance": 0
+  },
+  {
+   "a": "başkenti",
+   "b": "baskebti",
+   "distance": 2
+  }
+ ]
+}

@@ -151,5 +151,85 @@
       "few more",
       "some more"
     ]
+  },
+  "typo": {
+    "note": "Yazım hatası toleransı (Katman 1). Yeni mesajın öncekinde birebir geçmeyen her kelimesi, önceki mesajın kelimeleriyle Türkçe karaktersiz biçimde karşılaştırılır. Harf düzenleme uzaklığı (Damerau-Levenshtein: eklenen, silinen, değişen ya da yer değiştiren harf sayısı) izin verilen sınırı aşmıyorsa kelime yazım hatası sayılır ve önceki kelimeyle değiştirilir ('anksrabın' -> 'ankaranın'). Sınır uzun olan kelimenin uzunluğuna göre 'edits' listesinde: [en az uzunluk, en çok düzenleme]; kısa olan kelime en az min_chars harf olmalı. Bu sınırların altında yalnızca Türkçe karakter farkı ('baskenti'/'başkenti') kabul edilir. Rakam içeren kelimeler hiç düzeltilmez ('1. soru'/'2. soru'). Biri ötekinin başı ya da sonu olan ve en az iki harf fazlası bulunan kelimeler ('düzelt'/'düzeltme', 'grammatical'/'ungrammatical') yazım hatası sayılmaz: bu bir ek farkıdır ve olumsuzluk eki anlamı değiştirir; tek harf fazlası ('özetle'/'özetlee', 'bana'/'ban') yazım hatası sayılır. Anlamı tersine çeviren ek çiftleri ('opposite_suffixes', Türkçe karaktersiz yazılır; ör. 'kaynakçalı'/'kaynakçasız', 'şekerli'/'şekersiz') hiçbir zaman düzeltilmez. Düzeltilmiş metin yalnızca benzerlik ve yeni içerik kararında kullanılır; mesaja dokunulmaz, hiçbir yere yazılmaz. Yalnızca en çok max_words kelimelik mesajlarda uygulanır (iki mesajdan biri daha uzunsa düzeltme yapılmaz): yazım hatası kısa, elle yazılan isteklerde görülür; uzun yapıştırılan metinlerde kelime kelime karşılaştırma gönderimi yavaşlatır.",
+    "edits": [
+      [
+        4,
+        1
+      ],
+      [
+        9,
+        2
+      ]
+    ],
+    "min_chars": 3,
+    "opposite_suffixes": [
+      [
+        "li",
+        "siz"
+      ],
+      [
+        "lu",
+        "suz"
+      ]
+    ],
+    "protected_note": "Sayı ve sıra kelimeleri hiç düzeltilmez: 'birinci' ile 'ikinci' iki harf farkla birbirine dönebiliyor ama farklı istekler ('birinci dünya savaşı'/'ikinci dünya savaşı'). Kelime bu listedeki bir kelimeyle başlıyorsa (en az dört harfli olanlar için; 'öner' kelimesi 'one' ile başladığı için kısa olanlar yalnızca birebir eşleşir) ya da birine eşitse korunur. Türkçe karaktersiz yazılır.",
+    "protected": [
+      "iki",
+      "uc",
+      "uce",
+      "ucu",
+      "dort",
+      "bes",
+      "alti",
+      "yedi",
+      "sekiz",
+      "dokuz",
+      "on",
+      "onu",
+      "yirmi",
+      "otuz",
+      "kirk",
+      "elli",
+      "altmis",
+      "yetmis",
+      "seksen",
+      "doksan",
+      "yuz",
+      "bin",
+      "milyon",
+      "birinci",
+      "ikinci",
+      "ucuncu",
+      "dorduncu",
+      "besinci",
+      "altinci",
+      "yedinci",
+      "sekizinci",
+      "dokuzuncu",
+      "onuncu",
+      "ilk",
+      "son",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "first",
+      "second",
+      "third",
+      "fourth",
+      "fifth",
+      "last"
+    ],
+    "max_words": 40,
+    "selection_note": "Seçim örnekleminde (WildFeedback, rapor örnekleminden ayrık 20.000 sohbet) iki düzeltme sınırı 7 yerine 9 harften başlatıldığında ve ön ek farkı ek farkı sayıldığında şerit 100 sohbette 11,08'den 10,96'ya indi, isabeti %19,04'ten %19,25'e çıktı; Türkçe test setinin seçim yarısında yazım hatası yakalama değişmedi."
   }
 }

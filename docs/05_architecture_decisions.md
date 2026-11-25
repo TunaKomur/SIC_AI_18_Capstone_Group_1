@@ -54,6 +54,7 @@ Bu belge projede verdiğimiz teknik kararları ve nedenlerini kayıt altına al�
 | K48 | Yeniden hatırlatılan kural kartta not olarak söylenir ve Taze başlat taslağının başına girer | Kabul |
 | K49 | "Yön sende" önerisine yönü doğrudan veren ikinci düğme; eşik 3 kalır | Kabul |
 | K50 | Kapsam sadeleştirmesi: yapılmayan işler ürün ve belgelerden çıkarılır | Kabul |
+| K51 | Yazım hatası toleransı: yeni mesaj önceki mesaja göre düzeltilerek karşılaştırılır (NLP Katman 1) | Kabul |
 
 ---
 
@@ -633,3 +634,14 @@ Planda kalan tek dağıtım adımı Chrome Web Store yayını (Bölüm 10).
 
 **Bedeli.** Bazı özgün fikirler (öğrenme sorusu, destek yolu) bu dönemde ürüne girmedi. Bunlar Bölüm 4'te özgün önerinin parçası olarak anılır.
 
+## K51. Yazım hatası toleransı: yeni mesaj önceki mesaja göre düzeltilerek karşılaştırılır (NLP Katman 1)
+
+**Bağlam.** Mentor görüşmesinde Türkçe kullanımda bir eksik görüldü: aynı soru yazım hatasıyla yeniden sorulunca tekrar yakalanmıyordu. "ankaranın başkenti neresidir?" ile "anksrabın baskebti neresifir" arasındaki karakter 3-gram benzerliği 0,46; Türkçe karaktersiz yazım ("ankaranin baskenti neresidir") bile 0,79 ile 0,8 eşiğinin altında kalıyordu. Ayrıca yazım hatalı kelime K20'deki kurala göre "yeni içerik" sayılıyor ve şeridi susturuyordu. Hazır çok dilli cümle modelleri (MiniLM, multilingual-e5-small, potion) aynı 38 çift üzerinde denendi; yazım hatasında hiçbiri yeterli değildi (MiniLM bu örneğe 0,17 verdi).
+
+**Karar.** Yeni mesajın öncekinde birebir geçmeyen her kelimesi, önceki mesajın kelimeleriyle Türkçe karaktersiz biçimde karşılaştırılır. Harf düzenleme uzaklığı (Damerau-Levenshtein) sınırı aşmıyorsa kelime önceki karşılığıyla değiştirilir ve benzerlik ile yeni içerik kararı bu düzeltilmiş metinle de hesaplanır; büyük olan alınır. Sınır: 4–8 harfte bir, 9 ve üstünde iki düzenleme; daha kısa kelimelerde yalnızca Türkçe karakter farkı. Düzeltilmez: rakam içeren kelimeler, sayı ve sıra kelimeleri ("birinci"/"ikinci"), yalnızca ek farkı olan kelimeler ("düzelt"/"düzeltme", "grammatical"/"ungrammatical"), anlamı tersine çeviren ekler ("kaynakçalı"/"kaynakçasız"). Kırk kelimeden uzun mesajlarda uygulanmaz. Sözlük ya da model yoktur; sözlük kullanıcının bir önceki mesajıdır. Kurallar `extension/src/data/repeat-rules.json` ("typo"), kod `extension/src/core/typo.ts` ve `src/kafiai/extension_similarity.py`; ortak örnekler `tests/fixtures/typo_parity.json`.
+
+**Ölçüm.** Türkçe test seti (`tests/fixtures/semantic_pairs_tr.json`, 401 uydurma çift; seçim ve rapor yarısı ayrık): rapor yarısında yazım hatalı tekrarda gönderimin bekletilmesi %0'dan %90'a, Türkçe karaktersiz yazımda %5'ten %100'e çıktı; farklı istekler (başka özel ad, sayı, ters istek, başka konu) hiçbir durumda bekletilmedi (`outputs/semantic_pairs_eval.json`). WildFeedback rapor örnekleminde (20.000 sohbet) şerit 100 sohbette 10,13'ten 10,59'a çıktı, isabeti %21,51'den %21,07'ye indi; halka ve kart neredeyse değişmedi (`outputs/replay_eval.json`). Ayarlar (9 harf sınırı, ön ek kuralı) seçim örnekleminde seçildi.
+
+**Neden.** Gönderim anında, eşzamanlı ve modelsiz çalışır (40 kelimelik mesajda birkaç milisaniye); ağ, depolama ve izin değişmez. Kararın nedeni açıklanabilir: hangi kelimenin hangisine düzeltildiği bellidir.
+
+**Bedeli.** Yeni şeritlerin isabeti (yaklaşık %11) mevcut ortalamanın altında, tabanın (%5) iki katı. Bunların bir kısmı kullanıcının kendi yazım hatasını düzelterek yeniden göndermesi; WildFeedback bunu memnuniyetsizlik saymıyor. Farklı ama birbirine çok yakın yazılan kelimeler (kısaltmalar "LSTP"/"LTSP", "composting"/"combusting") yanlışlıkla eşleşebilir. Test seti uydurma cümlelerden oluşuyor; rapor yarısında görülen "birinci"/"ikinci" hatası kurala eklendiği için o yarı artık tümüyle bağımsız değil. Aynı isteğin başka kelimelerle sorulması bu katmanın işi değil (başka söylenişte bekletme %0); o, anlam modeli katmanında ele alınacak.

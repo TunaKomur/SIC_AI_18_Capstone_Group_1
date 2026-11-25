@@ -5,8 +5,8 @@
     "sohbet": 20000,
     "kullanici_turu": 115052,
     "serit": {
-      "100_sohbette": 18.77,
-      "isabet_yuzde": 15.08
+      "100_sohbette": 19.28,
+      "isabet_yuzde": 14.86
     },
     "kisa_onarim_seridi": {
       "100_sohbette": 0.0,
@@ -27,26 +27,26 @@
       "sonraki_tur_memnuniyetsizlik_yuzde": null
     },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 22.48,
-      "seviye2_tur_yuzde": 9.76,
-      "seviye2_isabet_yuzde": 25.11,
+      "seviye1_ve_ustu_tur_yuzde": 22.73,
+      "seviye2_tur_yuzde": 9.82,
+      "seviye2_isabet_yuzde": 25.06,
       "cikistan_sonra_yuksek_kalan_yuzde": null,
       "cikis_mesaji": 0
     },
     "kart": {
-      "100_sohbette": 30.66,
-      "isabet_yuzde": 18.23,
+      "100_sohbette": 30.77,
+      "isabet_yuzde": 18.17,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3148,
-          "isabet_yuzde": 29.99
+          "sayi": 3145,
+          "isabet_yuzde": 29.98
         },
         "norm": {
-          "sayi": 2985,
-          "isabet_yuzde": 5.83
+          "sayi": 3008,
+          "isabet_yuzde": 5.82
         }
       },
-      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.68,
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 29.75,
       "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
       "kural_notlu_kart_yuzde": 0.0,
       "kural_notlu_kart_isabet_yuzde": null
@@ -61,18 +61,18 @@
     "sohbet": 20000,
     "kullanici_turu": 115052,
     "serit": {
-      "100_sohbette": 10.13,
-      "isabet_yuzde": 21.51
+      "100_sohbette": 10.59,
+      "isabet_yuzde": 21.07
     },
     "kisa_onarim_seridi": {
       "100_sohbette": 0.91,
       "isabet_yuzde": 57.69
     },
     "dongu_sonu": {
-      "donguli_sohbet_yuzde": 23.8,
-      "birakildi_yuzde": 51.42,
-      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": 32.86,
-      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": 17.08
+      "donguli_sohbet_yuzde": 24.04,
+      "birakildi_yuzde": 51.67,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": 32.41,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": 16.96
     },
     "kisa_tekrar_seridi": {
       "100_sohbette": 0.51,
@@ -83,27 +83,27 @@
       "sonraki_tur_memnuniyetsizlik_yuzde": 0.0
     },
     "halka": {
-      "seviye1_ve_ustu_tur_yuzde": 21.4,
-      "seviye2_tur_yuzde": 9.42,
-      "seviye2_isabet_yuzde": 29.87,
+      "seviye1_ve_ustu_tur_yuzde": 21.52,
+      "seviye2_tur_yuzde": 9.44,
+      "seviye2_isabet_yuzde": 29.86,
       "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
       "cikis_mesaji": 336
     },
     "kart": {
-      "100_sohbette": 19.12,
-      "isabet_yuzde": 31.03,
+      "100_sohbette": 19.11,
+      "isabet_yuzde": 31.06,
       "kaynaga_gore": {
         "model": {
-          "sayi": 3102,
-          "isabet_yuzde": 27.72
+          "sayi": 3101,
+          "isabet_yuzde": 27.73
         },
         "ozur": {
-          "sayi": 485,
-          "isabet_yuzde": 44.54
+          "sayi": 484,
+          "isabet_yuzde": 44.63
         },
         "tekrar": {
-          "sayi": 208,
-          "isabet_yuzde": 51.44
+          "sayi": 207,
+          "isabet_yuzde": 51.69
         },
         "norm": {
           "sayi": 30,
@@ -112,7 +112,7 @@
       },
       "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 32.3,
       "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
-      "kural_notlu_kart_yuzde": 1.25,
+      "kural_notlu_kart_yuzde": 1.26,
       "kural_notlu_kart_isabet_yuzde": 39.58
     },
     "taze_baslat": {

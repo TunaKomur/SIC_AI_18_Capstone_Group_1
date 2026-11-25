@@ -1,0 +1,3213 @@
+{
+ "note": "Türkçe anlam test setini üretir: tests/fixtures/semantic_pairs_tr.json.",
+ "pairs": [
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaranın başknti neresidir?"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaaranın bşakenti neresidir?"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaranin baskenti neresidir?"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaranın başkenti nedir"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaranın başkenti hangi şehir"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankarqnın başkenti nedir"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "ankaranın nüfusu kaç"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "anksranın nüfusu kaç"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "python ile dosya nasıl okunur"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "pyton ile dosya nasıl okunur"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiyeenin başkenti nerei"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiyenn bşkenti ndresi"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "turkiyenin baskenti neresi"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiyenin başkenti hangi şehir"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiye'nin başkenti nedir"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türikyenin başkenti hangi şehir"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "amerikanın başkenti neresi"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "ameriikanın başkenti neresi"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiyenin en kalabalık şehri neresi"
+  },
+  {
+   "grup": 1,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "türkiyenin başkenti neresi",
+   "yeni": "türkiyenin en kalabalık şehfi neresi"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python ile dosya nasıl oknuur"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python ile dşsya nasıl oknur"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python ile dosya nasil okunur"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python'da bir dosyayı nasıl okurum"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "pythonda dosya okuma nasıl yapılır"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python'da bir dosyyı nsaıl okurum"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python ile dosya nasıl yazılır"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "python ile dosya nasıl ywzılır"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "java ile dosya nasıl okunur"
+  },
+  {
+   "grup": 2,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "python ile dosya nasıl okunur",
+   "yeni": "javaa ile dosya nasıl ounur"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodu düzelt çalışmııyor"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodu düzellt çalışmıyro"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodu duzelt calismiyor"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "kod hala çalışmıyor düzeltsene"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "şu kodu onar, olmuyor"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "kod halw çalışmıyor düzeltsene"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu koda yorum satırları ekle"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodaa yorum satırlar ekle"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodu javascripte çevir"
+  },
+  {
+   "grup": 3,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu kodu düzelt çalışmıyor",
+   "yeni": "bu kodu javascript çevir"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "mettni daaha kısa yaz"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni daah kıs yaz"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni daha kisa yaz"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "bunu kısalt, çok uzun olmuş"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni kısaltır mısın"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "bınu kısalt, çok uzun olmuş"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni daha uzun yaz"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni daha uuzn yaz"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni ingilizceye çevir"
+  },
+  {
+   "grup": 4,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "metni daha kısa yaz",
+   "yeni": "metni ihgilizceye çevir"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "bana fotoseentezi anlat"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "baana fotosentezi ançat"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "bana fotosentezi anlat"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "fotosentez nedir açıklar mısın"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "fotosentez nasıl gerçekleşir anlatır mısın"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "fotosentez nedir aıklar mısn"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "bana mitoz bölünmeyi anlat"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "bana mitooz bölünmeyi alnat"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "fotosentez hakkında 5 soruluk test hazırla"
+  },
+  {
+   "grup": 5,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bana fotosentezi anlat",
+   "yeni": "fotosentez hakkında 5 soruluk test hazrıla"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu htaanın sebebi ne"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu haatnın sebwbi ne"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu hatanin sebebi ne"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "neden bu hatayı alıyorum"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu hata neden çıkıyor"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "neden bu hatayı allyorum"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu hatayı nasıl düzeltirim"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu hatayı nasıl dzüeltirim"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu uyarının sebebi ne"
+  },
+  {
+   "grup": 6,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu hatanın sebebi ne",
+   "yeni": "bu uyarının sebeebi ne"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "exccel'de iki sütunu nasıl birleştiririm"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excel'de iki sütunu nassıl brileştiririm"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excel'de iki sutunu nasil birlestiririm"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excelde iki kolonu birleştirmenin yolu ne"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excel iki sütunu tek sütunda birleştirme"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excelde iki kollonu birleştirmenin yolu ne"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excel'de iki sütunu nasıl karşılaştırırım"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "excel'de iki sütunu nasıl karşıaştırırım"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "google sheets'te iki sütunu nasıl birleştiririm"
+  },
+  {
+   "grup": 7,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "excel'de iki sütunu nasıl birleştiririm",
+   "yeni": "google sheets'te iki sütnuu nasıll birleştiririm"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu markdown formatıında ver"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tablyu markdown foramtında ver"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu markdown formatinda ver"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "bunu markdown tablo olarak yaz"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu markdown olarak gösterir misin"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "bunu markdown tabl olaak yaz"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu csv formatında ver"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu csv formatınnda ver"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu tarihe göre sırala"
+  },
+  {
+   "grup": 8,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "tabloyu markdown formatında ver",
+   "yeni": "tabloyu tarihe gör sırala"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "özgeçmişimi daah profesyonel yap"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "özgemçişimi daa profesyonle yap"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "ozgecmisimi daha profesyonel yap"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "cv'mi daha profesyonel hale getir"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "özgeçmişimi daha profesyonel bir dille yeniden yaz"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "cv'mi dahaa profesyonel hale grtir"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "özgeçmişimi ingilizceye çevir"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "özgeçmişimmi ingilizceye çeivr"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "ön yazımı daha profesyonel yap"
+  },
+  {
+   "grup": 9,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "özgeçmişimi daha profesyonel yap",
+   "yeni": "ön yazımı daha profesyoonel yap"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postayı daah resmi yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postay dha rdsmi yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postayi daha resmi yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "maili daha resmi bir dille yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "bu e-postayı resmi hale getir"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "mailii daha resmi bir dillle yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postayı daha samimi yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postayı daaha samimi yaz"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postaya bir kapanış cümlesi ekle"
+  },
+  {
+   "grup": 10,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "e-postayı daha resmi yaz",
+   "yeni": "e-postaya bir kapanış cümlesi eklle"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümeyi ingilzceye çevir"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümldyi ingillizceye çevri"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cumleyi ingilizceye cevir"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümlenin ingilizcesi ne"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bunu ingilizce yazar mısın"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümlenni ingilizcesi ne"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümleyi almancaya çevir"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümelyi almancaya çevir"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümledeki yazım hatalarını düzelt"
+  },
+  {
+   "grup": 11,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu cümleyi ingilizceye çevir",
+   "yeni": "bu cümledeik yazım hatalarını düzetl"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "liteyi allfabetik sırala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "liteyi alfabetil sırala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeyi alfabetik sirala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeyi a'dan z'ye sırala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "bu listeyi alfabetik sıraya koy"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeyi a'dan z'ye sjrala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeyi tersten sırala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeyi tersten sjrala"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listedeki tekrar edenleri sil"
+  },
+  {
+   "grup": 12,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "listeyi alfabetik sırala",
+   "yeni": "listeeki tekrar edenleri sil"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbul için hxva durumu"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istnbul iin havaa duumu"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbul icin hava durumu"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbulda hava nasıl"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbul hava durumu ne"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbulda hava nasıll"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "izmir için hava durumu"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "izmr içinn hava durumu"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "istanbul için gezilecek yerler"
+  },
+  {
+   "grup": 13,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "istanbul için hava durumu",
+   "yeni": "isttanbul içn gezielcek yerler"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denkemini çöz"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denklemihi çöz"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denklemini coz"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denkleminde x kaç"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 ise x nedir"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denklehinde x kaç"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "4x-2=10 denklemini çöz"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "4x-2=10 denkçemini çöz"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denklemini grafikle göster"
+  },
+  {
+   "grup": 14,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "3x+5=20 denklemini çöz",
+   "yeni": "3x+5=20 denlkemini grafikle göster"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk pragrafı özetle"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrafı özetlee"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrafi ozetle"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrafın özetini çıkar"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "birinci paragrafı kısaca özetle"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrfın özetini çıkar"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ikinci paragrafı özetle"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ikinci paragrafı özele"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrafı ingilizceye çevir"
+  },
+  {
+   "grup": 15,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "ilk paragrafı özetle",
+   "yeni": "ilk paragrafı ingilşzceye çevir"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "react'ge sate nasıll güncellenir"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "reactt'te statw nassıl güncelleenir"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "react'te state nasil guncellenir"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "reactta state güncelleme nasıl yapılır"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "react state'i nasıl değiştiririm"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "reactta state günncelleme nasıl yapıılır"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "vue'da state nasıl güncellenir"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "vue'da state nasıll güncelleni"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "react'te nasıl api isteği atılır"
+  },
+  {
+   "grup": 16,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "react'te state nasıl güncellenir",
+   "yeni": "react'te naısl api issteği aılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql sorgusunda jon nasıl kullanılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql sorgusuda jooin naqıl kullamılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql sorgusunda join nasil kullanilir"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql'de join kullanımını anlat"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "join ifadesi sql'de nasıl yazılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql'de join kullanmını anlat"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql sorgusunda group by nasıl kullanılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "sql sorgusundx group by nasul kullanılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "mongodb'de join nasıl yapılır"
+  },
+  {
+   "grup": 17,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "sql sorgusunda join nasıl kullanılır",
+   "yeni": "mongodb'de join nasıl yqpılır"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. soruy çöz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. soruuyu çöz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. soruyu coz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "birinci soruyu çözer misin"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. sorunun çözümünü yaz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "1. soruyu çöz",
+   "yeni": "birinci soruyu çöze misin"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "1. soruyu çöz",
+   "yeni": "2. soruyu çöz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "1. soruyu çöz",
+   "yeni": "2. souyu çöz"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. soruyu açıkla ama çözme"
+  },
+  {
+   "grup": 18,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "1. soruyu çöz",
+   "yeni": "1. soruyu açıkla ama çzöme"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "ban bir şiir yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "banna bir şiirr yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bana bir siir yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bir şiir yazar mısın"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "benim için bir şiir yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bir şiir yaazar mıısın"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bana bir hikaye yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bna bir hikaye yaz"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bu şiiri analiz et"
+  },
+  {
+   "grup": 19,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bana bir şiir yaz",
+   "yeni": "bu şiiri analz et"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransanın nüfuus kaç"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fragsanın nüfussu kaç"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransanin nufusu kac"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransa'nın nüfusu ne kadar"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransada kaç kişi yaşıyor"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "frznsa'nın nüusu ne kadar"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "almanyanın nüfusu kaç"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "almanyanınn nüfusu kaç"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransanın yüzölçümü kaç"
+  },
+  {
+   "grup": 20,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "fransanın nüfusu kaç",
+   "yeni": "fransanın yüzölçümmü kaç"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonu daha hızı hale getir"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksioynu dahha hızşı hale getir"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonu daha hizli hale getir"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonu hızlandır"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonun performansını iyileştir"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonuu hızlandır"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyona test yaz"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonkisyona test yaz"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonu daha okunur hale getir"
+  },
+  {
+   "grup": 21,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu fonksiyonu daha hızlı hale getir",
+   "yeni": "bu fonksiyonu daha okunur hale getri"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makaleyi 200 kelimeeyle özetle"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "mwkaleyi 200 kelimeyle özetle"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makaleyi 200 kelimeyle ozetle"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makalenin 200 kelimelik özetini yaz"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makaleyi 200 kelimede özetler misin"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makalenin 200 kelimellik özetinii yaz"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makaleyi 500 kelimeyle özetle"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "maaleyi 500 kelijeyle özetle"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "makaledeki kaynakları listele"
+  },
+  {
+   "grup": 22,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "makaleyi 200 kelimeyle özetle",
+   "yeni": "mkaledeki kaynakları listelle"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce bir e-osta taslağı yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingiliace bir e-psota taslaı yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce bir e-posta taslagi yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce mail taslağı hazırla"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce bir e-posta taslağı hazırlar mısın"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce mial taslağj hazırla"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "almanca bir e-posta taslağı yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "almancaa bir e-posta taslağı yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilizce bir özgeçmiş taslağı yaz"
+  },
+  {
+   "grup": 23,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "ingilizce bir e-posta taslağı yaz",
+   "yeni": "ingilice bir özgeçiş taslağk yaz"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türev alm kurallarınnı anlat"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türrev ama kurallarını anla"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "turev alma kurallarini anlat"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türev kuralları nelerdir"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türev nasıl alınır kurallarıyla anlat"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türevv kurallarıı nelerdir"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "integral alma kurallarını anlat"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "intergal almaa kuralllarını analt"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türev ile ilgili 10 soru hazırla"
+  },
+  {
+   "grup": 24,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "türev alma kurallarını anlat",
+   "yeni": "türev ile ilgil 10 sooru hazırla"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevi kaynakçal yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödeevi kaynaçalı yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu odevi kaynakcali yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevi kaynakça ekleyerek yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "ödevi kaynaklarıyla birlikte yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevvi kaynakça ekleyerek yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevi kaynakçasız yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevi kaynakçasjz yaz"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevin sunumunu hazırla"
+  },
+  {
+   "grup": 25,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu ödevi kaynakçalı yaz",
+   "yeni": "bu ödevin sunumunuu hazırla"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "dockr cotainer nsıl durdurulur"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "dockdr contaier naısl durddurulur"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker container nasil durdurulur"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker'da container durdurma komutu ne"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "çalışan docker container'ı nasıl durdururum"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker'da container dudrurma komutu ne"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker container nasıl başlatılır"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker contaier nasıl başlatılır"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker image nasıl silinir"
+  },
+  {
+   "grup": 26,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "docker container nasıl durdurulur",
+   "yeni": "docker iage nasıl silinir"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'tee son commt nasıl geri alınır"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'e son committ nasıl gerii alınıd"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'te son commit nasil geri alinir"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "son commit'i nasıl geri alırım"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git son commit'i geri alma komutu"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "son commit'i nasıl gei alırım"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'te yeni branch nasıl açılır"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "giit'te yeni branch nasıl açılır"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'te son commit mesajı nasıl değiştirilir"
+  },
+  {
+   "grup": 27,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "git'te son commit nasıl geri alınır",
+   "yeni": "git'te son commit messajı nasıl değiştirilir"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafı daha akucı yaz"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragafı daha akıc yaz"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafi daha akici yaz"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "paragrafı daha akıcı hale getir"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafın akışını düzelt"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "paragrafı daha akııcı hlae getir"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafı daha resmi yaz"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafı daha resmp yaz"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrafa bir başlık öner"
+  },
+  {
+   "grup": 28,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu paragrafı daha akıcı yaz",
+   "yeni": "bu paragrfaa bir balşık öner"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "haftallk çalıma plnı hazırla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "haftalı çalışka planı haazırla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "haftalik calisma plani hazirla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "bana haftalık bir çalışma programı yap"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "bir haftalık ders çalışma planı oluştur"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "bana haftalık bir çalşıma programı yap"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "aylık çalışma planı hazırla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "aylık çalışma plnı hazırla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "haftalık yemek planı hazırla"
+  },
+  {
+   "grup": 29,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "haftalık çalışma planı hazırla",
+   "yeni": "haftaalık yemek planı hazırla"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabı tablo haliinde ver"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevaabı taablo halinnde ver"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabi tablo halinde ver"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabını tablo olarak yaz"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "bunu tabloya dök"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabnıı tablo olarak yaz"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabı madde madde ver"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevbaı madde madde ver"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cevabı kısalt"
+  },
+  {
+   "grup": 30,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "cevabı tablo halinde ver",
+   "yeni": "cedabı kısalt"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun ne yaptığıjı açıkla"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kdun ne yaptığını açıkkla"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun ne yaptigini acikla"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kod ne işe yarıyor"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodu satır satır açıklar mısın"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kod ne işe yarıor"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun hatasını bul"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun htaasını bul"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun karmaşıklığını hesapla"
+  },
+  {
+   "grup": 31,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu kodun ne yaptığını açıkla",
+   "yeni": "bu kodun karmaşıklığını hesala"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahvve mi çay mı dhaa saağlıklı"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahvee mi çay mı dahaa sğalıklı"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahve mi cay mi daha saglikli"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "çay mı kahve mi daha sağlıklı"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "sağlık açısından kahve mi çay mı"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "çay mı kahce mi daaha sağlıklı"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahve mi çay mı daha ucuz"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahve mi çay mı daha ucz"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahve nasıl demlenir"
+  },
+  {
+   "grup": 32,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "kahve mi çay mı daha sağlıklı",
+   "yeni": "kahhve nası demlenir"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikincii dünya savaşının sebeplerini yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikini dünay savaşını sebplerini yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikinci dunya savasinin sebeplerini yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "2. dünya savaşı neden çıktı"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikinci dünya savaşının nedenleri neler"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "2. dünyaa savaşı neden çıktı"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "birinci dünya savaşının sebeplerini yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "birinci düya savaşımın sebepkerini yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikinci dünya savaşının sonuçlarını yaz"
+  },
+  {
+   "grup": 33,
+   "split": "rapor",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "ikinci dünya savaşının sebeplerini yaz",
+   "yeni": "ikinci dnüya svaşının sonuçlagını yaz"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu meitndeki yazım hatalarını düxelt"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metindeki yaaım hatalaını düzeltt"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metindeki yazim hatalarini duzelt"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "metindeki yazım yanlışlarını düzelt"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu yazıdaki imla hatalarını düzeltir misin"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "metideki yzaım yalışlarını düzelt"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metni özetle"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metni özetlee"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metindeki anlatım bozukluklarını bul"
+  },
+  {
+   "grup": 34,
+   "split": "secim",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu metindeki yazım hatalarını düzelt",
+   "yeni": "bu metindeki anlatım boozukluklarını bul"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javascriptte dizi nasıl sıralnır"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javwscriptte diiz nasıl sıraalanır"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javascriptte dizi nasil siralanir"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "js'de array sıralama nasıl yapılır"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javascript dizisini nasıl sıralarım"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "js'de array sıralamaa nasıl yapıllır"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "zit",
+   "ayni": false,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javascriptte dizi nasıl ters çevrilir"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "zit_yazim",
+   "ayni": false,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "javascriptte dizi nasul ters çevrrilir"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "pythonda dizi nasıl sıralanır"
+  },
+  {
+   "grup": 35,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "javascriptte dizi nasıl sıralanır",
+   "yeni": "pythonda dizi nasıl sıalanır"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunu için 10 slayt başlığğı öner"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "suum için 10 slayyt başlığı öenr"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunum icin 10 slayt basligi oner"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunumum için 10 tane slayt başlığı ver"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "10 slaytlık sunuma başlık öner"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunumumm için 10 tane slayt başlığı ver"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunum için 5 slayt başlığı öner"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunuh için 5 slayt başlığıı öner"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunum için konuşma metni yaz"
+  },
+  {
+   "grup": 36,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "sunum için 10 slayt başlığı öner",
+   "yeni": "sunum içim konuşma metni yaz"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi 4 kiğilik yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi 4 kişiliik yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi 4 kisilik yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "tarifi 4 kişiye göre ayarla"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi dört kişilik hale getir"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "tarifi 4 kişiye göre ayyarla"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "seri",
+   "ayni": false,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi 8 kişilik yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "seri_yazim",
+   "ayni": false,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu taarifi 8 kişilik yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi vegan yap"
+  },
+  {
+   "grup": 37,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu tarifi 4 kişilik yap",
+   "yeni": "bu tarifi vfgan yap"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakatta sorulailecek sorularıı listele"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakatta sorulabilecek sıruları lğstele"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mulakatta sorulabilecek sorulari listele"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "iş görüşmesinde hangi sorular sorulur"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakat soruları neler olabilir"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "iş görüşmesind hangi sorular sorulur"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakatta sorulacak sorulara cevap yaz"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mlüakatta sorulacak sorulara cevap yaz"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakatta ne giymeliyim"
+  },
+  {
+   "grup": 38,
+   "split": "secim",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "mülakatta sorulabilecek soruları listele",
+   "yeni": "mülakatta ne gymeliyim"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "yazim_hafif",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümlenin özesini bul"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cülenin özesini bul"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "turkce_harfsiz",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cumlenin oznesini bul"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümlede özne hangisi"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "baska_soylenis",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "cümlenin öznesi ne"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "baska_soylenis_yazim",
+   "ayni": true,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümelde özne hangisi"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "varlik",
+   "ayni": false,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümlenin yüklemini bul"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "varlik_yazim",
+   "ayni": false,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümlenin yükleminni bul"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "konu",
+   "ayni": false,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümleyi ögelerine ayır"
+  },
+  {
+   "grup": 39,
+   "split": "rapor",
+   "tur": "konu_yazim",
+   "ayni": false,
+   "onceki": "bu cümlenin öznesini bul",
+   "yeni": "bu cümleyii ögelerine ayır"
+  },
+  {
+   "grup": 0,
+   "split": "secim",
+   "tur": "yazim_agir",
+   "ayni": true,
+   "onceki": "ankaranın başkenti neresidir?",
+   "yeni": "anksrabın baskebti neresifir"
+  }
+ ]
+}

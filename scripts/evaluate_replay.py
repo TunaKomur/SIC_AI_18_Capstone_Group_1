@@ -44,7 +44,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from kafiai import config  # noqa: E402
-from kafiai.extension_similarity import is_comparable, is_variation, new_content, similarity  # noqa: E402
+from kafiai.extension_similarity import is_comparable, is_variation, new_content, typo_similarity  # noqa: E402
 from kafiai.signals import RULES as SIGNAL_RULES, ConversationSignals  # noqa: E402
 from kafiai.tasks import task_type  # noqa: E402
 from kafiai.text import has_strong_repair  # noqa: E402
@@ -76,7 +76,7 @@ def detector_flags(msgs, use_variation):
             recent = [m for m in msgs[max(0, t - config.EXT_RECENT_MESSAGES):t] if is_comparable(m) and len(m) <= MAX_CHARS]
             best = 0.0
             for prev in recent:
-                s = similarity(text, prev)
+                s = typo_similarity(text, prev)  # yazım hatası toleransıyla (K51)
                 best = max(best, s)
                 if s >= config.EXT_SIMILARITY_THRESHOLD and not new_content(text, prev):
                     similar = True

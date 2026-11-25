@@ -199,16 +199,16 @@ Pilot yapılmadığı için başarı ölçütümüz WildFeedback üzerinde çevr
 
 | Bileşen | Sıklık | İsabet |
 |---|---|---|
-| Benzer mesaj şeridi | 100 sohbette 10,13 | %21,51 |
+| Benzer mesaj şeridi | 100 sohbette 10,59 | %21,07 |
 | Kısa onarım şeridi | 100 sohbette 0,91 | %57,69 |
 | Kısa devam şeridi | 100 sohbette 0,51 | %5,88 (bir uyarı değil, yön sorusu) |
 | "Yön sende" önerisi | 100 sohbette 0,02 | eski veride ölçülemeyecek kadar seyrek |
-| Halka | turların %21,40'ında 1. seviye ve üstü, %9,42'sinde 2. seviye | 2. seviyede %29,87 |
-| Çıkış kartı (tümü) | 100 sohbette 19,12 | %31,03 |
-| Çıkış kartı, kaynağa göre | model 3.102, özür 485, düzeltme alınmadı 208, uzun sohbet 30 kart | %27,72 · %44,54 · %51,44 · %13,33 |
-| Kural notu taşıyan kart | kartların %1,25'i | %39,58 |
+| Halka | turların %21,52'sinde 1. seviye ve üstü, %9,44'ünde 2. seviye | 2. seviyede %29,86 |
+| Çıkış kartı (tümü) | 100 sohbette 19,11 | %31,06 |
+| Çıkış kartı, kaynağa göre | model 3.101, özür 484, düzeltme alınmadı 207, uzun sohbet 30 kart | %27,73 · %44,63 · %51,69 · %13,33 |
+| Kural notu taşıyan kart | kartların %1,26'sı | %39,58 |
 
-İsabet: şeritlerde o mesajda, halka ve kartta o turda ya da bir sonrakinde kullanıcının memnuniyetsiz olması. Kullanıcının iki ya da daha fazla kez memnuniyetsiz olduğu 1.294 sohbetin %32,3'ünde kart ikinci şikayetten önce geliyor. Sohbetlerin %23,8'inde bir döngü sinyali görülüyor ve bunların %51,4'ü döngü sürerken bitiyor; bu sohbetlerin son iki turunda memnuniyetsizlik %32,9, döngüsü sakinleşerek biten sohbetlerde %17,1.
+İsabet: şeritlerde o mesajda, halka ve kartta o turda ya da bir sonrakinde kullanıcının memnuniyetsiz olması. Kullanıcının iki ya da daha fazla kez memnuniyetsiz olduğu 1.294 sohbetin %32,3'ünde kart ikinci şikayetten önce geliyor. Sohbetlerin %24,0'ında bir döngü sinyali görülüyor ve bunların %51,7'si döngü sürerken bitiyor; bu sohbetlerin son iki turunda memnuniyetsizlik %32,4, döngüsü sakinleşerek biten sohbetlerde %17,0. Bu sayılar yazım hatası toleransıyla (K51) güncellendi.
 
 Tur modelinin kendi test sonuçları (`outputs/turn_model_metrics.json`, eğitimde görülmeyen kullanıcılar): PR-AUC 0,321 (rastgele 0,098), ROC-AUC 0,782, kalibrasyon hatası (ECE) 0,020. Yüksek güven eşiğinde turların %5,07'si işaretleniyor ve bunların %44,57'si gerçekten döngü.
 

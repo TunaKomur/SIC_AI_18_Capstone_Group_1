@@ -156,13 +156,133 @@ def is_variation(text, score=0.0):
                 and _VARIATION["max_exact_words"] < words <= _VARIATION["template_words"])
 
 
+_TYPO_EDITS = sorted(_REPEAT_RULES["typo"]["edits"])
+_TYPO_MIN_CHARS = _REPEAT_RULES["typo"]["min_chars"]
+_TYPO_MAX_WORDS = _REPEAT_RULES["typo"]["max_words"]
+_PROTECTED = set(_REPEAT_RULES["typo"]["protected"])
+_PROTECTED_STEMS = [w for w in _REPEAT_RULES["typo"]["protected"] if len(w) >= 4]
+_OPPOSITE = [tuple(pair) for pair in _REPEAT_RULES["typo"]["opposite_suffixes"]]
+
+
+def _has_digit(token):
+    return any(c.isdigit() for c in token)
+
+
+def _typo_budget(length):
+    """Bu uzunluktaki bir kelimede yazım hatası sayılan en çok düzenleme (repeat-rules.json, typo.edits)."""
+    budget = 0
+    for min_len, edits in _TYPO_EDITS:
+        if length >= min_len:
+            budget = edits
+    return budget
+
+
+def osa_distance(a, b):
+    """Harf düzenleme uzaklığı: ekleme, silme, değiştirme ve yan yana iki harfin yer değiştirmesi
+    (Damerau-Levenshtein, optimal string alignment). typo.ts osaDistance ile aynı."""
+    n, m = len(a), len(b)
+    d = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        d[i][0] = i
+    for j in range(m + 1):
+        d[0][j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            cost = 0 if a[i - 1] == b[j - 1] else 1
+            d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost)
+            if i > 1 and j > 1 and a[i - 1] == b[j - 2] and a[i - 2] == b[j - 1]:
+                d[i][j] = min(d[i][j], d[i - 2][j - 2] + 1)
+    return d[n][m]
+
+
+def _opposite_suffix(a, b):
+    """İki kelime aynı gövdeye anlamı tersine çeviren eklerle mi bitiyor? ("kaynakcali"/"kaynakcasiz")"""
+    for x, y in _OPPOSITE:
+        for p, q in ((x, y), (y, x)):
+            if a.endswith(p) and b.endswith(q) and a[: len(a) - len(p)] == b[: len(b) - len(q)]:
+                return True
+    return False
+
+
+def _protected(folded):
+    """Sayı ve sıra kelimeleri ("ikinci", "üçüncü", "first") yazım hatası diye düzeltilmez."""
+    return folded in _PROTECTED or any(folded.startswith(w) for w in _PROTECTED_STEMS)
+
+
+def typo_match(token, previous_tokens):
+    """Kelime, önceki mesajdaki bir kelimenin yazım hatalı biçimi mi? Öyleyse o kelimeyi döner, değilse None.
+
+    Türkçe karaktersiz biçimde karşılaştırılır; en az düzenleme isteyen, eşitlikte ilk geçen kelime seçilir.
+    Rakam içeren kelimeler ve yalnızca ek farkı olan kelimeler ("düzelt"/"düzeltme") düzeltilmez.
+    """
+    if _has_digit(token):
+        return None
+    folded = fold_turkish(token)
+    best = None
+    for prev in previous_tokens:
+        if _has_digit(prev):
+            continue
+        fp = fold_turkish(prev)
+        if fp == folded:
+            distance = 0
+        else:
+            shorter, longer = sorted((len(fp), len(folded)))
+            affix = fp.startswith(folded) or folded.startswith(fp) or fp.endswith(folded) or folded.endswith(fp)
+            if affix and longer - shorter >= 2:
+                continue  # ek farkı ("düzelt"/"düzeltme", "grammatical"/"ungrammatical"); tek harf fazlası yazım hatası sayılır
+            if shorter < _TYPO_MIN_CHARS or _protected(folded) or _protected(fp) or _opposite_suffix(folded, fp):
+                continue
+            budget = _typo_budget(longer)
+            if budget == 0 or longer - shorter > budget:
+                continue
+            distance = osa_distance(folded, fp)
+            if distance > budget:
+                continue
+        if best is None or distance < best[0]:
+            best = (distance, prev)
+    return None if best is None else best[1]
+
+
+def align_typos(new_normalized, previous_normalized):
+    """Yeni mesajın yazım hatalı kelimelerini önceki mesajdaki karşılıklarıyla değiştirir (yalnızca karşılaştırma için).
+
+    "anksrabın baskebti neresifir" ile "ankaranın başkenti neresidir" -> "ankaranın başkenti neresidir".
+    Girdiler sadeleştirilmiş metindir (normalize_text). typo.ts alignTypos ile aynı.
+    """
+    new_tokens = new_normalized.split()
+    prev_tokens = previous_normalized.split()
+    if len(new_tokens) > _TYPO_MAX_WORDS or len(prev_tokens) > _TYPO_MAX_WORDS:
+        return new_normalized  # uzun metinlerde düzeltme yapılmaz (repeat-rules.json, typo.max_words)
+    prev = list(dict.fromkeys(prev_tokens))
+    prev_set = set(prev)
+    out = []
+    for token in new_tokens:
+        if token in prev_set:
+            out.append(token)
+            continue
+        match = typo_match(token, prev)
+        out.append(match if match is not None else token)
+    return " ".join(out)
+
+
+def typo_similarity(new_text, previous_text):
+    """Yazım hataları düzeltildikten sonraki benzerlik; ham benzerlikten küçük çıkarsa ham benzerlik."""
+    new_n, prev_n = normalize_text(new_text), normalize_text(previous_text)
+    raw = cosine(ngram_vector(new_n), ngram_vector(prev_n))
+    aligned = align_typos(new_n, prev_n)
+    return max(raw, cosine(ngram_vector(aligned), ngram_vector(prev_n)))
+
+
 def new_content(new_text, previous_text):
-    """Yeni mesajın öncekinde karşılığı olmayan içerik kelimeleri (repeat-detector.ts ile aynı kural)."""
+    """Yeni mesajın öncekinde karşılığı olmayan içerik kelimeleri (repeat-detector.ts ile aynı kural).
+
+    Yazım hatalı kelimeler önce öncekindeki karşılığına çevrilir; yazım hatası yeni içerik sayılmaz.
+    """
     stem = _REPEAT_RULES["stem_chars"]
     prev = normalize_text(previous_text).split()
     prev_set = set(prev)
     prev_stems = {t[:stem] for t in prev if len(t) >= stem and not any(c.isdigit() for c in t)}
-    words = normalize_text(new_text).split()
+    words = align_typos(normalize_text(new_text), " ".join(prev)).split()
     short = len(words) <= _REPEAT_RULES["choice_max_words"]
     out = []
     for t in words:
@@ -185,7 +305,7 @@ def is_repeat(new_text, previous_text, threshold=None):
     """Şerit kuralı: benzerlik eşiği geçiyor, yeni mesaj yeni bir içerik getirmiyor ve bir varyasyon isteği değil."""
     from kafiai.config import EXT_SIMILARITY_THRESHOLD
     limit = EXT_SIMILARITY_THRESHOLD if threshold is None else threshold
-    score = similarity(new_text, previous_text)
+    score = typo_similarity(new_text, previous_text)
     return score >= limit and not new_content(new_text, previous_text) and not is_variation(new_text, score)
 
 
@@ -198,4 +318,5 @@ def holds_send(new_text, previous_text):
     from kafiai.text import has_strong_repair
     if not is_repeat(new_text, previous_text):
         return False
-    return similarity(new_text, previous_text) >= _REPEAT_RULES["hold_exact_similarity"] or has_strong_repair(new_text)
+    exact = typo_similarity(new_text, previous_text) >= _REPEAT_RULES["hold_exact_similarity"]
+    return exact or has_strong_repair(new_text)

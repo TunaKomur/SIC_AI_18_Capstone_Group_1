@@ -31,7 +31,7 @@ Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düş�
 | Özellik | Ne yapar | Ne zaman |
 |---|---|---|
 | **Halka** | Mesaj kutusunun köşesinde 18 piksellik sessiz gösterge. Döngü sinyalleri arttıkça aynı rengin tonu koyulaşır; kırmızı yok. Üzerine gelince neyi ölçtüğünü tek satırla söyler | Her zaman; üç seviye. İki temiz turdan sonra sakinleşir |
-| **Benzer mesaj şeridi** | Mesaj gönderilmeden önce kısa bir şerit: "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede "Yeni sohbete geç" | Mesaj birebir tekrarsa ya da öncekine çok benzeyip "olmadı" gibi bir onarım ifadesi taşıyorsa. Bilerek yapılan seri istekler ("başka bir slogan öner") ve yeni içerik getiren mesajlar şerit açmaz |
+| **Benzer mesaj şeridi** | Mesaj gönderilmeden önce kısa bir şerit: "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede "Yeni sohbete geç" | Mesaj birebir tekrarsa ya da öncekine çok benzeyip "olmadı" gibi bir onarım ifadesi taşıyorsa. Bilerek yapılan seri istekler ("başka bir slogan öner") ve yeni içerik getiren mesajlar şerit açmaz. Yazım hataları ve Türkçe karaktersiz yazım önceki mesaja göre düzeltilerek karşılaştırılır ("anksrabın baskebti" = "ankaranın başkenti", [K51](docs/05_architecture_decisions.md)) |
 | **Kısa düzeltme şeridi** | "Olmadı", "yanlış" gibi kısa bir düzeltmede neyin olmadığını eklemeyi önerir: "Hata mesajını ekle", "Beklediğimi yaz" | 12 karakterden kısa onarım ifadesinde; ilk mesajda ve teklif sorusuna verilen yalın "hayır"da çıkmaz |
 | **Kısa devam şeridi** | Üçüncü "devam"da yönü sorar: "Neyle devam etsin, yaz", "Nasıl devam etsin, yaz" | Üst üste üçüncü yönsüz devam isteğinde |
 | **Çıkış kartı** | Cevap bittikten sonra çıkar, nedenini ve somut bir öneriyi söyler. "Taze başlat" istekleri tek bir taslakta toplar, panoya kopyalar ve yeni sohbet açar | Dört yoldan biriyle: tur modeli yüksek güvenle döngü tahmin etti; cevaplar üst üste iki kez özürle başladı; kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı; sohbet görev normunu aştı ve döngü işareti var |
@@ -53,12 +53,12 @@ Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur
 
 | Karar | 100 sohbette | İsabet |
 |---|---|---|
-| Benzer mesaj şeridi | 10,13 | %21,5 |
+| Benzer mesaj şeridi | 10,59 | %21,1 |
 | Kısa düzeltme şeridi | 0,91 | %57,7 |
 | Halka, koyu seviye | turların %9,4'ü | %29,9 |
-| Çıkış kartı (tümü) | 19,12 | %31,0 |
-| Çıkış kartı, düzeltme alınmadı | 1,04 | %51,4 |
-| Çıkış kartı, özür döngüsü | 2,43 | %44,5 |
+| Çıkış kartı (tümü) | 19,11 | %31,1 |
+| Çıkış kartı, düzeltme alınmadı | 1,04 | %51,7 |
+| Çıkış kartı, özür döngüsü | 2,42 | %44,6 |
 | Çıkış kartı, tur modeli | 15,51 | %27,7 |
 | Çıkış kartı, uzun sohbet | 0,15 | %13,3 |
 
@@ -78,7 +78,7 @@ Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur
 ```bash
 cd extension
 npm ci
-npm run check        # tip kontrolü, 555 test, derleme (çıktı: extension/dist)
+npm run check        # tip kontrolü, 564 test, derleme (çıktı: extension/dist)
 ```
 
 Chrome'da `chrome://extensions` sayfasını aç, **Geliştirici modu**nu aç, **Paketlenmemiş öğe yükle** ile `extension/dist` klasörünü seç. Kurulumdan hemen sonra karşılama ekranı açılır. Açık sohbet sekmesini yenile. Ne olduğunu görmek için sayfada geliştirici konsolunu açıp `[KafiAI]` diye süz. Chrome Web Store yayını planlanan son dağıtım adımı ([Bölüm 10](docs/10_deployment.md)).
@@ -129,7 +129,7 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 | İlk veri analizi | [Bölüm 2, Veri araştırması](docs/02_data_research.md) |
 | Neden bu teknolojiler? | [Bölüm 3, Teknoloji incelemesi](docs/03_technology_review.md) |
 | Proje önerisi | [Bölüm 4, Konsept notu](docs/04_concept_note.md) |
-| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K50) |
+| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K51) |
 | Ürün neyi yapıyor, neyi yapmıyor? | [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) |
 | Veri setleri ve kaynaklar | [Bölüm 7, Kaynaklar](docs/07_resources.md) |
 | Veri hazırlama, etiket, model karşılaştırması | [Bölüm 8](docs/08_data_preparation_and_model.md) |
@@ -194,7 +194,7 @@ Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make test            # Python testleri (161) ve eklenti: tip kontrolü, testler (555), derleme
+make test            # Python testleri (166) ve eklenti: tip kontrolü, testler (564), derleme
 ```
 
 Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:

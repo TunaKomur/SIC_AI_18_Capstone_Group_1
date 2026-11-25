@@ -4,6 +4,7 @@ import { ngramVector, cosine } from "./similarity";
 import { isBareContinue } from "./intents";
 import { hasStrongRepair } from "./strong-repair";
 import { foldTurkish, normalizeText, withFolded } from "./text";
+import { alignTypos } from "./typo";
 
 export interface RepeatCheck {
   /** Bu mesaj, yakın zamanda gönderilen birinin neredeyse aynısı mı? (şerit çıkar) */
@@ -31,6 +32,8 @@ export interface RepeatCheck {
 }
 
 interface Remembered {
+  /** Sadeleştirilmiş metin; yazım hatası karşılaştırması için (yalnızca bellekte). */
+  normalized: string;
   vec: Map<number, number>;
   tokens: Set<string>;
   stems: Set<string>;
@@ -74,16 +77,20 @@ export function isVariation(text: string, score = 0): boolean {
 function remembered(normalized: string): Remembered {
   const tokens = normalized.split(" ").filter((t) => t !== "");
   return {
+    normalized,
     vec: ngramVector(normalized),
     tokens: new Set(tokens),
     stems: new Set(tokens.filter((t) => Array.from(t).length >= STEM && !hasDigit(t)).map((t) => Array.from(t).slice(0, STEM).join(""))),
   };
 }
 
-/** Yeni mesajın öncekinde karşılığı olmayan içerik kelimeleri (Python: extension_similarity.new_content). */
+/**
+ * Yeni mesajın öncekinde karşılığı olmayan içerik kelimeleri (Python: extension_similarity.new_content).
+ * Yazım hatalı kelimeler önce öncekindeki karşılığına çevrilir; yazım hatası yeni içerik sayılmaz.
+ */
 export function newContent(normalizedNew: string, previous: Remembered): string[] {
   const out: string[] = [];
-  const words = normalizedNew.split(" ").filter((t) => t !== "");
+  const words = alignTypos(normalizedNew, previous.normalized).split(" ").filter((t) => t !== "");
   const short = words.length <= rules.choice_max_words;
   for (const t of words) {
     if (short && CHOICE.has(t)) {
@@ -124,7 +131,10 @@ export class RepeatDetector {
     let matches = 0;
     let aboveThreshold = false;
     for (const previous of this.recent) {
-      const s = cosine(vec, previous.vec);
+      // Yazım hataları önceki mesaja göre düzeltilmiş hâliyle de karşılaştırılır; büyük olan alınır (typo.ts).
+      const aligned = alignTypos(normalized, previous.normalized);
+      const raw = cosine(vec, previous.vec);
+      const s = aligned === normalized ? raw : Math.max(raw, cosine(ngramVector(aligned), previous.vec));
       score = Math.max(score, s);
       if (s >= SIMILARITY_THRESHOLD) {
         aboveThreshold = true;

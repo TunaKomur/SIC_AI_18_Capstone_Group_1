@@ -2,6 +2,22 @@
 
 Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üstte. Kararların gerekçeleri [`docs/05_architecture_decisions.md`](docs/05_architecture_decisions.md) içinde K numaralarıyla, güncel sonuçlar [`docs/10_deployment.md`](docs/10_deployment.md) içinde.
 
+## Türkçe anlam, Katman 1: yazım hatası toleransı (Kasım sonu)
+
+### Eklendi
+
+- Sohbete göre yazım hatası toleransı (K51): yeni mesajın kelimeleri önceki mesajın kelimeleriyle harf düzenleme uzaklığına göre eşleştirilir; "anksrabın baskebti neresifir" artık "ankaranın başkenti neresidir?" ile birebir tekrar sayılır. `extension/src/core/typo.ts`, Python ikizi `src/kafiai/extension_similarity.py` (`osa_distance`, `typo_match`, `align_typos`, `typo_similarity`), kurallar `repeat-rules.json` "typo".
+- Türkçe anlam test seti: `tests/fixtures/semantic_pairs_tr.json` (401 uydurma çift: yazım hatası, Türkçe karaktersiz yazım, başka söyleyiş, farklı özel ad, sayı, ters istek, konu değişimi), üretici `scripts/make_semantic_pairs.py`, ölçüm `scripts/evaluate_semantic_pairs.py` → `outputs/semantic_pairs_eval.json`.
+- Parite örnekleri `tests/fixtures/typo_parity.json` (`scripts/make_typo_parity_fixture.py`), testler `tests/test_typo.py` ve `extension/src/core/typo.test.ts`.
+
+### Değişti
+
+- `scripts/evaluate_replay.py` benzerliği yazım hatası toleransıyla hesaplıyor; `outputs/replay_eval.json` güncellendi (şerit 100 sohbette 10,13 → 10,59, isabet %21,51 → %21,07).
+
+### Testler
+
+- Python 166 (2'si veri gerektirdiği için atlanır), eklenti 564 (37 dosya).
+
 ## Son tur: genelleme, kuralın hatırlatılması ve belgeler (18 Kasım)
 
 ### Eklendi
