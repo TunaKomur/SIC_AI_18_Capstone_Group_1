@@ -78,7 +78,7 @@ Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur
 ```bash
 cd extension
 npm ci
-npm run check        # tip kontrolü, 564 test, derleme (çıktı: extension/dist)
+npm run check        # tip kontrolü, 565 test, derleme (çıktı: extension/dist)
 ```
 
 Chrome'da `chrome://extensions` sayfasını aç, **Geliştirici modu**nu aç, **Paketlenmemiş öğe yükle** ile `extension/dist` klasörünü seç. Kurulumdan hemen sonra karşılama ekranı açılır. Açık sohbet sekmesini yenile. Ne olduğunu görmek için sayfada geliştirici konsolunu açıp `[KafiAI]` diye süz. Chrome Web Store yayını planlanan son dağıtım adımı ([Bölüm 10](docs/10_deployment.md)).
@@ -194,7 +194,7 @@ Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make test            # Python testleri (166) ve eklenti: tip kontrolü, testler (564), derleme
+make test            # Python testleri (166) ve eklenti: tip kontrolü, testler (565), derleme
 ```
 
 Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:

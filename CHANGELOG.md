@@ -14,9 +14,13 @@ Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üst
 
 - `scripts/evaluate_replay.py` benzerliği yazım hatası toleransıyla hesaplıyor; `outputs/replay_eval.json` güncellendi (şerit 100 sohbette 10,13 → 10,59, isabet %21,51 → %21,07).
 
+### Düzeltildi
+
+- ChatGPT: yeni arayüzde gizli, eski bir mesaj kutusu kopyasında cevap bittikten sonra da "Durdur" düğmesi kalıyordu; eklenti üretimi hiç bitmemiş sayıyor, sonraki gönderimleri ve cevabın bitişini görmüyordu. Durdur düğmesi artık yalnızca ekranda görünen mesaj kutularında aranıyor (`extension/src/adapters/chatgpt.ts`, canlı sayfada ölçüldü).
+
 ### Testler
 
-- Python 166 (2'si veri gerektirdiği için atlanır), eklenti 564 (37 dosya).
+- Python 166 (2'si veri gerektirdiği için atlanır), eklenti 565 (37 dosya).
 
 ## Son tur: genelleme, kuralın hatırlatılması ve belgeler (18 Kasım)
 

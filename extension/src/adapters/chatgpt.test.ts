@@ -122,6 +122,26 @@ describe("sayfada iki mesaj kutusu varken (canlı sayfadaki durum)", () => {
     expect(handlers.onSend).toHaveBeenCalledWith({ text: "merhaba" });
   });
 
+  it("gizli eski bir formda kalan Durdur düğmesi üretim sayılmaz (Kasım 2026, canlı sayfa)", () => {
+    document.body.innerHTML = `
+      <main><div data-turn-key="x"><div data-talvt-turn-state="complete"></div></div></main>
+      <form id="stale">
+        <div contenteditable="true" role="textbox"><p></p></div>
+        <button type="button" aria-label="Durdur"></button>
+      </form>
+      <form id="real">
+        <div contenteditable="true" role="textbox"><p></p></div>
+        <button type="button" aria-label="Sesli iletişimi başlat"></button>
+      </form>`;
+    const real = document.querySelector<HTMLFormElement>("form#real")!;
+    const rect = { length: 1 } as unknown as DOMRectList;
+    real.getClientRects = () => rect;
+    expect(isGenerating()).toBe(false);
+    // Görünen formda Durdur belirirse üretim sürüyor sayılır.
+    real.insertAdjacentHTML("beforeend", '<button type="button" aria-label="Durdur"></button>');
+    expect(isGenerating()).toBe(true);
+  });
+
   it("Durdur düğmesi ikinci formdaysa da üretimi fark eder", () => {
     renderPage({ stop: true, decoy: true });
     expect(isGenerating()).toBe(true);

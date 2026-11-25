@@ -101,13 +101,24 @@ function hasStopButton(form: HTMLFormElement): boolean {
   return buttons.some((b) => STOP_LABEL.test(b.getAttribute("aria-label") ?? ""));
 }
 
+/**
+ * Durdur düğmesine bakılacak formlar: ekranda görünen mesaj kutularının formları. Canlı sayfada
+ * (Kasım 2026) gizli, eski kopya formlardan birinde cevap bittikten sonra da "Durdur" düğmesi kalıyor;
+ * ona bakılırsa üretim hiç bitmemiş sayılıyor ve sonraki gönderimler görülmüyordu. Hiçbir kutu
+ * görünür değilse (ör. jsdom testleri) hepsine bakılır.
+ */
+function stopCandidateForms(root: ParentNode): HTMLFormElement[] {
+  const forms = findComposers(root)
+    .map((box) => box.closest("form"))
+    .filter((f): f is HTMLFormElement => f !== null);
+  const visible = forms.filter((f) => f.getClientRects().length > 0);
+  return visible.length > 0 ? visible : forms;
+}
+
 /** Yapay zeka şu an cevap üretiyor mu? */
 export function isGenerating(root: ParentNode = document): boolean {
   if (root.querySelector('[data-talvt-turn-state="in_progress"]')) return true;
-  return findComposers(root).some((box) => {
-    const form = box.closest("form");
-    return form ? hasStopButton(form) : false;
-  });
+  return stopCandidateForms(root).some(hasStopButton);
 }
 
 export const chatgptAdapter: Adapter = {
