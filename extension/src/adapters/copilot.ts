@@ -2,7 +2,7 @@ import { POLL_MS } from "../config";
 import { ResponseWatcher } from "../core/response-watcher";
 import { appendInline } from "./insert";
 import { SendConfirmer } from "./send-confirmer";
-import type { Adapter, AdapterHandlers } from "./types";
+import type { Adapter, AdapterHandlers, UserMessage } from "./types";
 import { reportedUserTurns } from "./virtual-list";
 import { lastOf, responseText } from "./response-text";
 
@@ -86,9 +86,14 @@ export function isGenerating(root: ParentNode = document): boolean {
 }
 
 export function readUserMessages(root: ParentNode = document): string[] {
+  return userMessageElements(root).map((m) => m.text);
+}
+
+/** Sayfadaki kullanıcı mesajları, öğeleriyle (sanal listede yalnızca çizilenler). */
+export function userMessageElements(root: ParentNode = document): UserMessage[] {
   return Array.from(root.querySelectorAll<HTMLElement>(QUESTION_TEXT))
-    .map((el) => (el.innerText || el.textContent || "").trim())
-    .filter((text) => text.length > 0);
+    .map((element) => ({ element, text: (element.innerText || element.textContent || "").trim() }))
+    .filter((m) => m.text.length > 0);
 }
 
 export const copilotAdapter: Adapter = {
@@ -128,6 +133,10 @@ export const copilotAdapter: Adapter = {
 
   readHistory() {
     return readUserMessages();
+  },
+
+  userMessages() {
+    return userMessageElements();
   },
 
   historyTotal() {

@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { findPreviousMessage } from "../core/jump";
 import { historySeed } from "../core/history-watcher";
 import {
   chatKeyFromPath,
@@ -11,6 +12,7 @@ import {
   readComposerText,
   readUserMessages,
   reportedUserTurns,
+  userMessageElements,
 } from "./claude";
 import bosSohbet from "../../test-snapshots/claude/tr_bos_sohbet.html?raw";
 import cevapBitince from "../../test-snapshots/claude/tr_cevap_bitince.html?raw";
@@ -341,5 +343,16 @@ describe("lastResponse: son cevabın başı (yalnızca özür kuralı için)", (
   it("boş sohbette null", () => {
     load("bos_sohbet");
     expect(claudeAdapter.lastResponse!()).toBeNull();
+  });
+});
+
+describe("Claude: önceki cevaba git (K53)", () => {
+  it("mesaj öğeleri metinleriyle birlikte okunur ve önceki istek sayfada bulunur", () => {
+    const doc = snapshot("cevap_bitince");
+    const messages = userMessageElements(doc);
+    expect(messages.map((m) => m.text)).toEqual(readUserMessages(doc));
+    expect(messages.length).toBeGreaterThanOrEqual(2);
+    const target = messages[0]!;
+    expect(findPreviousMessage(messages, target.text)).toBe(target.element);
   });
 });

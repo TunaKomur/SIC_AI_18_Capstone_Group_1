@@ -56,6 +56,7 @@ Bu belge projede verdiğimiz teknik kararları ve nedenlerini kayıt altına al�
 | K50 | Kapsam sadeleştirmesi: yapılmayan işler ürün ve belgelerden çıkarılır | Kabul |
 | K51 | Yazım hatası toleransı: yeni mesaj önceki mesaja göre düzeltilerek karşılaştırılır (NLP Katman 1) | Kabul |
 | K52 | Anlam modeli: aynı isteğin başka kelimelerle sorulması cihazda fark edilir, yalnızca not gösterilir (NLP Katman 2) | Kabul |
+| K53 | "Önceki cevaba git": şerit ve anlam notu önceki soruya kaydırır; yalnızca aynı sohbette, hiçbir şey saklanmadan | Kabul |
 
 ---
 
@@ -658,3 +659,15 @@ Planda kalan tek dağıtım adımı Chrome Web Store yayını (Bölüm 10).
 **Neden yalnızca not.** İlk tasarımda işaret halka ve kart için de benzer mesaj sayılıyordu. Yeniden oynatmada bu, halkanın koyu seviye isabetini %29,9'dan %28,7'ye indirdi ve işaretin kendisi memnuniyetsizliği taban oranından fazla haber vermedi. Kullanıcıyla birlikte, mevcut ölçülmüş uyarıları bozmamak için işaretin yalnızca not açmasına karar verildi. Not gönderimi bekletmez, sohbet başına bir kezdir ve tek tıkla kapanır.
 
 **Bedeli.** İzinlere `offscreen` eklendi; paket 39 MB model ve 14 MB çalışma motoruyla büyüdü; ilk karşılaştırmada model bir kez yükleniyor (yaklaşık 1,4 saniye). Model depoda değil, betikle üretiliyor; model yoksa Katman 2 sessizce kapalı kalır. WildFeedback çoğunlukla İngilizce ve başka söyleyişle tekrar sormak orada memnuniyetsizlik sayılmıyor; Türkçe gerçek kullanımda ölçülmedi. Türkçe test seti uydurma cümlelerden oluşuyor. Kelime tablosunu kırpmak için Türkçe sayımda kullanılan quora-tr veri setinin lisansı belirtilmemiş; metinlerin kendisi hiçbir yere yazılmadı, yalnızca parça kimlikleri tutuldu. Modelin "aynı" bulduğu ama bekçinin reddettiği çiftler (ters istek) bilerek kaçırılıyor; bekçi bazı gerçek başka söyleyişleri de reddediyor.
+
+## K53. "Önceki cevaba git": şerit ve anlam notu önceki soruya kaydırır; yalnızca aynı sohbette, hiçbir şey saklanmadan
+
+**Bağlam.** Şerit ve anlam notu "bunu az önce sordun" diyor ama kullanıcı önceki cevabı bulmak için sohbeti kendisi kaydırmak zorunda kalıyordu. Kullanıcı tekrar sorduğunda çoğu zaman aradığı bilgi zaten sayfada. Ekipten istek: düğmeye basınca önceki soruya gidilsin; soru başka bir sohbetteyse o sohbet yeni sekmede açılsın.
+
+**Karar.** Benzer mesaj şeridine (gönderim bekletildiğinde) ve anlam notuna "Önceki cevaba git" düğmesi eklendi. Tekrar sayılan önceki mesaj bellekteki listeden alınır (`RepeatCheck.matched`, `SemanticResult.previous`) ve sayfadaki kullanıcı mesajları arasında aranır: önce sadeleştirilmiş ve Türkçe karaktersiz metni birebir aynı olan en yeni mesaj, yoksa 3-gram benzerliği 0,9'u geçen en benzer mesaj (`extension/src/core/jump.ts`). Bulunursa düğme görünür; basınca sayfa soruya yumuşakça kayar (üstte 96 piksel pay), soru 2,6 saniye çerçeveyle işaretlenir. Şerit açık kalır; bekletilen mesaj olduğu gibi durur. Her adaptör sayfadaki kullanıcı mesajlarını öğeleriyle verir (`userMessages()`); `readHistory()` artık bundan türetiliyor. Sayaçlar: `strip_action cevaba_git`, `semantic not_cevaba_git`.
+
+**Kapsam dışı: başka sohbetler.** Başka bir sohbetteki soruyu bulmak için eklentinin her soruyu (metni ya da anlam vektörünü) sohbet adresiyle birlikte `chrome.storage`'da saklaması gerekirdi. Eklenti bugün yalnızca ayar ve sayı saklıyor; sayaç anahtarlarına metin, sohbet kimliği ya da adres giremez (K18). Kullanıcıyla birlikte bu sözün korunmasına ve özelliğin yalnızca aynı sohbette çalışmasına karar verildi.
+
+**Neden.** Kullanıcı tekrar sormadan önce cevabı yeniden okuyabilir; bu, isteği daha iyi yazmasına ya da hiç göndermemesine yol açabilir. Mesaj metni yine yalnızca bellekte; düğme yalnızca sayfada zaten olan bir öğeye kaydırır. Öğenin stili kalıcı olarak değişmez: vurgu bir animasyon, kaydırma payı kısa süre sonra geri alınıyor.
+
+**Bedeli.** Claude ve Copilot uzun sohbetlerde yalnızca ekrandaki mesajları sayfada tutuyor (sanal liste); önceki soru çizilmemişse düğme görünmez. Yumuşak kaydırma Chromium'da bazen başlamıyor (başsız tarayıcıda ölçüldü); 0,9 saniye sonra soru ekranın üst yarısında değilse doğrudan götürülüyor. Düğmenin etkisi (kullanıcının sonra göndermekten vazgeçip vazgeçmediği) yalnızca sayaçlarla görülebilir; yeniden oynatma verisiyle ölçülemez.

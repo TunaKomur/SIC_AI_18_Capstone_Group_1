@@ -20,6 +20,11 @@ export interface StripActions {
   onNotRelevant?(): void;
   /** "Yeni sohbete geç": çıkış kartını açar. Verilirse ve birkaç deneme olduysa düğme gösterilir. */
   onFreshStart?(): void;
+  /**
+   * "Önceki cevaba git": sayfa önceki soruya kayar (K53). Verilirse düğme gösterilir; yalnızca benzer
+   * mesaj şeridinde ve anlam notunda. Şerit açık kalır; kullanıcı okuyup sonra seçer.
+   */
+  onGoToAnswer?(): void;
 }
 
 export interface StripContext {
@@ -38,6 +43,9 @@ export interface StripContext {
    */
   kind?: "repeat" | "short_repair" | "short_repeat" | "affirm_hint" | "semantic_note";
 }
+
+/** "Önceki cevaba git" düğmesinin yazısı (K53). */
+export const GO_TO_ANSWER_LABEL = "Önceki cevaba git";
 
 /** Bu denemeden sonra şeritte "Yeni sohbete geç" önerilir. */
 export const FRESH_START_FROM_ATTEMPT = 3;
@@ -148,6 +156,8 @@ export class Strip {
       this.hide();
       actions.onClose();
     };
+    /** Önceki soruya kaydırır; şeridi kapatmaz. */
+    const goToAnswer = () => (actions.onGoToAnswer ? [button(GO_TO_ANSWER_LABEL, "secondary", () => actions.onGoToAnswer?.())] : []);
     const msg = stripMessage(ctx);
     const chip =
       ctx.kind === "short_repair"
@@ -208,6 +218,7 @@ export class Strip {
         : button("Neyin eksik olduğunu söyle", "", showRepairs);
       row.append(primary);
       if (offerFresh) row.append(button("Neyin eksik olduğunu söyle", "secondary", showRepairs));
+      row.append(...goToAnswer());
       row.append(
         button("Yine de gönder", "secondary", () => {
           this.hide();
@@ -281,7 +292,7 @@ export class Strip {
     const showSemanticNote = () => {
       const row = document.createElement("div");
       row.className = "row";
-      row.append(button("Neyin eksik olduğunu söyle", "", showRepairsFor(showSemanticNote)), spacer());
+      row.append(button("Neyin eksik olduğunu söyle", "", showRepairsFor(showSemanticNote)), ...goToAnswer(), spacer());
       if (actions.onNotRelevant) {
         row.append(
           button("Yerinde değildi", "link", () => {

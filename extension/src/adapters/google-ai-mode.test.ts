@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { findPreviousMessage } from "../core/jump";
 import bosSohbet from "../../test-snapshots/google_ai_mode/tr_bos_sohbet.html?raw";
 import cevapBitince from "../../test-snapshots/google_ai_mode/tr_cevap_bitince.html?raw";
 import cevapUretilirken from "../../test-snapshots/google_ai_mode/tr_cevap_uretilirken.html?raw";
@@ -17,6 +18,7 @@ import {
   isGenerating,
   readComposerText,
   readUserMessages,
+  userMessageElements,
 } from "./google-ai-mode";
 
 /**
@@ -320,5 +322,15 @@ describe("lastResponse", () => {
     expect(text).not.toMatch(/AI Modu yanıtı|hata olabilir/);
     load("bos_sohbet");
     expect(googleAiModeAdapter.lastResponse!()).toBeNull();
+  });
+});
+
+describe("Google AI Modu: önceki cevaba git (K53)", () => {
+  it("mesaj öğeleri metinleriyle birlikte okunur ve önceki soru sayfada bulunur", () => {
+    load("uzun_gecmis");
+    const messages = userMessageElements();
+    expect(messages.map((m) => m.text)).toEqual(readUserMessages());
+    const target = messages[2]!;
+    expect(findPreviousMessage(messages, target.text)).toBe(target.element);
   });
 });

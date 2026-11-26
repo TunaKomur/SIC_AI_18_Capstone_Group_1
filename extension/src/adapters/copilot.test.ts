@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { findPreviousMessage } from "../core/jump";
 import bosSohbet from "../../test-snapshots/copilot/tr_bos_sohbet.html?raw";
 import cevapBitince from "../../test-snapshots/copilot/tr_cevap_bitince.html?raw";
 import cevapUretilirken from "../../test-snapshots/copilot/tr_cevap_uretilirken.html?raw";
@@ -17,6 +18,7 @@ import {
   isGenerating,
   readComposerText,
   readUserMessages,
+  userMessageElements,
 } from "./copilot";
 import { reportedUserTurns } from "./virtual-list";
 
@@ -320,5 +322,16 @@ describe("lastResponse", () => {
     expect(copilotAdapter.lastResponse!()).toMatch(/ters çevirmek/);
     load("bos_sohbet");
     expect(copilotAdapter.lastResponse!()).toBeNull();
+  });
+});
+
+describe("Copilot: önceki cevaba git (K53)", () => {
+  it("mesaj öğeleri metinleriyle birlikte okunur ve önceki istek sayfada bulunur", () => {
+    const doc = snapshot("cevap_bitince");
+    const messages = userMessageElements(doc);
+    expect(messages.map((m) => m.text)).toEqual(readUserMessages(doc));
+    expect(messages.length).toBeGreaterThanOrEqual(2);
+    const target = messages[0]!;
+    expect(findPreviousMessage(messages, target.text)).toBe(target.element);
   });
 });

@@ -3,7 +3,7 @@ import { ResponseWatcher } from "../core/response-watcher";
 import { appendInline } from "./insert";
 import { SendConfirmer } from "./send-confirmer";
 import { reportedUserTurns } from "./virtual-list";
-import type { Adapter, AdapterHandlers } from "./types";
+import type { Adapter, AdapterHandlers, UserMessage } from "./types";
 import { lastOf, responseText } from "./response-text";
 
 /** Bekletilen gönderim (varsa) ve "bir sonraki girişimi engelleme" bayrağı. */
@@ -82,9 +82,14 @@ function messageText(el: HTMLElement): string {
 
 /** Sayfada çizili olan kullanıcı mesajları (eskiden yeniye). Sanal listede eksik olabilir. */
 export function readUserMessages(root: ParentNode = document): string[] {
+  return userMessageElements(root).map((m) => m.text);
+}
+
+/** Sayfadaki kullanıcı mesajları, öğeleriyle (sanal listede yalnızca çizilenler). */
+export function userMessageElements(root: ParentNode = document): UserMessage[] {
   return Array.from(root.querySelectorAll<HTMLElement>(USER_MESSAGE_SELECTOR))
-    .map(messageText)
-    .filter((text) => text.length > 0);
+    .map((element) => ({ element, text: messageText(element) }))
+    .filter((m) => m.text.length > 0);
 }
 
 export { reportedUserTurns };
@@ -131,6 +136,10 @@ export const claudeAdapter: Adapter = {
 
   readHistory() {
     return readUserMessages();
+  },
+
+  userMessages() {
+    return userMessageElements();
   },
 
   historyTotal() {

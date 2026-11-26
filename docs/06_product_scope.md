@@ -34,11 +34,15 @@ Halkayı tur modeli ve sohbet sinyalleri besler: benzer mesajlar, özürle başl
 
 | Şerit | Ne zaman | Ne der | Düğmeler |
 |---|---|---|---|
-| Benzer mesaj (K37, K26) | Mesaj son mesajlardan biriyle birebir aynı ya da öncekine çok benziyor ve "olmadı" gibi bir onarım ifadesi taşıyor | "Bunu az önce de sormuştun." İkinci denemede "Aynı isteğe ikinci kez dönüyorsun."; üçüncüde "Birkaç denemedir aynı yerdesin." | "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede önce "Yeni sohbete geç" |
+| Benzer mesaj (K37, K26) | Mesaj son mesajlardan biriyle birebir aynı ya da öncekine çok benziyor ve "olmadı" gibi bir onarım ifadesi taşıyor | "Bunu az önce de sormuştun." İkinci denemede "Aynı isteğe ikinci kez dönüyorsun."; üçüncüde "Birkaç denemedir aynı yerdesin." | "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Önceki cevaba git" (K53), "Yine de gönder"; üçüncü denemede önce "Yeni sohbete geç" |
 | Kısa düzeltme (K34, K40) | 12 karakterden kısa bir onarım ifadesi ("olmadı", "yanlış"); ilk mesajda ve soruyla biten bir teklife verilen yalın "hayır"da çıkmaz | "Neyin olmadığını bir cümleyle eklersen cevap daha isabetli olur." | "Hata mesajını ekle" ya da "Neyin yanlış olduğunu yaz", "Beklediğimi yaz", "Olduğu gibi gönder" |
 | Kısa devam (K41, K43) | Üst üste üçüncü yönsüz devam isteği ("devam", "devam et", "continue") | "Üst üste üçüncü kez kısa bir mesajla devam ediyorsun." | "Neyle devam etsin, yaz", "Nasıl devam etsin, yaz", "Olduğu gibi gönder" |
 
 Hazır cümle seçilince mesaj kutusuna eklenir; kullanıcı tamamlayıp kendisi gönderir. Bilerek yapılan seri istekler ("başka bir slogan öner", "sonraki soruyu sor") ve yeni içerik getiren mesajlar ("1. soruyu çöz" / "2. soruyu çöz") şerit açmaz (K20). Her şeritte "Yerinde değildi" ve "Kapat" vardır.
+
+**Anlam notu (K52).** Mesaj, son mesajlardan biriyle anlamca aynı istekse ("ankaranın başkenti neresidir?" / "ankaranın başkenti hangi şehir"), cevap bittikten sonra mesaj kutusunun üstünde kısa bir not çıkar: "Bunu az önce başka kelimelerle sormuştun." Gönderimi bekletmez, sohbet başına bir kez çıkar. Düğmeler: "Neyin eksik olduğunu söyle", "Önceki cevaba git", "Yerinde değildi", "Kapat".
+
+**Önceki cevaba git (K53).** Benzer mesaj şeridinde ve anlam notunda, önceki soru sayfada bulunuyorsa bu düğme görünür. Basınca sayfa önceki soruya kayar ve soru birkaç saniye çerçeveyle işaretlenir; cevabı hemen altındadır. Şerit açık kalır, bekletilen mesaj olduğu gibi durur; kullanıcı okuduktan sonra seçer. Yalnızca aynı sohbette çalışır; başka sohbetlerdeki sorular aranmaz, hiçbir şey saklanmaz.
 
 **Çıkış kartı.** Döngü sürerse, yapay zekanın cevabı bittikten sonra ve kullanıcı yazmaya başlamadan önce küçük bir kart görünür. Nedenini ve somut bir öneriyi söyler. Dört yoldan açılır:
 

@@ -29,6 +29,11 @@ export interface RepeatCheck {
   hold: boolean;
   /** Son mesajlardan kaç tanesi bu mesajın tekrarı (eşiği geçen ve yeni içerik getirmeyen); şeritteki "N. deneme" için. */
   matches: number;
+  /**
+   * Bu mesajın tekrarı sayılan önceki mesajlardan en benzeri (sadeleştirilmiş metin; yalnızca bellekte).
+   * "Önceki cevaba git" düğmesi onu sayfada bulmak için kullanır (K53). Tekrar yoksa null.
+   */
+  matched: string | null;
 }
 
 interface Remembered {
@@ -122,7 +127,7 @@ export class RepeatDetector {
     const normalized = normalizeText(text);
     // Yönsüz devam ("devam edebilir misin lütfen") bir istek değil; kısa mesaj gibi karşılaştırılmaz.
     if (Array.from(normalized).length < MIN_NORMALIZED_CHARS || isBareContinue(text)) {
-      return { similar: false, soft: false, score: 0, tooShort: true, newContent: false, variation: false, hold: false, matches: 0 };
+      return { similar: false, soft: false, score: 0, tooShort: true, newContent: false, variation: false, hold: false, matches: 0, matched: null };
     }
     const vec = ngramVector(normalized);
     let score = 0;
@@ -130,6 +135,8 @@ export class RepeatDetector {
     let exact = false;
     let matches = 0;
     let aboveThreshold = false;
+    let matched: string | null = null;
+    let matchedScore = -1;
     for (const previous of this.recent) {
       // Yazım hataları önceki mesaja göre düzeltilmiş hâliyle de karşılaştırılır; büyük olan alınır (typo.ts).
       const aligned = alignTypos(normalized, previous.normalized);
@@ -142,16 +149,21 @@ export class RepeatDetector {
           similar = true;
           matches += 1;
           if (s >= rules.hold_exact_similarity) exact = true;
+          // Eşit benzerlikte daha yeni mesaj seçilir (liste eskiden yeniye).
+          if (s >= matchedScore) {
+            matched = previous.normalized;
+            matchedScore = s;
+          }
         }
       }
     }
     const soft = score >= SOFT_SIMILARITY_THRESHOLD;
     if ((similar || soft) && isVariation(text, score)) {
       // Bilerek yapılan seri üretim: döngü sayılmaz.
-      return { similar: false, soft: false, score, tooShort: false, newContent: false, variation: true, hold: false, matches: 0 };
+      return { similar: false, soft: false, score, tooShort: false, newContent: false, variation: true, hold: false, matches: 0, matched: null };
     }
     const hold = similar && (exact || hasStrongRepair(text));
-    return { similar, soft, score, tooShort: false, newContent: aboveThreshold && !similar, variation: false, hold, matches };
+    return { similar, soft, score, tooShort: false, newContent: aboveThreshold && !similar, variation: false, hold, matches, matched };
   }
 
   /** Mesaj gönderildikten sonra çağrılır. Kısa mesajlar saklanmaz. */

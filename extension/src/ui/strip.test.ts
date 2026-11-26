@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { REPAIRS } from "../core/repairs";
-import { Strip } from "./strip";
+import { GO_TO_ANSWER_LABEL, Strip } from "./strip";
 
 function shadowOf(): ShadowRoot {
   return document.querySelector<HTMLElement>('[data-kafiai="strip"]')!.shadowRoot!;
@@ -238,5 +238,45 @@ describe("kısa tekrar şeridi ve onay zinciri önerisi", () => {
     buttonByText("Yerinde değildi").click();
     expect(a.onNotRelevant).toHaveBeenCalled();
     input.remove();
+  });
+
+  describe("Önceki cevaba git (K53)", () => {
+    it("eylem verilmezse düğme yok", () => {
+      strip.show(document.body, actions());
+      expect(buttonByText(GO_TO_ANSWER_LABEL)).toBeUndefined();
+      strip.show(document.body, actions(), { attempt: 1, exact: false, task: null, kind: "semantic_note" });
+      expect(buttonByText(GO_TO_ANSWER_LABEL)).toBeUndefined();
+    });
+
+    it("benzer mesaj şeridinde: tıklanınca kaydırır, şerit ve bekletilen mesaj olduğu gibi kalır", () => {
+      const a = { ...actions(), onGoToAnswer: vi.fn() };
+      strip.show(document.body, a);
+      buttonByText(GO_TO_ANSWER_LABEL).click();
+      expect(a.onGoToAnswer).toHaveBeenCalledTimes(1);
+      expect(strip.visible).toBe(true);
+      expect(a.onSendAnyway).not.toHaveBeenCalled();
+      expect(a.onClose).not.toHaveBeenCalled();
+      // Okuduktan sonra kullanıcı yine seçebilir.
+      buttonByText("Yine de gönder").click();
+      expect(a.onSendAnyway).toHaveBeenCalledTimes(1);
+    });
+
+    it("üçüncü denemede de görünür; anlam notunda da görünür ve not açık kalır", () => {
+      const a = { ...actions(), onGoToAnswer: vi.fn(), onFreshStart: vi.fn() };
+      strip.show(document.body, a, { attempt: 3, exact: true, task: null });
+      expect(buttonByText(GO_TO_ANSWER_LABEL)).toBeTruthy();
+      strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "semantic_note" });
+      buttonByText(GO_TO_ANSWER_LABEL).click();
+      expect(a.onGoToAnswer).toHaveBeenCalledTimes(1);
+      expect(strip.visible).toBe(true);
+    });
+
+    it("kısa düzeltme, kısa tekrar ve 'Yön sende' görünümlerinde gösterilmez", () => {
+      const a = { ...actions(), onGoToAnswer: vi.fn() };
+      for (const kind of ["short_repair", "short_repeat", "affirm_hint"] as const) {
+        strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind });
+        expect(buttonByText(GO_TO_ANSWER_LABEL)).toBeUndefined();
+      }
+    });
   });
 });

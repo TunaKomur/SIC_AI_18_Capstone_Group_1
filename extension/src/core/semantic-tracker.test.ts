@@ -10,7 +10,7 @@ describe("SemanticTracker", () => {
   it("ilk mesajda modele hiç gitmez", async () => {
     const t = new SemanticTracker(fakeEmbed);
     fakeEmbed.mockClear();
-    expect(await t.check("ankaranın başkenti neresidir")).toEqual({ same: false, score: 0 });
+    expect(await t.check("ankaranın başkenti neresidir")).toEqual({ same: false, score: 0, previous: null });
     expect(fakeEmbed).not.toHaveBeenCalled();
   });
 
@@ -20,6 +20,14 @@ describe("SemanticTracker", () => {
     const r = await t.check("ankaranın başkenti hangi şehir");
     expect(r?.same).toBe(true);
     expect(r?.score).toBeCloseTo(1);
+    // "Önceki cevaba git" için aynı istek sayılan önceki mesaj olduğu gibi döner (K53).
+    expect(r?.previous).toBe("ankaranın başkenti neresidir?");
+  });
+
+  it("aynı istek değilse önceki mesaj döndürülmez", async () => {
+    const t = new SemanticTracker(async (texts) => texts.map(() => [1, 0]));
+    t.remember("metni daha kısa yaz");
+    expect((await t.check("metni daha uzun yaz"))?.previous).toBeNull();
   });
 
   it("model yüksek benzerlik verse de içerik kelimesi yer değiştirdiyse aynı istek sayılmaz", async () => {
@@ -51,6 +59,6 @@ describe("SemanticTracker", () => {
     release([]);
     expect((await pending)?.same).toBe(true);
     t.reset();
-    expect(await t.check("ankaranın başkenti nedir")).toEqual({ same: false, score: 0 });
+    expect(await t.check("ankaranın başkenti nedir")).toEqual({ same: false, score: 0, previous: null });
   });
 });

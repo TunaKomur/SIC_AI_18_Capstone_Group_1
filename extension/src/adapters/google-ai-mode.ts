@@ -2,7 +2,7 @@ import { POLL_MS } from "../config";
 import { ResponseWatcher } from "../core/response-watcher";
 import { appendToTextarea } from "./insert";
 import { SendConfirmer } from "./send-confirmer";
-import type { Adapter, AdapterHandlers } from "./types";
+import type { Adapter, AdapterHandlers, UserMessage } from "./types";
 import { lastOf, responseText } from "./response-text";
 
 /** Bekletilen gönderim (varsa) ve "bir sonraki girişimi engelleme" bayrağı. */
@@ -93,9 +93,14 @@ export function isGenerating(root: ParentNode = document): boolean {
 
 /** Sayfadaki kullanıcı mesajları (eskiden yeniye). */
 export function readUserMessages(root: ParentNode = document): string[] {
+  return userMessageElements(root).map((m) => m.text);
+}
+
+/** Sayfadaki kullanıcı mesajları (soru başlıkları), öğeleriyle. */
+export function userMessageElements(root: ParentNode = document): UserMessage[] {
   return Array.from(root.querySelectorAll<HTMLElement>(`${TURN_ROOT} span[role="heading"]`))
-    .map((el) => (el.innerText || el.textContent || "").trim())
-    .filter((text) => text.length > 0);
+    .map((element) => ({ element, text: (element.innerText || element.textContent || "").trim() }))
+    .filter((m) => m.text.length > 0);
 }
 
 /** Bir mesajın düzenleme kutusu: sohbet içinde, mesaj kutusu alanlarının dışında görünen <textarea>. */
@@ -158,6 +163,10 @@ export const googleAiModeAdapter: Adapter = {
 
   readHistory() {
     return readUserMessages();
+  },
+
+  userMessages() {
+    return userMessageElements();
   },
 
   composer() {

@@ -13,6 +13,8 @@ export interface SemanticResult {
   same: boolean;
   /** En yüksek anlam benzerliği (aynı istek sayılan önceki mesajla, yoksa genel en yüksek). */
   score: number;
+  /** Aynı istek sayılan önceki mesajın metni (yalnızca bellekte; "Önceki cevaba git" için, K53). Yoksa null. */
+  previous: string | null;
 }
 
 export class SemanticTracker {
@@ -26,20 +28,20 @@ export class SemanticTracker {
    */
   async check(text: string): Promise<SemanticResult | null> {
     const previous = [...this.recent];
-    if (previous.length === 0) return { same: false, score: 0 };
+    if (previous.length === 0) return { same: false, score: 0, previous: null };
     const pairs = previous.map((p) => ({ prev: p, ...modelInputs(p, text) }));
     const texts = [...new Set(pairs.flatMap((p) => [p.previous, p.next]))].filter((t) => t !== "");
     const vectors = await this.embed(texts);
     if (!vectors || vectors.length !== texts.length) return null;
     const byText = new Map(texts.map((t, i) => [t, vectors[i]!]));
-    let best: SemanticResult = { same: false, score: 0 };
+    let best: SemanticResult = { same: false, score: 0, previous: null };
     for (const p of pairs) {
       const a = byText.get(p.previous);
       const b = byText.get(p.next);
       if (!a || !b) continue;
       const score = dot(a, b);
       const same = sameIntent(score, p.prev, text);
-      if ((same && !best.same) || (same === best.same && score > best.score)) best = { same, score };
+      if ((same && !best.same) || (same === best.same && score > best.score)) best = { same, score, previous: same ? p.prev : null };
     }
     return best;
   }

@@ -31,7 +31,7 @@ Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düş�
 | Özellik | Ne yapar | Ne zaman |
 |---|---|---|
 | **Halka** | Mesaj kutusunun köşesinde 18 piksellik sessiz gösterge. Döngü sinyalleri arttıkça aynı rengin tonu koyulaşır; kırmızı yok. Üzerine gelince neyi ölçtüğünü tek satırla söyler | Her zaman; üç seviye. İki temiz turdan sonra sakinleşir |
-| **Benzer mesaj şeridi** | Mesaj gönderilmeden önce kısa bir şerit: "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Yine de gönder"; üçüncü denemede "Yeni sohbete geç" | Mesaj birebir tekrarsa ya da öncekine çok benzeyip "olmadı" gibi bir onarım ifadesi taşıyorsa. Bilerek yapılan seri istekler ("başka bir slogan öner") ve yeni içerik getiren mesajlar şerit açmaz. Yazım hataları ve Türkçe karaktersiz yazım önceki mesaja göre düzeltilerek karşılaştırılır ("anksrabın baskebti" = "ankaranın başkenti", [K51](docs/05_architecture_decisions.md)) |
+| **Benzer mesaj şeridi** | Mesaj gönderilmeden önce kısa bir şerit: "Neyin eksik olduğunu söyle" (hazır cümleler: "Biçim yanlış", "Bilgi yanlış", "Fazla uzun", "Fazla kısa"), "Önceki cevaba git", "Yine de gönder"; üçüncü denemede "Yeni sohbete geç" | Mesaj birebir tekrarsa ya da öncekine çok benzeyip "olmadı" gibi bir onarım ifadesi taşıyorsa. Bilerek yapılan seri istekler ("başka bir slogan öner") ve yeni içerik getiren mesajlar şerit açmaz. Yazım hataları ve Türkçe karaktersiz yazım önceki mesaja göre düzeltilerek karşılaştırılır ("anksrabın baskebti" = "ankaranın başkenti", [K51](docs/05_architecture_decisions.md)) |
 | **Kısa düzeltme şeridi** | "Olmadı", "yanlış" gibi kısa bir düzeltmede neyin olmadığını eklemeyi önerir: "Hata mesajını ekle", "Beklediğimi yaz" | 12 karakterden kısa onarım ifadesinde; ilk mesajda ve teklif sorusuna verilen yalın "hayır"da çıkmaz |
 | **Kısa devam şeridi** | Üçüncü "devam"da yönü sorar: "Neyle devam etsin, yaz", "Nasıl devam etsin, yaz" | Üst üste üçüncü yönsüz devam isteğinde |
 | **Çıkış kartı** | Cevap bittikten sonra çıkar, nedenini ve somut bir öneriyi söyler. "Taze başlat" istekleri tek bir taslakta toplar, panoya kopyalar ve yeni sohbet açar | Dört yoldan biriyle: tur modeli yüksek güvenle döngü tahmin etti; cevaplar üst üste iki kez özürle başladı; kullanıcı düzeltme istedi ama cevap öncekinin neredeyse aynısı; sohbet görev normunu aştı ve döngü işareti var |
@@ -40,6 +40,7 @@ Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düş�
 | **Araç çubuğu penceresi** | "Bu sohbet" özeti, son 7 günün içgörüleri, ayarlar (eklenti, öneriler, halka, çıkış kartı), "Sayaçlarımı kopyala", "Tüm verilerimi sil" | Her zaman |
 | **Karşılama ekranı** | Neye baktığını, neye bakmadığını ve verinin nerede durduğunu söyler | İlk kurulumda ve "Kâfi AI nasıl çalışır?" bağlantısıyla |
 | **Anlam modeli ve notu** | Aynı isteğin başka kelimelerle sorulduğunu ("başkenti neresi" / "başkenti hangi şehir") bilgisayarda çalışan küçük bir çok dilli dil modeliyle fark eder; cevaptan sonra kısa bir not çıkar ("Bunu az önce başka kelimelerle sormuştun"). Gönderimi bekletmez | Anlam benzerliği 0,80 ve üstü, içerik kelimesi yer değiştirmemiş ("kısa"/"uzun") ve en çok bir yeni içerik kelimesi; not sohbet başına bir kez ([K52](docs/05_architecture_decisions.md)) |
+| **Önceki cevaba git** | Şeritteki ve anlam notundaki düğme; sayfayı önceki soruya kaydırır ve soruyu kısa süre işaretler, cevap hemen altındadır. Şerit açık kalır | Önceki soru aynı sohbette, sayfada bulunuyorsa ([K53](docs/05_architecture_decisions.md)) |
 | **Yalnızca say** | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca sayılır | Ayarlardan |
 
 Kişisel ve duygusal sohbetlerde hiçbir öneri gösterilmez.
@@ -83,7 +84,7 @@ pip install onnx                         # bir kez: anlam modelini kırpmak içi
 python scripts/build_semantic_model.py   # bir kez: anlam modelini indirir ve kırpar (yaklaşık 118 MB indirir, 39 MB yazar)
 cd extension
 npm ci
-npm run check        # tip kontrolü, 580 test, derleme (çıktı: extension/dist)
+npm run check        # tip kontrolü, 599 test, derleme (çıktı: extension/dist)
 ```
 
 Anlam modeli depoda değil (39 MB); betik onu Hugging Face'ten sabit sürümle indirir, SHA-256 özetini denetler ve Türkçe ile İngilizceye kırpar ([K52](docs/05_architecture_decisions.md)). Model yoksa eklenti çalışır, yalnızca Katman 2 kapalı kalır.
@@ -136,7 +137,7 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 | İlk veri analizi | [Bölüm 2, Veri araştırması](docs/02_data_research.md) |
 | Neden bu teknolojiler? | [Bölüm 3, Teknoloji incelemesi](docs/03_technology_review.md) |
 | Proje önerisi | [Bölüm 4, Konsept notu](docs/04_concept_note.md) |
-| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K52) |
+| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K53) |
 | Ürün neyi yapıyor, neyi yapmıyor? | [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) |
 | Veri setleri ve kaynaklar | [Bölüm 7, Kaynaklar](docs/07_resources.md) |
 | Veri hazırlama, etiket, model karşılaştırması | [Bölüm 8](docs/08_data_preparation_and_model.md) |
@@ -201,7 +202,7 @@ Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make test            # Python testleri (171) ve eklenti: tip kontrolü, testler (580), derleme
+make test            # Python testleri (171) ve eklenti: tip kontrolü, testler (599), derleme
 ```
 
 Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:

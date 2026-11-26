@@ -2,6 +2,24 @@
 
 Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üstte. Kararların gerekçeleri [`docs/05_architecture_decisions.md`](docs/05_architecture_decisions.md) içinde K numaralarıyla, güncel sonuçlar [`docs/10_deployment.md`](docs/10_deployment.md) içinde.
 
+## Önceki cevaba git (Kasım sonu)
+
+### Eklendi
+
+- "Önceki cevaba git" düğmesi (K53): benzer mesaj şeridinde ve anlam notunda, önceki soru sayfada bulunuyorsa görünür. Basınca sayfa önceki soruya kayar ve soru kısa süre işaretlenir; şerit açık kalır, bekletilen mesaj durur. Yalnızca aynı sohbette; hiçbir şey saklanmaz. Kod `extension/src/core/jump.ts` (`findPreviousMessage`, `jumpTo`), testler `jump.test.ts`.
+- Adaptörlere `userMessages()`: sayfadaki kullanıcı mesajları öğeleriyle; beş sitede sayfa görüntüleriyle sınandı. `readHistory()` bundan türetiliyor.
+- `RepeatCheck.matched` ve `SemanticResult.previous`: tekrar sayılan önceki mesaj (yalnızca bellekte).
+- Sayaç ayrıntıları: `strip_action cevaba_git`, `semantic not_cevaba_git`.
+
+### Düzeltildi
+
+- Sayaç şemasındaki `semantic` notu, Katman 2'nin halka ve kartı artık etkilemediğini söylüyor (K52 kararıyla uyumlu).
+- Ürün kapsamı belgesine (Bölüm 6) anlam notu eklendi.
+
+### Testler
+
+- Python 169 (2'si veri gerektirdiği için atlanır), eklenti 599 (42 dosya).
+
 ## Türkçe anlam, Katman 2: anlam modeli (Kasım sonu)
 
 ### Eklendi

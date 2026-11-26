@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { findPreviousMessage } from "../core/jump";
 import { composerContaining, editBoxContaining, findComposer, findComposers, geminiAdapter, isGenerating, readComposerText } from "./gemini";
 import type { AdapterHandlers } from "./types";
 import bosSohbet from "../../test-snapshots/gemini/tr_bos_sohbet.html?raw";
@@ -136,5 +137,16 @@ describe("Gemini düzenleme ve yeniden üretme yakalama (P6)", () => {
     expect(redo).not.toBeNull();
     redo.click();
     expect(h.onRegenerate).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("Gemini: önceki cevaba git (K53)", () => {
+  it("mesaj öğeleri metinleriyle birlikte okunur ve önceki istek sayfada bulunur", () => {
+    load("uzun_gecmis");
+    const messages = geminiAdapter.userMessages();
+    expect(messages.map((m) => m.text)).toEqual(geminiAdapter.readHistory());
+    const target = messages[3]!;
+    expect(target.element.tagName.toLowerCase()).toBe("user-query");
+    expect(findPreviousMessage(messages, target.text)).toBe(target.element);
   });
 });

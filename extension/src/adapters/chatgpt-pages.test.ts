@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { findPreviousMessage } from "../core/jump";
 import { chatgptAdapter, composerContaining, editBoxContaining, findComposer, findComposers, isGenerating, readComposerText } from "./chatgpt";
 import type { AdapterHandlers } from "./types";
 import bosSohbet from "../../test-snapshots/chatgpt/tr_bos_sohbet.html?raw";
@@ -144,5 +145,16 @@ describe("ChatGPT düzenleme yakalama (P6)", () => {
     const cancel = document.querySelector<HTMLButtonElement>('[data-turn-key] form button[type="button"]')!;
     cancel.click();
     expect(h.onEdit).not.toHaveBeenCalled();
+  });
+});
+
+describe("ChatGPT: önceki cevaba git (K53)", () => {
+  it("mesaj öğeleri metinleriyle birlikte okunur ve önceki soru sayfada bulunur", () => {
+    load("cevap_bitince");
+    const messages = chatgptAdapter.userMessages();
+    expect(messages.map((m) => m.text)).toEqual(chatgptAdapter.readHistory());
+    const target = messages[1]!;
+    expect(findPreviousMessage(messages, target.text)).toBe(target.element);
+    expect(target.element.textContent).toContain(target.text.slice(0, 20));
   });
 });

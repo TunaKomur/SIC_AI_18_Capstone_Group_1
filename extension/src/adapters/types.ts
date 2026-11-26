@@ -3,6 +3,12 @@ export interface SendInfo {
   text: string;
 }
 
+/** Sayfadaki bir kullanıcı mesajı: öğesi ve metni. Yalnızca bellekte, "Önceki cevaba git" için (K53). */
+export interface UserMessage {
+  element: HTMLElement;
+  text: string;
+}
+
 /** Mesaj gönderilmeden hemen önce: bekletilip bekletilmeyeceğine karar vermek için. */
 export interface BeforeSendInfo {
   text: string;
@@ -64,6 +70,8 @@ export interface Adapter {
   insertText(text: string): boolean;
   /** Sayfada görünen önceki kullanıcı mesajlarının metinleri (eskiden yeniye). Yalnızca bellekte kullanılır. */
   readHistory(): string[];
+  /** Sayfada görünen önceki kullanıcı mesajları, öğeleriyle (eskiden yeniye); readHistory() ile aynı sıra. */
+  userMessages(): UserMessage[];
   /**
    * Sayfanın bildirdiği toplam kullanıcı mesajı sayısı. Yalnızca ekrandaki mesajları çizen
    * (sanal liste kullanan) sitelerde verilir; readHistory() o zaman sohbetin yalnızca bir

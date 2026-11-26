@@ -15,6 +15,7 @@ import { ExitCardPolicy } from "../core/exit-card-policy";
 import { buildFreshStartDraft } from "../core/fresh-start";
 import { HistoryWatcher, historySeed, historySignature } from "../core/history-watcher";
 import { isPopupMessage, MSG_OPEN_CARD, type ConversationSnapshot } from "../core/messages";
+import { findPreviousMessage, jumpTo } from "../core/jump";
 import { isPersonal } from "../core/personal";
 import { hasStrongRepair } from "../core/strong-repair";
 import { normalizeText } from "../core/text";
@@ -121,6 +122,9 @@ function main(): boolean {
   let conversationEpoch = 0;
   let semanticNoteShown = false;
   let semanticNoteTurn = 0;
+  /** Anlam notunun işaret ettiği önceki mesaj ve yeni mesaj (yalnızca bellekte; "Önceki cevaba git", K53). */
+  let semanticNotePrevious: string | null = null;
+  let semanticNoteText: string | null = null;
   let answerDone = true;
   let semanticUnavailable = false;
 
@@ -401,7 +405,7 @@ function main(): boolean {
    * halka ve çıkış kartı bu işareti saymaz (yeniden oynatmada memnuniyetsizliği haber vermedi). Sonuç geç geldiyse ve kullanıcı
    * bu arada başka bir mesaj gönderdiyse ya da sohbet değiştiyse yok sayılır.
    */
-  const onSemanticResult = (result: SemanticResult | null, epoch: number, turn: number) => {
+  const onSemanticResult = (result: SemanticResult | null, epoch: number, turn: number, text: string) => {
     if (epoch !== conversationEpoch || !active()) return;
     if (result === null) {
       if (!semanticUnavailable) {
@@ -420,7 +424,24 @@ function main(): boolean {
     record("semantic", "ayni_istek");
     console.log(`[KafiAI] anlam: AYNI İSTEK, başka kelimelerle (skor ${result.score.toFixed(2)})`);
     semanticNoteTurn = turn;
+    semanticNotePrevious = result.previous;
+    semanticNoteText = text;
     if (answerDone) maybeShowSemanticNote();
+  };
+
+  /**
+   * "Önceki cevaba git" (K53): önceki mesaj sayfada bulunuyorsa düğmenin eylemi, yoksa undefined
+   * (düğme gösterilmez). Tıklanınca öğe yeniden aranır; site sayfayı bu arada yeniden çizmiş olabilir.
+   * exclude: aranmayacak metin (anlam notunda yeni mesajın kendisi).
+   */
+  const goToAnswerAction = (target: string | null, exclude: string | null, onJump: (ok: boolean) => void) => {
+    if (target === null || findPreviousMessage(adapter.userMessages(), target, exclude) === null) return undefined;
+    return () => {
+      const element = findPreviousMessage(adapter.userMessages(), target, exclude);
+      const ok = element !== null && jumpTo(element);
+      console.log(`[KafiAI] önceki cevaba gidildi: ${ok ? "evet" : "HAYIR (soru sayfada bulunamadı)"}`);
+      onJump(ok);
+    };
   };
 
   /**
@@ -452,6 +473,9 @@ function main(): boolean {
           if (ok) record("semantic", "not_onarim");
           console.log(`[KafiAI] anlam notundan onarım cümlesi eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
         },
+        onGoToAnswer: goToAnswerAction(semanticNotePrevious, semanticNoteText, (ok) => {
+          if (ok) record("semantic", "not_cevaba_git");
+        }),
       },
       { attempt: 1, exact: false, task: currentTask(), kind: "semantic_note" },
     );
@@ -664,6 +688,13 @@ function main(): boolean {
           if (ok) record("repair_button", id);
           console.log(`[KafiAI] onarım cümlesi eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
         },
+        // Mesaj henüz gönderilmedi; sayfadaki en benzer önceki mesaj aranır (K53).
+        onGoToAnswer:
+          kind === "repeat"
+            ? goToAnswerAction(check.matched, null, (ok) => {
+                if (ok) record("strip_action", "cevaba_git");
+              })
+            : undefined,
       }, stripContext);
       return true;
     },
@@ -723,7 +754,7 @@ function main(): boolean {
       );
       if (semanticCheck) {
         const epoch = conversationEpoch;
-        void semanticCheck.then((result) => onSemanticResult(result, epoch, n));
+        void semanticCheck.then((result) => onSemanticResult(result, epoch, n, text));
       }
     },
     onResponseComplete: () => {
@@ -788,6 +819,8 @@ function main(): boolean {
     conversationEpoch += 1;
     semanticNoteShown = false;
     semanticNoteTurn = 0;
+    semanticNotePrevious = null;
+    semanticNoteText = null;
     answerDone = true;
     signals.reset();
     seenSignals.clear();

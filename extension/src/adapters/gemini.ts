@@ -157,15 +157,20 @@ export const geminiAdapter: Adapter = {
   },
 
   readHistory() {
+    return geminiAdapter.userMessages().map((m) => m.text);
+  },
+
+  userMessages() {
     return Array.from(document.querySelectorAll<HTMLElement>("user-query"))
       .filter((el) => el.getClientRects().length > 0)
-      .map((el) =>
-        Array.from(el.querySelectorAll<HTMLElement>(".query-text-line"))
+      .map((element) => ({
+        element,
+        text: Array.from(element.querySelectorAll<HTMLElement>(".query-text-line"))
           .map((line) => (line.innerText || line.textContent || "").trim())
           .filter((text) => text.length > 0)
           .join("\n"),
-      )
-      .filter((text) => text.length > 0);
+      }))
+      .filter((m) => m.text.length > 0);
   },
 
   composer() {

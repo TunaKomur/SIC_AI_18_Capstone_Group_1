@@ -112,6 +112,26 @@ describe("RepeatDetector", () => {
 import repeatFixture from "../../../tests/fixtures/repeat_parity.json";
 import { isVariation, newContent, rememberForTest } from "./repeat-detector";
 
+describe("önceki cevaba git için eşleşen mesaj (K53)", () => {
+  it("tekrar sayılan önceki mesajı sadeleştirilmiş olarak verir; yazım hatasında da", () => {
+    const d = new RepeatDetector();
+    d.remember("Python ile dosya nasıl okunur?");
+    d.remember("Ankaranın başkenti neresidir?");
+    expect(d.check("anksrabın baskebti neresifir").matched).toBe("ankaranın başkenti neresidir");
+    expect(d.check("python ile dosya nasıl okunur").matched).toBe("python ile dosya nasıl okunur");
+  });
+
+  it("aynı mesaj iki kez varsa daha yenisini verir; tekrar yoksa null", () => {
+    const d = new RepeatDetector();
+    d.remember("ankaranın başkenti neresidir");
+    d.remember("bugün hava nasıl olacak");
+    d.remember("ankaranın başkenti neresidir");
+    expect(d.check("ankaranın başkenti neresidir").matched).toBe("ankaranın başkenti neresidir");
+    expect(d.check("java ile dosya nasıl okunur").matched).toBeNull();
+    expect(d.check("evet").matched).toBeNull();
+  });
+});
+
 describe("şerit kuralı: yeni içerik getiren mesaj tekrar sayılmaz", () => {
   it("Python ile aynı kararı verir", () => {
     for (const row of repeatFixture) {

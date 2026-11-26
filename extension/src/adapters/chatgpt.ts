@@ -167,12 +167,16 @@ export const chatgptAdapter: Adapter = {
   },
 
   readHistory() {
+    return chatgptAdapter.userMessages().map((m) => m.text);
+  },
+
+  userMessages() {
     // Sohbet değişince ChatGPT önceki sohbetin mesajını sayfada görünmez bir artık olarak
     // bırakabiliyor (canlı sayfada ölçüldü: yükseklik 0). Yalnızca ekranda yer kaplayanlar alınır.
     return Array.from(document.querySelectorAll<HTMLElement>(USER_MESSAGE_SELECTOR))
       .filter((el) => el.getClientRects().length > 0)
-      .map((el) => (el.innerText || el.textContent || "").trim())
-      .filter((text) => text.length > 0);
+      .map((element) => ({ element, text: (element.innerText || element.textContent || "").trim() }))
+      .filter((m) => m.text.length > 0);
   },
 
   insertText(text) {
