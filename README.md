@@ -40,7 +40,7 @@ Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düş�
 | **Araç çubuğu penceresi** | "Bu sohbet" özeti, son 7 günün içgörüleri, ayarlar (eklenti, öneriler, halka, çıkış kartı), "Sayaçlarımı kopyala", "Tüm verilerimi sil" | Her zaman |
 | **Karşılama ekranı** | Neye baktığını, neye bakmadığını ve verinin nerede durduğunu söyler | İlk kurulumda ve "Kâfi AI nasıl çalışır?" bağlantısıyla |
 | **Anlam modeli ve notu** | Aynı isteğin başka kelimelerle sorulduğunu ("başkenti neresi" / "başkenti hangi şehir") bilgisayarda çalışan küçük bir çok dilli dil modeliyle fark eder; cevaptan sonra kısa bir not çıkar ("Bunu az önce başka kelimelerle sormuştun"). Gönderimi bekletmez | Anlam benzerliği 0,80 ve üstü, içerik kelimesi yer değiştirmemiş ("kısa"/"uzun") ve en çok bir yeni içerik kelimesi; not sohbet başına bir kez ([K52](docs/05_architecture_decisions.md)) |
-| **Önceki cevaba git** | Şeritteki ve anlam notundaki düğme; sayfayı önceki soruya kaydırır ve soruyu kısa süre işaretler, cevap hemen altındadır. Şerit açık kalır | Önceki soru aynı sohbette, sayfada bulunuyorsa ([K53](docs/05_architecture_decisions.md)) |
+| **Önceki cevaba git** | Şeritteki ve anlam notundaki düğme; sayfayı önceki soruya kaydırır ve soruyu kısa süre işaretler, cevap hemen altındadır. Şerit açık kalır | Önceki soru aynı sohbetteyse; site eski soruyu sayfadan kaldırmışsa kaydırarak arar ([K53](docs/05_architecture_decisions.md)) |
 | **Yalnızca say** | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca sayılır | Ayarlardan |
 
 Kişisel ve duygusal sohbetlerde hiçbir öneri gösterilmez.
@@ -84,7 +84,7 @@ pip install onnx                         # bir kez: anlam modelini kırpmak içi
 python scripts/build_semantic_model.py   # bir kez: anlam modelini indirir ve kırpar (yaklaşık 118 MB indirir, 39 MB yazar)
 cd extension
 npm ci
-npm run check        # tip kontrolü, 599 test, derleme (çıktı: extension/dist)
+npm run check        # tip kontrolü, 606 test, derleme (çıktı: extension/dist)
 ```
 
 Anlam modeli depoda değil (39 MB); betik onu Hugging Face'ten sabit sürümle indirir, SHA-256 özetini denetler ve Türkçe ile İngilizceye kırpar ([K52](docs/05_architecture_decisions.md)). Model yoksa eklenti çalışır, yalnızca Katman 2 kapalı kalır.
@@ -202,7 +202,7 @@ Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make test            # Python testleri (171) ve eklenti: tip kontrolü, testler (599), derleme
+make test            # Python testleri (171) ve eklenti: tip kontrolü, testler (606), derleme
 ```
 
 Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:

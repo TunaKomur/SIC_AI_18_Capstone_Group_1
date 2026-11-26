@@ -4,8 +4,11 @@ import { foldTurkish, normalizeText } from "./text";
 
 /**
  * "Önceki cevaba git" (K53): şeridin ya da anlam notunun işaret ettiği önceki soruyu sayfada bulur
- * ve oraya kaydırır. Yalnızca aynı sohbette, yalnızca sayfada o an bulunan mesajlarla çalışır;
- * hiçbir şey saklanmaz.
+ * ve oraya kaydırır. Yalnızca aynı sohbette çalışır; hiçbir şey saklanmaz.
+ *
+ * ChatGPT ekrandan uzak mesajları sayfadan kaldırıp yaklaşınca yeniden çiziyor (canlı sayfada
+ * görüldü; Claude ve Copilot da sanal liste kullanıyor). Soru o an sayfada yoksa sohbet adım adım
+ * kaydırılarak aranır (seekMessage).
  */
 
 /** Sayfa metni ile hafızadaki metin küçük farklarla gelebilir (satır sonları, görünmez karakterler). */
@@ -90,3 +93,53 @@ export function jumpTo(element: HTMLElement): boolean {
   }
   return true;
 }
+
+/** Arama: bir adımda kaydırılan pay (görünür yüksekliğin oranı), adım sonrası bekleme ve en çok adım. */
+const SEEK_STEP_RATIO = 0.8;
+const SEEK_STEP_MS = 160;
+const SEEK_MAX_STEPS = 40;
+
+/** Öğeyi içeren kaydırılabilir alan (sohbet listesi); yoksa sayfanın kendisi. */
+export function scrollContainerOf(element: Element | null): HTMLElement {
+  for (let el = element?.parentElement ?? null; el; el = el.parentElement) {
+    const overflow = getComputedStyle(el).overflowY;
+    if (/(auto|scroll|overlay)/.test(overflow) && el.scrollHeight > el.clientHeight + 1) return el;
+  }
+  return (document.scrollingElement as HTMLElement | null) ?? document.documentElement;
+}
+
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+function scrollToTop(container: HTMLElement, top: number): void {
+  // "instant": sitenin CSS'teki yumuşak kaydırması aramayı yavaşlatmasın.
+  if (typeof container.scrollTo === "function") container.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+  else container.scrollTop = top;
+}
+
+/**
+ * Önceki soruyu bulur; sayfada yoksa sohbeti adım adım önce yukarı, sonra aşağı kaydırıp her adımda
+ * yeniden arar (site mesajı yaklaşınca çizer). Bulunamazsa sohbet başladığı yere döner ve null.
+ */
+export async function seekMessage(
+  find: () => HTMLElement | null,
+  container: HTMLElement,
+  wait: (ms: number) => Promise<void> = sleep,
+): Promise<HTMLElement | null> {
+  const found = find();
+  if (found) return found;
+  const start = container.scrollTop;
+  for (const direction of [-1, 1]) {
+    scrollToTop(container, start);
+    for (let i = 0; i < SEEK_MAX_STEPS; i++) {
+      const before = container.scrollTop;
+      scrollToTop(container, before + direction * Math.max(200, container.clientHeight * SEEK_STEP_RATIO));
+      await wait(SEEK_STEP_MS);
+      const element = find();
+      if (element) return element;
+      if (Math.abs(container.scrollTop - before) < 1) break; // sohbetin başına (ya da sonuna) gelindi
+    }
+  }
+  scrollToTop(container, start);
+  return null;
+}
+

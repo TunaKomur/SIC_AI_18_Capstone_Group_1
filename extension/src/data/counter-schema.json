@@ -109,9 +109,10 @@
         "duzenle",
         "yerinde_degil",
         "yeni_sohbet",
-        "cevaba_git"
+        "cevaba_git",
+        "cevaba_git_yok"
       ],
-      "note": "Benzer mesaj şeridindeki seçimler. cevaba_git: 'Önceki cevaba git' ile sayfa önceki soruya kaydırıldı (K53); şerit açık kalır, ardından ayrıca bir seçim sayılabilir."
+      "note": "Benzer mesaj şeridindeki seçimler. cevaba_git: 'Önceki cevaba git' ile sayfa önceki soruya kaydırıldı (K53); cevaba_git_yok: soru sohbette aranıp bulunamadı. Şerit açık kalır, ardından ayrıca bir seçim sayılabilir."
     },
     "repair_button": {
       "dims": [
@@ -294,9 +295,10 @@
         "not_yerinde_degil",
         "not_kapat",
         "not_cevaba_git",
+        "not_cevaba_git_yok",
         "model_yok"
       ],
-      "note": "Anlam modeli (Katman 2, K52). ayni_istek: gönderilen mesaj, son mesajlardan biriyle anlamca aynı istek sayıldı (Katman 1'in benzer saymadığı bir mesaj); halka ve çıkış kartını etkilemez. not_*: gönderimden sonra çıkan kısa notun gösterilmesi ve kullanıcının seçimi (sohbet başına en çok bir kez); not_cevaba_git: nottan önceki soruya kaydırıldı (K53). model_yok: model yüklenemedi ya da cevap vermedi (sayfa başına bir kez)."
+      "note": "Anlam modeli (Katman 2, K52). ayni_istek: gönderilen mesaj, son mesajlardan biriyle anlamca aynı istek sayıldı (Katman 1'in benzer saymadığı bir mesaj); halka ve çıkış kartını etkilemez. not_*: gönderimden sonra çıkan kısa notun gösterilmesi ve kullanıcının seçimi (sohbet başına en çok bir kez); not_cevaba_git: nottan önceki soruya kaydırıldı, not_cevaba_git_yok: soru bulunamadı (K53). model_yok: model yüklenemedi ya da cevap vermedi (sayfa başına bir kez)."
     }
   }
 }

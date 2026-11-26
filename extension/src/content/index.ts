@@ -15,7 +15,7 @@ import { ExitCardPolicy } from "../core/exit-card-policy";
 import { buildFreshStartDraft } from "../core/fresh-start";
 import { HistoryWatcher, historySeed, historySignature } from "../core/history-watcher";
 import { isPopupMessage, MSG_OPEN_CARD, type ConversationSnapshot } from "../core/messages";
-import { findPreviousMessage, jumpTo } from "../core/jump";
+import { findPreviousMessage, jumpTo, scrollContainerOf, seekMessage } from "../core/jump";
 import { isPersonal } from "../core/personal";
 import { hasStrongRepair } from "../core/strong-repair";
 import { normalizeText } from "../core/text";
@@ -430,17 +430,20 @@ function main(): boolean {
   };
 
   /**
-   * "Önceki cevaba git" (K53): önceki mesaj sayfada bulunuyorsa düğmenin eylemi, yoksa undefined
-   * (düğme gösterilmez). Tıklanınca öğe yeniden aranır; site sayfayı bu arada yeniden çizmiş olabilir.
-   * exclude: aranmayacak metin (anlam notunda yeni mesajın kendisi).
+   * "Önceki cevaba git" (K53): tekrar sayılan önceki mesaj biliniyorsa düğmenin eylemi, yoksa undefined
+   * (düğme gösterilmez). Tıklanınca mesaj sayfada aranır; sitenin o an çizmediği eski bir mesajsa sohbet
+   * adım adım kaydırılarak aranır. exclude: aranmayacak metin (anlam notunda yeni mesajın kendisi).
    */
   const goToAnswerAction = (target: string | null, exclude: string | null, onJump: (ok: boolean) => void) => {
-    if (target === null || findPreviousMessage(adapter.userMessages(), target, exclude) === null) return undefined;
-    return () => {
-      const element = findPreviousMessage(adapter.userMessages(), target, exclude);
+    if (target === null) return undefined;
+    return async () => {
+      const find = () => findPreviousMessage(adapter.userMessages(), target, exclude);
+      const visible = adapter.userMessages().at(-1)?.element ?? null;
+      const element = await seekMessage(find, scrollContainerOf(visible));
       const ok = element !== null && jumpTo(element);
       console.log(`[KafiAI] önceki cevaba gidildi: ${ok ? "evet" : "HAYIR (soru sayfada bulunamadı)"}`);
       onJump(ok);
+      return ok;
     };
   };
 
@@ -474,7 +477,7 @@ function main(): boolean {
           console.log(`[KafiAI] anlam notundan onarım cümlesi eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
         },
         onGoToAnswer: goToAnswerAction(semanticNotePrevious, semanticNoteText, (ok) => {
-          if (ok) record("semantic", "not_cevaba_git");
+          record("semantic", ok ? "not_cevaba_git" : "not_cevaba_git_yok");
         }),
       },
       { attempt: 1, exact: false, task: currentTask(), kind: "semantic_note" },
@@ -688,11 +691,11 @@ function main(): boolean {
           if (ok) record("repair_button", id);
           console.log(`[KafiAI] onarım cümlesi eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
         },
-        // Mesaj henüz gönderilmedi; sayfadaki en benzer önceki mesaj aranır (K53).
+        // Mesaj henüz gönderilmedi; tekrar sayılan önceki mesaj sayfada aranır (K53).
         onGoToAnswer:
           kind === "repeat"
             ? goToAnswerAction(check.matched, null, (ok) => {
-                if (ok) record("strip_action", "cevaba_git");
+                record("strip_action", ok ? "cevaba_git" : "cevaba_git_yok");
               })
             : undefined,
       }, stripContext);

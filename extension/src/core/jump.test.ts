@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { UserMessage } from "../adapters/types";
-import { findPreviousMessage, jumpTo } from "./jump";
+import { findPreviousMessage, jumpTo, scrollContainerOf, seekMessage } from "./jump";
 
 function page(texts: string[]): UserMessage[] {
   document.body.replaceChildren();
@@ -85,3 +85,70 @@ describe("jumpTo", () => {
     expect(scroll).not.toHaveBeenCalled();
   });
 });
+
+/**
+ * ChatGPT gibi sanal liste: 20 mesaj, her biri 500 piksel; yalnızca görünen alanın 1000 piksel
+ * yakınındaki mesajlar "çizilir" (find yalnızca onları görür).
+ */
+function virtualList(scrollTop: number) {
+  const container = document.createElement("div");
+  let top = scrollTop;
+  Object.defineProperty(container, "clientHeight", { value: 800 });
+  Object.defineProperty(container, "scrollHeight", { value: 20 * 500 });
+  Object.defineProperty(container, "scrollTop", {
+    get: () => top,
+    set: (v: number) => (top = Math.max(0, Math.min(v, 20 * 500 - 800))),
+  });
+  const items = Array.from({ length: 20 }, (_, i) => {
+    const element = document.createElement("div");
+    element.textContent = `soru ${i}`;
+    return element;
+  });
+  const rendered = () => items.filter((_, i) => i * 500 > top - 1000 && i * 500 < top + 800 + 1000);
+  return { container, items, rendered, top: () => top };
+}
+
+describe("seekMessage (sayfadan kaldırılmış eski mesaj)", () => {
+  const noWait = async () => undefined;
+
+  it("sayfadaysa kaydırmadan döner", async () => {
+    const v = virtualList(9200);
+    const el = await seekMessage(() => v.rendered().find((e) => e.textContent === "soru 19") ?? null, v.container, noWait);
+    expect(el).toBe(v.items[19]);
+    expect(v.top()).toBe(9200);
+  });
+
+  it("yukarıdaki eski mesajı kaydırarak bulur", async () => {
+    const v = virtualList(9200);
+    const el = await seekMessage(() => v.rendered().find((e) => e.textContent === "soru 0") ?? null, v.container, noWait);
+    expect(el).toBe(v.items[0]);
+  });
+
+  it("aşağıdaki mesajı da bulur (kullanıcı yukarıdayken)", async () => {
+    const v = virtualList(0);
+    const el = await seekMessage(() => v.rendered().find((e) => e.textContent === "soru 18") ?? null, v.container, noWait);
+    expect(el).toBe(v.items[18]);
+  });
+
+  it("bulunamazsa sohbet başladığı yere döner", async () => {
+    const v = virtualList(4000);
+    expect(await seekMessage(() => null, v.container, noWait)).toBeNull();
+    expect(v.top()).toBe(4000);
+  });
+});
+
+describe("scrollContainerOf", () => {
+  it("kaydırılabilir ataya ulaşır, yoksa sayfanın kendisi", () => {
+    const outer = document.createElement("div");
+    outer.style.overflowY = "auto";
+    Object.defineProperty(outer, "scrollHeight", { value: 2000 });
+    Object.defineProperty(outer, "clientHeight", { value: 500 });
+    const inner = document.createElement("div");
+    outer.append(inner);
+    document.body.append(outer);
+    expect(scrollContainerOf(inner)).toBe(outer);
+    expect(scrollContainerOf(null)).toBe(document.scrollingElement ?? document.documentElement);
+    outer.remove();
+  });
+});
+

@@ -22,9 +22,10 @@ export interface StripActions {
   onFreshStart?(): void;
   /**
    * "Önceki cevaba git": sayfa önceki soruya kayar (K53). Verilirse düğme gösterilir; yalnızca benzer
-   * mesaj şeridinde ve anlam notunda. Şerit açık kalır; kullanıcı okuyup sonra seçer.
+   * mesaj şeridinde ve anlam notunda. Şerit açık kalır; kullanıcı okuyup sonra seçer. Söz (Promise)
+   * dönerse arama sürerken düğmede "Aranıyor…" yazar; false ile biterse "Soru bulunamadı".
    */
-  onGoToAnswer?(): void;
+  onGoToAnswer?(): void | Promise<boolean>;
 }
 
 export interface StripContext {
@@ -46,6 +47,8 @@ export interface StripContext {
 
 /** "Önceki cevaba git" düğmesinin yazısı (K53). */
 export const GO_TO_ANSWER_LABEL = "Önceki cevaba git";
+export const GO_TO_ANSWER_SEARCHING = "Aranıyor…";
+export const GO_TO_ANSWER_NOT_FOUND = "Soru bulunamadı";
 
 /** Bu denemeden sonra şeritte "Yeni sohbete geç" önerilir. */
 export const FRESH_START_FROM_ATTEMPT = 3;
@@ -157,7 +160,23 @@ export class Strip {
       actions.onClose();
     };
     /** Önceki soruya kaydırır; şeridi kapatmaz. */
-    const goToAnswer = () => (actions.onGoToAnswer ? [button(GO_TO_ANSWER_LABEL, "secondary", () => actions.onGoToAnswer?.())] : []);
+    const goToAnswer = (): HTMLButtonElement[] => {
+      if (!actions.onGoToAnswer) return [];
+      const b = button(GO_TO_ANSWER_LABEL, "secondary", () => {
+        if (b.disabled) return;
+        const result = actions.onGoToAnswer?.();
+        if (!(result instanceof Promise)) return;
+        b.disabled = true;
+        b.textContent = GO_TO_ANSWER_SEARCHING;
+        void result
+          .catch(() => false)
+          .then((ok) => {
+            b.textContent = ok ? GO_TO_ANSWER_LABEL : GO_TO_ANSWER_NOT_FOUND;
+            b.disabled = !ok;
+          });
+      });
+      return [b];
+    };
     const msg = stripMessage(ctx);
     const chip =
       ctx.kind === "short_repair"

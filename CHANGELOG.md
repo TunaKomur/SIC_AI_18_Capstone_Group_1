@@ -6,10 +6,11 @@ Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üst
 
 ### Eklendi
 
-- "Önceki cevaba git" düğmesi (K53): benzer mesaj şeridinde ve anlam notunda, önceki soru sayfada bulunuyorsa görünür. Basınca sayfa önceki soruya kayar ve soru kısa süre işaretlenir; şerit açık kalır, bekletilen mesaj durur. Yalnızca aynı sohbette; hiçbir şey saklanmaz. Kod `extension/src/core/jump.ts` (`findPreviousMessage`, `jumpTo`), testler `jump.test.ts`.
+- "Önceki cevaba git" düğmesi (K53): benzer mesaj şeridinde ve anlam notunda görünür. Basınca sayfa önceki soruya kayar ve soru kısa süre işaretlenir; şerit açık kalır, bekletilen mesaj durur. Yalnızca aynı sohbette; hiçbir şey saklanmaz. Kod `extension/src/core/jump.ts` (`findPreviousMessage`, `jumpTo`, `seekMessage`), testler `jump.test.ts`.
+- Sayfadan kaldırılmış eski soruyu arama: ChatGPT canlı sayfada ekrandan uzak mesajları sayfadan kaldırıyordu ve düğme ilk denemede hiç görünmedi. Soru sayfada yoksa sohbet adım adım kaydırılarak aranır; düğmede "Aranıyor…", bulunamazsa "Soru bulunamadı" yazar. Sahte sanal liste sayfasıyla uçtan uca sınandı.
 - Adaptörlere `userMessages()`: sayfadaki kullanıcı mesajları öğeleriyle; beş sitede sayfa görüntüleriyle sınandı. `readHistory()` bundan türetiliyor.
 - `RepeatCheck.matched` ve `SemanticResult.previous`: tekrar sayılan önceki mesaj (yalnızca bellekte).
-- Sayaç ayrıntıları: `strip_action cevaba_git`, `semantic not_cevaba_git`.
+- Sayaç ayrıntıları: `strip_action cevaba_git` ve `cevaba_git_yok`, `semantic not_cevaba_git` ve `not_cevaba_git_yok`.
 
 ### Düzeltildi
 
@@ -18,7 +19,7 @@ Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üst
 
 ### Testler
 
-- Python 169 (2'si veri gerektirdiği için atlanır), eklenti 599 (42 dosya).
+- Python 169 (2'si veri gerektirdiği için atlanır), eklenti 606 (42 dosya).
 
 ## Türkçe anlam, Katman 2: anlam modeli (Kasım sonu)
 

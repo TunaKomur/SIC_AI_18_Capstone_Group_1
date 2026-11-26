@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { REPAIRS } from "../core/repairs";
-import { GO_TO_ANSWER_LABEL, Strip } from "./strip";
+import { GO_TO_ANSWER_LABEL, GO_TO_ANSWER_NOT_FOUND, GO_TO_ANSWER_SEARCHING, Strip } from "./strip";
 
 function shadowOf(): ShadowRoot {
   return document.querySelector<HTMLElement>('[data-kafiai="strip"]')!.shadowRoot!;
@@ -268,6 +268,31 @@ describe("kısa tekrar şeridi ve onay zinciri önerisi", () => {
       strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "semantic_note" });
       buttonByText(GO_TO_ANSWER_LABEL).click();
       expect(a.onGoToAnswer).toHaveBeenCalledTimes(1);
+      expect(strip.visible).toBe(true);
+    });
+
+    it("arama sürerken 'Aranıyor…' yazar; bulununca eski yazıya döner", async () => {
+      let resolve: (ok: boolean) => void = () => undefined;
+      const a = { ...actions(), onGoToAnswer: vi.fn(() => new Promise<boolean>((r) => (resolve = r))) };
+      strip.show(document.body, a);
+      buttonByText(GO_TO_ANSWER_LABEL).click();
+      const b = buttonByText(GO_TO_ANSWER_SEARCHING);
+      expect(b.disabled).toBe(true);
+      b.click(); // arama sürerken ikinci tıklama yeni arama başlatmaz
+      expect(a.onGoToAnswer).toHaveBeenCalledTimes(1);
+      resolve(true);
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(b.textContent).toBe(GO_TO_ANSWER_LABEL);
+      expect(b.disabled).toBe(false);
+    });
+
+    it("bulunamazsa 'Soru bulunamadı' yazar ve düğme kapanır; şerit açık kalır", async () => {
+      const a = { ...actions(), onGoToAnswer: vi.fn(async () => false) };
+      strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "semantic_note" });
+      buttonByText(GO_TO_ANSWER_LABEL).click();
+      await vi.waitFor(() => expect(buttonByText(GO_TO_ANSWER_NOT_FOUND)).toBeTruthy());
+      expect(buttonByText(GO_TO_ANSWER_NOT_FOUND).disabled).toBe(true);
       expect(strip.visible).toBe(true);
     });
 

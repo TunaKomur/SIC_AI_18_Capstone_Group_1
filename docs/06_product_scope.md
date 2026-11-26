@@ -42,7 +42,7 @@ Hazır cümle seçilince mesaj kutusuna eklenir; kullanıcı tamamlayıp kendisi
 
 **Anlam notu (K52).** Mesaj, son mesajlardan biriyle anlamca aynı istekse ("ankaranın başkenti neresidir?" / "ankaranın başkenti hangi şehir"), cevap bittikten sonra mesaj kutusunun üstünde kısa bir not çıkar: "Bunu az önce başka kelimelerle sormuştun." Gönderimi bekletmez, sohbet başına bir kez çıkar. Düğmeler: "Neyin eksik olduğunu söyle", "Önceki cevaba git", "Yerinde değildi", "Kapat".
 
-**Önceki cevaba git (K53).** Benzer mesaj şeridinde ve anlam notunda, önceki soru sayfada bulunuyorsa bu düğme görünür. Basınca sayfa önceki soruya kayar ve soru birkaç saniye çerçeveyle işaretlenir; cevabı hemen altındadır. Şerit açık kalır, bekletilen mesaj olduğu gibi durur; kullanıcı okuduktan sonra seçer. Yalnızca aynı sohbette çalışır; başka sohbetlerdeki sorular aranmaz, hiçbir şey saklanmaz.
+**Önceki cevaba git (K53).** Benzer mesaj şeridinde ve anlam notunda bu düğme görünür. Basınca sayfa önceki soruya kayar ve soru birkaç saniye çerçeveyle işaretlenir; cevabı hemen altındadır. Şerit açık kalır, bekletilen mesaj olduğu gibi durur; kullanıcı okuduktan sonra seçer. Site eski soruyu o an sayfadan kaldırmışsa (ChatGPT, Claude ve Copilot uzun sohbetlerde bunu yapıyor) eklenti sohbeti kaydırarak arar; düğmede "Aranıyor…", bulunamazsa "Soru bulunamadı" yazar. Yalnızca aynı sohbette çalışır; başka sohbetlerdeki sorular aranmaz, hiçbir şey saklanmaz.
 
 **Çıkış kartı.** Döngü sürerse, yapay zekanın cevabı bittikten sonra ve kullanıcı yazmaya başlamadan önce küçük bir kart görünür. Nedenini ve somut bir öneriyi söyler. Dört yoldan açılır:
 
