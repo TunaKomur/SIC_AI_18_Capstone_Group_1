@@ -33,6 +33,8 @@ describe("karşılama ekranı", () => {
     expect(text).toContain("Hiçbir mesaj cihazından çıkmaz");
     expect(text).toContain("Mesaj metni kaydedilmez");
     expect(text).toContain("90 gün");
+    expect(text).toContain("eklentinin içinde çalışan küçük bir dil modeliyle");
+    expect(text).toContain("tarayıcı, eklentinin kendi dosyaları dışındaki her adrese isteği engeller");
   });
 
   it("Anladım düğmesi close'u çağırır", () => {

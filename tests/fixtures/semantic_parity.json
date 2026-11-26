@@ -1,0 +1,3646 @@
+{
+ "tokens": [
+  {
+   "text": "ankaranın başkenti neresidir",
+   "ids": [
+    0,
+    137,
+    5613,
+    1046,
+    43400,
+    11957,
+    20109,
+    2
+   ]
+  },
+  {
+   "text": "ankaranın başkenti nedir",
+   "ids": [
+    0,
+    137,
+    5613,
+    1046,
+    43400,
+    24422,
+    2
+   ]
+  },
+  {
+   "text": "ankaranın nüfusu kaç",
+   "ids": [
+    0,
+    137,
+    5613,
+    1046,
+    36648,
+    34,
+    12996,
+    2
+   ]
+  },
+  {
+   "text": "pyton ile dosya nasıl okunur",
+   "ids": [
+    0,
+    7846,
+    1115,
+    1015,
+    32735,
+    7887,
+    6948,
+    8852,
+    2
+   ]
+  },
+  {
+   "text": "türkiyenin başkenti neresi",
+   "ids": [
+    0,
+    15548,
+    4449,
+    572,
+    43400,
+    11957,
+    167,
+    2
+   ]
+  },
+  {
+   "text": "türkiyenin başkenti hangi şehir",
+   "ids": [
+    0,
+    15548,
+    4449,
+    572,
+    43400,
+    17745,
+    20910,
+    2
+   ]
+  },
+  {
+   "text": "türkiyenin en kalabalık şehri neresi",
+   "ids": [
+    0,
+    15548,
+    4449,
+    572,
+    22,
+    43874,
+    39627,
+    11957,
+    167,
+    2
+   ]
+  },
+  {
+   "text": "python ile dosya nasıl okunur",
+   "ids": [
+    0,
+    7846,
+    18095,
+    1015,
+    32735,
+    7887,
+    6948,
+    8852,
+    2
+   ]
+  },
+  {
+   "text": "pythonda dosya okuma nasıl yapılır",
+   "ids": [
+    0,
+    7846,
+    18095,
+    84,
+    32735,
+    28546,
+    7887,
+    31630,
+    2
+   ]
+  },
+  {
+   "text": "python ile dosya nasıl ywzılır",
+   "ids": [
+    0,
+    7846,
+    18095,
+    1015,
+    32735,
+    7887,
+    6,
+    10965,
+    164,
+    12519,
+    2
+   ]
+  },
+  {
+   "text": "bu kodu düzelt çalışmıyor",
+   "ids": [
+    0,
+    335,
+    9375,
+    41508,
+    9583,
+    20979,
+    2
+   ]
+  },
+  {
+   "text": "kodu hala çalışmıyor düzeltsene",
+   "ids": [
+    0,
+    9375,
+    8454,
+    9583,
+    20979,
+    41508,
+    7,
+    886,
+    2
+   ]
+  },
+  {
+   "text": "bu kodu yorum satırları ekle",
+   "ids": [
+    0,
+    335,
+    9375,
+    16377,
+    57,
+    5797,
+    768,
+    1184,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "bu kodu javascript çevir",
+   "ids": [
+    0,
+    335,
+    9375,
+    35033,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "metni daha kısa yaz",
+   "ids": [
+    0,
+    384,
+    92,
+    1329,
+    11513,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bınu kısalt çok uzun olmuş",
+   "ids": [
+    0,
+    698,
+    855,
+    34,
+    11513,
+    970,
+    1482,
+    7632,
+    11103,
+    2
+   ]
+  },
+  {
+   "text": "metni ingilizceye çevir",
+   "ids": [
+    0,
+    384,
+    92,
+    23,
+    17278,
+    34424,
+    806,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "bana fotosentezi anlat",
+   "ids": [
+    0,
+    7683,
+    6021,
+    2712,
+    581,
+    18349,
+    2
+   ]
+  },
+  {
+   "text": "fotosentezi nasıl gerçekleşir anlatır mısın",
+   "ids": [
+    0,
+    6021,
+    2712,
+    581,
+    7887,
+    19811,
+    421,
+    36507,
+    42,
+    9746,
+    10225,
+    2
+   ]
+  },
+  {
+   "text": "bana mitooz bölünmeyi anlat",
+   "ids": [
+    0,
+    7683,
+    26410,
+    2872,
+    39830,
+    14818,
+    18349,
+    2
+   ]
+  },
+  {
+   "text": "bu hatanın sebebi ne",
+   "ids": [
+    0,
+    335,
+    7054,
+    1046,
+    34447,
+    107,
+    2
+   ]
+  },
+  {
+   "text": "neden bu hatayı alıyorum",
+   "ids": [
+    0,
+    9838,
+    335,
+    957,
+    17854,
+    10,
+    41910,
+    2
+   ]
+  },
+  {
+   "text": "bu hatayı nasıl düzeltirim",
+   "ids": [
+    0,
+    335,
+    957,
+    17854,
+    7887,
+    41508,
+    14024,
+    2
+   ]
+  },
+  {
+   "text": "bu uyarının sebebi ne",
+   "ids": [
+    0,
+    335,
+    32462,
+    1046,
+    34447,
+    107,
+    2
+   ]
+  },
+  {
+   "text": "excel de iki sütunu nasıl birleştiririm",
+   "ids": [
+    0,
+    21431,
+    8,
+    1505,
+    21570,
+    5660,
+    7887,
+    43178,
+    14024,
+    2
+   ]
+  },
+  {
+   "text": "excelde iki kollonu birleştirmenin yolu ne",
+   "ids": [
+    0,
+    21431,
+    111,
+    1505,
+    18568,
+    183,
+    34,
+    43178,
+    19947,
+    10188,
+    107,
+    2
+   ]
+  },
+  {
+   "text": "google sheets te iki sütunu nasıl birleştiririm",
+   "ids": [
+    0,
+    10997,
+    37485,
+    7,
+    118,
+    1505,
+    21570,
+    5660,
+    7887,
+    43178,
+    14024,
+    2
+   ]
+  },
+  {
+   "text": "tabloyu markdown formatında ver",
+   "ids": [
+    0,
+    20882,
+    4761,
+    7477,
+    13578,
+    4887,
+    3438,
+    429,
+    2
+   ]
+  },
+  {
+   "text": "tabloyu markdown olarak gösterir misin",
+   "ids": [
+    0,
+    20882,
+    4761,
+    7477,
+    13578,
+    1450,
+    40375,
+    946,
+    72,
+    2
+   ]
+  },
+  {
+   "text": "tabloyu csv formatında ver",
+   "ids": [
+    0,
+    20882,
+    4761,
+    9062,
+    305,
+    4887,
+    3438,
+    429,
+    2
+   ]
+  },
+  {
+   "text": "özgeçmişimi daha profesyonel yap",
+   "ids": [
+    0,
+    3709,
+    171,
+    38335,
+    1714,
+    1329,
+    30666,
+    7353,
+    2
+   ]
+  },
+  {
+   "text": "cv mi daha profesyonel hale getir",
+   "ids": [
+    0,
+    31632,
+    298,
+    1329,
+    30666,
+    16267,
+    9597,
+    2
+   ]
+  },
+  {
+   "text": "özgeçmişimi ingilizceye çevir",
+   "ids": [
+    0,
+    3709,
+    171,
+    38335,
+    1714,
+    23,
+    17278,
+    34424,
+    806,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "ön yazımı daha profesyonel yap",
+   "ids": [
+    0,
+    4953,
+    6651,
+    8966,
+    1329,
+    30666,
+    7353,
+    2
+   ]
+  },
+  {
+   "text": "e postayı daha resmi yaz",
+   "ids": [
+    0,
+    28,
+    988,
+    17854,
+    1329,
+    14184,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "mailii daha resmi bir dillle yaz",
+   "ids": [
+    0,
+    3691,
+    1151,
+    1329,
+    14184,
+    244,
+    4972,
+    937,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "e postayı bir kapanış cümlesi ekle",
+   "ids": [
+    0,
+    28,
+    988,
+    17854,
+    244,
+    17943,
+    6612,
+    37644,
+    167,
+    1184,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "bu cümleyi ingilizceye çevir",
+   "ids": [
+    0,
+    335,
+    37644,
+    1602,
+    23,
+    17278,
+    34424,
+    806,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "bunu ingilizce yazar mısın",
+   "ids": [
+    0,
+    7052,
+    23,
+    17278,
+    34424,
+    22673,
+    9746,
+    10225,
+    2
+   ]
+  },
+  {
+   "text": "bu cümleyi almancaya çevir",
+   "ids": [
+    0,
+    335,
+    37644,
+    1602,
+    9534,
+    7531,
+    351,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "listeyi alfabetik sırala",
+   "ids": [
+    0,
+    7355,
+    1602,
+    27556,
+    636,
+    7600,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "listeyi a dan z ye sırala",
+   "ids": [
+    0,
+    7355,
+    1602,
+    10,
+    121,
+    96,
+    1622,
+    7600,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "listeyi tersten sırala",
+   "ids": [
+    0,
+    7355,
+    1602,
+    577,
+    1699,
+    7600,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "listeeki tekrar edenleri sil",
+   "ids": [
+    0,
+    7355,
+    13,
+    278,
+    16058,
+    40553,
+    14,
+    3305,
+    2
+   ]
+  },
+  {
+   "text": "istanbul için hava durumu",
+   "ids": [
+    0,
+    390,
+    66,
+    4510,
+    848,
+    5634,
+    17169,
+    2
+   ]
+  },
+  {
+   "text": "istanbulda hava nasıll",
+   "ids": [
+    0,
+    390,
+    66,
+    4510,
+    84,
+    5634,
+    7887,
+    136,
+    2
+   ]
+  },
+  {
+   "text": "istanbul için gezilecek yerler",
+   "ids": [
+    0,
+    390,
+    66,
+    4510,
+    848,
+    15993,
+    27224,
+    29127,
+    2
+   ]
+  },
+  {
+   "text": "3x 5 20 denklemini çöz",
+   "ids": [
+    0,
+    134,
+    374,
+    182,
+    344,
+    163,
+    4647,
+    4817,
+    32654,
+    2
+   ]
+  },
+  {
+   "text": "3x 5 20 ise x nedir",
+   "ids": [
+    0,
+    134,
+    374,
+    182,
+    344,
+    2837,
+    798,
+    24422,
+    2
+   ]
+  },
+  {
+   "text": "4x 2 10 denklemini çöz",
+   "ids": [
+    0,
+    193,
+    374,
+    114,
+    199,
+    163,
+    4647,
+    4817,
+    32654,
+    2
+   ]
+  },
+  {
+   "text": "ilk paragrafı özetle",
+   "ids": [
+    0,
+    2580,
+    30008,
+    823,
+    3709,
+    123,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "ilk paragrafı özetini çıkar",
+   "ids": [
+    0,
+    2580,
+    30008,
+    823,
+    3709,
+    123,
+    742,
+    7497,
+    2
+   ]
+  },
+  {
+   "text": "ikinci paragrafı özetle",
+   "ids": [
+    0,
+    9945,
+    30008,
+    823,
+    3709,
+    123,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "ilk paragrafı ingilşzceye çevir",
+   "ids": [
+    0,
+    2580,
+    30008,
+    823,
+    23,
+    4596,
+    1265,
+    34424,
+    806,
+    24000,
+    2
+   ]
+  },
+  {
+   "text": "react te state nasıl güncellenir",
+   "ids": [
+    0,
+    34204,
+    118,
+    5654,
+    7887,
+    33329,
+    38330,
+    2
+   ]
+  },
+  {
+   "text": "reactta state günncelleme nasıl yapıılır",
+   "ids": [
+    0,
+    34204,
+    101,
+    5654,
+    2233,
+    2409,
+    937,
+    262,
+    7887,
+    8111,
+    12519,
+    2
+   ]
+  },
+  {
+   "text": "react te nasıl api isteği atılır",
+   "ids": [
+    0,
+    34204,
+    118,
+    7887,
+    12607,
+    41206,
+    98,
+    12519,
+    2
+   ]
+  },
+  {
+   "text": "sql sorgusunda join nasıl kullanılır",
+   "ids": [
+    0,
+    90,
+    28851,
+    15779,
+    208,
+    3823,
+    13178,
+    7887,
+    39380,
+    2
+   ]
+  },
+  {
+   "text": "join ifadesi sql de nasıl yazılır",
+   "ids": [
+    0,
+    13178,
+    9987,
+    167,
+    90,
+    28851,
+    8,
+    7887,
+    27078,
+    42,
+    2
+   ]
+  },
+  {
+   "text": "sql sorgusunda group by nasıl kullanılır",
+   "ids": [
+    0,
+    90,
+    28851,
+    15779,
+    208,
+    3823,
+    9183,
+    346,
+    7887,
+    39380,
+    2
+   ]
+  },
+  {
+   "text": "1 soruyu çöz",
+   "ids": [
+    0,
+    105,
+    3501,
+    20384,
+    32654,
+    2
+   ]
+  },
+  {
+   "text": "birinci soruyu çözer misin",
+   "ids": [
+    0,
+    13336,
+    3501,
+    20384,
+    32654,
+    56,
+    946,
+    72,
+    2
+   ]
+  },
+  {
+   "text": "2 soruyu çöz",
+   "ids": [
+    0,
+    114,
+    3501,
+    20384,
+    32654,
+    2
+   ]
+  },
+  {
+   "text": "1 soruyu açıkla ama çzöme",
+   "ids": [
+    0,
+    105,
+    3501,
+    20384,
+    8414,
+    138,
+    1678,
+    7383,
+    164,
+    8135,
+    13,
+    2
+   ]
+  },
+  {
+   "text": "bana bir şiir yaz",
+   "ids": [
+    0,
+    7683,
+    244,
+    35535,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bir şiir yaazar mıısın",
+   "ids": [
+    0,
+    244,
+    35535,
+    146,
+    11,
+    3564,
+    9746,
+    14714,
+    19,
+    2
+   ]
+  },
+  {
+   "text": "bu şiir analiz et",
+   "ids": [
+    0,
+    335,
+    35535,
+    7645,
+    81,
+    2
+   ]
+  },
+  {
+   "text": "fransanın nüfusu kaç",
+   "ids": [
+    0,
+    11295,
+    7,
+    17241,
+    36648,
+    34,
+    12996,
+    2
+   ]
+  },
+  {
+   "text": "fransada kaç kişi yaşıyor",
+   "ids": [
+    0,
+    11295,
+    11337,
+    12996,
+    7351,
+    35327,
+    2
+   ]
+  },
+  {
+   "text": "almanyanınn nüfusu kaç",
+   "ids": [
+    0,
+    139,
+    556,
+    16188,
+    19,
+    36648,
+    34,
+    12996,
+    2
+   ]
+  },
+  {
+   "text": "bu fonksiyonu daha hızlı hale getir",
+   "ids": [
+    0,
+    335,
+    42668,
+    34,
+    1329,
+    17263,
+    16267,
+    9597,
+    2
+   ]
+  },
+  {
+   "text": "bu fonksiyonu hızlandır",
+   "ids": [
+    0,
+    335,
+    42668,
+    34,
+    39248,
+    19,
+    1687,
+    2
+   ]
+  },
+  {
+   "text": "bu fonksiyonu test yaz",
+   "ids": [
+    0,
+    335,
+    42668,
+    34,
+    1939,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu fonksiyonu daha okunur hale getir",
+   "ids": [
+    0,
+    335,
+    42668,
+    34,
+    1329,
+    6948,
+    8852,
+    16267,
+    9597,
+    2
+   ]
+  },
+  {
+   "text": "makaleyi 200 kelimeyle özetle",
+   "ids": [
+    0,
+    1748,
+    2575,
+    14,
+    1276,
+    28045,
+    4181,
+    3709,
+    123,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "makaleyi 200 kelimellik özetinii yaz",
+   "ids": [
+    0,
+    1748,
+    2575,
+    14,
+    1276,
+    28045,
+    136,
+    506,
+    3709,
+    13749,
+    1151,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "makaledeki kaynakları listele",
+   "ids": [
+    0,
+    1748,
+    130,
+    7862,
+    16345,
+    768,
+    7355,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "ingilizce bir e posta taslağı yaz",
+   "ids": [
+    0,
+    23,
+    17278,
+    34424,
+    244,
+    28,
+    5022,
+    2046,
+    136,
+    6828,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "ingilizce bir e posta taslağı hazırlar mısın",
+   "ids": [
+    0,
+    23,
+    17278,
+    34424,
+    244,
+    28,
+    5022,
+    2046,
+    136,
+    6828,
+    15124,
+    42,
+    9746,
+    10225,
+    2
+   ]
+  },
+  {
+   "text": "almancaa bir e posta taslağı yaz",
+   "ids": [
+    0,
+    9534,
+    7531,
+    11,
+    244,
+    28,
+    5022,
+    2046,
+    136,
+    6828,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "türev alma kurallarını anlat",
+   "ids": [
+    0,
+    13957,
+    2854,
+    9534,
+    42782,
+    2886,
+    18349,
+    2
+   ]
+  },
+  {
+   "text": "türev kuralları nelerdir",
+   "ids": [
+    0,
+    13957,
+    2854,
+    42782,
+    107,
+    21829,
+    2
+   ]
+  },
+  {
+   "text": "integral alma kurallarını anlat",
+   "ids": [
+    0,
+    11816,
+    9534,
+    42782,
+    2886,
+    18349,
+    2
+   ]
+  },
+  {
+   "text": "türev ile ilgil 10 sooru hazırla",
+   "ids": [
+    0,
+    13957,
+    2854,
+    1015,
+    200,
+    4596,
+    199,
+    1531,
+    702,
+    15124,
+    2
+   ]
+  },
+  {
+   "text": "bu ödevi kaynakçalı yaz",
+   "ids": [
+    0,
+    335,
+    24999,
+    567,
+    16345,
+    1907,
+    987,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu ödevi kaynakça ekleyerek yaz",
+   "ids": [
+    0,
+    335,
+    24999,
+    567,
+    16345,
+    1907,
+    1184,
+    33514,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu ödevi sunumunu hazırla",
+   "ids": [
+    0,
+    335,
+    24999,
+    567,
+    161,
+    1715,
+    5660,
+    15124,
+    2
+   ]
+  },
+  {
+   "text": "docker container nasıl durdurulur",
+   "ids": [
+    0,
+    54,
+    5542,
+    31846,
+    7887,
+    39631,
+    21509,
+    2
+   ]
+  },
+  {
+   "text": "çalışan docker container ı nasıl durdurulur",
+   "ids": [
+    0,
+    12458,
+    54,
+    5542,
+    31846,
+    6,
+    823,
+    7887,
+    39631,
+    21509,
+    2
+   ]
+  },
+  {
+   "text": "docker container nasıl başlatılır",
+   "ids": [
+    0,
+    54,
+    5542,
+    31846,
+    7887,
+    25053,
+    12519,
+    2
+   ]
+  },
+  {
+   "text": "git te son commit nasıl geri alınır",
+   "ids": [
+    0,
+    20969,
+    118,
+    631,
+    336,
+    2435,
+    7887,
+    5610,
+    39839,
+    2
+   ]
+  },
+  {
+   "text": "git tee son commit nasıl geri alınır",
+   "ids": [
+    0,
+    20969,
+    12993,
+    631,
+    336,
+    2435,
+    7887,
+    5610,
+    39839,
+    2
+   ]
+  },
+  {
+   "text": "son commit i nasıl geri alırım",
+   "ids": [
+    0,
+    631,
+    336,
+    2435,
+    17,
+    7887,
+    5610,
+    139,
+    30300,
+    2
+   ]
+  },
+  {
+   "text": "git te yeni branch nasıl açılır",
+   "ids": [
+    0,
+    20969,
+    118,
+    1993,
+    13043,
+    197,
+    7887,
+    41368,
+    2
+   ]
+  },
+  {
+   "text": "git te son commit messajı nasıl değiştirilir",
+   "ids": [
+    0,
+    20969,
+    118,
+    631,
+    336,
+    2435,
+    31664,
+    165,
+    823,
+    7887,
+    22461,
+    11868,
+    2
+   ]
+  },
+  {
+   "text": "bu paragrafı daha akıcı yaz",
+   "ids": [
+    0,
+    335,
+    30008,
+    823,
+    1329,
+    2188,
+    9742,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "paragrafı daha akıcı hlae getir",
+   "ids": [
+    0,
+    30008,
+    823,
+    1329,
+    2188,
+    9742,
+    6,
+    3740,
+    13,
+    9597,
+    2
+   ]
+  },
+  {
+   "text": "bu paragrafı bir başlık öner",
+   "ids": [
+    0,
+    335,
+    30008,
+    823,
+    244,
+    42340,
+    4953,
+    56,
+    2
+   ]
+  },
+  {
+   "text": "haftalık çalışma planı hazırla",
+   "ids": [
+    0,
+    9046,
+    2606,
+    10799,
+    36980,
+    15124,
+    2
+   ]
+  },
+  {
+   "text": "bir haftalık ders çalışma planı oluştur",
+   "ids": [
+    0,
+    244,
+    9046,
+    2606,
+    120,
+    7,
+    10799,
+    36980,
+    10378,
+    2
+   ]
+  },
+  {
+   "text": "aylık çalışma planı hazırla",
+   "ids": [
+    0,
+    35446,
+    10799,
+    36980,
+    15124,
+    2
+   ]
+  },
+  {
+   "text": "cevabı tablo halinde ver",
+   "ids": [
+    0,
+    39110,
+    20882,
+    23266,
+    429,
+    2
+   ]
+  },
+  {
+   "text": "cevabını tablo olarak yaz",
+   "ids": [
+    0,
+    39110,
+    2886,
+    20882,
+    1450,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "cevabı madde madde ver",
+   "ids": [
+    0,
+    39110,
+    26758,
+    26758,
+    429,
+    2
+   ]
+  },
+  {
+   "text": "cevabı kısalt",
+   "ids": [
+    0,
+    39110,
+    11513,
+    970,
+    2
+   ]
+  },
+  {
+   "text": "bu kodun ne yaptığını açıkla",
+   "ids": [
+    0,
+    335,
+    9375,
+    19,
+    107,
+    10091,
+    2886,
+    8414,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "bu kod ne işe yarıor",
+   "ids": [
+    0,
+    335,
+    4565,
+    107,
+    32054,
+    21830,
+    611,
+    2
+   ]
+  },
+  {
+   "text": "bu kodun karmaşıklığını hesapla",
+   "ids": [
+    0,
+    335,
+    9375,
+    19,
+    29714,
+    14206,
+    17637,
+    22103,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "kahve mi çay mı daha sağlıklı",
+   "ids": [
+    0,
+    35442,
+    298,
+    23561,
+    9746,
+    1329,
+    26686,
+    2
+   ]
+  },
+  {
+   "text": "sağlık açısından kahve mi çay mı",
+   "ids": [
+    0,
+    15712,
+    22122,
+    35442,
+    298,
+    23561,
+    9746,
+    2
+   ]
+  },
+  {
+   "text": "kahve mi çay mı daha ucz",
+   "ids": [
+    0,
+    35442,
+    298,
+    23561,
+    9746,
+    1329,
+    74,
+    1333,
+    2
+   ]
+  },
+  {
+   "text": "ikinci dünya savaşının sebeplerini yaz",
+   "ids": [
+    0,
+    9945,
+    7058,
+    39226,
+    1046,
+    27339,
+    3988,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "ikincii dünya savaşının sebeplerini yaz",
+   "ids": [
+    0,
+    9945,
+    14,
+    7058,
+    39226,
+    1046,
+    27339,
+    3988,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "2 dünya savaşı neden çıktı",
+   "ids": [
+    0,
+    114,
+    7058,
+    39226,
+    9838,
+    17589,
+    2
+   ]
+  },
+  {
+   "text": "birinci dünya savaşının sebeplerini yaz",
+   "ids": [
+    0,
+    13336,
+    7058,
+    39226,
+    1046,
+    27339,
+    3988,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "ikinci dünya savaşının sonuçlagını yaz",
+   "ids": [
+    0,
+    9945,
+    7058,
+    39226,
+    1046,
+    24879,
+    2267,
+    2744,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu metindeki yazım hatalarını düzelt",
+   "ids": [
+    0,
+    335,
+    384,
+    22702,
+    6651,
+    39,
+    7054,
+    2549,
+    41508,
+    2
+   ]
+  },
+  {
+   "text": "metindeki yazım yalışlarını düzelt",
+   "ids": [
+    0,
+    384,
+    22702,
+    6651,
+    39,
+    146,
+    136,
+    6612,
+    2549,
+    41508,
+    2
+   ]
+  },
+  {
+   "text": "bu metindeki anlatım bozukluklarını bul",
+   "ids": [
+    0,
+    335,
+    384,
+    22702,
+    36507,
+    39,
+    307,
+    16912,
+    3342,
+    2549,
+    5869,
+    2
+   ]
+  },
+  {
+   "text": "javascriptte dizi nasıl sıralanır",
+   "ids": [
+    0,
+    35033,
+    67,
+    23076,
+    7887,
+    7600,
+    16234,
+    2
+   ]
+  },
+  {
+   "text": "javascript dizisini nasıl sıralanır",
+   "ids": [
+    0,
+    35033,
+    42076,
+    92,
+    7887,
+    7600,
+    16234,
+    2
+   ]
+  },
+  {
+   "text": "javascriptte dizi nasıl ters çevrrilir",
+   "ids": [
+    0,
+    35033,
+    67,
+    23076,
+    7887,
+    577,
+    7,
+    14631,
+    3254,
+    42,
+    11868,
+    2
+   ]
+  },
+  {
+   "text": "sunum için 10 slayt başlığı öner",
+   "ids": [
+    0,
+    161,
+    1715,
+    848,
+    199,
+    6992,
+    8866,
+    42696,
+    4953,
+    56,
+    2
+   ]
+  },
+  {
+   "text": "sunumum için 10 tane slayt başlığı ver",
+   "ids": [
+    0,
+    161,
+    1715,
+    292,
+    848,
+    199,
+    20796,
+    6992,
+    8866,
+    42696,
+    429,
+    2
+   ]
+  },
+  {
+   "text": "sunum için 5 slayt başlığı öner",
+   "ids": [
+    0,
+    161,
+    1715,
+    848,
+    182,
+    6992,
+    8866,
+    42696,
+    4953,
+    56,
+    2
+   ]
+  },
+  {
+   "text": "sunum için konuşma metni yaz",
+   "ids": [
+    0,
+    161,
+    1715,
+    848,
+    16019,
+    384,
+    92,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu tarifi 4 kişilik yap",
+   "ids": [
+    0,
+    335,
+    6082,
+    14,
+    193,
+    35543,
+    7353,
+    2
+   ]
+  },
+  {
+   "text": "tarifi 4 kişiye göre ayyarla",
+   "ids": [
+    0,
+    6082,
+    14,
+    193,
+    37870,
+    4335,
+    462,
+    3766,
+    138,
+    2
+   ]
+  },
+  {
+   "text": "bu tarifi vegan yap",
+   "ids": [
+    0,
+    335,
+    6082,
+    14,
+    21950,
+    7353,
+    2
+   ]
+  },
+  {
+   "text": "mülakatta sorulabilecek soruları listele",
+   "ids": [
+    0,
+    4556,
+    10043,
+    1560,
+    3501,
+    194,
+    22337,
+    40326,
+    7355,
+    130,
+    2
+   ]
+  },
+  {
+   "text": "mülakat soruları neler olabilir",
+   "ids": [
+    0,
+    4556,
+    138,
+    1574,
+    40326,
+    31126,
+    11903,
+    2
+   ]
+  },
+  {
+   "text": "mülakatta sorulacak soruları cevap yaz",
+   "ids": [
+    0,
+    4556,
+    10043,
+    1560,
+    17156,
+    24883,
+    40326,
+    19719,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "bu cümlenin öznesini bul",
+   "ids": [
+    0,
+    335,
+    37644,
+    572,
+    3709,
+    85,
+    3028,
+    5869,
+    2
+   ]
+  },
+  {
+   "text": "bu cümlede özne hangisi",
+   "ids": [
+    0,
+    335,
+    37644,
+    111,
+    3709,
+    85,
+    42329,
+    2
+   ]
+  },
+  {
+   "text": "bu cümlenin yüklemini bul",
+   "ids": [
+    0,
+    335,
+    37644,
+    572,
+    14614,
+    130,
+    4817,
+    5869,
+    2
+   ]
+  },
+  {
+   "text": "bu cümleyii ögelerine ayır",
+   "ids": [
+    0,
+    335,
+    37644,
+    1602,
+    14,
+    5906,
+    378,
+    6224,
+    22921,
+    2
+   ]
+  },
+  {
+   "text": "ankaranın başkenti hangi şehir",
+   "ids": [
+    0,
+    137,
+    5613,
+    1046,
+    43400,
+    17745,
+    20910,
+    2
+   ]
+  },
+  {
+   "text": "metni daha uzun yaz",
+   "ids": [
+    0,
+    384,
+    92,
+    1329,
+    7632,
+    9050,
+    2
+   ]
+  },
+  {
+   "text": "java ile dosya nasıl okunur",
+   "ids": [
+    0,
+    78,
+    301,
+    1015,
+    32735,
+    7887,
+    6948,
+    8852,
+    2
+   ]
+  },
+  {
+   "text": "what is the capital of france",
+   "ids": [
+    0,
+    1593,
+    82,
+    69,
+    5247,
+    110,
+    14518,
+    13,
+    2
+   ]
+  },
+  {
+   "text": "which city is the capital of france",
+   "ids": [
+    0,
+    1982,
+    10953,
+    82,
+    69,
+    5247,
+    110,
+    14518,
+    13,
+    2
+   ]
+  },
+  {
+   "text": "écrire un poème",
+   "ids": [
+    0,
+    349,
+    13295,
+    106,
+    51,
+    155,
+    10144,
+    2
+   ]
+  },
+  {
+   "text": "ﬁle naïve café",
+   "ids": [
+    0,
+    5699,
+    24,
+    4892,
+    252,
+    10908,
+    2
+   ]
+  },
+  {
+   "text": "ankaranın başkenti neresidir?",
+   "ids": [
+    0,
+    137,
+    5613,
+    1046,
+    43400,
+    11957,
+    20109,
+    32,
+    2
+   ]
+  },
+  {
+   "text": "anksrabın baskebti neresifir",
+   "ids": [
+    0,
+    137,
+    934,
+    7758,
+    855,
+    756,
+    923,
+    255,
+    116,
+    11957,
+    167,
+    6464,
+    2
+   ]
+  },
+  {
+   "text": "What is the capital of France?",
+   "ids": [
+    0,
+    2861,
+    82,
+    69,
+    5247,
+    110,
+    5101,
+    32,
+    2
+   ]
+  },
+  {
+   "text": "Which city is the capital of France?",
+   "ids": [
+    0,
+    34005,
+    10953,
+    82,
+    69,
+    5247,
+    110,
+    5101,
+    32,
+    2
+   ]
+  },
+  {
+   "text": "Écrire un poème",
+   "ids": [
+    0,
+    1946,
+    13295,
+    106,
+    51,
+    155,
+    10144,
+    2
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başknti neresidir?",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başkenti nedir",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.94661,
+   "same": true
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın nüfusu kaç",
+   "only_old": [
+    "başkenti"
+   ],
+   "only_new": [
+    "nüfusu"
+   ],
+   "score": 0.47818,
+   "same": false
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "pyton ile dosya nasıl okunur",
+   "only_old": [
+    "ankaranın",
+    "başkenti"
+   ],
+   "only_new": [
+    "pyton",
+    "dosya",
+    "okunur"
+   ],
+   "score": -0.0017,
+   "same": false
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "turkiyenin baskenti neresi",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türikyenin başkenti hangi şehir",
+   "only_old": [],
+   "only_new": [
+    "şehir"
+   ],
+   "score": 0.95842,
+   "same": true
+  },
+  {
+   "previous": "türkiyenin başkenti neresi",
+   "new": "türkiyenin en kalabalık şehri neresi",
+   "only_old": [
+    "başkenti"
+   ],
+   "only_new": [
+    "en",
+    "kalabalık",
+    "şehri"
+   ],
+   "score": 0.76442,
+   "same": false
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dşsya nasıl oknur",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "pythonda dosya okuma nasıl yapılır",
+   "only_old": [
+    "okunur"
+   ],
+   "only_new": [
+    "okuma"
+   ],
+   "score": 0.96724,
+   "same": false
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "python ile dosya nasıl ywzılır",
+   "only_old": [
+    "okunur"
+   ],
+   "only_new": [
+    "ywzılır"
+   ],
+   "score": 0.89258,
+   "same": false
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu düzelt çalışmııyor",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "kod hala çalışmıyor düzeltsene",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.84481,
+   "same": true
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu koda yorum satırları ekle",
+   "only_old": [
+    "düzelt",
+    "çalışmıyor"
+   ],
+   "only_new": [
+    "yorum",
+    "satırları",
+    "ekle"
+   ],
+   "score": 0.52266,
+   "same": false
+  },
+  {
+   "previous": "bu kodu düzelt çalışmıyor",
+   "new": "bu kodu javascript çevir",
+   "only_old": [
+    "düzelt",
+    "çalışmıyor"
+   ],
+   "only_new": [
+    "javascript",
+    "çevir"
+   ],
+   "score": 0.40078,
+   "same": false
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daha kisa yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "bınu kısalt, çok uzun olmuş",
+   "only_old": [
+    "metni"
+   ],
+   "only_new": [
+    "bınu",
+    "çok",
+    "uzun",
+    "olmuş"
+   ],
+   "score": 0.55389,
+   "same": false
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni ingilizceye çevir",
+   "only_old": [
+    "kısa"
+   ],
+   "only_new": [
+    "ingilizceye",
+    "çevir"
+   ],
+   "score": 0.48021,
+   "same": false
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "baana fotosentezi ançat",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "fotosentez nasıl gerçekleşir anlatır mısın",
+   "only_old": [],
+   "only_new": [
+    "gerçekleşir"
+   ],
+   "score": 0.83843,
+   "same": true
+  },
+  {
+   "previous": "bana fotosentezi anlat",
+   "new": "bana mitooz bölünmeyi alnat",
+   "only_old": [
+    "fotosentezi"
+   ],
+   "only_new": [
+    "mitooz",
+    "bölünmeyi"
+   ],
+   "score": 0.32418,
+   "same": false
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu htaanın sebebi ne",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "neden bu hatayı alıyorum",
+   "only_old": [
+    "sebebi"
+   ],
+   "only_new": [
+    "alıyorum"
+   ],
+   "score": 0.81068,
+   "same": false
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu hatayı nasıl düzeltirim",
+   "only_old": [
+    "sebebi"
+   ],
+   "only_new": [
+    "düzeltirim"
+   ],
+   "score": 0.69193,
+   "same": false
+  },
+  {
+   "previous": "bu hatanın sebebi ne",
+   "new": "bu uyarının sebeebi ne",
+   "only_old": [
+    "hatanın"
+   ],
+   "only_new": [
+    "uyarının"
+   ],
+   "score": 0.61722,
+   "same": false
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excel'de iki sutunu nasil birlestiririm",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "excelde iki kollonu birleştirmenin yolu ne",
+   "only_old": [
+    "sütunu"
+   ],
+   "only_new": [
+    "kollonu",
+    "yolu"
+   ],
+   "score": 0.90507,
+   "same": false
+  },
+  {
+   "previous": "excel'de iki sütunu nasıl birleştiririm",
+   "new": "google sheets'te iki sütunu nasıl birleştiririm",
+   "only_old": [
+    "excel"
+   ],
+   "only_new": [
+    "google",
+    "sheets",
+    "te"
+   ],
+   "score": 0.5868,
+   "same": false
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tablyu markdown foramtında ver",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu markdown olarak gösterir misin",
+   "only_old": [
+    "formatında"
+   ],
+   "only_new": [],
+   "score": 0.7814,
+   "same": false
+  },
+  {
+   "previous": "tabloyu markdown formatında ver",
+   "new": "tabloyu csv formatınnda ver",
+   "only_old": [
+    "markdown"
+   ],
+   "only_new": [
+    "csv"
+   ],
+   "score": 0.57082,
+   "same": false
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimi daah profesyonel yap",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "cv'mi daha profesyonel hale getir",
+   "only_old": [
+    "özgeçmişimi"
+   ],
+   "only_new": [
+    "cv"
+   ],
+   "score": 0.83353,
+   "same": false
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "özgeçmişimi ingilizceye çevir",
+   "only_old": [
+    "profesyonel"
+   ],
+   "only_new": [
+    "ingilizceye",
+    "çevir"
+   ],
+   "score": 0.62923,
+   "same": false
+  },
+  {
+   "previous": "özgeçmişimi daha profesyonel yap",
+   "new": "ön yazımı daha profesyoonel yap",
+   "only_old": [
+    "özgeçmişimi"
+   ],
+   "only_new": [
+    "ön",
+    "yazımı"
+   ],
+   "score": 0.8054,
+   "same": false
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postayi daha resmi yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "mailii daha resmi bir dillle yaz",
+   "only_old": [
+    "postayı"
+   ],
+   "only_new": [
+    "mailii",
+    "dillle"
+   ],
+   "score": 0.61027,
+   "same": false
+  },
+  {
+   "previous": "e-postayı daha resmi yaz",
+   "new": "e-postaya bir kapanış cümlesi ekle",
+   "only_old": [
+    "resmi"
+   ],
+   "only_new": [
+    "kapanış",
+    "cümlesi",
+    "ekle"
+   ],
+   "score": 0.66134,
+   "same": false
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümldyi ingillizceye çevri",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bunu ingilizce yazar mısın",
+   "only_old": [
+    "cümleyi",
+    "çevir"
+   ],
+   "only_new": [],
+   "score": 0.57678,
+   "same": false
+  },
+  {
+   "previous": "bu cümleyi ingilizceye çevir",
+   "new": "bu cümelyi almancaya çevir",
+   "only_old": [
+    "ingilizceye"
+   ],
+   "only_new": [
+    "almancaya"
+   ],
+   "score": 0.92242,
+   "same": false
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "liteyi allfabetik sırala",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi a'dan z'ye sırala",
+   "only_old": [
+    "alfabetik"
+   ],
+   "only_new": [
+    "dan",
+    "ye"
+   ],
+   "score": 0.7288,
+   "same": false
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeyi tersten sırala",
+   "only_old": [
+    "alfabetik"
+   ],
+   "only_new": [
+    "tersten"
+   ],
+   "score": 0.79092,
+   "same": false
+  },
+  {
+   "previous": "listeyi alfabetik sırala",
+   "new": "listeeki tekrar edenleri sil",
+   "only_old": [
+    "alfabetik",
+    "sırala"
+   ],
+   "only_new": [
+    "edenleri",
+    "sil"
+   ],
+   "score": 0.66109,
+   "same": false
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul icin hava durumu",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbulda hava nasıll",
+   "only_old": [
+    "durumu"
+   ],
+   "only_new": [
+    "nasıll"
+   ],
+   "score": 0.95097,
+   "same": false
+  },
+  {
+   "previous": "istanbul için hava durumu",
+   "new": "istanbul için gezilecek yerler",
+   "only_old": [
+    "hava",
+    "durumu"
+   ],
+   "only_new": [
+    "gezilecek",
+    "yerler"
+   ],
+   "score": 0.78955,
+   "same": false
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 denklemihi çöz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "3x+5=20 ise x nedir",
+   "only_old": [
+    "denklemini",
+    "çöz"
+   ],
+   "only_new": [
+    "ise"
+   ],
+   "score": 0.67671,
+   "same": false
+  },
+  {
+   "previous": "3x+5=20 denklemini çöz",
+   "new": "4x-2=10 denkçemini çöz",
+   "only_old": [
+    "3x",
+    "5",
+    "20"
+   ],
+   "only_new": [
+    "4x",
+    "2",
+    "10"
+   ],
+   "score": 0.91952,
+   "same": false
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk pragrafı özetle",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafın özetini çıkar",
+   "only_old": [],
+   "only_new": [
+    "çıkar"
+   ],
+   "score": 0.96119,
+   "same": true
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ikinci paragrafı özetle",
+   "only_old": [
+    "ilk"
+   ],
+   "only_new": [
+    "ikinci"
+   ],
+   "score": 0.84066,
+   "same": false
+  },
+  {
+   "previous": "ilk paragrafı özetle",
+   "new": "ilk paragrafı ingilşzceye çevir",
+   "only_old": [
+    "özetle"
+   ],
+   "only_new": [
+    "ingilşzceye",
+    "çevir"
+   ],
+   "score": 0.91584,
+   "same": false
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'te state nasil guncellenir",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "reactta state günncelleme nasıl yapıılır",
+   "only_old": [
+    "te",
+    "güncellenir"
+   ],
+   "only_new": [
+    "günncelleme",
+    "yapıılır"
+   ],
+   "score": 0.8009,
+   "same": false
+  },
+  {
+   "previous": "react'te state nasıl güncellenir",
+   "new": "react'te nasıl api isteği atılır",
+   "only_old": [
+    "state",
+    "güncellenir"
+   ],
+   "only_new": [
+    "api",
+    "isteği",
+    "atılır"
+   ],
+   "score": 0.64783,
+   "same": false
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusuda jooin naqıl kullamılır",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "join ifadesi sql'de nasıl yazılır",
+   "only_old": [
+    "sorgusunda",
+    "kullanılır"
+   ],
+   "only_new": [
+    "ifadesi",
+    "yazılır"
+   ],
+   "score": 0.93442,
+   "same": false
+  },
+  {
+   "previous": "sql sorgusunda join nasıl kullanılır",
+   "new": "sql sorgusundx group by nasul kullanılır",
+   "only_old": [
+    "join"
+   ],
+   "only_new": [
+    "group",
+    "by"
+   ],
+   "score": 0.79974,
+   "same": false
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruy çöz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "birinci soruyu çözer misin",
+   "only_old": [
+    "1",
+    "çöz"
+   ],
+   "only_new": [
+    "birinci",
+    "çözer"
+   ],
+   "score": 0.8344,
+   "same": false
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "2. soruyu çöz",
+   "only_old": [
+    "1"
+   ],
+   "only_new": [
+    "2"
+   ],
+   "score": 0.83919,
+   "same": false
+  },
+  {
+   "previous": "1. soruyu çöz",
+   "new": "1. soruyu açıkla ama çzöme",
+   "only_old": [
+    "çöz"
+   ],
+   "only_new": [
+    "çzöme"
+   ],
+   "score": 0.83978,
+   "same": false
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bana bir siir yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bir şiir yaazar mıısın",
+   "only_old": [],
+   "only_new": [
+    "yaazar",
+    "mıısın"
+   ],
+   "score": 0.89341,
+   "same": false
+  },
+  {
+   "previous": "bana bir şiir yaz",
+   "new": "bu şiiri analiz et",
+   "only_old": [],
+   "only_new": [
+    "analiz"
+   ],
+   "score": 0.84814,
+   "same": true
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fragsanın nüfussu kaç",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "fransada kaç kişi yaşıyor",
+   "only_old": [
+    "nüfusu"
+   ],
+   "only_new": [
+    "kişi",
+    "yaşıyor"
+   ],
+   "score": 0.71814,
+   "same": false
+  },
+  {
+   "previous": "fransanın nüfusu kaç",
+   "new": "almanyanınn nüfusu kaç",
+   "only_old": [
+    "fransanın"
+   ],
+   "only_new": [
+    "almanyanınn"
+   ],
+   "score": 0.74885,
+   "same": false
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha hızı hale getir",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu hızlandır",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.90576,
+   "same": true
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyona test yaz",
+   "only_old": [
+    "hızlı"
+   ],
+   "only_new": [
+    "test"
+   ],
+   "score": 0.4889,
+   "same": false
+  },
+  {
+   "previous": "bu fonksiyonu daha hızlı hale getir",
+   "new": "bu fonksiyonu daha okunur hale getri",
+   "only_old": [
+    "hızlı"
+   ],
+   "only_new": [
+    "okunur"
+   ],
+   "score": 0.66779,
+   "same": false
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaleyi 200 kelimeyle ozetle",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makalenin 200 kelimellik özetinii yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.96422,
+   "same": true
+  },
+  {
+   "previous": "makaleyi 200 kelimeyle özetle",
+   "new": "makaledeki kaynakları listele",
+   "only_old": [
+    "200",
+    "kelimeyle",
+    "özetle"
+   ],
+   "only_new": [
+    "kaynakları",
+    "listele"
+   ],
+   "score": 0.55113,
+   "same": false
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingiliace bir e-psota taslaı yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "ingilizce bir e-posta taslağı hazırlar mısın",
+   "only_old": [],
+   "only_new": [
+    "hazırlar"
+   ],
+   "score": 0.92306,
+   "same": true
+  },
+  {
+   "previous": "ingilizce bir e-posta taslağı yaz",
+   "new": "almancaa bir e-posta taslağı yaz",
+   "only_old": [
+    "ingilizce"
+   ],
+   "only_new": [
+    "almancaa"
+   ],
+   "score": 0.8719,
+   "same": false
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev alm kurallarınnı anlat",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev kuralları nelerdir",
+   "only_old": [
+    "alma"
+   ],
+   "only_new": [],
+   "score": 0.84874,
+   "same": true
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "integral alma kurallarını anlat",
+   "only_old": [
+    "türev"
+   ],
+   "only_new": [
+    "integral"
+   ],
+   "score": 0.69592,
+   "same": false
+  },
+  {
+   "previous": "türev alma kurallarını anlat",
+   "new": "türev ile ilgil 10 sooru hazırla",
+   "only_old": [
+    "alma",
+    "kurallarını"
+   ],
+   "only_new": [
+    "ilgil",
+    "10",
+    "sooru",
+    "hazırla"
+   ],
+   "score": 0.40444,
+   "same": false
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu odevi kaynakcali yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevvi kaynakça ekleyerek yaz",
+   "only_old": [],
+   "only_new": [
+    "ekleyerek"
+   ],
+   "score": 0.97052,
+   "same": true
+  },
+  {
+   "previous": "bu ödevi kaynakçalı yaz",
+   "new": "bu ödevin sunumunu hazırla",
+   "only_old": [
+    "kaynakçalı"
+   ],
+   "only_new": [
+    "sunumunu",
+    "hazırla"
+   ],
+   "score": 0.75712,
+   "same": false
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "dockdr contaier naısl durddurulur",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "çalışan docker container'ı nasıl durdururum",
+   "only_old": [],
+   "only_new": [
+    "çalışan"
+   ],
+   "score": 0.95,
+   "same": true
+  },
+  {
+   "previous": "docker container nasıl durdurulur",
+   "new": "docker contaier nasıl başlatılır",
+   "only_old": [
+    "durdurulur"
+   ],
+   "only_new": [
+    "başlatılır"
+   ],
+   "score": 0.82116,
+   "same": false
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'tee son commt nasıl geri alınır",
+   "only_old": [
+    "te"
+   ],
+   "only_new": [
+    "tee"
+   ],
+   "score": 0.89548,
+   "same": false
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "son commit'i nasıl geri alırım",
+   "only_old": [
+    "git",
+    "te",
+    "alınır"
+   ],
+   "only_new": [
+    "alırım"
+   ],
+   "score": 0.90436,
+   "same": false
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te yeni branch nasıl açılır",
+   "only_old": [
+    "son",
+    "commit",
+    "geri",
+    "alınır"
+   ],
+   "only_new": [
+    "yeni",
+    "branch",
+    "açılır"
+   ],
+   "score": 0.36837,
+   "same": false
+  },
+  {
+   "previous": "git'te son commit nasıl geri alınır",
+   "new": "git'te son commit messajı nasıl değiştirilir",
+   "only_old": [
+    "geri",
+    "alınır"
+   ],
+   "only_new": [
+    "messajı",
+    "değiştirilir"
+   ],
+   "score": 0.78126,
+   "same": false
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafi daha akici yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "paragrafı daha akııcı hlae getir",
+   "only_old": [],
+   "only_new": [
+    "hlae"
+   ],
+   "score": 0.91824,
+   "same": true
+  },
+  {
+   "previous": "bu paragrafı daha akıcı yaz",
+   "new": "bu paragrafa bir başlık öner",
+   "only_old": [
+    "akıcı"
+   ],
+   "only_new": [
+    "başlık",
+    "öner"
+   ],
+   "score": 0.82354,
+   "same": false
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "haftalı çalışka planı haazırla",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "bir haftalık ders çalışma planı oluştur",
+   "only_old": [
+    "hazırla"
+   ],
+   "only_new": [
+    "ders",
+    "oluştur"
+   ],
+   "score": 0.8486,
+   "same": false
+  },
+  {
+   "previous": "haftalık çalışma planı hazırla",
+   "new": "aylık çalışma plnı hazırla",
+   "only_old": [
+    "haftalık"
+   ],
+   "only_new": [
+    "aylık"
+   ],
+   "score": 0.82731,
+   "same": false
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabı tablo haliinde ver",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabını tablo olarak yaz",
+   "only_old": [
+    "halinde"
+   ],
+   "only_new": [],
+   "score": 0.90092,
+   "same": true
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cevabı madde madde ver",
+   "only_old": [
+    "tablo",
+    "halinde"
+   ],
+   "only_new": [
+    "madde",
+    "madde"
+   ],
+   "score": 0.82018,
+   "same": false
+  },
+  {
+   "previous": "cevabı tablo halinde ver",
+   "new": "cedabı kısalt",
+   "only_old": [
+    "tablo",
+    "halinde"
+   ],
+   "only_new": [
+    "kısalt"
+   ],
+   "score": 0.75718,
+   "same": false
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun ne yaptigini acikla",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kod ne işe yarıor",
+   "only_old": [
+    "kodun",
+    "yaptığını"
+   ],
+   "only_new": [
+    "kod",
+    "işe",
+    "yarıor"
+   ],
+   "score": 0.86699,
+   "same": false
+  },
+  {
+   "previous": "bu kodun ne yaptığını açıkla",
+   "new": "bu kodun karmaşıklığını hesapla",
+   "only_old": [
+    "yaptığını"
+   ],
+   "only_new": [
+    "karmaşıklığını",
+    "hesapla"
+   ],
+   "score": 0.65808,
+   "same": false
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahvee mi çay mı dahaa sğalıklı",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "sağlık açısından kahve mi çay mı",
+   "only_old": [],
+   "only_new": [
+    "açısından"
+   ],
+   "score": 0.95676,
+   "same": true
+  },
+  {
+   "previous": "kahve mi çay mı daha sağlıklı",
+   "new": "kahve mi çay mı daha ucz",
+   "only_old": [
+    "sağlıklı"
+   ],
+   "only_new": [
+    "ucz"
+   ],
+   "score": 0.86621,
+   "same": false
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikincii dünya savaşının sebeplerini yaz",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.9582,
+   "same": true
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "2. dünya savaşı neden çıktı",
+   "only_old": [
+    "ikinci",
+    "sebeplerini"
+   ],
+   "only_new": [
+    "2",
+    "çıktı"
+   ],
+   "score": 0.90833,
+   "same": false
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "birinci dünya savaşının sebeplerini yaz",
+   "only_old": [
+    "ikinci"
+   ],
+   "only_new": [
+    "birinci"
+   ],
+   "score": 0.92506,
+   "same": false
+  },
+  {
+   "previous": "ikinci dünya savaşının sebeplerini yaz",
+   "new": "ikinci dnüya svaşının sonuçlagını yaz",
+   "only_old": [
+    "sebeplerini"
+   ],
+   "only_new": [
+    "sonuçlagını"
+   ],
+   "score": 0.91381,
+   "same": false
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki yazim hatalarini duzelt",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "metideki yzaım yalışlarını düzelt",
+   "only_old": [
+    "hatalarını"
+   ],
+   "only_new": [
+    "yalışlarını"
+   ],
+   "score": 0.87895,
+   "same": false
+  },
+  {
+   "previous": "bu metindeki yazım hatalarını düzelt",
+   "new": "bu metindeki anlatım bozukluklarını bul",
+   "only_old": [
+    "yazım",
+    "hatalarını",
+    "düzelt"
+   ],
+   "only_new": [
+    "anlatım",
+    "bozukluklarını",
+    "bul"
+   ],
+   "score": 0.56236,
+   "same": false
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javwscriptte diiz nasıl sıraalanır",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascript dizisini nasıl sıralarım",
+   "only_old": [],
+   "only_new": [],
+   "score": 0.92917,
+   "same": true
+  },
+  {
+   "previous": "javascriptte dizi nasıl sıralanır",
+   "new": "javascriptte dizi nasul ters çevrrilir",
+   "only_old": [
+    "sıralanır"
+   ],
+   "only_new": [
+    "ters",
+    "çevrrilir"
+   ],
+   "score": 0.87294,
+   "same": false
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunu için 10 slayt başlığğı öner",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunumum için 10 tane slayt başlığı ver",
+   "only_old": [
+    "öner"
+   ],
+   "only_new": [
+    "tane"
+   ],
+   "score": 0.94958,
+   "same": false
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum için 5 slayt başlığı öner",
+   "only_old": [
+    "10"
+   ],
+   "only_new": [
+    "5"
+   ],
+   "score": 0.86495,
+   "same": false
+  },
+  {
+   "previous": "sunum için 10 slayt başlığı öner",
+   "new": "sunum içim konuşma metni yaz",
+   "only_old": [
+    "10",
+    "slayt",
+    "başlığı",
+    "öner"
+   ],
+   "only_new": [
+    "konuşma",
+    "metni"
+   ],
+   "score": 0.32909,
+   "same": false
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi 4 kisilik yap",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "tarifi 4 kişiye göre ayyarla",
+   "only_old": [],
+   "only_new": [
+    "göre",
+    "ayyarla"
+   ],
+   "score": 0.92704,
+   "same": false
+  },
+  {
+   "previous": "bu tarifi 4 kişilik yap",
+   "new": "bu tarifi vegan yap",
+   "only_old": [
+    "4",
+    "kişilik"
+   ],
+   "only_new": [
+    "vegan"
+   ],
+   "score": 0.28939,
+   "same": false
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakatta sorulabilecek sıruları lğstele",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mülakat soruları neler olabilir",
+   "only_old": [
+    "listele"
+   ],
+   "only_new": [],
+   "score": 0.72758,
+   "same": false
+  },
+  {
+   "previous": "mülakatta sorulabilecek soruları listele",
+   "new": "mlüakatta sorulacak sorulara cevap yaz",
+   "only_old": [
+    "listele"
+   ],
+   "only_new": [
+    "cevap"
+   ],
+   "score": 0.84846,
+   "same": false
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlenin özesini bul",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlede özne hangisi",
+   "only_old": [
+    "bul"
+   ],
+   "only_new": [],
+   "score": 0.89585,
+   "same": true
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümlenin yüklemini bul",
+   "only_old": [
+    "öznesini"
+   ],
+   "only_new": [
+    "yüklemini"
+   ],
+   "score": 0.90642,
+   "same": false
+  },
+  {
+   "previous": "bu cümlenin öznesini bul",
+   "new": "bu cümleyii ögelerine ayır",
+   "only_old": [
+    "öznesini",
+    "bul"
+   ],
+   "only_new": [
+    "ögelerine",
+    "ayır"
+   ],
+   "score": 0.88654,
+   "same": false
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "ankaranın başkenti hangi şehir",
+   "only_old": [],
+   "only_new": [
+    "şehir"
+   ],
+   "score": 0.90933,
+   "same": true
+  },
+  {
+   "previous": "ankaranın başkenti neresidir?",
+   "new": "anksrabın baskebti neresifir",
+   "only_old": [],
+   "only_new": [],
+   "score": 1.0,
+   "same": true
+  },
+  {
+   "previous": "metni daha kısa yaz",
+   "new": "metni daha uzun yaz",
+   "only_old": [
+    "kısa"
+   ],
+   "only_new": [
+    "uzun"
+   ],
+   "score": 0.84188,
+   "same": false
+  },
+  {
+   "previous": "python ile dosya nasıl okunur",
+   "new": "java ile dosya nasıl okunur",
+   "only_old": [
+    "python"
+   ],
+   "only_new": [
+    "java"
+   ],
+   "score": 0.70868,
+   "same": false
+  },
+  {
+   "previous": "What is the capital of France?",
+   "new": "Which city is the capital of France?",
+   "only_old": [],
+   "only_new": [
+    "which",
+    "city"
+   ],
+   "score": 0.96513,
+   "same": false
+  },
+  {
+   "previous": "Écrire un poème",
+   "new": "ﬁle naïve café",
+   "only_old": [
+    "écrire",
+    "un",
+    "poème"
+   ],
+   "only_new": [
+    "ﬁle",
+    "naïve",
+    "café"
+   ],
+   "score": 0.25501,
+   "same": false
+  }
+ ]
+}

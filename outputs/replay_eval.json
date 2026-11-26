@@ -22,6 +22,12 @@
       "100_sohbette": 0.0,
       "isabet_yuzde": null
     },
+    "anlam_tekrari": {
+      "100_sohbette": 0.0,
+      "isabet_yuzde": null,
+      "not_100_sohbette": 0.0,
+      "not_isabet_yuzde": null
+    },
     "onay_zinciri_onerisi": {
       "100_sohbette": 0.0,
       "sonraki_tur_memnuniyetsizlik_yuzde": null
@@ -77,6 +83,82 @@
     "kisa_tekrar_seridi": {
       "100_sohbette": 0.51,
       "isabet_yuzde": 5.88
+    },
+    "anlam_tekrari": {
+      "100_sohbette": 0.0,
+      "isabet_yuzde": null,
+      "not_100_sohbette": 0.0,
+      "not_isabet_yuzde": null
+    },
+    "onay_zinciri_onerisi": {
+      "100_sohbette": 0.02,
+      "sonraki_tur_memnuniyetsizlik_yuzde": 0.0
+    },
+    "halka": {
+      "seviye1_ve_ustu_tur_yuzde": 21.52,
+      "seviye2_tur_yuzde": 9.44,
+      "seviye2_isabet_yuzde": 29.86,
+      "cikistan_sonra_yuksek_kalan_yuzde": 19.35,
+      "cikis_mesaji": 336
+    },
+    "kart": {
+      "100_sohbette": 19.11,
+      "isabet_yuzde": 31.06,
+      "kaynaga_gore": {
+        "model": {
+          "sayi": 3101,
+          "isabet_yuzde": 27.73
+        },
+        "ozur": {
+          "sayi": 484,
+          "isabet_yuzde": 44.63
+        },
+        "tekrar": {
+          "sayi": 207,
+          "isabet_yuzde": 51.69
+        },
+        "norm": {
+          "sayi": 30,
+          "isabet_yuzde": 13.33
+        }
+      },
+      "tekrarlayan_memnuniyetsizlikte_yakalama_yuzde": 32.3,
+      "tekrarlayan_memnuniyetsizlik_sohbeti": 1294,
+      "kural_notlu_kart_yuzde": 1.26,
+      "kural_notlu_kart_isabet_yuzde": 39.58
+    },
+    "taze_baslat": {
+      "konu_kayan_sohbet_yuzde": 6.42,
+      "taslaktaki_istek_ortalama_once": 6.4,
+      "taslaktaki_istek_ortalama_sonra": 4.22
+    }
+  },
+  "anlam": {
+    "sohbet": 20000,
+    "kullanici_turu": 115052,
+    "serit": {
+      "100_sohbette": 10.59,
+      "isabet_yuzde": 21.07
+    },
+    "kisa_onarim_seridi": {
+      "100_sohbette": 0.91,
+      "isabet_yuzde": 57.69
+    },
+    "dongu_sonu": {
+      "donguli_sohbet_yuzde": 24.04,
+      "birakildi_yuzde": 51.67,
+      "birakildi_son_turlarda_memnuniyetsizlik_yuzde": 32.41,
+      "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": 16.96
+    },
+    "kisa_tekrar_seridi": {
+      "100_sohbette": 0.51,
+      "isabet_yuzde": 5.88
+    },
+    "anlam_tekrari": {
+      "100_sohbette": 6.77,
+      "isabet_yuzde": 5.47,
+      "not_100_sohbette": 5.42,
+      "not_isabet_yuzde": 6.74
     },
     "onay_zinciri_onerisi": {
       "100_sohbette": 0.02,

@@ -39,6 +39,7 @@ Projenin ilk taslağında ikinci bir gösterge olarak "aşırı güven ve düş�
 | **Yön sende** | Modelin teklif sorularına üst üste kısa onaylarda ("evet", "tamam") "Özetlet" ya da "Adımı ben yazayım" önerir | Üç kısa onaydan sonra, sohbet başına bir kez |
 | **Araç çubuğu penceresi** | "Bu sohbet" özeti, son 7 günün içgörüleri, ayarlar (eklenti, öneriler, halka, çıkış kartı), "Sayaçlarımı kopyala", "Tüm verilerimi sil" | Her zaman |
 | **Karşılama ekranı** | Neye baktığını, neye bakmadığını ve verinin nerede durduğunu söyler | İlk kurulumda ve "Kâfi AI nasıl çalışır?" bağlantısıyla |
+| **Anlam modeli ve notu** | Aynı isteğin başka kelimelerle sorulduğunu ("başkenti neresi" / "başkenti hangi şehir") bilgisayarda çalışan küçük bir çok dilli dil modeliyle fark eder; cevaptan sonra kısa bir not çıkar ("Bunu az önce başka kelimelerle sormuştun"). Gönderimi bekletmez | Anlam benzerliği 0,80 ve üstü, içerik kelimesi yer değiştirmemiş ("kısa"/"uzun") ve en çok bir yeni içerik kelimesi; not sohbet başına bir kez ([K52](docs/05_architecture_decisions.md)) |
 | **Yalnızca say** | Öneriler kapalıyken hiçbir şey gösterilmez, yalnızca sayılır | Ayarlardan |
 
 Kişisel ve duygusal sohbetlerde hiçbir öneri gösterilmez.
@@ -61,6 +62,7 @@ Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur
 | Çıkış kartı, özür döngüsü | 2,42 | %44,6 |
 | Çıkış kartı, tur modeli | 15,51 | %27,7 |
 | Çıkış kartı, uzun sohbet | 0,15 | %13,3 |
+| Anlam notu (Katman 2) | 5,42 | %6,7 |
 
 İsabet: şeritlerde o mesajda, halka ve kartta o turda ya da bir sonrakinde kullanıcının memnuniyetsiz olması. Kullanıcının iki ya da daha fazla kez memnuniyetsiz olduğu sohbetlerin %32,3'ünde kart ikinci şikayetten önce geliyor. Bu sayılar eklentinin her uyarıda haklı olmadığını da gösteriyor; bu yüzden hiçbir uyarı bir şeyi engellemez, hepsi tek tıkla geçilir ve "Yerinde değildi" ile işaretlenebilir.
 
@@ -70,16 +72,21 @@ Pilot yapılmadı; eklenti WildFeedback'teki 20.000 gerçek sohbet üzerinde tur
 
 - Mesaj metni yalnızca sekmenin belleğinde durur; sekme kapanınca ya da sohbet değişince silinir. Cevabın yalnızca başı ve sonu, yalnızca bellekte ve yalnızca birkaç kural için okunur (özürle mi başladı, öncekinin aynısı mı, soruyla mı bitti).
 - `chrome.storage` içinde yalnızca ayarlar ve günlük sayılar (90 gün) tutulur. Sayaç anahtarlarına metin, sohbet kimliği ya da adres giremez. Konsola metin değil, yalnızca `[KafiAI]` önekli sayı ve etiket yazılır.
-- Eklentide ağ isteği yapan kod yoktur. Eklenti sayfaları ve arka plan çalışanı için manifestte `connect-src 'none'` var. İçerik betiği sohbet sitesinin sayfasında çalıştığı için bu kural onu kapsamaz; onun güvencesi [`no-network.test.ts`](extension/src/no-network.test.ts): derlenmiş kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource`, `importScripts`, `eval` ve izinsiz bir web adresi geçmediğini her test çalıştırmasında denetler ([K11](docs/05_architecture_decisions.md)).
-- Eklenti yalnızca `storage` ve `clipboardWrite` izni ister ve yalnızca chatgpt.com, chat.openai.com, gemini.google.com, claude.ai, copilot.microsoft.com ve google.com/search (yalnızca AI Modu) adreslerinde çalışır. Yazı tipi dahil hiçbir kaynak ağdan yüklenmez.
+- Eklenti internete istek göndermez. İçerik betiği, arka plan çalışanı, araç çubuğu penceresi ve karşılama ekranında ağ isteği yapan kod yoktur; içerik betiği sohbet sitesinin sayfasında çalıştığı için onun güvencesi [`no-network.test.ts`](extension/src/no-network.test.ts): derlenmiş kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource`, `importScripts`, `eval` ve izinsiz bir web adresi geçmediğini her test çalıştırmasında denetler ([K11](docs/05_architecture_decisions.md)).
+- Anlam modeli (K52) eklentinin gizli bir sayfasında (offscreen) çalışır ve model dosyasını eklentinin kendi paketinden okur. Eklenti sayfalarının güvenlik kuralı `connect-src 'self'`: tarayıcı, eklentinin kendi dosyaları dışındaki her adrese isteği engeller (Chromium'da denendi). Mesaj metni modele yalnızca tarayıcının içinde, eklentinin kendi parçaları arasında gider; geri yalnızca sayılar gelir.
+- Eklenti yalnızca `storage`, `clipboardWrite` ve `offscreen` (anlam modelinin gizli sayfası) izni ister ve yalnızca chatgpt.com, chat.openai.com, gemini.google.com, claude.ai, copilot.microsoft.com ve google.com/search (yalnızca AI Modu) adreslerinde çalışır. Yazı tipi dahil hiçbir kaynak ağdan yüklenmez.
 
 ### Kurulum (geliştirici modu)
 
 ```bash
+pip install onnx                         # bir kez: anlam modelini kırpmak için
+python scripts/build_semantic_model.py   # bir kez: anlam modelini indirir ve kırpar (yaklaşık 118 MB indirir, 39 MB yazar)
 cd extension
 npm ci
-npm run check        # tip kontrolü, 565 test, derleme (çıktı: extension/dist)
+npm run check        # tip kontrolü, 580 test, derleme (çıktı: extension/dist)
 ```
+
+Anlam modeli depoda değil (39 MB); betik onu Hugging Face'ten sabit sürümle indirir, SHA-256 özetini denetler ve Türkçe ile İngilizceye kırpar ([K52](docs/05_architecture_decisions.md)). Model yoksa eklenti çalışır, yalnızca Katman 2 kapalı kalır.
 
 Chrome'da `chrome://extensions` sayfasını aç, **Geliştirici modu**nu aç, **Paketlenmemiş öğe yükle** ile `extension/dist` klasörünü seç. Kurulumdan hemen sonra karşılama ekranı açılır. Açık sohbet sekmesini yenile. Ne olduğunu görmek için sayfada geliştirici konsolunu açıp `[KafiAI]` diye süz. Chrome Web Store yayını planlanan son dağıtım adımı ([Bölüm 10](docs/10_deployment.md)).
 
@@ -129,7 +136,7 @@ Her sayının yanında, sayının durduğu dosya ve anahtar var. Yöntem ve sın
 | İlk veri analizi | [Bölüm 2, Veri araştırması](docs/02_data_research.md) |
 | Neden bu teknolojiler? | [Bölüm 3, Teknoloji incelemesi](docs/03_technology_review.md) |
 | Proje önerisi | [Bölüm 4, Konsept notu](docs/04_concept_note.md) |
-| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K51) |
+| Hangi kararı neden aldınız? | [Bölüm 5, Mimari kararlar](docs/05_architecture_decisions.md) (K01 ile K52) |
 | Ürün neyi yapıyor, neyi yapmıyor? | [Bölüm 6, Ürün kapsamı](docs/06_product_scope.md) |
 | Veri setleri ve kaynaklar | [Bölüm 7, Kaynaklar](docs/07_resources.md) |
 | Veri hazırlama, etiket, model karşılaştırması | [Bölüm 8](docs/08_data_preparation_and_model.md) |
@@ -194,7 +201,7 @@ Ham veri repoya girmez; betikler veriyi `data/processed/` altına indirir.
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-make test            # Python testleri (166) ve eklenti: tip kontrolü, testler (565), derleme
+make test            # Python testleri (171) ve eklenti: tip kontrolü, testler (580), derleme
 ```
 
 Ham veri gerektiren testler veri yoksa açık bir mesajla atlanır (`pytest -rs` nedenini gösterir). GitHub Actions her push ve pull request'te aynı kontrolleri çalıştırır. Ağ denetimi için derlemeden sonra şu komut boş dönmeli:
@@ -220,6 +227,8 @@ python scripts/train_turn_model.py            # eklentinin modeli, Şekil 26-28
 python scripts/calibrate_extension.py         # görev normları (kurallar değiştiyse)
 python scripts/make_turn_parity_fixture.py    # model değiştiyse mutlaka
 python scripts/evaluate_replay.py             # eklentiyi gerçek sohbetlerde yeniden oynatma (yaklaşık 10 dk)
+python scripts/evaluate_replay.py --anlam     # Katman 2 ile birlikte (model gerekir, yaklaşık 1 saat)
+python scripts/evaluate_semantic_pairs.py     # Türkçe anlam test seti (K51, K52)
 python scripts/evaluate_stage3.py             # ters yönlü düzeltme ve kural yeniden yazma ölçümü (K47)
 python -m pytest tests
 ```

@@ -220,4 +220,23 @@ describe("kısa tekrar şeridi ve onay zinciri önerisi", () => {
     expect(a.onRepair).toHaveBeenCalledWith("Teklif sorma, bir sonraki adımı ben belirliyorum: ", "next_step");
     expect(strip.visible).toBe(false);
   });
+
+  it("anlam notu (Katman 2): gönderim olmuştur, 'Yine de gönder' yok, odağı almaz; onarım cümleleri sunulur", () => {
+    const a = { ...actions(), onNotRelevant: vi.fn() };
+    const input = document.createElement("input");
+    document.body.append(input);
+    input.focus();
+    strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "semantic_note" });
+    expect(shadowOf().textContent).toContain("Benzer anlam");
+    expect(shadowOf().textContent).toContain("Bunu az önce başka kelimelerle sormuştun.");
+    expect(buttonByText("Yine de gönder")).toBeUndefined();
+    expect(document.activeElement).toBe(input);
+    buttonByText("Neyin eksik olduğunu söyle").click();
+    buttonByText(REPAIRS[0]!.label).click();
+    expect(a.onRepair).toHaveBeenCalledWith(REPAIRS[0]!.sentence, REPAIRS[0]!.id);
+    strip.show(document.body, a, { attempt: 1, exact: false, task: null, kind: "semantic_note" });
+    buttonByText("Yerinde değildi").click();
+    expect(a.onNotRelevant).toHaveBeenCalled();
+    input.remove();
+  });
 });

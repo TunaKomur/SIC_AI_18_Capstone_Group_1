@@ -90,6 +90,23 @@ def detector_flags(msgs, use_variation):
     return flags
 
 
+def semantic_flags(msgs, flags, embedder):
+    """Katman 2 (K52): her mesaj son beş karşılaştırılabilir mesajdan biriyle anlamca aynı istek mi?
+
+    Eklentideki gibi yalnızca Katman 1'in benzer saymadığı, karşılaştırılabilir ve varyasyon olmayan
+    mesajlara bakılır (src/content/index.ts, SemanticTracker)."""
+    from kafiai import semantic
+    out = []
+    for t, text in enumerate(msgs):
+        similar, _soft, variation, _hold = flags[t]
+        same = False
+        if t > 0 and not similar and not variation and is_comparable(text):
+            recent = [m for m in msgs[:t] if is_comparable(m)][-semantic.RULES["recent_messages"]:]
+            same = any(semantic.same_intent(embedder.similarity(p, text), p, text) for p in recent)
+        out.append(same)
+    return out
+
+
 def ring_level(prediction, similar_signal, apology, vague, short_repeat=0, ignored_repair=False):
     """Halka seviyesi (ring.ts). Aynı kısa mesajın tekrarı halkayı yükseltmez; onun yerine şerit çıkar.
     Düzeltme istendiği hâlde cevap öncekinin neredeyse aynısıysa halka koyulaşır."""
@@ -100,23 +117,25 @@ def ring_level(prediction, similar_signal, apology, vague, short_repeat=0, ignor
     return 0
 
 
-def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None):
+def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None, semantic=None):
     """Bir sohbeti oynatır; her tur için kararları döner. "sonra" eklentideki sırayı birebir izler
     (src/content/index.ts): mesaj gönderilir, tekrar ve sinyaller işlenir, model tahmin yapar,
     cevap gelir, özür sinyali işlenir, halka güncellenir, kart koşuluna bakılır.
 
     extra: aday kural denemesi için (scripts/evaluate_stage3.py). {"ring": {tur: seviye}, "card": {tur: gerekçe}};
     kart soğuma süresine ve bir turda tek müdahale kuralına uyar, öncelikte "tekrar"dan sonra gelir."""
+    semantic = semantic or [False] * len(msgs)  # Katman 2 işaretleri (yalnızca "anlam" politikasında)
     extra_ring = (extra or {}).get("ring", {})
     extra_card = (extra or {}).get("card", {})
-    after = policy == "sonra"
+    after = policy in ("sonra", "anlam")
+    use_semantic = policy == "anlam"
     flags = detector_flags(msgs, use_variation=after)
     signals = ConversationSignals()
     min_turns = min_turns_for(task_type(msgs[0]))
     repeats = 0          # ExitCardPolicy.repeats (önce: sohbet boyu yumuşak tekrar; sonra: son dört mesajda benzer)
     similar_total = 0    # eski halkanın kullandığı sohbet boyu sayı
     quiet_until = 0
-    short_repeat_offered = hint_shown = False
+    short_repeat_offered = hint_shown = note_shown = False
     turns = []
     for t, text in enumerate(msgs):
         n = t + 1
@@ -125,8 +144,9 @@ def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None):
             repeats += 1  # eski kural: sohbet boyu yumuşak tekrar
         if similar:
             similar_total += 1
+        same = use_semantic and semantic[t]
         if after:
-            signals.note_user(text, similar)
+            signals.note_user(text, similar)  # Katman 2 halkaya/karta katılmaz (K52)
             repeats = signals.recent_similar  # ExitCardPolicy.setRepeats: son dört mesaj, çıkışta sıfır
         if predictions is not None:
             prediction = predictions[t]
@@ -168,7 +188,10 @@ def replay(msgs, answers, model, reasons, policy, predictions=None, extra=None):
         hint = (after and not hint_shown and not card and not stripped
                 and signals.affirm_streak >= SIGNAL_RULES["affirm"]["streak"])
         hint_shown = hint_shown or hint
-        turns.append({"looping": after and (signals.looping or signals.last_short_repair),
+        # Anlam notu (Katman 2): cevabın altında, sohbet başına bir kez, o turda başka müdahale yoksa.
+        note = same and not note_shown and not card and not stripped and not hint
+        note_shown = note_shown or note
+        turns.append({"semantic": same, "semantic_note": note,"looping": after and (signals.looping or signals.last_short_repair),
                       "looping_end": after and signals.looping,
                       "strip": hold, "short_strip": after and signals.last_short_repair,
                       "short_repeat_strip": short_repeat_strip, "hint": hint, "variation": variation, "ring": level, "card": card,
@@ -192,6 +215,7 @@ class Tally:
         self.short_strips = self.short_strip_hits = 0
         self.short_repeat_strips = self.short_repeat_hits = 0
         self.hints = self.hint_hits = 0
+        self.semantic = self.semantic_hits = self.notes = self.note_hits = 0
         self.loop_convs = self.loop_left = self.loop_left_dsat = self.loop_rec = self.loop_rec_dsat = 0
         self.ring1 = self.ring2 = self.ring2_hits = 0
         self.exits = self.exit_high = 0
@@ -216,6 +240,12 @@ class Tally:
             if d.get("short_repeat_strip"):
                 self.short_repeat_strips += 1
                 self.short_repeat_hits += t in ds
+            if d.get("semantic"):
+                self.semantic += 1
+                self.semantic_hits += t in ds
+            if d.get("semantic_note"):
+                self.notes += 1
+                self.note_hits += (t in ds) or ((t + 1) in ds)
             if d.get("hint"):
                 self.hints += 1
                 self.hint_hits += (t in ds) or ((t + 1) in ds)
@@ -274,6 +304,8 @@ class Tally:
                            "toparlandi_son_turlarda_memnuniyetsizlik_yuzde": pct(self.loop_rec_dsat, self.loop_rec)},
             "kisa_tekrar_seridi": {"100_sohbette": round(100 * self.short_repeat_strips / n, 2),
                                    "isabet_yuzde": pct(self.short_repeat_hits, self.short_repeat_strips)},
+            "anlam_tekrari": {"100_sohbette": round(100 * self.semantic / n, 2), "isabet_yuzde": pct(self.semantic_hits, self.semantic),
+                              "not_100_sohbette": round(100 * self.notes / n, 2), "not_isabet_yuzde": pct(self.note_hits, self.notes)},
             "onay_zinciri_onerisi": {"100_sohbette": round(100 * self.hints / n, 3),
                                      "sonraki_tur_memnuniyetsizlik_yuzde": pct(self.hint_hits, self.hints)},
             "halka": {"seviye1_ve_ustu_tur_yuzde": pct(self.ring1, self.user_turns),
@@ -292,14 +324,15 @@ class Tally:
         }
 
 
-def evaluate(df, model, reasons, policies=("once", "sonra")):
+def evaluate(df, model, reasons, policies=("once", "sonra"), embedder=None):
     tallies = {p: Tally() for p in policies}
     for i, (msgs, answers, dsat) in enumerate(zip(df.user_msgs, df.assistant_msgs, df.dsat_turns)):
         msgs, answers = [str(m or "") for m in msgs], [str(a or "") for a in answers]
         ds = {int(x) for x in dsat}
         preds = predictions_for(msgs, model, reasons)
+        sem = semantic_flags(msgs, detector_flags(msgs, use_variation=True), embedder) if "anlam" in policies else None
         for p in policies:
-            tallies[p].add(replay(msgs, answers, model, reasons, p, preds), ds, len(msgs))
+            tallies[p].add(replay(msgs, answers, model, reasons, p, preds, semantic=sem), ds, len(msgs))
         if (i + 1) % 5000 == 0:
             print(f"  {i + 1:,} sohbet", flush=True)
     return {p: t.result() for p, t in tallies.items()}
@@ -308,6 +341,8 @@ def evaluate(df, model, reasons, policies=("once", "sonra")):
 def main():
     ap = argparse.ArgumentParser(description="Eklentiyi gerçek sohbetler üzerinde yeniden oynat")
     ap.add_argument("--max", type=int, default=20000, help="örneklem büyüklüğü (0 = hepsi)")
+    ap.add_argument("--anlam", action="store_true",
+                    help="Katman 2'yi (anlam modeli, K52) de oynat: 'anlam' politikası; model dosyası gerekir")
     args = ap.parse_args()
     df = pd.read_parquet(DATA)
     if "assistant_msgs" not in df.columns:
@@ -319,7 +354,11 @@ def main():
     base_dsat = sum(len(d) for d in df.dsat_turns) / max(1, sum(df.n_user_msgs))
     result = {"kaynak": "WildFeedback (sat_dsat_annotation)", "tum_turlarda_dsat_yuzde": round(100 * base_dsat, 2)}
     print(f"{len(df):,} sohbet oynatılıyor...", flush=True)
-    result.update(evaluate(df, model, reasons))
+    if args.anlam:
+        from kafiai.semantic import Embedder
+        result.update(evaluate(df, model, reasons, ("once", "sonra", "anlam"), Embedder()))
+    else:
+        result.update(evaluate(df, model, reasons))
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False, indent=2))

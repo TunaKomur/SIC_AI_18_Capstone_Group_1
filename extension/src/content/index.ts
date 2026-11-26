@@ -28,6 +28,8 @@ import {
   SHORT_REPEAT_STREAK,
 } from "../core/signals";
 import { RepeatDetector } from "../core/repeat-detector";
+import { SemanticTracker, type EmbedFn, type SemanticResult } from "../core/semantic-tracker";
+import { MSG_SEMANTIC_EMBED, type SemanticEmbedResponse } from "../semantic/messages";
 import { Session } from "../core/session";
 import {
   DEFAULT_SETTINGS,
@@ -60,6 +62,19 @@ function main(): boolean {
 
   const session = new Session(adapter.conversationKey(url));
   const detector = new RepeatDetector(); // yalnızca bellekte; sohbet değişince silinir
+  /**
+   * Katman 2 (K52): anlam modeli eklentinin gizli sayfasında çalışır. Mesaj metni yalnızca oraya,
+   * tarayıcının içinde gider; geri yalnızca sayılar gelir. Model yoksa ya da cevap vermezse null.
+   */
+  const embed: EmbedFn = async (texts) => {
+    try {
+      const response = (await chrome.runtime.sendMessage({ type: MSG_SEMANTIC_EMBED, texts })) as SemanticEmbedResponse | undefined;
+      return response?.ok ? response.vectors : null;
+    } catch {
+      return null;
+    }
+  };
+  const semantic = new SemanticTracker(embed); // yalnızca bellekte; sohbet değişince silinir
   // Sohbet sinyalleri (K32): özür döngüsü, döngüden çıkış, belirsiz istek, konu kayması. Yalnızca bellekte.
   const signals = new ConversationSignals();
   /** Bu sohbette sayılmış sinyaller: her biri sohbet başına bir kez sayılır (yalnızca bellekte). */
@@ -102,6 +117,12 @@ function main(): boolean {
   let affirmHintShown = false;
   /** Konsola yazılan son halka seviyesi; elle doğrulamada seviye değişimini tek satırda görmek için */
   let ringLogged = 0;
+  /** Katman 2: sohbet sürümü (eski sohbete ait geç gelen sonucu atmak için), not durumu, cevap bitti mi. */
+  let conversationEpoch = 0;
+  let semanticNoteShown = false;
+  let semanticNoteTurn = 0;
+  let answerDone = true;
+  let semanticUnavailable = false;
 
   // Ayarlar yüklenene kadar (null) eklenti hiçbir şey yapmaz.
   let settings: Settings | null = null;
@@ -375,6 +396,67 @@ function main(): boolean {
     }
   };
 
+  /**
+   * Katman 2 sonucu (K52). Mesaj anlamca öncekiyle aynı istekse cevaptan sonra kısa bir not çıkar;
+   * halka ve çıkış kartı bu işareti saymaz (yeniden oynatmada memnuniyetsizliği haber vermedi). Sonuç geç geldiyse ve kullanıcı
+   * bu arada başka bir mesaj gönderdiyse ya da sohbet değiştiyse yok sayılır.
+   */
+  const onSemanticResult = (result: SemanticResult | null, epoch: number, turn: number) => {
+    if (epoch !== conversationEpoch || !active()) return;
+    if (result === null) {
+      if (!semanticUnavailable) {
+        semanticUnavailable = true;
+        record("semantic", "model_yok");
+        console.log("[KafiAI] anlam modeli kullanılamıyor; Katman 2 bu sayfada kapalı");
+      }
+      return;
+    }
+    if (turn !== session.turns) return;
+    if (!result.same) {
+      console.log(`[KafiAI] anlam: farklı istek (skor ${result.score.toFixed(2)})`);
+      return;
+    }
+    // Yalnızca not: halka ve kart bu işareti saymaz; yeniden oynatmada memnuniyetsizliği haber vermedi (K52).
+    record("semantic", "ayni_istek");
+    console.log(`[KafiAI] anlam: AYNI İSTEK, başka kelimelerle (skor ${result.score.toFixed(2)})`);
+    semanticNoteTurn = turn;
+    if (answerDone) maybeShowSemanticNote();
+  };
+
+  /**
+   * Anlam notu: gönderimden sonra, cevabın altında kısa bir not; gönderimi bekletmez, odağı almaz.
+   * Sohbet başına en çok bir kez; o turda şerit ya da kart çıktıysa gösterilmez (bir turda tek müdahale, K39).
+   */
+  const maybeShowSemanticNote = () => {
+    if (semanticNoteShown || semanticNoteTurn === 0 || semanticNoteTurn !== session.turns) return;
+    if (strip.visible || exitCard.visible || policy.stripShownThisTurn(session.turns)) return;
+    if (!suggesting() || !intervening() || personal) return;
+    const composer = adapter.composer();
+    if (!composer) return;
+    semanticNoteShown = true;
+    semanticNoteTurn = 0;
+    record("semantic", "not_gosterildi");
+    console.log("[KafiAI] anlam notu gösterildi");
+    ring.hide();
+    strip.show(
+      composer.anchor,
+      {
+        onSendAnyway: () => undefined,
+        onClose: () => record("semantic", "not_kapat"),
+        onNotRelevant: () => {
+          console.log("[KafiAI] kullanıcı anlam notu için 'Yerinde değildi' dedi");
+          record("semantic", "not_yerinde_degil");
+        },
+        onRepair: (sentence) => {
+          const ok = adapter.insertText(sentence);
+          if (ok) record("semantic", "not_onarim");
+          console.log(`[KafiAI] anlam notundan onarım cümlesi eklendi: ${ok ? "evet" : "HAYIR (eklenemedi)"}`);
+        },
+      },
+      { attempt: 1, exact: false, task: currentTask(), kind: "semantic_note" },
+    );
+  };
+
   /** Yeni boş bir sohbet "Taze başlat"tan mı geldi? İşaret bir kez kullanılır ve silinir. */
   const checkFreshStart = async () => {
     try {
@@ -433,6 +515,7 @@ function main(): boolean {
         noteUserSignals(text, check.similar);
         if (isPersonal(text)) personal = true;
         detector.remember(text);
+        if (!check.tooShort) semantic.remember(text); // geçmiş mesajlar modele gönderilmez, yalnızca hafızaya girer
       }
       userTexts = [...texts];
       if (!seed.partial && texts.length >= MODEL_MIN_TURN && capabilities.model === "on") {
@@ -600,6 +683,12 @@ function main(): boolean {
       }
       const check = detector.check(text);
       detector.remember(text);
+      // Katman 2: Katman 1'in benzer saymadığı, karşılaştırılabilir ve varyasyon olmayan mesaj anlamca da
+      // karşılaştırılır. Sonuç gönderimden sonra gelir; gönderimi bekletmez.
+      const semanticCheck =
+        !check.similar && !check.variation && !check.tooShort && semantic.hasHistory ? semantic.check(text) : null;
+      if (!check.tooShort) semantic.remember(text);
+      answerDone = false;
       userTexts.push(text);
       if (check.similar) similarCount += 1;
       if (!personal && isPersonal(text)) {
@@ -632,9 +721,14 @@ function main(): boolean {
       console.log(
         `[KafiAI] mesaj gönderildi: ${text.length} karakter, oturumda ${n}. mesaj, ${verdict} (skor ${check.score.toFixed(2)})`,
       );
+      if (semanticCheck) {
+        const epoch = conversationEpoch;
+        void semanticCheck.then((result) => onSemanticResult(result, epoch, n));
+      }
     },
     onResponseComplete: () => {
       if (!active()) return;
+      answerDone = true;
       console.log("[KafiAI] cevap bitti");
       // Cevabın yalnızca başı, yalnızca bellekte ve yalnızca özür kuralı için okunur (K32).
       signals.noteAnswer(adapter.lastResponse?.() ?? null);
@@ -656,6 +750,7 @@ function main(): boolean {
       updateRing();
       maybeShowExitCard();
       maybeShowAffirmHint();
+      maybeShowSemanticNote();
     },
     onSendNotSeen: () => {
       // Sayfa mesajı göndermedi (örneğin yeni açılmış sekmede Enter işlenmedi): sayılmadı.
@@ -689,6 +784,11 @@ function main(): boolean {
     // Sayfanın o anki hâli kullanılmaz: gecikmeyle fark edilen geçişte o zaten yeni sohbet olabilir.
     staleHistory = historySignature(userTexts);
     detector.reset();
+    semantic.reset();
+    conversationEpoch += 1;
+    semanticNoteShown = false;
+    semanticNoteTurn = 0;
+    answerDone = true;
     signals.reset();
     seenSignals.clear();
     strip.hide();

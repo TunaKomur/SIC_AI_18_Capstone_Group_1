@@ -2,6 +2,25 @@
 
 Projenin iş paketleri burada bölüm bölüm kayıtlı; en yeni bölüm en üstte. Kararların gerekçeleri [`docs/05_architecture_decisions.md`](docs/05_architecture_decisions.md) içinde K numaralarıyla, güncel sonuçlar [`docs/10_deployment.md`](docs/10_deployment.md) içinde.
 
+## Türkçe anlam, Katman 2: anlam modeli (Kasım sonu)
+
+### Eklendi
+
+- Anlam modeli (K52): aynı isteğin başka kelimelerle sorulduğunu fark eden çok dilli cümle modeli (paraphrase-multilingual-MiniLM-L12-v2, Türkçe ve İngilizceye kırpılmış, 39 MB). Eklentinin gizli sayfasında (`offscreen.html`) onnxruntime-web ile çalışır; kelime bölücü TypeScript'te (`extension/src/semantic/tokenizer.ts`). Model betikle üretilir: `scripts/build_semantic_model.py` (sabit sürüm, SHA-256 denetimi), kırpma listesi `scripts/make_semantic_vocab.py`.
+- "Aynı istek" kuralı ve bekçi: `extension/src/core/semantic.ts`, `semantic-tracker.ts`, Python ikizi `src/kafiai/semantic.py`, kurallar `semantic-rules.json`; parite örnekleri `tests/fixtures/semantic_parity.json`.
+- Anlam notu: cevaptan sonra, sohbet başına bir kez "Bunu az önce başka kelimelerle sormuştun."; sayaç olayı `semantic` (ayni_istek, not_gosterildi, not_onarim, not_yerinde_degil, not_kapat, model_yok).
+- `scripts/evaluate_replay.py --anlam`: Katman 2 ile yeniden oynatma ("anlam" politikası).
+
+### Değişti
+
+- İzinlere `offscreen` eklendi; eklenti sayfalarının güvenlik kuralı `connect-src 'self'` ve `script-src 'self' 'wasm-unsafe-eval'` (model eklentinin kendi dosyasından okunur, başka adrese istek tarayıcıda engellenir). Ağ testi buna göre güncellendi.
+- Türkçe test setinin rapor yarısında başka söyleyişte aynı istek kararı %2,5 → %47,5; farklı isteklerde yanlış eşleşme %2,5 → %5.
+- Yeniden oynatmada anlam notu 100 sohbette 5,42, isabeti %6,7; halka ve kart değişmedi (işaret onları etkilemiyor).
+
+### Testler
+
+- Python 169 (2'si veri gerektirdiği için atlanır), eklenti 580 (41 dosya).
+
 ## Türkçe anlam, Katman 1: yazım hatası toleransı (Kasım sonu)
 
 ### Eklendi

@@ -279,6 +279,21 @@
         "kural_hatirlatildi"
       ],
       "note": "Sohbet sinyalleri (K32), sohbet başına her biri en fazla bir kez. ozur_dongusu: yapay zekanın cevapları üst üste iki kez özürle başladı; cikis: benzer mesaj, özür ya da belirsiz istekten sonra kullanıcı teşekkür etti ya da 'oldu' dedi; konu_kaymasi: sohbet başka bir konuya geçti; belirsiz: üst üste iki kısa ve açıklamasız düzeltme isteği; duzeltme_alinmadi: onarımdan sonra cevap öncekinin neredeyse aynısı; mesaj_kisaldi: döngüde şikayet bir öncekinin yarısından kısa; toparlandi: iki temiz turla sakinleşti; kural_hatirlatildi: kullanıcı bir kuralı yeniden hatırlattı (K48). Metin yok, yalnızca sayı."
+    },
+    "semantic": {
+      "dims": [
+        "platform",
+        "task"
+      ],
+      "details": [
+        "ayni_istek",
+        "not_gosterildi",
+        "not_onarim",
+        "not_yerinde_degil",
+        "not_kapat",
+        "model_yok"
+      ],
+      "note": "Anlam modeli (Katman 2, K52). ayni_istek: gönderilen mesaj, son mesajlardan biriyle anlamca aynı istek sayıldı (Katman 1'in benzer saymadığı bir mesaj); halka ve çıkış kartı için benzer mesaj gibi işlendi. not_*: gönderimden sonra çıkan kısa notun gösterilmesi ve kullanıcının seçimi (sohbet başına en çok bir kez). model_yok: model yüklenemedi ya da cevap vermedi (sayfa başına bir kez)."
     }
   }
 }

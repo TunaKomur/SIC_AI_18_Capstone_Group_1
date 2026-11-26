@@ -20,7 +20,9 @@ export const WELCOME_SECTIONS: WelcomeSection[] = [
   {
     title: "Neye bakar",
     lines: [
-      "Sohbette gönderdiğin mesajlara. Gönder'e bastığın anda, mesajın daha önce yazdıklarına çok benzeyip benzemediğine bakar.",
+      "Sohbette gönderdiğin mesajlara. Gönder'e bastığın anda, mesajın daha önce yazdıklarına çok benzeyip benzemediğine bakar; yazım hatalarını ve Türkçe karaktersiz yazımı da tanır.",
+      // Katman 2 (K52): model eklentinin içinde, gizli bir eklenti sayfasında çalışır.
+      "Gönderdikten sonra, aynı isteği başka kelimelerle sorup sormadığına da bakar. Bunu bilgisayarında, eklentinin içinde çalışan küçük bir dil modeliyle yapar.",
       // Cevabın başı ve sonu özür, düzeltme alınmadı ve teklif sorusu kuralları için okunur (K32, K40, K44).
       "Yapay zekanın cevabının ne zaman bittiğine; cevabın başına ve sonuna yalnızca bellekte, birkaç kural için bakar.",
     ],
@@ -35,7 +37,7 @@ export const WELCOME_SECTIONS: WelcomeSection[] = [
   {
     title: "Verin nerede durur",
     lines: [
-      "Hiçbir mesaj cihazından çıkmaz. Eklentide internete istek gönderen kod yoktur.",
+      "Hiçbir mesaj cihazından çıkmaz. Eklenti internete istek gönderemez: tarayıcı, eklentinin kendi dosyaları dışındaki her adrese isteği engeller.",
       "Mesaj metni kaydedilmez; yalnızca sekme açıkken bellekte durur ve sekme kapanınca silinir.",
       `Kalıcı olarak yalnızca ayarların ve günlük sayılar (kaç kez uyarı gösterildi gibi) tutulur. Sayılar 90 gün sonra silinir; istersen ${BRAND_NAME} penceresinden hemen silebilirsin.`,
     ],

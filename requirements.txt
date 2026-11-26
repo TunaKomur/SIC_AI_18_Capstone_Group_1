@@ -11,3 +11,8 @@ shap>=0.44
 sentence-transformers>=2.7
 pytest>=8.0
 jupyter
+
+# Anlam modeli (Katman 2, K52): kelime bölücü, modelin Python ile çalıştırılması ve kırpılması
+tokenizers>=0.20
+onnxruntime>=1.18
+onnx>=1.16

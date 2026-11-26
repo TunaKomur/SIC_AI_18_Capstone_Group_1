@@ -64,9 +64,22 @@ olasılık  = sigmoid(a × logit(ham) + b)
 
 Kâfi AI'nın kararlarının çoğu modelden değil, ölçülerek seçilmiş kurallardan geliyor: benzer mesaj eşiği, onarım ifadeleri, varyasyon isteği, özür döngüsü, kısa mesaj kuralları, düzeltme alınmadı, kuralın yeniden hatırlatılması, kişisel sohbet tespiti. Bunlar `extension/src/data/` altında JSON dosyalarında duruyor: `repair-rules.json`, `repeat-rules.json`, `signal-rules.json`, `personal-rules.json`, `task-rules.json`, `task-norms.json`, `model-reasons.json`, `insights-config.json`, `platforms.json` ve `counter-schema.json`. Python tarafı (`src/kafiai/`) aynı dosyaları okuyor. Böylece bir eşik tek bir yerde değişiyor ve değerlendirme betiği ile eklenti hiçbir zaman farklı kurallarla çalışmıyor.
 
-### 2.4 Depolama ve sürümleme
+### 2.4 Anlam modeli (Katman 2, K52)
 
-Model ve kural dosyaları git'te kodla birlikte sürümleniyor; her model ya da kural güncellemesi bir commit olarak görülüyor. Toplam boyut birkaç on kilobayt olduğu için ayrı bir model deposuna (model registry) ya da sıkıştırmaya ihtiyaç duyulmadı. Derleme sırasında JSON dosyaları JavaScript paketinin içine gömülüyor; çalışma anında ayrıca bir dosya indirilmiyor ya da okunmuyor. Her kural değişikliği iki dilde birlikte yapılıyor ve `tests/fixtures/*_parity.json` içine örnek ekleniyor.
+Tur modelinden ayrı, ikinci bir model var: aynı isteğin başka kelimelerle sorulduğunu fark eden çok dilli cümle modeli (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, Apache 2.0). Hugging Face'teki nicemlenmiş ONNX sürümü (118 MB) kelime tablosu Türkçe ve İngilizceye indirilerek 39 MB'a küçültülüyor: 250.002 parçadan, Türkçe (quora-tr) ve İngilizce (WildFeedback) metinlerde en az iki kez geçen 44.612 parça kalıyor; bunlar Türkçe metinlerdeki parçaların %99,997'sini kapsıyor. Kırpılmış model tam modelle aynı cümleye neredeyse aynı vektörü veriyor (500 Türkçe soruda %99,8'i 0,99 üstü benzerlik).
+
+| Dosya | Nerede | Nasıl üretiliyor |
+|---|---|---|
+| `model.onnx` (39 MB) | `extension/public/models/minilm-tr/`, depoda değil | `scripts/build_semantic_model.py`: sabit sürümle indirir, SHA-256 denetler, kırpar; sonuç her seferinde aynı |
+| `tokenizer.json` (1,8 MB) | aynı klasör, depoda | aynı betik |
+| Kırpma listesi | `scripts/data/semantic_keep_ids.json` | `scripts/make_semantic_vocab.py` (yalnızca parça kimlikleri; metin yok) |
+| Kurallar ve eşik | `extension/src/data/semantic-rules.json` | elle, ölçümle (K52) |
+
+Eklentide model eklentinin gizli bir sayfasında (`offscreen.html`) onnxruntime-web ile çalışıyor; motorun WebAssembly dosyası (14 MB) da pakete gömülü. Sonuç yalnızca cevaptan sonraki kısa notu açar; halka ve çıkış kartı bu işareti saymaz (K52). İlk istekte model bir kez yükleniyor (yaklaşık 1,4 saniye), sonraki mesajlar yaklaşık 30 ms sürüyor; gönderim beklemiyor. Kelime bölücü TypeScript'te yeniden yazıldı (`src/semantic/tokenizer.ts`) ve Python'daki Hugging Face kelime bölücüsüyle 32.202 metnin 32.163'ünde birebir aynı; kalan farklar görünmez kontrol karakterleri ve onlar da atılıyor. Python (onnxruntime) ile tarayıcı (onnxruntime-web) aynı nicemlenmiş modelde sayıları birebir aynı yuvarlamıyor: 140 çiftte fark ortanca 0,000001, en çok 0,0096 (`src/semantic/embedder.test.ts`).
+
+### 2.5 Depolama ve sürümleme
+
+Tur modeli ve kural dosyaları git'te kodla birlikte sürümleniyor; her model ya da kural güncellemesi bir commit olarak görülüyor (anlam modeli bunun dışında, bkz. 2.4). Bunların toplam boyutu birkaç on kilobayt olduğu için ayrı bir model deposuna (model registry) ya da sıkıştırmaya ihtiyaç duyulmadı. Derleme sırasında JSON dosyaları JavaScript paketinin içine gömülüyor; çalışma anında ayrıca bir dosya indirilmiyor ya da okunmuyor. Her kural değişikliği iki dilde birlikte yapılıyor ve `tests/fixtures/*_parity.json` içine örnek ekleniyor.
 
 ---
 
@@ -142,14 +155,14 @@ Kâfi AI'da güvenliğin merkezinde kimlik doğrulama değil, verinin cihazdan �
 
 | Önlem | Ne sağlıyor |
 |---|---|
-| Güvenlik politikası `connect-src 'none'` | Eklenti sayfaları ve arka plan çalışanı hiçbir adrese bağlantı kuramaz |
-| `script-src 'self'` | Yalnızca pakette gelen kod çalışır; uzaktan kod yüklenemez |
-| En az izin | `permissions` altında yalnızca `storage` (ayarlar ve sayılar için) ve `clipboardWrite` (Taze başlat taslağını ve sayaç dökümünü kopyalamak için) |
+| Güvenlik politikası `connect-src 'self'` | Eklenti sayfaları, gizli sayfa ve arka plan çalışanı yalnızca eklentinin kendi dosyalarını okuyabilir; başka her adrese istek tarayıcı tarafından engellenir (K52 ile `'none'` yerine; anlam modeli kendi dosyasını okuyor) |
+| `script-src 'self' 'wasm-unsafe-eval'` | Yalnızca pakette gelen kod çalışır; uzaktan kod yüklenemez. `'wasm-unsafe-eval'` yalnızca pakette gelen WebAssembly motorunun derlenmesine izin verir |
+| En az izin | `permissions` altında yalnızca `storage` (ayarlar ve sayılar için), `clipboardWrite` (Taze başlat taslağını ve sayaç dökümünü kopyalamak için) ve `offscreen` (anlam modelinin gizli sayfası) |
 | Sınırlı adres erişimi | `host_permissions` ve içerik betiği yalnızca altı adresi kapsar: chatgpt.com, chat.openai.com, gemini.google.com, claude.ai, copilot.microsoft.com ve google.com/search (adaptör yalnızca AI Modu'nda çalışır). Başka sitelerin sayfalarını göremez |
 
 ### 5.2 Kod düzeyinde denetim
 
-İçerik betiği sitenin kendi sayfasında çalıştığı için `connect-src 'none'` onu kapsamıyor. Bu boşluğu bir test kapatıyor (`extension/src/no-network.test.ts`): eklenti, derleme ayarlarıyla aynı biçimde derleniyor ve çıkan kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource` ve `importScripts` adlarından hiçbirinin, `eval` ya da `new Function` kullanımının ve desteklenen site adresleri dışında bir web adresinin geçmediği kontrol ediliyor. Aynı test manifestteki izinleri ve güvenlik politikasını da denetliyor. Test her push ve pull request'te GitHub Actions üzerinde çalışıyor.
+İçerik betiği sitenin kendi sayfasında çalıştığı için eklentinin güvenlik politikası onu kapsamıyor. Bu boşluğu bir test kapatıyor (`extension/src/no-network.test.ts`): eklenti, derleme ayarlarıyla aynı biçimde derleniyor ve çıkan kodda `fetch`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, `EventSource` ve `importScripts` adlarından hiçbirinin, `eval` ya da `new Function` kullanımının ve desteklenen site adresleri dışında bir web adresinin geçmediği kontrol ediliyor. Aynı test manifestteki izinleri ve güvenlik politikasını da denetliyor. Anlam modelinin gizli sayfası kendi dosyalarını okuduğu için bu sayfada `fetch` var; test onun yalnızca `chrome.runtime.getURL` ile çağrıldığını, sayfanın kodunda uzak bir adres olmadığını ve `connect-src` kuralının tam olarak `'self'` olduğunu denetliyor; içerik betiğinde model motorunun hiç bulunmadığını da denetliyor. Test her push ve pull request'te GitHub Actions üzerinde çalışıyor.
 
 ### 5.3 Verinin saklanması
 

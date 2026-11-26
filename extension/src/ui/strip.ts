@@ -33,9 +33,10 @@ export interface StripContext {
    * repeat: benzer mesaj (varsayılan). short_repair: "olmadı", "yanlış" gibi kısa bir onarım;
    * mesaj tekrar değil, yalnızca neyin olmadığını söylemiyor. short_repeat: aynı kısa mesaj ("devam")
    * üçüncü kez gönderilmek üzere. affirm_hint: soruyla biten cevaplara üst üste kısa onaylar verildi;
-   * cevabın altında çıkar ve gönderimi bekletmez.
+   * cevabın altında çıkar ve gönderimi bekletmez. semantic_note: mesaj, öncekiyle anlamca aynı istek
+   * (Katman 2, K52); gönderimden sonra, cevabın altında çıkar ve gönderimi bekletmez.
    */
-  kind?: "repeat" | "short_repair" | "short_repeat" | "affirm_hint";
+  kind?: "repeat" | "short_repair" | "short_repeat" | "affirm_hint" | "semantic_note";
 }
 
 /** Bu denemeden sonra şeritte "Yeni sohbete geç" önerilir. */
@@ -63,6 +64,13 @@ export function stripMessage(ctx: StripContext): { title: string; body: string; 
     return {
       title: "Son mesajların modelin tekliflerine kısa onaylardı.",
       body: "İstersen devam etmeden önce modelin şu ana kadar ne anladığını özetlemesini iste ya da bir sonraki adımı kendin yaz.",
+      hint: null,
+    };
+  }
+  if (ctx.kind === "semantic_note") {
+    return {
+      title: "Bunu az önce başka kelimelerle sormuştun.",
+      body: "Aynı soruyu farklı sözlerle sormak çoğu zaman benzer bir cevap getirir. İstersen önceki cevapta neyin eksik kaldığını bir cümleyle ekle.",
       hint: null,
     };
   }
@@ -148,6 +156,8 @@ export class Strip {
           ? "Kısa devam"
           : ctx.kind === "affirm_hint"
             ? "Yön sende"
+            : ctx.kind === "semantic_note"
+              ? "Benzer anlam"
             : ctx.attempt >= 2
               ? `${ctx.attempt}. deneme`
               : "Benzer mesaj";
@@ -185,6 +195,7 @@ export class Strip {
       (row.firstElementChild as HTMLButtonElement | null)?.focus();
     };
 
+    const showRepairs = () => showRepairsFor(showChoice)();
     const showChoice = () => {
       const row = document.createElement("div");
       row.className = "row";
@@ -223,7 +234,7 @@ export class Strip {
       primary.focus();
     };
 
-    const showRepairs = () => {
+    const showRepairsFor = (back: () => void) => () => {
       const row = document.createElement("div");
       row.className = "row";
       for (const repair of REPAIRS) {
@@ -234,7 +245,7 @@ export class Strip {
           }),
         );
       }
-      row.append(spacer(), button("Geri", "link", showChoice));
+      row.append(spacer(), button("Geri", "link", back));
       box.replaceChildren(header(chip), paragraph("Cevapta ne eksikti?", "title"), paragraph("Seçtiğin cümle mesajına eklenir; tamamlayıp kendin gönderirsin.", "hint"), row);
       (row.firstElementChild as HTMLButtonElement | null)?.focus();
     };
@@ -266,8 +277,26 @@ export class Strip {
       box.replaceChildren(header(chip), paragraph(msg.title, "title"), paragraph(msg.body, "body"), row);
     };
 
+    /** Anlam notu: gönderim olmuştur; bekletmez, odağı almaz. Onarım cümleleri bir sonraki mesaja eklenir. */
+    const showSemanticNote = () => {
+      const row = document.createElement("div");
+      row.className = "row";
+      row.append(button("Neyin eksik olduğunu söyle", "", showRepairsFor(showSemanticNote)), spacer());
+      if (actions.onNotRelevant) {
+        row.append(
+          button("Yerinde değildi", "link", () => {
+            this.hide();
+            actions.onNotRelevant?.();
+          }),
+        );
+      }
+      row.append(button("Kapat", "link", close));
+      box.replaceChildren(header(chip), paragraph(msg.title, "title"), paragraph(msg.body, "body"), row);
+    };
+
     if (ctx.kind === "short_repair" || ctx.kind === "short_repeat") showShortRepair();
     else if (ctx.kind === "affirm_hint") showAffirmHint();
+    else if (ctx.kind === "semantic_note") showSemanticNote();
     else showChoice();
     this.host = host;
 

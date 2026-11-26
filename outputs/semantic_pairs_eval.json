@@ -5,91 +5,106 @@
     "n": 120,
     "benzer": 10.8,
     "bekletir": 0.8,
-    "yumusak": 65.8
+    "yumusak": 65.8,
+    "ayni": 10.8
    },
    "TUM_FARKLI": {
     "n": 80,
     "benzer": 2.5,
     "bekletir": 0.0,
-    "yumusak": 43.8
+    "yumusak": 43.8,
+    "ayni": 2.5
    },
    "baska_soylenis": {
     "n": 40,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 45.0
+    "yumusak": 45.0,
+    "ayni": 0.0
    },
    "baska_soylenis_yazim": {
     "n": 20,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 15.0
+    "yumusak": 15.0,
+    "ayni": 0.0
    },
    "konu": {
     "n": 14,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 7.1
+    "yumusak": 7.1,
+    "ayni": 0.0
    },
    "konu_yazim": {
     "n": 14,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 7.1
+    "yumusak": 7.1,
+    "ayni": 0.0
    },
    "seri": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "seri_yazim": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "turkce_harfsiz": {
     "n": 20,
     "benzer": 15.0,
     "bekletir": 5.0,
-    "yumusak": 90.0
+    "yumusak": 90.0,
+    "ayni": 15.0
    },
    "varlik": {
     "n": 19,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 63.2
+    "yumusak": 63.2,
+    "ayni": 0.0
    },
    "varlik_yazim": {
     "n": 19,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 47.4
+    "yumusak": 47.4,
+    "ayni": 0.0
    },
    "yazim_agir": {
     "n": 20,
     "benzer": 15.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 15.0
    },
    "yazim_hafif": {
     "n": 20,
     "benzer": 35.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 35.0
    },
    "zit": {
     "n": 3,
     "benzer": 33.3,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 33.3
    },
    "zit_yazim": {
     "n": 3,
     "benzer": 33.3,
     "bekletir": 0.0,
-    "yumusak": 33.3
+    "yumusak": 33.3,
+    "ayni": 33.3
    }
   },
   "secim": {
@@ -97,91 +112,106 @@
     "n": 121,
     "benzer": 14.9,
     "bekletir": 0.0,
-    "yumusak": 65.3
+    "yumusak": 65.3,
+    "ayni": 14.9
    },
    "TUM_FARKLI": {
     "n": 80,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 40.0
+    "yumusak": 40.0,
+    "ayni": 0.0
    },
    "baska_soylenis": {
     "n": 40,
     "benzer": 2.5,
     "bekletir": 0.0,
-    "yumusak": 35.0
+    "yumusak": 35.0,
+    "ayni": 2.5
    },
    "baska_soylenis_yazim": {
     "n": 20,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 30.0
+    "yumusak": 30.0,
+    "ayni": 0.0
    },
    "konu": {
     "n": 17,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 11.8
+    "yumusak": 11.8,
+    "ayni": 0.0
    },
    "konu_yazim": {
     "n": 17,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 0.0
+    "yumusak": 0.0,
+    "ayni": 0.0
    },
    "seri": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "seri_yazim": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 75.0
+    "yumusak": 75.0,
+    "ayni": 0.0
    },
    "turkce_harfsiz": {
     "n": 20,
     "benzer": 30.0,
     "bekletir": 0.0,
-    "yumusak": 95.0
+    "yumusak": 95.0,
+    "ayni": 30.0
    },
    "varlik": {
     "n": 13,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 61.5
+    "yumusak": 61.5,
+    "ayni": 0.0
    },
    "varlik_yazim": {
     "n": 13,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 53.8
+    "yumusak": 53.8,
+    "ayni": 0.0
    },
    "yazim_agir": {
     "n": 21,
     "benzer": 14.3,
     "bekletir": 0.0,
-    "yumusak": 95.2
+    "yumusak": 95.2,
+    "ayni": 14.3
    },
    "yazim_hafif": {
     "n": 20,
     "benzer": 40.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 40.0
    },
    "zit": {
     "n": 6,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 66.7
+    "yumusak": 66.7,
+    "ayni": 0.0
    },
    "zit_yazim": {
     "n": 6,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 66.7
+    "yumusak": 66.7,
+    "ayni": 0.0
    }
   }
  },
@@ -191,91 +221,106 @@
     "n": 120,
     "benzer": 50.0,
     "bekletir": 46.7,
-    "yumusak": 71.7
+    "yumusak": 71.7,
+    "ayni": 50.0
    },
    "TUM_FARKLI": {
     "n": 80,
     "benzer": 2.5,
     "bekletir": 0.0,
-    "yumusak": 50.0
+    "yumusak": 50.0,
+    "ayni": 2.5
    },
    "baska_soylenis": {
     "n": 40,
     "benzer": 2.5,
     "bekletir": 0.0,
-    "yumusak": 47.5
+    "yumusak": 47.5,
+    "ayni": 2.5
    },
    "baska_soylenis_yazim": {
     "n": 20,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 35.0
+    "yumusak": 35.0,
+    "ayni": 0.0
    },
    "konu": {
     "n": 14,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 7.1
+    "yumusak": 7.1,
+    "ayni": 0.0
    },
    "konu_yazim": {
     "n": 14,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 7.1
+    "yumusak": 7.1,
+    "ayni": 0.0
    },
    "seri": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "seri_yazim": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "turkce_harfsiz": {
     "n": 20,
     "benzer": 100.0,
     "bekletir": 100.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 100.0
    },
    "varlik": {
     "n": 19,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 63.2
+    "yumusak": 63.2,
+    "ayni": 0.0
    },
    "varlik_yazim": {
     "n": 19,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 63.2
+    "yumusak": 63.2,
+    "ayni": 0.0
    },
    "yazim_agir": {
     "n": 20,
     "benzer": 100.0,
     "bekletir": 90.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 100.0
    },
    "yazim_hafif": {
     "n": 20,
     "benzer": 95.0,
     "bekletir": 90.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 95.0
    },
    "zit": {
     "n": 3,
     "benzer": 33.3,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 33.3
    },
    "zit_yazim": {
     "n": 3,
     "benzer": 33.3,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 33.3
    }
   },
   "secim": {
@@ -283,91 +328,322 @@
     "n": 121,
     "benzer": 52.1,
     "bekletir": 48.8,
-    "yumusak": 70.2
+    "yumusak": 70.2,
+    "ayni": 52.1
    },
    "TUM_FARKLI": {
     "n": 80,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 45.0
+    "yumusak": 45.0,
+    "ayni": 0.0
    },
    "baska_soylenis": {
     "n": 40,
     "benzer": 5.0,
     "bekletir": 0.0,
-    "yumusak": 40.0
+    "yumusak": 40.0,
+    "ayni": 5.0
    },
    "baska_soylenis_yazim": {
     "n": 20,
     "benzer": 5.0,
     "bekletir": 0.0,
-    "yumusak": 40.0
+    "yumusak": 40.0,
+    "ayni": 5.0
    },
    "konu": {
     "n": 17,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 11.8
+    "yumusak": 11.8,
+    "ayni": 0.0
    },
    "konu_yazim": {
     "n": 17,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 11.8
+    "yumusak": 11.8,
+    "ayni": 0.0
    },
    "seri": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "seri_yazim": {
     "n": 4,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 0.0
    },
    "turkce_harfsiz": {
     "n": 20,
     "benzer": 100.0,
     "bekletir": 95.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 100.0
    },
    "varlik": {
     "n": 13,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 61.5
+    "yumusak": 61.5,
+    "ayni": 0.0
    },
    "varlik_yazim": {
     "n": 13,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 61.5
+    "yumusak": 61.5,
+    "ayni": 0.0
    },
    "yazim_agir": {
     "n": 21,
     "benzer": 100.0,
     "bekletir": 100.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 100.0
    },
    "yazim_hafif": {
     "n": 20,
     "benzer": 95.0,
     "bekletir": 95.0,
-    "yumusak": 100.0
+    "yumusak": 100.0,
+    "ayni": 95.0
    },
    "zit": {
     "n": 6,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 66.7
+    "yumusak": 66.7,
+    "ayni": 0.0
    },
    "zit_yazim": {
     "n": 6,
     "benzer": 0.0,
     "bekletir": 0.0,
-    "yumusak": 66.7
+    "yumusak": 66.7,
+    "ayni": 0.0
+   }
+  }
+ },
+ "katman2": {
+  "rapor": {
+   "TUM_AYNI": {
+    "n": 120,
+    "benzer": 50.0,
+    "bekletir": 46.7,
+    "yumusak": 71.7,
+    "ayni": 70.0
+   },
+   "TUM_FARKLI": {
+    "n": 80,
+    "benzer": 2.5,
+    "bekletir": 0.0,
+    "yumusak": 50.0,
+    "ayni": 5.0
+   },
+   "baska_soylenis": {
+    "n": 40,
+    "benzer": 2.5,
+    "bekletir": 0.0,
+    "yumusak": 47.5,
+    "ayni": 47.5
+   },
+   "baska_soylenis_yazim": {
+    "n": 20,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 35.0,
+    "ayni": 30.0
+   },
+   "konu": {
+    "n": 14,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 7.1,
+    "ayni": 7.1
+   },
+   "konu_yazim": {
+    "n": 14,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 7.1,
+    "ayni": 7.1
+   },
+   "seri": {
+    "n": 4,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 0.0
+   },
+   "seri_yazim": {
+    "n": 4,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 0.0
+   },
+   "turkce_harfsiz": {
+    "n": 20,
+    "benzer": 100.0,
+    "bekletir": 100.0,
+    "yumusak": 100.0,
+    "ayni": 100.0
+   },
+   "varlik": {
+    "n": 19,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 63.2,
+    "ayni": 0.0
+   },
+   "varlik_yazim": {
+    "n": 19,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 63.2,
+    "ayni": 0.0
+   },
+   "yazim_agir": {
+    "n": 20,
+    "benzer": 100.0,
+    "bekletir": 90.0,
+    "yumusak": 100.0,
+    "ayni": 100.0
+   },
+   "yazim_hafif": {
+    "n": 20,
+    "benzer": 95.0,
+    "bekletir": 90.0,
+    "yumusak": 100.0,
+    "ayni": 95.0
+   },
+   "zit": {
+    "n": 3,
+    "benzer": 33.3,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 33.3
+   },
+   "zit_yazim": {
+    "n": 3,
+    "benzer": 33.3,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 33.3
+   }
+  },
+  "secim": {
+   "TUM_AYNI": {
+    "n": 121,
+    "benzer": 52.1,
+    "bekletir": 48.8,
+    "yumusak": 70.2,
+    "ayni": 67.8
+   },
+   "TUM_FARKLI": {
+    "n": 80,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 45.0,
+    "ayni": 0.0
+   },
+   "baska_soylenis": {
+    "n": 40,
+    "benzer": 5.0,
+    "bekletir": 0.0,
+    "yumusak": 40.0,
+    "ayni": 42.5
+   },
+   "baska_soylenis_yazim": {
+    "n": 20,
+    "benzer": 5.0,
+    "bekletir": 0.0,
+    "yumusak": 40.0,
+    "ayni": 25.0
+   },
+   "konu": {
+    "n": 17,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 11.8,
+    "ayni": 0.0
+   },
+   "konu_yazim": {
+    "n": 17,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 11.8,
+    "ayni": 0.0
+   },
+   "seri": {
+    "n": 4,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 0.0
+   },
+   "seri_yazim": {
+    "n": 4,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 100.0,
+    "ayni": 0.0
+   },
+   "turkce_harfsiz": {
+    "n": 20,
+    "benzer": 100.0,
+    "bekletir": 95.0,
+    "yumusak": 100.0,
+    "ayni": 100.0
+   },
+   "varlik": {
+    "n": 13,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 61.5,
+    "ayni": 0.0
+   },
+   "varlik_yazim": {
+    "n": 13,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 61.5,
+    "ayni": 0.0
+   },
+   "yazim_agir": {
+    "n": 21,
+    "benzer": 100.0,
+    "bekletir": 100.0,
+    "yumusak": 100.0,
+    "ayni": 100.0
+   },
+   "yazim_hafif": {
+    "n": 20,
+    "benzer": 95.0,
+    "bekletir": 95.0,
+    "yumusak": 100.0,
+    "ayni": 95.0
+   },
+   "zit": {
+    "n": 6,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 66.7,
+    "ayni": 0.0
+   },
+   "zit_yazim": {
+    "n": 6,
+    "benzer": 0.0,
+    "bekletir": 0.0,
+    "yumusak": 66.7,
+    "ayni": 0.0
    }
   }
  }
